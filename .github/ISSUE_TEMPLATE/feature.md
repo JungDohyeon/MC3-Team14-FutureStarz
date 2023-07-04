@@ -1,5 +1,5 @@
 ---
-name: "[FEAT]"
+name: Feature
 about: Feature 작업 상황 알려주세요.
 title: ''
 labels: ''
