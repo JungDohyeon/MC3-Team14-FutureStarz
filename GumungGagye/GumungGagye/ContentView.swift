@@ -26,4 +26,4 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-git commit -m "[ADD] #12 쩜디와 회식"
+
