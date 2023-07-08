@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E22C6962A57D669008AF9E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */; };
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
+		CD27E2DB2A599F1400F15A50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2DA2A599F1400F15A50 /* GoogleService-Info.plist */; };
+		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
+		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
+		CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */; };
+		CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E32A59AF8800F15A50 /* Pretendard-ExtraBold.otf */; };
+		CD27E2EC2A59AFAB00F15A50 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E22A59AF8800F15A50 /* Pretendard-Bold.otf */; };
+		CD27E2ED2A59AFAD00F15A50 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E42A59AF8800F15A50 /* Pretendard-Black.otf */; };
+		CD27E2EE2A59AFB100F15A50 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */; };
+		CD27E2EF2A59AFB300F15A50 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E62A59AF8800F15A50 /* Pretendard-Regular.otf */; };
+		CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E82A59AF8800F15A50 /* Pretendard-SemiBold.otf */; };
+		CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E72A59AF8800F15A50 /* Pretendard-Thin.otf */; };
 		CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */; };
 		CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C462A53A02F005DF128 /* ContentView.swift */; };
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
@@ -18,7 +28,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD27E2DA2A599F1400F15A50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		CD27E2E22A59AF8800F15A50 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		CD27E2E32A59AF8800F15A50 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		CD27E2E42A59AF8800F15A50 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		CD27E2E62A59AF8800F15A50 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		CD27E2E72A59AF8800F15A50 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		CD27E2E82A59AF8800F15A50 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		CD27E2F22A59AFEC00F15A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +61,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD27E2DC2A59A53400F15A50 /* AppFontFile */ = {
+			isa = PBXGroup;
+			children = (
+				CD27E2DD2A59AE9300F15A50 /* AppFont.swift */,
+			);
+			path = AppFontFile;
+			sourceTree = "<group>";
+		};
+		CD27E2DF2A59AF7300F15A50 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CD27E2E42A59AF8800F15A50 /* Pretendard-Black.otf */,
+				CD27E2E22A59AF8800F15A50 /* Pretendard-Bold.otf */,
+				CD27E2E32A59AF8800F15A50 /* Pretendard-ExtraBold.otf */,
+				CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */,
+				CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */,
+				CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */,
+				CD27E2E62A59AF8800F15A50 /* Pretendard-Regular.otf */,
+				CD27E2E82A59AF8800F15A50 /* Pretendard-SemiBold.otf */,
+				CD27E2E72A59AF8800F15A50 /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		CDCB8C382A53A02F005DF128 = {
 			isa = PBXGroup;
 			children = (
@@ -59,9 +104,12 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				CD27E2F22A59AFEC00F15A50 /* Info.plist */,
+				CD27E2DF2A59AF7300F15A50 /* Fonts */,
+				CD27E2DC2A59A53400F15A50 /* AppFontFile */,
+				CD27E2DA2A599F1400F15A50 /* GoogleService-Info.plist */,
 				CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */,
 				CDCB8C462A53A02F005DF128 /* ContentView.swift */,
-				5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */,
 				CDCB8C482A53A030005DF128 /* Assets.xcassets */,
 				CDCB8C4A2A53A030005DF128 /* Preview Content */,
 			);
@@ -142,9 +190,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */,
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
-				5E22C6962A57D669008AF9E5 /* GoogleService-Info.plist in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
+				CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */,
+				CD27E2EC2A59AFAB00F15A50 /* Pretendard-Bold.otf in Resources */,
+				CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */,
+				CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */,
+				CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */,
+				CD27E2ED2A59AFAD00F15A50 /* Pretendard-Black.otf in Resources */,
+				CD27E2EF2A59AFB300F15A50 /* Pretendard-Regular.otf in Resources */,
+				CD27E2DB2A599F1400F15A50 /* GoogleService-Info.plist in Resources */,
+				CD27E2EE2A59AFB100F15A50 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +214,7 @@
 			files = (
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
+				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +346,7 @@
 				DEVELOPMENT_TEAM = C3U3CZ666D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GumungGagye/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,6 +376,7 @@
 				DEVELOPMENT_TEAM = C3U3CZ666D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GumungGagye/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
