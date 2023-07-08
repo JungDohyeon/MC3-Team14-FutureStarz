@@ -14,6 +14,8 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+                .modifier(Num2()) // font 적용 예시
+            
         }
         .padding()
     }
