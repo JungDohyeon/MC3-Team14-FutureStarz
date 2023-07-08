@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E22C6962A57D669008AF9E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */; };
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			children = (
 				CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */,
 				CDCB8C462A53A02F005DF128 /* ContentView.swift */,
-				5E22C6952A57D669008AF9E5 /* GoogleService-Info.plist */,
 				CDCB8C482A53A030005DF128 /* Assets.xcassets */,
 				CDCB8C4A2A53A030005DF128 /* Preview Content */,
 			);
@@ -143,7 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
-				5E22C6962A57D669008AF9E5 /* GoogleService-Info.plist in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
