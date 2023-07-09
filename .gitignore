@@ -178,5 +178,6 @@ Dependencies/
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods,macos,objective-c
 
 # Ignore Firebase configuration files
+GumungGagye/GumungGagye/GoogleService-Info.plist
 GoogleService-Info.plist
 GoogleService-Info.json
