@@ -27,6 +27,7 @@
 		CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */; };
 		CD27E3002A5AA6FD00F15A50 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CD27E2FF2A5AA6FD00F15A50 /* FirebaseFirestore */; };
 		CD27E3022A5AA72800F15A50 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD27E3012A5AA72800F15A50 /* FirebaseFirestoreSwift */; };
+		CD27E3042A5AEC8100F15A50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD27E3032A5AEC8100F15A50 /* GoogleService-Info.plist */; };
 		CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */; };
 		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
 		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
@@ -53,6 +54,7 @@
 		CD27E2F82A59B80800F15A50 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMain.swift; sourceTree = "<group>"; };
 		CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
+		CD27E3032A5AEC8100F15A50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
 		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
 		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
