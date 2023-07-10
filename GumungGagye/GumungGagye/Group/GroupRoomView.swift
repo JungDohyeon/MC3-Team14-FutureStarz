@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct GroupRoomView: View {
-    
     let groupdata: GroupData
-
     var isNotExist: Bool
-
     
     var body: some View {
         ZStack {
@@ -37,8 +34,6 @@ struct GroupRoomView: View {
                             .frame(width: 18)
                             .foregroundColor(Color("Gray2"))
                     }
-                    
-
                 }
                 .padding(.bottom, 8)
                 
@@ -51,13 +46,7 @@ struct GroupRoomView: View {
                     Spacer()
                 }
                 .padding(.bottom, 16)
-                
-
-                HStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        Rectangle()
-                            .frame(width:24, height: 24)
-                            .padding(.trailing, 8)
+                    
 
                 HStack(spacing: 23) {
                     HStack(spacing: 0) {
@@ -164,8 +153,7 @@ struct GroupSignInBtn: View {
 struct GroupRoomView_Previews: PreviewProvider {
     static var previews: some View {
 
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"))
-
+        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
         GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
 
     }
