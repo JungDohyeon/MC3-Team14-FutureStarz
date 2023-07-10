@@ -49,11 +49,6 @@ struct GroupNotExistView: View {
                         
                         
                         ScrollView {
-
-                            VStack (spacing: 20) {
-                                ForEach(groupList.groupList) { room in
-                                    GroupRoomView(groupdata: room)
-
                             VStack(spacing: 24) {
                                 ForEach(groupList.groupList) { room in
                                     GroupRoomView(groupdata: room, isNotExist: true)
