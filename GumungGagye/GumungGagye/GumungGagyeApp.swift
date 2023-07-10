@@ -26,7 +26,7 @@ struct GumungGagyeApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                GroupViewInside()
             }
         }
     }
