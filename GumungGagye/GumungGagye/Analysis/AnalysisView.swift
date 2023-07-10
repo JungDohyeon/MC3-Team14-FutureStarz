@@ -132,9 +132,8 @@ struct AnalysisView: View {
                     }
                     .padding(.vertical, 36.0)
                     
-                    // - TODO: - 차트 만들기
-                    Text("Chart")
-                        .padding(.bottom, 54.0)
+                    ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)})
+                        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
                     
                     // Top 3 List
                     VStack(spacing: 10.0) {
@@ -143,6 +142,7 @@ struct AnalysisView: View {
                         TopContentView()
                     }
                     .padding(.bottom, 28.0)
+                    .padding(.top, 24)
                     
                     // 더보기 Button
                     Rectangle()
