@@ -10,7 +10,6 @@
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
-		CD27E2DB2A599F1400F15A50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2DA2A599F1400F15A50 /* GoogleService-Info.plist */; };
 		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
 		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
 		CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */; };
@@ -29,6 +28,11 @@
 		CD27E3002A5AA6FD00F15A50 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CD27E2FF2A5AA6FD00F15A50 /* FirebaseFirestore */; };
 		CD27E3022A5AA72800F15A50 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD27E3012A5AA72800F15A50 /* FirebaseFirestoreSwift */; };
 		CD27E3042A5AEC8100F15A50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD27E3032A5AEC8100F15A50 /* GoogleService-Info.plist */; };
+
+		CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */; };
+		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
+		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
+
 		CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */; };
 		CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C462A53A02F005DF128 /* ContentView.swift */; };
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
@@ -37,7 +41,9 @@
 
 /* Begin PBXFileReference section */
 
+
 		CD27E2DA2A599F1400F15A50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -55,6 +61,11 @@
 		CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMain.swift; sourceTree = "<group>"; };
 		CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		CD27E3032A5AEC8100F15A50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+
+		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
+		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
+		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
+
 		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,7 +113,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-    
+
 		CD27E2F32A59B78200F15A50 /* Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +122,11 @@
 				CD27E2F82A59B80800F15A50 /* GroupData.swift */,
 				CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */,
 				CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */,
+
+				CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */,
+				CD55899C2A5B104B003508E2 /* GroupInfoView.swift */,
+				CD55899E2A5B105A003508E2 /* GroupSpendView.swift */,
+
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -143,7 +159,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
-				CD27E3032A5AEC8100F15A50 /* GoogleService-Info.plist */,
+
 				CD27E2F32A59B78200F15A50 /* Group */,
 				CD27E2F22A59AFEC00F15A50 /* Info.plist */,
 				CD27E2DF2A59AF7300F15A50 /* Fonts */,
@@ -255,12 +271,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
+
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
+
+				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
+				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
+				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
+				CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */,
+
 				CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
+
+				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
+
+
+				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 
 			);
