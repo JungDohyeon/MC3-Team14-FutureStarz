@@ -76,7 +76,9 @@ struct PersonalDaySpendView: View {
 
 
 struct AboutUserSpendView: View {
+    
     var userName: String
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Group {
@@ -106,6 +108,16 @@ struct AboutUserSpendView: View {
             }
             .padding(.bottom, 36)
         }
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Image(systemName: "chevron.left")
+                .font(.system(size: 16))
+                .fontWeight(.regular)
+                .foregroundColor(.black)
+        }))
+        .navigationBarTitle("하루 지출 내역", displayMode: .inline)
     }
 }
 

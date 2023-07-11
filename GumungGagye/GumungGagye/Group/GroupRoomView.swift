@@ -86,8 +86,10 @@ struct GroupRoomView: View {
                 }
                 .padding(.bottom, 24)
                 
-                Divider()
-                    .background(Color("Gray3"))
+                if isNotExist {
+                    Divider()
+                        .background(Color("Gray3"))
+                }
             }
         }
     }

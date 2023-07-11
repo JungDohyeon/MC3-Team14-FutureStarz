@@ -17,11 +17,10 @@ struct GroupInfoView: View {
         ZStack {
             Color("background").ignoresSafeArea()
             
-            VStack {
+            ScrollView {
                 VStack {
                     GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: false)
                 }
-                .frame(height: 110)
                 .padding(.horizontal, 20)
                 
                 Divider()
@@ -33,7 +32,6 @@ struct GroupInfoView: View {
                         Text("지출 랭킹")
                             .modifier(H2SemiBold())
                             .foregroundColor(Color("Black"))
-                            .padding(.top, 36)
                         
                         Spacer()
                     }
@@ -62,6 +60,7 @@ struct GroupInfoView: View {
                         Spacer()
                     }
                 }
+                .padding(.top, 36)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
                 
@@ -110,7 +109,6 @@ struct GroupRankingView: View {
                 Text(ranking.description)
                     .modifier(Num5())
                 
-                
                 Text(userName)
                     .modifier(Body2())
                 
@@ -119,8 +117,7 @@ struct GroupRankingView: View {
                 Text("-\(spendMoney.description)원")
                     .modifier(Num4SemiBold())
             }
-            
-            .padding(.vertical, 12)
+            .padding(12)
             
             Divider()
         }
