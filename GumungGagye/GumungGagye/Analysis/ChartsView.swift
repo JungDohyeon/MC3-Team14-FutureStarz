@@ -13,12 +13,11 @@ public struct ChartView: View {
     public let formatter: (Double) -> String
 
     public var colors: [Color]
-    public var backgroundColor: Color
 
     public var widthFraction: CGFloat
     public var innerRadiusFraction: CGFloat
 
-    @State private var activeIndex: Int = -1
+    @State private var activeIndex: Int = 0
 
     var slices: [PieSliceData] {
         let sum = values.reduce(0, +)
@@ -33,24 +32,23 @@ public struct ChartView: View {
         return tempSlices
     }
 
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], backgroundColor: Color = Color(red: 21 / 255, green: 24 / 255, blue: 30 / 255, opacity: 1.0), widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
+    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
         self.values = values
         self.names = names
         self.formatter = formatter
 
         self.colors = colors
-        self.backgroundColor = backgroundColor
         self.widthFraction = widthFraction
         self.innerRadiusFraction = innerRadiusFraction
     }
 
     public var body: some View {
         GeometryReader { geometry in
-            VStack{
+//            VStack{
                 ZStack{
                     ForEach(0..<self.values.count){ i in
                         PieSliceView(pieSliceData: self.slices[i], isShowingTag: self.activeIndex == i ? true : false)
-                            .scaleEffect(self.activeIndex == i ? 1.03 : 1)
+                            .scaleEffect(self.activeIndex == i ? 1.1 : 1)
                             .animation(.spring())
                             .onTapGesture {
                                 if(self.activeIndex != i){
@@ -70,17 +68,17 @@ public struct ChartView: View {
                         .frame(width: 80, height: 80)
                     
                     // 차트 내부 텍스트
-                    VStack {
-                        Text(self.activeIndex == -1 ? "총" : names[self.activeIndex])
-                            .modifier(Body2())
-                            .foregroundColor(Color.gray)
-                        Text(self.formatter(self.activeIndex == -1 ? values.reduce(0, +) : values[self.activeIndex]))
-                            .modifier(Body1Bold())
-                    }
+//                    VStack {
+//                        Text(self.activeIndex == -1 ? "총" : names[self.activeIndex])
+//                            .modifier(Body2())
+//                            .foregroundColor(Color.gray)
+//                        Text(self.formatter(self.activeIndex == -1 ? values.reduce(0, +) : values[self.activeIndex]))
+//                            .modifier(Body1Bold())
+//                    }
 
                 }
 //                PieChartRows(colors: self.colors, names: self.names, values: self.values.map { self.formatter($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
-            }
+//            }
             .foregroundColor(Color.black)
         }
     }
