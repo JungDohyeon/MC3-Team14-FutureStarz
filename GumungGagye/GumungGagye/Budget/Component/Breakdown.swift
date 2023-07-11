@@ -9,7 +9,14 @@ import SwiftUI
 
 struct Breakdown: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            CategoryIcon(size: .small, color: Color("Food")) // Color 데이터로 바꾸기
+            Text("내용")
+                .modifier(Body1())
+            Spacer()
+            Text("-10,000원")
+                .modifier(Num3Bold())
+        }
     }
 }
 

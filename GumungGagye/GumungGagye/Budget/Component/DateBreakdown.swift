@@ -9,7 +9,12 @@ import SwiftUI
 
 struct DateBreakdown: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            DateTotal()
+            Breakdown() // 있는 내역 다 보여주기 - ForEach
+        }
+        
     }
 }
 

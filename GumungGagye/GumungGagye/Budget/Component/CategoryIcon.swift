@@ -8,8 +8,8 @@
 import SwiftUI
 
 enum IconSize: CGFloat {
-    case small = 48
-    case large = 80
+    case small = 48 // Category/IconSmall
+    case large = 80 // Category/IconBig
 }
 
 struct CategoryIcon: View {
