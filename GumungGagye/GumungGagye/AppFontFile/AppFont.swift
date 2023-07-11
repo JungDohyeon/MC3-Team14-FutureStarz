@@ -24,7 +24,7 @@ struct H2SemiBold: ViewModifier {
 struct Body1: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.custom("Pretendard-Medium"), size: 16)
+            .font(.custom("Pretendard-Medium", size: 16))
     }
 }
 
