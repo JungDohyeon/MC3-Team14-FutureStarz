@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2828DD2A5BB0C900A9D5D9 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */; };
+		0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */; };
+		0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */; };
+		0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */; };
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
+		0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContentView.swift; sourceTree = "<group>"; };
+		0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
+		0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -81,6 +89,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A2828D92A5BB09200A9D5D9 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */,
+				0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */,
+				0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */,
+				0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */,
+			);
+			path = Analysis;
+			sourceTree = "<group>";
+		};
 		CD27E2DC2A59A53400F15A50 /* AppFontFile */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +167,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				0A2828D92A5BB09200A9D5D9 /* Analysis */,
 				CD27E2F32A59B78200F15A50 /* Group */,
 				CD27E2F22A59AFEC00F15A50 /* Info.plist */,
 				CD27E2DF2A59AF7300F15A50 /* Fonts */,
@@ -273,10 +293,14 @@
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */,
+				0A2828DD2A5BB0C900A9D5D9 /* AnalysisView.swift in Sources */,
+				0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */,
 				CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
+				0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */,
+				0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
