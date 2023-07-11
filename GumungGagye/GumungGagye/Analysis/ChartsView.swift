@@ -11,8 +11,7 @@ public struct ChartView: View {
     public let values: [Double]
     public let names: [String]
     public let formatter: (Double) -> String
-
-    public var colors: [Color]
+    public let colors: [Color]
 
     public var widthFraction: CGFloat
     public var innerRadiusFraction: CGFloat
@@ -26,13 +25,13 @@ public struct ChartView: View {
 
         for (i, value) in values.enumerated() {
             let degrees: Double = value * 360 / sum
-            tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees), text: String(format: "%.0f%%", value * 100 / sum), color: self.colors[i]))
+            tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees),categoryText: names[i] ,percentText: String(format: "%.0f%%", value * 100 / sum), color: self.colors[i]))
             endDeg += degrees
         }
         return tempSlices
     }
 
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color] = [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
+    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color], widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
         self.values = values
         self.names = names
         self.formatter = formatter
@@ -112,7 +111,7 @@ struct PieChartRows: View {
 
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)})
+        ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
     }
 }
 

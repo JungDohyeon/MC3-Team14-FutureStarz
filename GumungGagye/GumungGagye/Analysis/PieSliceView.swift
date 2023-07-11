@@ -41,14 +41,14 @@ struct PieSliceView: View {
                     ZStack {
                         Circle()
                             .frame(width: 52, height: 52)
-                            .shadow(color: Color("Food"), radius: 2, x: 0, y: 0) //카테고리에 맞는 색으로 변경
+                            .shadow(color: pieSliceData.color, radius: 2, x: 0, y: 0)
                         VStack{
-                            Text("식비") // 카테고리 텍스트로 변경
+                            Text(pieSliceData.categoryText)
                                 .modifier(Cap2())
                                 .foregroundColor(Color("Black"))
-                            Text(pieSliceData.text)
+                            Text(pieSliceData.percentText)
                                 .modifier(Cap1Bold())
-                                .foregroundColor(Color("Food")) //카테고리에 맞는 색으로 바꿔야함
+                                .foregroundColor(pieSliceData.color)
                         }
                     }
                     .position(
@@ -66,12 +66,13 @@ struct PieSliceView: View {
 struct PieSliceData {
     var startAngle: Angle
     var endAngle: Angle
-    var text: String
+    var categoryText: String
+    var percentText: String
     var color: Color
 }
 
 struct PieSliceView_Previews: PreviewProvider {
     static var previews: some View {
-        PieSliceView(pieSliceData: PieSliceData(startAngle: Angle(degrees: 0.0), endAngle: Angle(degrees: 120.0), text: "30%", color: Color.black), isShowingTag: true)
+        PieSliceView(pieSliceData: PieSliceData(startAngle: Angle(degrees: 0.0), endAngle: Angle(degrees: 120.0),categoryText: "식비", percentText: "30%", color: Color.black), isShowingTag: true)
     }
 }
