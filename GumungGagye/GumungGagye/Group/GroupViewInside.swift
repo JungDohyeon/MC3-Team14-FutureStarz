@@ -66,8 +66,17 @@ struct GroupViewInside: View {
                     .padding(.horizontal, 20)
                     
                     if !isGroupInfo {
-                        GroupSpendView()
-                        Spacer()
+                        ScrollView {
+                            GroupSpendView()
+                                .padding(.horizontal, 20)
+                            
+                            Divider()
+                                .frame(height: 8)
+                                .overlay(Color("Gray4"))
+                            
+                            GroupNotSpendView(userName: "Lavine")
+                                .padding(.horizontal, 20)
+                        }
                     } else {
                         VStack {
                             GroupInfoView()
