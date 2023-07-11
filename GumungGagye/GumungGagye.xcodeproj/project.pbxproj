@@ -14,6 +14,7 @@
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
+		CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */; };
 		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
 		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
 		CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */; };
@@ -39,9 +40,11 @@
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
 		CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C4B2A53A030005DF128 /* Preview Assets.xcassets */; };
 		CDCBE3802A5BA5D200DB33C8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDCBE37F2A5BA5D200DB33C8 /* GoogleService-Info.plist */; };
+		CDCBE3832A5BE37D00DB33C8 /* GroupUserSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDaySpendView.swift; sourceTree = "<group>"; };
 		0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContentView.swift; sourceTree = "<group>"; };
 		0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		CDCB8C482A53A030005DF128 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDCB8C4B2A53A030005DF128 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CDCBE37F2A5BA5D200DB33C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "GumungGagye/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupUserSpendView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 				CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */,
 				CD55899C2A5B104B003508E2 /* GroupInfoView.swift */,
 				CD55899E2A5B105A003508E2 /* GroupSpendView.swift */,
+				CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */,
+				CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -297,8 +303,10 @@
 				0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */,
 				CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
+				CDCBE3832A5BE37D00DB33C8 /* GroupUserSpendView.swift in Sources */,
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
+				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
 				0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */,
 				0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
