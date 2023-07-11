@@ -19,9 +19,14 @@ struct GroupInfoView: View {
             
             VStack {
                 VStack {
-                    GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: false, group_pw: ""), isNotExist: false)
+                    GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: false)
                 }
                 .frame(height: 110)
+                .padding(.horizontal, 20)
+                
+                Divider()
+                    .frame(height: 8)
+                    .overlay(Color("Gray4"))
                 
                 VStack(spacing: 0) {
                     HStack {
@@ -39,30 +44,35 @@ struct GroupInfoView: View {
                             monthPicker.decrement()
                         } label: {
                             Image(systemName: "chevron.left")
+                                .modifier(H2SemiBold())
+                                .foregroundColor(Color("Gray1"))
                         }
                         
                         Text(monthPicker.monthName)
                             .modifier(Body1Bold())
+                            .foregroundColor(.black)
                         
                         Button {
                             monthPicker.increment()
                         } label: {
                             Image(systemName: "chevron.right")
+                                .modifier(H2SemiBold())
+                                .foregroundColor(Color("Gray1"))
                         }
-                        
                         Spacer()
                     }
-                    .foregroundColor(.black)
                 }
                 .padding(.bottom, 20)
+                .padding(.horizontal, 20)
                 
                 ScrollView {
                     ForEach(1..<10) { rank in
                         GroupRankingView(ranking: rank, userName: "PADO", spendMoney: 7500)
                     }
+                    .padding(.horizontal, 20)
                 }
-                Spacer()
             }
+            
         }
     }
 }
