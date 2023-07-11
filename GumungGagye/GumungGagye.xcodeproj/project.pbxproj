@@ -10,6 +10,15 @@
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
+		99F7D7142A5BE8980090A05A /* TargetBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7132A5BE8980090A05A /* TargetBudgetView.swift */; };
+		99F7D7162A5BE8B00090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7152A5BE8B00090A05A /* CurrentAssetView.swift */; };
+		99F7D7182A5BEC0D0090A05A /* ConsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7172A5BEC0D0090A05A /* ConsListView.swift */; };
+		99F7D71A2A5BECAF0090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7192A5BECAF0090A05A /* MainBudgetView.swift */; };
+		99F7D71C2A5CDFD20090A05A /* SmallButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D71B2A5CDFD20090A05A /* SmallButton.swift */; };
+		99F7D71F2A5CE74E0090A05A /* DateTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D71E2A5CE74E0090A05A /* DateTotal.swift */; };
+		99F7D7232A5CE85D0090A05A /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7222A5CE85D0090A05A /* CategoryIcon.swift */; };
+		99F7D7252A5CE9240090A05A /* Breakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7242A5CE9240090A05A /* Breakdown.swift */; };
+		99F7D7272A5CE9300090A05A /* DateBreakdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7262A5CE9300090A05A /* DateBreakdown.swift */; };
 		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
 		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
 		CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E52A59AF8800F15A50 /* Pretendard-Light.otf */; };
@@ -38,6 +47,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99F7D70F2A5BE75A0090A05A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		99F7D7132A5BE8980090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TargetBudgetView.swift; path = ../../../../../../../TargetBudgetView.swift; sourceTree = "<group>"; };
+		99F7D7152A5BE8B00090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrentAssetView.swift; path = ../../../../../../../CurrentAssetView.swift; sourceTree = "<group>"; };
+		99F7D7172A5BEC0D0090A05A /* ConsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConsListView.swift; path = ../../../../../../../ConsListView.swift; sourceTree = "<group>"; };
+		99F7D7192A5BECAF0090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainBudgetView.swift; path = ../../../../../../../MainBudgetView.swift; sourceTree = "<group>"; };
+		99F7D71B2A5CDFD20090A05A /* SmallButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButton.swift; sourceTree = "<group>"; };
+		99F7D71E2A5CE74E0090A05A /* DateTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTotal.swift; sourceTree = "<group>"; };
+		99F7D7222A5CE85D0090A05A /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
+		99F7D7242A5CE9240090A05A /* Breakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breakdown.swift; sourceTree = "<group>"; };
+		99F7D7262A5CE9300090A05A /* DateBreakdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateBreakdown.swift; sourceTree = "<group>"; };
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		CD27E2E12A59AF8800F15A50 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
@@ -81,6 +100,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99F7D7122A5BE8770090A05A /* Budget */ = {
+			isa = PBXGroup;
+			children = (
+				99F7D71D2A5CE72C0090A05A /* Component */,
+				99F7D7132A5BE8980090A05A /* TargetBudgetView.swift */,
+				99F7D7152A5BE8B00090A05A /* CurrentAssetView.swift */,
+				99F7D7172A5BEC0D0090A05A /* ConsListView.swift */,
+				99F7D7192A5BECAF0090A05A /* MainBudgetView.swift */,
+			);
+			path = Budget;
+			sourceTree = "<group>";
+		};
+		99F7D71D2A5CE72C0090A05A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				99F7D71B2A5CDFD20090A05A /* SmallButton.swift */,
+				99F7D71E2A5CE74E0090A05A /* DateTotal.swift */,
+				99F7D7222A5CE85D0090A05A /* CategoryIcon.swift */,
+				99F7D7242A5CE9240090A05A /* Breakdown.swift */,
+				99F7D7262A5CE9300090A05A /* DateBreakdown.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		CD27E2DC2A59A53400F15A50 /* AppFontFile */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +191,8 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				99F7D7122A5BE8770090A05A /* Budget */,
+				99F7D70F2A5BE75A0090A05A /* GoogleService-Info.plist */,
 				CD27E2F32A59B78200F15A50 /* Group */,
 				CD27E2F22A59AFEC00F15A50 /* Info.plist */,
 				CD27E2DF2A59AF7300F15A50 /* Fonts */,
@@ -266,13 +311,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99F7D7232A5CE85D0090A05A /* CategoryIcon.swift in Sources */,
+				99F7D71A2A5BECAF0090A05A /* MainBudgetView.swift in Sources */,
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
+				99F7D7142A5BE8980090A05A /* TargetBudgetView.swift in Sources */,
+				99F7D71C2A5CDFD20090A05A /* SmallButton.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
+				99F7D7252A5CE9240090A05A /* Breakdown.swift in Sources */,
 				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
+				99F7D71F2A5CE74E0090A05A /* DateTotal.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */,
+				99F7D7182A5BEC0D0090A05A /* ConsListView.swift in Sources */,
 				CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
@@ -280,6 +332,8 @@
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
+				99F7D7272A5CE9300090A05A /* DateBreakdown.swift in Sources */,
+				99F7D7162A5BE8B00090A05A /* CurrentAssetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-				DEVELOPMENT_TEAM = N8RU5UJH68;
+				DEVELOPMENT_TEAM = L2C588NJHZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
@@ -438,7 +492,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-				DEVELOPMENT_TEAM = C3U3CZ666D;
+				DEVELOPMENT_TEAM = L2C588NJHZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
