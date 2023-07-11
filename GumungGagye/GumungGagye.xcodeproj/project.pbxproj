@@ -13,6 +13,8 @@
 		0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */; };
 		0A2828E72A5D686F00A9D5D9 /* OverpurchasingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E62A5D686F00A9D5D9 /* OverpurchasingView.swift */; };
 		0A2828EA2A5D6ED500A9D5D9 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E92A5D6ED500A9D5D9 /* DividerView.swift */; };
+		0A2828EE2A5D82F300A9D5D9 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828ED2A5D82F300A9D5D9 /* CategoryListView.swift */; };
+		0A2828F02A5D835100A9D5D9 /* CategoryHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */; };
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
@@ -52,6 +54,8 @@
 		0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 		0A2828E62A5D686F00A9D5D9 /* OverpurchasingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpurchasingView.swift; sourceTree = "<group>"; };
 		0A2828E92A5D6ED500A9D5D9 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		0A2828ED2A5D82F300A9D5D9 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHistoryView.swift; sourceTree = "<group>"; };
 		CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDaySpendView.swift; sourceTree = "<group>"; };
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */,
 				0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */,
 				0A2828E62A5D686F00A9D5D9 /* OverpurchasingView.swift */,
+				0A2828ED2A5D82F300A9D5D9 /* CategoryListView.swift */,
+				0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
+				0A2828EE2A5D82F300A9D5D9 /* CategoryListView.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */,
@@ -328,6 +335,7 @@
 				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
 				0A2828E72A5D686F00A9D5D9 /* OverpurchasingView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
+				0A2828F02A5D835100A9D5D9 /* CategoryHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

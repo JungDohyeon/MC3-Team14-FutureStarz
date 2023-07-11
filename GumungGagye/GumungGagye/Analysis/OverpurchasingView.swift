@@ -75,7 +75,7 @@ struct OverpurchasingView: View {
                 
             }
         }
-        .navigationBarTitle("과소비 내역")
+        .navigationBarTitle("과소비 내역", displayMode: .inline)
     }
 }
 
