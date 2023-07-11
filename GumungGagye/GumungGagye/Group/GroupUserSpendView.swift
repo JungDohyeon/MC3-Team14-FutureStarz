@@ -11,8 +11,8 @@ import SwiftUI
 struct GroupUserSpendView: View {
     var body: some View {
         ZStack {
-            
             Color("background").ignoresSafeArea()
+            
             VStack(spacing: 16) {
                 HStack {
                     Text("닉네임")
@@ -35,7 +35,6 @@ struct GroupUserSpendView: View {
                 }
             }
         }
-        
     }
 }
 
@@ -54,16 +53,7 @@ struct PurchasingContent: View {
                 .modifier(Body2())
             
             if isOverPurchase {
-                Text("과소비")
-                    .modifier(Cap2())
-                    .foregroundColor(Color("OverPurchasing"))
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 4)
-                    .background(
-                        Rectangle()
-                            .foregroundColor(Color("OverPurchasingLight"))
-                            .cornerRadius(7)
-                    )
+                SpendTag(isOverPurchase: isOverPurchase, isSecret: false)
             }
             
             Spacer()
@@ -74,6 +64,24 @@ struct PurchasingContent: View {
     }
 }
 
+// 소비 태그
+struct SpendTag: View {
+    var isOverPurchase: Bool    // 과소비 태그
+    var isSecret: Bool  // 비공개 태그
+    
+    var body: some View {
+        Text(isOverPurchase ? "과소비" : "비공개")
+            .modifier(Cap2())
+            .foregroundColor(isOverPurchase ? Color("OverPurchasing") : Color("Gray1"))
+            .padding(.horizontal, 9)
+            .padding(.vertical, 4)
+            .background(
+                Rectangle()
+                    .foregroundColor(isOverPurchase ? Color("OverPurchasingLight") : Color("Gray3"))
+                    .cornerRadius(7)
+            )
+    }
+}
 
 struct SpendCommentDisplayView: View {
     var body: some View {
