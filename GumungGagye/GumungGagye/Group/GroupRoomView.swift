@@ -80,7 +80,7 @@ struct GroupRoomView: View {
                         NavigationLink {
                             GroupViewInside()
                         } label: {
-                            GroupSignInBtn()
+                            MainColorBtn(inputText: "가입하기")
                         }
                     }
                 }
@@ -94,9 +94,11 @@ struct GroupRoomView: View {
 }
 
 
-struct GroupSignInBtn: View {
+struct MainColorBtn: View {
+    var inputText: String
+    
     var body: some View {
-        Text("가입하기")
+        Text(inputText)
             .modifier(BtnBold())
             .foregroundColor(Color("Main"))
             .padding(.horizontal, 15)
