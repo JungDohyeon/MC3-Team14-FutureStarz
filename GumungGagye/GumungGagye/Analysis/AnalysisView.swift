@@ -89,9 +89,9 @@ struct AnalysisView: View {
                     
                     // Top 3 리스트
                     VStack(spacing: 10.0) {
-                        TopContentView()
-                        TopContentView()
-                        TopContentView()
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
                     }
                     .padding(.bottom, 28.0)
                     
@@ -132,14 +132,14 @@ struct AnalysisView: View {
                     }
                     .padding(.vertical, 36.0)
                     
-                    ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)})
+                    ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
                         .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
                     
                     // Top 3 List
                     VStack(spacing: 10.0) {
-                        TopContentView()
-                        TopContentView()
-                        TopContentView()
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
+                        TopContentView(rank: 1, content: "치킨", money: 5000)
                     }
                     .padding(.bottom, 28.0)
                     .padding(.top, 24)
