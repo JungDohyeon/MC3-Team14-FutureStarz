@@ -11,8 +11,8 @@ import SwiftUI
 struct GroupUserSpendView: View {
     var body: some View {
         ZStack {
-            
             Color("background").ignoresSafeArea()
+            
             VStack(spacing: 16) {
                 HStack {
                     Text("닉네임")
@@ -35,7 +35,6 @@ struct GroupUserSpendView: View {
                 }
             }
         }
-        
     }
 }
 
