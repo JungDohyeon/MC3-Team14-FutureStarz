@@ -148,7 +148,7 @@ struct AnalysisView: View {
                         
                         // - TODO: - 카테고리별 소비로 이동
                         // 더보기 Button
-                        NavigationLink(destination: Text("카테고리별 소비")){
+                        NavigationLink(destination: CategoryListView()){
                             VStack {
                                 Rectangle()
                                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
