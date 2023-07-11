@@ -88,7 +88,7 @@ struct Num1: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-Bold", size: 28))
-            .tracking(3)
+            .tracking(0.84)
     }
 }
 
@@ -96,7 +96,7 @@ struct Num2: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-Bold", size: 20))
-            .tracking(3)
+            .tracking(0.6)
     }
 }
 
@@ -104,7 +104,7 @@ struct Num3: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-SemiBold", size: 16))
-            .tracking(3)
+            .tracking(0.48)
     }
 }
 
@@ -112,7 +112,7 @@ struct Num3Bold: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-Bold", size: 16))
-            .tracking(3)
+            .tracking(0.48)
     }
 }
 
@@ -120,7 +120,7 @@ struct Num4: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-Regular", size: 14))
-            .tracking(3)
+            .tracking(0.42)
     }
 }
 
@@ -128,7 +128,7 @@ struct Num4SemiBold: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-SemiBold", size: 14))
-            .tracking(3)
+            .tracking(0.42)
     }
 }
 
@@ -136,6 +136,6 @@ struct Num5: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Pretendard-Regular", size: 12))
-            .tracking(3)
+            .tracking(0.36)
     }
 }
