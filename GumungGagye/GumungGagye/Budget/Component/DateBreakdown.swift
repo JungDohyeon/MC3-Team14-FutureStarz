@@ -10,8 +10,9 @@ import SwiftUI
 struct DateBreakdown: View {
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             DateTotal()
+                .padding(.bottom, 16)
             Breakdown() // 있는 내역 다 보여주기 - ForEach
         }
         
