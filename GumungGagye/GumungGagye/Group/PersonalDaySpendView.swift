@@ -12,41 +12,14 @@ struct PersonalDaySpendView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Group {
-                VStack(spacing: 8) {
-                    HStack(spacing: 2) {
-                        Text("7월 23일")
-                            .modifier(Cap1())
-                        Text("파도")
-                            .modifier(Cap1Bold())
-                        
-                        Spacer()
-                    }
-                    
-                    HStack {
-                        Text("25,000원")
-                            .modifier(Num1())
-                        Spacer()
-                    }
-                }
-                .padding(.top, 48)
-                .padding(.bottom, 24)
-                
-                VStack(spacing: 12) {
-                    PurchasingContent(isOverPurchase: true)
-                    PurchasingContent(isOverPurchase: false)
-                    PurchasingContent(isOverPurchase: true)
-                }
-                .padding(.bottom, 36)
-            }
-            .padding(.horizontal, 20)
-         
-            
-            Divider()
-                .frame(height: 8)
-                .overlay(Color("Gray4"))
-            
             ScrollView {
+                AboutUserSpendView(userName: "Pado")
+                    .padding(.horizontal, 20)
+                
+                Divider()
+                    .frame(height: 8)
+                    .overlay(Color("Gray4"))
+                
                 HStack(spacing: 9) {
                     Image(systemName: "bubble.left.fill")
                         .foregroundColor(Color("Gray2"))
@@ -62,34 +35,10 @@ struct PersonalDaySpendView: View {
                     
                     Spacer()
                 }
+                .padding(.top, 36)
                 .padding(.horizontal, 20)
                 
-                TextField("댓글을 입력해주세요", text: $commentInput)
-                    .padding(.vertical, 12.5)
-                    .padding(.horizontal, 12)
-                    .modifier(Body1Bold())
-                    .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color.black)
-                    .background(Color("Gray4"))
-                    .cornerRadius(12)
-                    .overlay(
-                        HStack {
-                            Image(systemName: "paperplane.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color("Main"))
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                                .padding(.trailing, 12)
-                        }
-                    )
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .padding(.top, 16)
-                    .padding(.bottom, 12)
-                    .padding(.horizontal, 20)
-                
                 VStack(spacing: 0) {
-                    CommentView()
-                    CommentView()
-                    CommentView()
                     CommentView()
                     CommentView()
                     CommentView()
@@ -99,7 +48,63 @@ struct PersonalDaySpendView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .padding(.top, 36)
+            
+            TextField("댓글을 입력해주세요", text: $commentInput)
+                .padding(.vertical, 12.5)
+                .padding(.horizontal, 12)
+                .modifier(Body1Bold())
+                .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color.black)
+                .background(Color("Gray4"))
+                .cornerRadius(12)
+                .overlay(
+                    HStack {
+                        Image(systemName: "paperplane.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(commentInput.count == 0 ? Color("Vehicle") : Color("Main"))
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing, 12)
+                    }
+                )
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .padding(.top, 16)
+                .padding(.bottom, 12)
+                .padding(.horizontal, 20)
+        }
+    }
+}
+
+
+struct AboutUserSpendView: View {
+    var userName: String
+    
+    var body: some View {
+        Group {
+            VStack(spacing: 8) {
+                HStack(spacing: 2) {
+                    Text("7월 23일")
+                        .modifier(Cap1())
+                    Text(userName)
+                        .modifier(Cap1Bold())
+                    
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("25,000원")
+                        .modifier(Num1())
+                    Spacer()
+                }
+            }
+            .padding(.top, 48)
+            .padding(.bottom, 24)
+            
+            VStack(spacing: 12) {
+                PurchasingContent(isOverPurchase: true)
+                PurchasingContent(isOverPurchase: false)
+                PurchasingContent(isOverPurchase: true)
+            }
+            .padding(.bottom, 36)
         }
     }
 }
@@ -124,7 +129,6 @@ struct CommentView: View {
                         .modifier(Cap1())
                         .foregroundColor(Color("Gray2"))
                 }
-
             }
             
             HStack {
