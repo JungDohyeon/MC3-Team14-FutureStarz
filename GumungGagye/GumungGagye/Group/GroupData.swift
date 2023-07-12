@@ -52,7 +52,7 @@ class GroupListStore: ObservableObject {
                     // update list property in main Thread
                     DispatchQueue.main.async {
                         self.groupList = snapshot.documents.map { document in
-                            return GroupData(id: document.documentID, group_name: document["group_name"] as? String ?? "", group_introduce: document["introduce"] as? String ?? "", group_goal: document["group_goal"] as? Int ?? 0, group_cur: document["group_cur"] as? Int ?? 0, group_max: document["group_max"] as? Int ?? 0, lock_status: document["lock _status"] as? Bool ?? false, group_pw: document["group_pw"] as? String ?? "")
+                            return GroupData(id: document.documentID, group_name: document["group_name"] as? String ?? "", group_introduce: document["introduce"] as? String ?? "", group_goal: document["group_goal"] as? Int ?? 0, group_cur: document["group_cur"] as? Int ?? 0, group_max: document["group_max"] as? Int ?? 0, lock_status: document["lock_status"] as? Bool ?? false, group_pw: document["group_pw"] as? String ?? "")
                         }
                     }
                 }

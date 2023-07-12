@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct GroupRoomView: View {
+    
     let groupdata: GroupData
-    var isNotExist: Bool
+    let isNotExist: Bool
     
     var body: some View {
         ZStack {
@@ -23,15 +24,9 @@ struct GroupRoomView: View {
                     
                     Spacer()
                     
-
-                    Rectangle()
-                        .frame(width:24, height: 24)
-
                     if groupdata.lock_status {
                         Image(systemName: "lock.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 18)
+                            .font(.system(size: 16))
                             .foregroundColor(Color("Gray2"))
                     }
                 }
@@ -46,42 +41,26 @@ struct GroupRoomView: View {
                     Spacer()
                 }
                 .padding(.bottom, 16)
-                    
-
+                
                 HStack(spacing: 23) {
-                    HStack(spacing: 0) {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 18, height: 19)
+                    HStack(spacing: 6) {
+                        Image(systemName: "wonsign.circle.fill")
+                            .font(.system(size: 16))
                             .foregroundColor(Color("Gray2"))
-                            .padding(.trailing, 11)
-
                         
-                        Text(groupdata.group_goal.description)
-                            .modifier(Body2())
-                            .foregroundColor(Color("Gray1"))
-                        
+                        HStack(spacing: 0) {
+                            Text(groupdata.group_goal.description)
+                            Text("원")
+                        }
+                        .modifier(Body2())
+                        .foregroundColor(Color("Gray1"))
                     }
-
-                    .padding(.trailing, 20)
-                    
-                    
-                    HStack(spacing: 0) {
-                        Rectangle()
-                            .frame(width:24, height: 24)
-                            .padding(.trailing, 8)
-
-                    
                     
                     HStack(spacing: 0) {
                         Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 18, height: 19)
+                            .font(.system(size: 16))
                             .foregroundColor(Color("Gray2"))
-                            .padding(.trailing, 11)
-
+                            .padding(.trailing, 7)
                         
                         Group {
                             Text(groupdata.group_cur.description)
@@ -96,24 +75,12 @@ struct GroupRoomView: View {
                     
                     Spacer()
                     
-
-                    NavigationLink {
-                        
-                    } label: {
-                       GroupSignInBtn()
-                    }
-
-                }
-                .padding(.bottom, 24)
-                
-                Divider()
-                    .background(Color("Gray3"))
-
+                    // 가입된 그룹이 없을 경우 가입 버튼 생성
                     if isNotExist {
                         NavigationLink {
-                            
+                            GroupViewInside()
                         } label: {
-                           GroupSignInBtn()
+                            MainColorBtn(inputText: "가입하기")
                         }
                     }
                 }
@@ -123,28 +90,25 @@ struct GroupRoomView: View {
                     Divider()
                         .background(Color("Gray3"))
                 }
-
             }
         }
     }
 }
 
 
-struct GroupSignInBtn: View {
+struct MainColorBtn: View {
+    var inputText: String
+    
     var body: some View {
-        Text("가입하기")
+        Text(inputText)
             .modifier(BtnBold())
             .foregroundColor(Color("Main"))
             .padding(.horizontal, 15)
             .padding(.vertical, 8)
             .background(
                 Rectangle()
-
-                    .foregroundColor(Color("Main"))
-
                     .foregroundColor(Color("Light"))
                     .cornerRadius(5)
-
             )
     }
 }
@@ -152,9 +116,6 @@ struct GroupSignInBtn: View {
 
 struct GroupRoomView_Previews: PreviewProvider {
     static var previews: some View {
-
         GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
-
     }
 }
