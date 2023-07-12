@@ -1,0 +1,31 @@
+//
+//  CategoryIcon.swift
+//  GumungGagye
+//
+//  Created by 손서연 on 2023/07/11.
+//
+
+import SwiftUI
+
+enum IconSize: CGFloat {
+    case small = 48
+    case large = 80
+}
+
+struct CategoryIcon: View {
+    
+    let size: IconSize
+    let color: Color
+    
+    var body: some View {
+        Circle()
+            .foregroundColor(color)
+            .frame(width: size.rawValue, height: size.rawValue)
+    }
+}
+
+struct CategoryIcon_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryIcon(size: .small, color: Color("Food"))
+    }
+}
