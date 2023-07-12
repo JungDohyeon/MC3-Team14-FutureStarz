@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum SelectedButtonType {
+    case expense
+    case income
+}
+
 struct MoneyTypeButton: View {
     var moneyType: String
     var isSelected: Bool
