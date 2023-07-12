@@ -13,6 +13,7 @@ struct AddModalView: View {
     @State var number: String = ""
     @State var selectButton: SelectedButtonType = .expense
     @State var tappedExpenseCategory: String = ""
+    @State var tappedIncomeCategory: String = ""
     @State var tappedDate: String = ""
     @State private var isChecked = false
     
@@ -60,13 +61,13 @@ struct AddModalView: View {
             
             // MARK: - 지출일 경우
             if selectButton == .expense {
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory,tappedDate: $tappedDate,  item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory,tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
                 
                 HStack {
                     Text("이번에 과소비를 했어요.")
@@ -85,13 +86,13 @@ struct AddModalView: View {
             }
             // MARK: - 수입일 경우
             else if selectButton == .income {
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedDate: $tappedDate, item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
                 
                 Text("수입은 그룹원에게 공개되지 않아요.")
                     .modifier(Body2())
