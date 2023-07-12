@@ -31,21 +31,25 @@ struct BreakdownWriting: View {
     
     @FocusState var isNumberKeyboardVisible: Bool
     
+    @Binding var selectedButton: SelectedButtonType
     @Binding var text: String
     @Binding var currentDate: Date
     @Binding var tappedExpenseCategory: String
+    @Binding var tappedIncomeCategory: String
     @Binding var tappedDate: String
     
     var item: WritingList
     var icon: ListIcon
     var placeholder: String
     
-    init(isDatePickerVisible: Bool, number: State<String>, text: Binding<String>, currentDate: Binding<Date>, tappedExpenseCategory: Binding<String>, tappedDate: Binding<String>, item: WritingList, icon: ListIcon, placeholder: String) {
+    init(isDatePickerVisible: Bool, number: State<String>, selectedButton: Binding<SelectedButtonType>, text: Binding<String>, currentDate: Binding<Date>, tappedExpenseCategory: Binding<String>, tappedIncomeCategory: Binding<String>, tappedDate: Binding<String>, item: WritingList, icon: ListIcon, placeholder: String) {
         self._isDatePickerVisible = State(initialValue: isDatePickerVisible)
         self._number = number
+        self._selectedButton = selectedButton
         self._text = text
         self._currentDate = currentDate
         self._tappedExpenseCategory = tappedExpenseCategory
+        self._tappedIncomeCategory = tappedIncomeCategory
         self._tappedDate = tappedDate
         self.item = item
         self.icon = icon
@@ -140,14 +144,24 @@ struct BreakdownWriting: View {
                         }
                     }
                     .sheet(isPresented: $isCategorySheetVisible) {
-                        ExpenseCategorySheet(tappedExpenseCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
-                            .presentationDetents([.medium])
+                        if selectedButton == .expense {
+                            ExpenseCategorySheet(tappedExpenseCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
+                                .presentationDetents([.medium])
+                                .onChange(of: selectedOption, perform: { newValue in
+                                    self.tappedExpenseCategory = newValue
+                                    isCategorySheetVisible = false
+                                    DividerSelect = false
+                                })
+                        } else if selectedButton == .income {
+                            IncomeCategorySheet(tappedIncomeCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
+                                .presentationDetents([.medium])
+                                .onChange(of: selectedOption, perform: { newValue in
+                                    self.tappedIncomeCategory = newValue
+                                    isCategorySheetVisible = false
+                                    DividerSelect = false
+                                })
+                        }
                     }
-                    .onChange(of: selectedOption, perform: { newValue in
-                        self.tappedExpenseCategory = newValue
-                        isCategorySheetVisible = false
-                        DividerSelect = false
-                    })
                 }
                 // MARK: - 내용 내역
                 else if item == .content {
