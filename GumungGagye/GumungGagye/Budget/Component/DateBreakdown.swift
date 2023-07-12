@@ -13,7 +13,11 @@ struct DateBreakdown: View {
         VStack(spacing: 0) {
             DateTotal()
                 .padding(.bottom, 16)
-            Breakdown() // 있는 내역 다 보여주기 - ForEach
+            
+            ForEach(1..<3) {_ in
+                Breakdown() // 있는 내역 다 보여주기 - ForEach
+            }
+            .padding(.bottom, 20)
         }
         
     }
