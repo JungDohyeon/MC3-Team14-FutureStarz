@@ -156,7 +156,7 @@
 				99F7D72C2A5DD0790090A05A /* SectionBar.swift */,
 			);
 			path = Component;
-
+		};
 		0A2828D92A5BB09200A9D5D9 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
