@@ -72,7 +72,6 @@ enum ExpenseCategoryList: String, CaseIterable {
 
 struct ExpenseCategorySheet: View {
     
-//    @Binding var selectedExpenseCategory: String
     @Binding var tappedExpenseCategory: String
     @Binding var isCategorySheetVisible: Bool
     @Binding var DividerSelect: Bool
