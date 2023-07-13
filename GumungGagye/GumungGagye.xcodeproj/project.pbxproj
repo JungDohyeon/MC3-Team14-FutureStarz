@@ -71,7 +71,6 @@
 		0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHistoryView.swift; sourceTree = "<group>"; };
 		0A2828F12A5E385000A9D5D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		99F7D70F2A5BE75A0090A05A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
 		99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetBudgetView.swift; sourceTree = "<group>"; };
@@ -255,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				99F7D7122A5BE8770090A05A /* Budget */,
-				99F7D70F2A5BE75A0090A05A /* GoogleService-Info.plist */,
 				0A2828F32A5E3AD500A9D5D9 /* Setting */,
 				0A2828E82A5D6E7400A9D5D9 /* CommonView */,
 				0A2828D92A5BB09200A9D5D9 /* Analysis */,
