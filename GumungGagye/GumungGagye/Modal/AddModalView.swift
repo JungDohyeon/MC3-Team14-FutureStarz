@@ -19,6 +19,9 @@ struct AddModalView: View {
     @State private var isCheckedExpense = false
     @State private var isCheckedShare = true
     
+    var bankApp: String = "토스"
+    var bankAppScheme: String = "supertoss://"
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -28,14 +31,14 @@ struct AddModalView: View {
                 
                 Spacer()
                 
-                SmallButton(text: "토스뱅크 열기"){
-                    let toss = "supertoss://"
-                    let tossURL = NSURL(string: toss)
-                    if (UIApplication.shared.canOpenURL(tossURL! as URL)) {
-                        UIApplication.shared.open(tossURL! as URL)
+                SmallButton(text: "\(bankApp) 열기"){
+                    let app = bankAppScheme
+                    let appURL = NSURL(string: app)
+                    if (UIApplication.shared.canOpenURL(appURL! as URL)) {
+                        UIApplication.shared.open(appURL! as URL)
                     }
                     else {
-                        print("No kakaotalk installed.")
+                        print("No App installed.")
                     }
                 }
             }

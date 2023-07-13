@@ -57,7 +57,6 @@
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
 		CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C4B2A53A030005DF128 /* Preview Assets.xcassets */; };
 		CDCBE3832A5BE37D00DB33C8 /* GroupUserSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */; };
-		D2C828212A5E364A0003C0D6 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C828202A5E364A0003C0D6 /* ConnectView.swift */; };
 		D2C828232A5E366D0003C0D6 /* AddModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C828222A5E366D0003C0D6 /* AddModalView.swift */; };
 		D2C828252A5E36980003C0D6 /* BreakdownWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C828242A5E36980003C0D6 /* BreakdownWriting.swift */; };
 		D2C8282D2A5E37B00003C0D6 /* ExpenseCategorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C8282C2A5E37B00003C0D6 /* ExpenseCategorySheet.swift */; };
@@ -115,7 +114,6 @@
 		CDCB8C4B2A53A030005DF128 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CDCBE37F2A5BA5D200DB33C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "GumungGagye/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupUserSpendView.swift; sourceTree = "<group>"; };
-		D2C828202A5E364A0003C0D6 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		D2C828222A5E366D0003C0D6 /* AddModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModalView.swift; sourceTree = "<group>"; };
 		D2C828242A5E36980003C0D6 /* BreakdownWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownWriting.swift; sourceTree = "<group>"; };
 		D2C8282C2A5E37B00003C0D6 /* ExpenseCategorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategorySheet.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				D2C828262A5E37230003C0D6 /* CategorySheet */,
-				D2C828202A5E364A0003C0D6 /* ConnectView.swift */,
 				D2C828222A5E366D0003C0D6 /* AddModalView.swift */,
 				D2C828242A5E36980003C0D6 /* BreakdownWriting.swift */,
 			);
@@ -426,7 +423,6 @@
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
 				99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
-				D2C828212A5E364A0003C0D6 /* ConnectView.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				D2C828312A5E37EA0003C0D6 /* NextButton.swift in Sources */,
 				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
