@@ -319,7 +319,7 @@ struct PickerModalView: View {
         NavigationView {
             VStack {
                 Picker(selection: $selectedValue, label: Text("Test")) {
-                    ForEach(1...10, id: \.self) { num in
+                    ForEach(2...10, id: \.self) { num in
                         Text(num.description)
                     }
                 }
