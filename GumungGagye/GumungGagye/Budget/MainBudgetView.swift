@@ -43,12 +43,22 @@ struct MainBudgetView: View {
 }
 
 struct Header: View {
+    
+    @State var showAddModalView: Bool = false
+
     var body: some View {
         HStack {
             Text("내역")
                 .modifier(H2SemiBold())
             Spacer()
-            SmallButton(text: "+ 추가")
+            SmallButton(text: "+ 추가"){
+                self.showAddModalView = true
+            }
+            .sheet(isPresented: self.$showAddModalView) {
+                AddModalView()
+                    .presentationDetents([.large])
+                    .presentationDragIndicator(.visible)
+            }
         }
         .padding(.bottom, 10) // 전꺼 36
         .background(.white)
