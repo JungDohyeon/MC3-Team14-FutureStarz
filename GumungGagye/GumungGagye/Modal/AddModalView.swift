@@ -15,7 +15,6 @@ struct AddModalView: View {
     @State var tappedExpenseCategory: String = ""
     @State var tappedIncomeCategory: String = ""
     @State var tappedDate: String = ""
-    @State private var isChecked = false
     
     
     var body: some View {
