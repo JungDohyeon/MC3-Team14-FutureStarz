@@ -28,7 +28,16 @@ struct AddModalView: View {
                 
                 Spacer()
                 
-                SmallButton(text: "토스뱅크 열기")
+                SmallButton(text: "토스뱅크 열기"){
+                    let toss = "supertoss://"
+                    let tossURL = NSURL(string: toss)
+                    if (UIApplication.shared.canOpenURL(tossURL! as URL)) {
+                        UIApplication.shared.open(tossURL! as URL)
+                    }
+                    else {
+                        print("No kakaotalk installed.")
+                    }
+                }
             }
             // MARK: - 거래 유형
             VStack(alignment: .leading) {

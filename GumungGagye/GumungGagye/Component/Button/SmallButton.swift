@@ -9,10 +9,11 @@ import SwiftUI
 
 struct SmallButton: View {
     var text: String
+    var action: () -> Void
     
     var body: some View {
         Button {
-            
+            action()
         } label: {
             Text(text)
                 .modifier(Cap1())
@@ -28,6 +29,8 @@ struct SmallButton: View {
 
 struct SmallButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmallButton(text: "은행열기")
+        SmallButton(text: "은행열기"){
+            print("")
+        }
     }
 }
