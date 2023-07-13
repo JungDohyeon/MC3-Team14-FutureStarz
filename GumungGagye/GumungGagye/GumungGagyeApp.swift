@@ -25,9 +25,8 @@ struct GumungGagyeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                GroupNotExistView()
-            }
+//            MainView()
+            MainBudgetView()
         }
     }
 }
