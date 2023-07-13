@@ -16,6 +16,8 @@ struct AddModalView: View {
     @State var tappedIncomeCategory: String = ""
     @State var tappedDate: String = ""
     
+    @State private var isCheckedExpense = false
+    @State private var isCheckedShare = true
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -68,15 +70,38 @@ struct AddModalView: View {
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
                 
-                HStack {
-                    Text("이번에 과소비를 했어요.")
-                        .modifier(Body1())
-                        .foregroundColor(Color("Black"))
-                }
-                HStack {
-                    Text("이번 지출 내역을 그룹원에게 공개할게요.")
-                        .modifier(Body1())
-                        .foregroundColor(Color("Black"))
+                VStack(spacing: 24) {
+                    
+                    Button {
+                        isCheckedExpense.toggle()
+                    } label: {
+                        HStack {
+                            Text("이번에 과소비를 했어요.")
+                                .modifier(Body1())
+                                .foregroundColor(Color("Black"))
+                            
+                            Spacer()
+                            
+                            Image(systemName: isCheckedExpense ? "checkmark.square.fill" : "checkmark.square")
+                                .foregroundColor(isCheckedExpense ? Color("Main") : Color("Gray2"))
+                        }
+                    }
+                    .padding(.top, 18)
+                    
+                    Button {
+                        isCheckedShare.toggle()
+                    } label: {
+                        HStack {
+                            Text("이번 지출 내역을 그룹원에게 공개할게요.")
+                                .modifier(Body1())
+                                .foregroundColor(Color("Black"))
+                            
+                            Spacer()
+                            
+                            Image(systemName: isCheckedShare ? "checkmark.square.fill" : "checkmark.square")
+                                .foregroundColor(isCheckedShare ? Color("Main") : Color("Gray2"))
+                        }
+                    }
                 }
                 
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
