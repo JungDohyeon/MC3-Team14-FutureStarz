@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TabView{
-            Text("Budget") // 가계부 뷰로 변경
+            MainBudgetView()
             .tabItem {
                 Label("가계부", systemImage: "list.clipboard.fill")
             }

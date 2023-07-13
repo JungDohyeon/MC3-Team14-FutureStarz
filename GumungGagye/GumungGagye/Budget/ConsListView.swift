@@ -15,7 +15,9 @@ struct ConsListView: View {
                 Text("내역")
                     .modifier(H2SemiBold())
                 Spacer()
-                SmallButton(text: "+ 추가")
+                SmallButton(text: "+ 추가"){
+                    print("")
+                }
             }
             .padding(.bottom, 36)
             
