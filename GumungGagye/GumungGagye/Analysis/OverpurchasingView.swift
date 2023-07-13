@@ -71,10 +71,11 @@ struct OverpurchasingView: View {
                         .background(Color("Gray3"))
                 }
                 .padding(.horizontal, 20.0)
-                
-                
             }
+            .padding(.bottom, 20.0)
         }
+        .foregroundColor(Color("Black"))
+        .background(Color("background"))
         .navigationBarTitle("과소비 내역", displayMode: .inline)
     }
 }

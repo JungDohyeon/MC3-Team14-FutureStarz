@@ -63,7 +63,7 @@ public struct ChartView: View {
                     
                     // 차트 내부 공간
                     Circle()
-                        .fill(Color.white)
+                        .fill(Color("background"))
                         .frame(width: 80, height: 80)
                     
                     // 차트 내부 텍스트

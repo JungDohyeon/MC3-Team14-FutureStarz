@@ -21,9 +21,10 @@ struct SettingView: View {
                 VStack(alignment: .leading, spacing: 20.0) {
                     Text("파도")
                         .modifier(H2SemiBold())
-                    HStack {
+                    HStack(alignment: .center, spacing: 4.0) {
                         Image(systemName: "apple.logo")
                             .foregroundColor(Color("Gray2"))
+                            .font(.system(size: 16))
                         Text("이메일")
                             .modifier(Body2())
                     }
@@ -86,7 +87,12 @@ struct SettingView: View {
                     
             }
             .padding(.horizontal, 20)
+            
+            Spacer()
         }
+        .padding(.top, 24.0)
+        .foregroundColor(Color("Black"))
+        .background(Color("background"))
     }
 }
 
@@ -119,6 +125,7 @@ struct SettingRowView: View {
                         .foregroundColor(Color("Black"))
                     Image(systemName: "chevron.right")
                         .foregroundColor(Color("Gray2"))
+                        .font(.system(size: 16))
                 }
             }
         }
