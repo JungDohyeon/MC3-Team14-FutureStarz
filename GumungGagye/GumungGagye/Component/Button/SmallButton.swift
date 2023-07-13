@@ -2,7 +2,7 @@
 //  SmallButton.swift
 //  GumungGagye
 //
-//  Created by Lee Juwon on 2023/07/11.
+//  Created by 손서연 on 2023/07/10.
 //
 
 import SwiftUI
