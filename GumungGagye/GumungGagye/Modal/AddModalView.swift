@@ -49,15 +49,11 @@ struct AddModalView: View {
                 }
                 .padding(.vertical, 15)
                 .padding(.leading, 12)
-                //            .padding(.trailing, 133)
-                .overlay(
-                    VStack {
-                        Spacer()
-                        Capsule()
-                            .foregroundColor(Color("Gray4"))
-                            .frame(height: 1)
-                    }
-                )
+                
+                // MARK: - 구분선
+                Divider()
+                    .frame(height: 1)
+                    .overlay(Color("Gray4"))
             }
             
             // MARK: - 지출일 경우
