@@ -305,7 +305,7 @@
 		D2C8281F2A5E36420003C0D6 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
-				D2C828262A5E37230003C0D6 /* Component */,
+				D2C828262A5E37230003C0D6 /* CategorySheet */,
 				D2C828202A5E364A0003C0D6 /* ConnectView.swift */,
 				D2C828222A5E366D0003C0D6 /* AddModalView.swift */,
 				D2C828242A5E36980003C0D6 /* BreakdownWriting.swift */,
@@ -313,13 +313,13 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
-		D2C828262A5E37230003C0D6 /* Component */ = {
+		D2C828262A5E37230003C0D6 /* CategorySheet */ = {
 			isa = PBXGroup;
 			children = (
 				D2C8282C2A5E37B00003C0D6 /* ExpenseCategorySheet.swift */,
 				D2F9DFEE2A5F05300037EC59 /* IncomeCategorySheet.swift */,
 			);
-			path = Component;
+			path = CategorySheet;
 			sourceTree = "<group>";
 		};
 		D2C828272A5E372E0003C0D6 /* Button */ = {
