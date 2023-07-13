@@ -21,6 +21,7 @@ struct CategoryListView: View {
                 .padding(.horizontal, 20.0)
                 .padding(.top, 48)
             }
+            .background(Color("background"))
             .navigationBarTitle("카테고리별 소비", displayMode: .inline)
     }
 }

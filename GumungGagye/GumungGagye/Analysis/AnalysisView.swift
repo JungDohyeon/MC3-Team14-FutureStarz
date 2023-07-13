@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AnalysisView: View {
     var body: some View {
-        NavigationView {
+        
             VStack {
                 // - MARK: - 분석 타이틀 / 월 변경
                 
@@ -18,7 +18,6 @@ struct AnalysisView: View {
                     
                     // 타이틀
                     Text("분석")
-                        .padding(.top, 24.0)
                         .modifier(H1Bold())
                     
                     // 월 변경
@@ -27,9 +26,10 @@ struct AnalysisView: View {
                             // 지난 달로
                         } label: {
                             Image(systemName: "chevron.left")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Color("Gray1"))
                         }
-                        .foregroundColor(Color("Gray1"))
-                        
+
                         Text("7월")
                             .modifier(H2SemiBold())
                         
@@ -37,8 +37,9 @@ struct AnalysisView: View {
                             // 다음 달로
                         } label: {
                             Image(systemName: "chevron.right")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Color("Gray1"))
                         }
-                        .foregroundColor(Color("Gray1"))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -146,7 +147,6 @@ struct AnalysisView: View {
                         .padding(.bottom, 28.0)
                         .padding(.top, 24)
                         
-                        // - TODO: - 카테고리별 소비로 이동
                         // 더보기 Button
                         NavigationLink(destination: CategoryListView()){
                             VStack {
@@ -164,9 +164,12 @@ struct AnalysisView: View {
                         }
                     }
                     .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
                 }
             }
-        }
+            .padding(.top, 24.0)
+            .foregroundColor(Color("Black"))
+            .background(Color("background"))
     }
 }
 
