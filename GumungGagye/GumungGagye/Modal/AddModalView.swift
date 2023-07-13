@@ -36,6 +36,7 @@ struct AddModalView: View {
                     Text("거래 유형")
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
+                        .frame(width: 52, alignment: .leading)
                     
                     HStack(spacing: 12) {
                         MoneyTypeButton(moneyType: "지출", isSelected: selectButton == .expense) {
@@ -100,9 +101,12 @@ struct AddModalView: View {
                     }
                 }
                 
+                Spacer()
+                
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
                     print("plus")
                 }
+                .padding(.bottom, 71)
             }
             // MARK: - 수입일 경우
             else if selectButton == .income {
@@ -114,18 +118,25 @@ struct AddModalView: View {
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
                 
-                Text("수입은 그룹원에게 공개되지 않아요.")
-                    .modifier(Body2())
-                    .foregroundColor(Color("Gray2"))
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.bottom, 12)
+                Spacer()
                 
-                Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
-                    print("plus")
+                VStack {
+                    Text("수입은 그룹원에게 공개되지 않아요.")
+                        .modifier(Body2())
+                        .foregroundColor(Color("Gray2"))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.bottom, 12)
+                    
+                    Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
+                        print("plus")
+                    }
                 }
+                .padding(.bottom, 71)
             }
         }
+        .padding(.top, 50)
         .padding(.horizontal, 20)
+        .ignoresSafeArea()
     }
 }
 
