@@ -29,3 +29,4 @@ struct CategoryIcon_Previews: PreviewProvider {
         CategoryIcon(size: .small, color: Color("Food"))
     }
 }
+

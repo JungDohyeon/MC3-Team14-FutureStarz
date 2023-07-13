@@ -11,11 +11,14 @@ struct DateTotal: View {
     var body: some View {
         
         HStack {
-            Text("4일 화요일") // '일', '요일' 고정
+            Text("4일 화요일")
+                .modifier(Body2())// '일', '요일' 고정
             Spacer()
             Text("+20,000원") // +,'원' 고정, 숫자만 바꿀 것
                 .foregroundColor(Color("Main"))
-            Text("-10,000원") // -,'원' 고정, 숫자만 바꿀 것
+                .modifier(Num4())
+            Text("-10,000원")
+                .modifier(Num4())// -,'원' 고정, 숫자만 바꿀 것
         }
     }
 }
