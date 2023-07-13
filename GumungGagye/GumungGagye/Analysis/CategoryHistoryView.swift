@@ -11,7 +11,9 @@ struct CategoryHistoryView: View {
     var body: some View {
         ScrollView{
             VStack(spacing: 76.0) {
-                HStack(alignment: .top) {
+                
+                // - MARK: - 카테고리 요약
+                HStack(alignment: .top, spacing: 0.0) {
                     VStack(alignment: .leading, spacing: 12.0) {
                         VStack(alignment: .leading, spacing: 8.0){
                             HStack(spacing: 4.0) {
@@ -42,12 +44,15 @@ struct CategoryHistoryView: View {
                 }
                 .padding(.top, 48.0)
                 
+                // - MARK: - 카테고리 내역 리스트
                 Text("(아마)리나가 만든 내역뷰...")
                     .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
                     .background(Color("Gray3"))
             }
             .padding(.horizontal, 20.0)
         }
+        .background(Color("background"))
+        .foregroundColor(Color("Black"))
         .navigationBarTitle("식비 내역",  displayMode: .inline)
     }
 }
