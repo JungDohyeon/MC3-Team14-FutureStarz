@@ -68,6 +68,8 @@ struct BreakdownWriting: View {
                 Text(item.rawValue)
                     .modifier(Body2())
                     .foregroundColor(Color("Gray1"))
+                    .frame(width: 52, alignment: .leading)
+                    .padding(.trailing, 24)
                 
                 // MARK: - 날짜 내역
                 if item == .date {
@@ -213,11 +215,12 @@ struct BreakdownWriting: View {
                             .frame(width: 16, height: 16)
                             .foregroundColor(Color("Gray2"))
                     }
-                    .padding(.vertical, 23)
+                    .padding(.vertical, 16)
                     .padding(.leading, 12)
                 }
             }
         }
+        .padding(.horizontal, 12)
         
         // MARK: - 구분선
         Divider()
