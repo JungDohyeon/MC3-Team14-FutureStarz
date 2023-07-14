@@ -17,16 +17,17 @@ struct GroupData: Identifiable {
     var group_max: Int  // 최대 인원
     var lock_status: Bool   // 비공개 여부
     var group_pw: String   // 비공개 비번
+    var timeStamp: Date = Date()
 }
 
 
 class GroupListStore: ObservableObject {
     @Published var groupList = [GroupData]()
     
-    func addData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String) {
+    func addData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
         let db = Firestore.firestore()
         
-        db.collection("groupRoom").addDocument(data: ["group_name" : group_name, "introduce": group_introduce, "group_goal": group_goal, "group_cur": group_cur, "group_max": group_max, "lock_status": lock_status, "group_pw": group_pw]) { error in
+        db.collection("groupRoom").addDocument(data: ["group_name" : group_name, "introduce": group_introduce, "group_goal": group_goal, "group_cur": group_cur, "group_max": group_max, "lock_status": lock_status, "group_pw": group_pw, "timeStamp": makeTime]) { error in
             if error == nil {
                 // if no error
                 //                self.fetchData()
@@ -42,7 +43,7 @@ class GroupListStore: ObservableObject {
     func fetchData() {
         let db = Firestore.firestore()
         
-        db.collection("groupRoom").getDocuments { snapshot, error in
+        db.collection("groupRoom").order(by: "timeStamp", descending: true).getDocuments { snapshot, error in
             
             // check error
             if error == nil {
