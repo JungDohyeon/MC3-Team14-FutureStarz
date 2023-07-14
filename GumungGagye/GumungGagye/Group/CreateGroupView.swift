@@ -192,8 +192,9 @@ struct CreateGroupView: View {
                         .modifier(Num3())
                         .focused($focusedField, equals: activeStateForIndex(index: idx))
                     
+                    // 번호가 채워진 칸은 파란 밑줄로 수정
                     Rectangle()
-                        .fill(focusedField == activeStateForIndex(index: idx) ? Color("Main") : Color("Gray3"))
+                        .fill(((focusedField == activeStateForIndex(index: idx)) || inputCodeArray[idx].count != 0) ? Color("Main") : Color("Gray3"))
                         .frame(height: 2)
                 }
                 .frame(width: 48)
