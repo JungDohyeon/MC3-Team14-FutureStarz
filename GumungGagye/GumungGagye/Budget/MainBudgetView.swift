@@ -58,6 +58,7 @@ struct Header: View {
                 AddModalView()
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
+                    .background(Color("White"))
             }
         }
         .padding(.bottom, 10) // 전꺼 36
