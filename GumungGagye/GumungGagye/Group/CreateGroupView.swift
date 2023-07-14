@@ -162,7 +162,7 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                store.addData(group_name: groupName, group_introduce: groupContent, group_goal: Int(groupGoalString) ?? 0, group_cur: 1, group_max: groupMax, lock_status: isSecretRoom, group_pw: groupCode)
+                store.addData(group_name: groupName, group_introduce: groupContent, group_goal: Int(groupGoalString) ?? 0, group_cur: 1, group_max: groupMax, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
                 dismiss()
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&

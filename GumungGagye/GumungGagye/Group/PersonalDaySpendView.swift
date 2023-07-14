@@ -60,7 +60,7 @@ struct PersonalDaySpendView: View {
                     HStack {
                         Image(systemName: "paperplane.fill")
                             .font(.system(size: 16))
-                            .foregroundColor(commentInput.count == 0 ? Color("Vehicle") : Color("Main"))
+                            .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color("Main"))
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
                             .padding(.trailing, 12)
                     }
