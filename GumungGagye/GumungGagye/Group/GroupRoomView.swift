@@ -16,6 +16,8 @@ struct GroupRoomView: View {
         ZStack {
             Color("background").ignoresSafeArea()
             
+            // MARK: 그룹 명
+            
             VStack(spacing: 0) {
                 HStack {
                     Text(groupdata.group_name)
@@ -32,6 +34,9 @@ struct GroupRoomView: View {
                 }
                 .padding(.bottom, 8)
                 
+                
+                // MARK: 그룹 소개 글
+                
                 HStack {
                     Text(groupdata.group_introduce)
                         .modifier(Body2())
@@ -41,6 +46,8 @@ struct GroupRoomView: View {
                     Spacer()
                 }
                 .padding(.bottom, 16)
+                
+                // MARK: 그룹 목표 금액, 최대 인원
                 
                 HStack(spacing: 23) {
                     HStack(spacing: 6) {
@@ -75,6 +82,7 @@ struct GroupRoomView: View {
                     
                     Spacer()
                     
+                    // MARK: 가입 버튼
                     // 가입된 그룹이 없을 경우 가입 버튼 생성
                     if isNotExist {
                         NavigationLink {

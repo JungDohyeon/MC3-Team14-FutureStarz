@@ -29,7 +29,7 @@ struct GroupViewInside: View {
                         Button {
                             isGroupInfo = false
                         } label: {
-                            Text("지출 내역")
+                            Text("지출 공유")
                                 .foregroundColor(isGroupInfo ? Color("Gray2") : Color("Black"))
                         }
                         
