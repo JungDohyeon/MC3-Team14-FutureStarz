@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class Utilities {
     
@@ -32,3 +33,17 @@ final class Utilities {
     }
 }
 
+
+struct CustomBackButton: View {
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: {
+            action()
+        }) {
+            Image(systemName: "chevron.backward")
+                .imageScale(.large)
+                .foregroundColor(.black)
+        }
+    }
+}
