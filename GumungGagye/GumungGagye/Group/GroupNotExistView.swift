@@ -12,7 +12,6 @@ struct GroupNotExistView: View {
     @State private var searchText: String = ""
     @ObservedObject var groupList = GroupListStore()
     
-    
     var body: some View {
         GeometryReader { geo in
             NavigationView {
@@ -48,7 +47,7 @@ struct GroupNotExistView: View {
                             }
                             .padding(.bottom, 48)
                             
-                            // Search Field
+                            // MARK: Search Field
                             TextField("그룹 이름을 검색해주세요", text: $searchText)
                                 .padding(.vertical, 12.5)
                                 .padding(.leading, 40)
@@ -71,6 +70,9 @@ struct GroupNotExistView: View {
                                 .padding(.bottom, 32)
                         }
                         .padding(.horizontal, 20)
+                        
+                        
+                        // MARK: Group Room List
                         
                         ScrollView {
                             VStack(spacing: 24) {
