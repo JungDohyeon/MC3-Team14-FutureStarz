@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SelectingBank: View {
+    @State var logic: Bool = false
     @State var selectBankCardPay: Int = 0
     @State var selectBankCardPayIndex: Int = 0
     @State var isAbled: Bool = false
-    
+    @AppStorage("bankCardPay") var bankCardPay: Int = 0
+    @AppStorage("bankCardPayIndex") var bankCardPayIndex: Int = 0
     @State private var isActive: Bool = false
     @Environment(\.presentationMode) var presentationMode
     let columns = [
@@ -95,10 +97,31 @@ struct SelectingBank: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: SelectingBudget()) {
-                    OnboardingNextButton(isAbled: $isAbled)
-                }
+                
+                Button(action: {
+                    bankCardPay = selectBankCardPay
+                    bankCardPayIndex = selectBankCardPayIndex
+                    logic = true
+                    
+                }, label: {
+                    OnboardingNextButton(isAbled: .constant(true))
+                        
+                })
+                .navigationDestination(isPresented: $logic, destination: {
+                    // 목적지
+                    SelectingBudget()
+                        
+                })
+//                .disabled(!isAbled)
                 .padding(.bottom, 59)
+                
+                
+                
+                
+//                NavigationLink(destination: SelectingBudget()) {
+//                    OnboardingNextButton(isAbled: $isAbled)
+//                }
+//                .padding(.bottom, 59)
             }
             .ignoresSafeArea()
             .navigationBarBackButtonHidden(true)

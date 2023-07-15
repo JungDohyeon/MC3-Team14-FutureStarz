@@ -35,11 +35,11 @@ class KeyboardResponder: ObservableObject {
 
 struct SelectingName: View {
     // MARK: - PROPERTY
-    
+    @AppStorage("app_name") var app_name: String = ""
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @State private var name: String = ""
     @State var isAbled: Bool = false
-    
+    @State var logic: Bool = false
     // MARK: - BODY
     var body: some View {
         VStack(spacing: 0) {
@@ -67,13 +67,32 @@ struct SelectingName: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: SelectingBank()) {
-                    OnboardingNextButton(isAbled: $isAbled)
-                }
+//                NavigationLink(destination: SelectingBank()) {
+//
+//                    OnboardingNextButton(isAbled: $isAbled)
+//
+//
+//                }
+//                .disabled(!isAbled)
                 
+                Button(action: {
+                    app_name = name
+                    logic = true
+                    
+                }, label: {
+                    OnboardingNextButton(isAbled: $isAbled)
+                        
+                })
+                .navigationDestination(isPresented: $logic, destination: {
+                    // 목적지
+                    SelectingBank()
+                        
+                })
                 .disabled(!isAbled)
-//                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
                 .padding(.bottom, 25)
+                
+//                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
+                
                 .animation(.easeInOut)
                 
             }

@@ -9,6 +9,8 @@ import SwiftUI
 
 
 struct SelectingBudget: View {
+    @State var logic: Bool = false
+    @AppStorage("budget") var user_budget: String = ""
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @State private var isActive: Bool = false
     @State private var budget: String = ""
@@ -60,12 +62,32 @@ struct SelectingBudget: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: PreStart()) {
+                
+                Button(action: {
+                    user_budget = budget
+                    logic = true
+                    
+                }, label: {
                     OnboardingNextButton(isAbled: $isAbled)
-                }
+                        
+                })
+                .navigationDestination(isPresented: $logic, destination: {
+                    // 목적지
+                    PreStart()
+                        
+                })
                 .disabled(!isAbled)
-//                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
                 .padding(.bottom, 25)
+                
+                
+                
+                
+//                NavigationLink(destination: PreStart()) {
+//                    OnboardingNextButton(isAbled: $isAbled)
+//                }
+//                .disabled(!isAbled)
+////                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
+//                .padding(.bottom, 25)
             }
         }
         .edgesIgnoringSafeArea([.top])
