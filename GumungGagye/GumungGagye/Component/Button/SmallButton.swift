@@ -16,12 +16,12 @@ struct SmallButton: View {
             action()
         } label: {
             Text(text)
-                .modifier(Cap1())
+                .modifier(Cap1Bold())
                 .foregroundColor(Color("Main"))
                 .padding(.vertical, 7)
                 .padding(.horizontal, 12)
         }
-        .background(Color("Light30"))
+        .background(Color("Light"))
         .cornerRadius(5)
 
     }

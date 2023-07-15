@@ -123,6 +123,8 @@ struct CalendarView: View {
     let startDate = Calendar.current.date(from: DateComponents(year: 2023, month: 1, day: 2))!
     let endDate = Calendar.current.date(from: DateComponents(year: 2023, month: 12, day: 31))!
     
+    let DateArray: [String] = ["월", "화", "수", "목", "금", "토", "일"]
+    
     @State private var selectedDate: Date? = Date() // 사용자가 선택한 날짜 (기본 = 오늘 날짜)
     @State private var presentedDate = Date()   // 현재 사용자 화면에 표시되는 날짜
     @State private var tagNum: Int = 0   // Page Tag
@@ -132,16 +134,24 @@ struct CalendarView: View {
             Text(monthFormatter.string(from: dateArray()[tagNum][6]))
                 .modifier(H2SemiBold())
             
-            TabView(selection: $tagNum) {
-                ForEach(dateArray().indices, id: \.self) { index in
-                    let weekDates = dateArray()[index]
-                    HStack(spacing: 18.5) {
-                        ForEach(weekDates, id: \.self) { date in
-                            VStack(spacing: 4) {
-                                Text(dayOfWeekFormatter.string(from: date))
-                                    .modifier(Cap2())
-                                    .foregroundColor(Color("Gray2"))
-                                
+            VStack(spacing: 4) {
+                // 요일 고정
+                HStack(spacing: 18.5) {
+                    ForEach(DateArray, id: \.self) { date in
+                        Text(date)
+                            .padding(.horizontal, 11.5)
+                            .modifier(Cap2())
+                            .foregroundColor(Color("Gray2"))
+                        
+                    }
+                }
+                
+                // 날짜 스크롤 (TabView)
+                TabView(selection: $tagNum) {
+                    ForEach(dateArray().indices, id: \.self) { index in
+                        let weekDates = dateArray()[index]
+                        HStack(spacing: 18.5) {
+                            ForEach(weekDates, id: \.self) { date in
                                 Text(dayFormatter.string(from: date))
                                     .modifier(Num3())
                                     .frame(width: 32, height: 32)
@@ -153,21 +163,21 @@ struct CalendarView: View {
                                     }
                             }
                         }
-                    }
-                    .onAppear {
-                        presentedDate = dateArray()[index][6]
-                    }
-                }
-            }
-            .onAppear {
-                // 화면이 나타나면 오늘 날짜가 있는 배열 먼저 보여준다.
-                for idx in 0..<dateArray().count {
-                    if isTodayIncluded(dateArray()[idx]) {
-                        tagNum = idx
+                        .onAppear {
+                            presentedDate = dateArray()[index][6]
+                        }
                     }
                 }
+                .onAppear {
+                    // 화면이 나타나면 오늘 날짜가 있는 배열 먼저 보여준다.
+                    for idx in 0..<dateArray().count {
+                        if isTodayIncluded(dateArray()[idx]) {
+                            tagNum = idx
+                        }
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
         }
         
     }
