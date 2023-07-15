@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct SelectingBank: View {
+    @State var selectBankCardPay: Int = 0
+    @State var selectBankCardPayIndex: Int = 0
+    @State var isAbled: Bool = false
     
     @State private var isActive: Bool = false
     @Environment(\.presentationMode) var presentationMode
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     
     var body: some View {
         VStack(spacing: 0) {
@@ -36,39 +45,58 @@ struct SelectingBank: View {
                 
                 
                 
-                //                Text("은행")
-                //                    .modifier(H2SemiBold())
-                //                    .foregroundColor(Color("Gray1"))
-                
                 ScrollView(showsIndicators: false) {
                     LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
-                        Section(header: BankView_header(var_text: "카드")) {
-                            VStack {
-                                ForEach(1...20, id: \.self) { index in
-                                    Text("Item \(index)")
-                                        .font(.title)
+                        Section(header: BankView_header(var_text: "은행")) {
+                            LazyVGrid(columns: columns) {
+                                
+                                ForEach(1...9, id: \.self) { index in
+                                    BankCardPayView(bankCardPay: 1, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
+                                        
+                                        
+                                        
                                 }
+                                
                             }
                         }
                     }
+                    .padding(.bottom, 36)
                     
                     
                     LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
                         Section(header: BankView_header(var_text: "페이")) {
-                            VStack() {
-                                ForEach(1...20, id: \.self) { index in
-                                    Text("Item \(index)")
-                                        .font(.title)
+                            LazyVGrid(columns: columns) {
+                                
+                                ForEach(1...3, id: \.self) { index in
+                                    BankCardPayView(bankCardPay: 2, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
+                                        
                                 }
+                                
                             }
                         }
                     }
+                    .padding(.bottom, 36)
+                    
+                    LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
+                        Section(header: BankView_header(var_text: "카드사")) {
+                            LazyVGrid(columns: columns) {
+                                
+                                ForEach(1...8, id: \.self) { index in
+                                    BankCardPayView(bankCardPay: 3, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
+                                        
+                                }
+                                
+                            }
+                        }
+                    }
+                    .padding(.bottom, 36)
+                    
                 }
-                .clipped()
+                
                 Spacer()
                 
                 NavigationLink(destination: SelectingBudget()) {
-                    OnboardingNextButton(isAbled: .constant(true))
+                    OnboardingNextButton(isAbled: $isAbled)
                 }
                 .padding(.bottom, 59)
             }

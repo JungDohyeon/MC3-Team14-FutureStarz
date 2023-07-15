@@ -27,6 +27,7 @@ class KeyboardResponder: ObservableObject {
         keyboardWillHideNotification
             .map { _ in CGFloat.zero }
             .assign(to: &$currentHeight)
+        print(currentHeight)
     }
 }
 
@@ -55,6 +56,7 @@ struct SelectingName: View {
                     Text("이름을 입력해주세요")
                 }.onChange(of: name) { newValue in
                     isAbled = !newValue.isEmpty
+                    print(keyboardResponder.currentHeight)
                 }
                 
                 .modifier(H2SemiBold())
@@ -70,34 +72,19 @@ struct SelectingName: View {
                 }
                 
                 .disabled(!isAbled)
-                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
+//                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
+                .padding(.bottom, 25)
                 .animation(.easeInOut)
                 
             }
             
             
         }
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
+        
+        .edgesIgnoringSafeArea([.top])
         .padding(.horizontal, 20)
         
-    }
-    private func adjustButtonPosition(keyboardHeight: CGFloat) {
-        guard keyboardHeight > 0 else {
-            return
-        }
-        
-        let topSafeAreaInset = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0
-        let bottomSafeAreaInset = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
-        
-        DispatchQueue.main.async {
-            withAnimation {
-                if keyboardHeight > topSafeAreaInset + bottomSafeAreaInset {
-                    self.isAbled = false
-                } else {
-                    self.isAbled = !self.name.isEmpty
-                }
-            }
-        }
     }
 }
 
