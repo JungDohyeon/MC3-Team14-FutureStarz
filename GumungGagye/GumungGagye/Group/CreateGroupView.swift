@@ -7,8 +7,34 @@
 
 import SwiftUI
 
+// code 입력창 focus state
+enum CodeField {
+    case groupName
+    case groupCaption
+    case groupGoal
+    case groupMax
+    case code1
+    case code2
+    case code3
+    case code4
+}
+
+// Integer만 받도록 하는 클래스. (목표 금액 필드에 사용)
+class NumbersOnlyInput: ObservableObject {
+    @Published var groupGoalValue = "" {
+        didSet {
+            let filtered = groupGoalValue.filter { $0.isNumber }
+            
+            if groupGoalValue != filtered {
+                groupGoalValue = filtered
+            }
+        }
+    }
+}
+
 struct CreateGroupView: View {
     @ObservedObject var store = GroupListStore()
+    @ObservedObject var input = NumbersOnlyInput()
     @Environment(\.dismiss) var dismiss
     
     @State private var inputCodeArray: [String] = Array(repeating: "", count: 4)
@@ -16,9 +42,9 @@ struct CreateGroupView: View {
     
     // group data
     @State private var groupName: String = ""
-    @State private var groupContent: String = ""
-    @State private var groupGoalString: String = ""
-    @State private var groupMax: Int = 0
+    @State private var groupCaption: String = ""
+    @State private var groupGoal: Int? = nil
+    @State private var groupMax: String = ""
     @State private var isSecretRoom: Bool = false
     @State private var groupCode: String = ""
     
@@ -28,7 +54,6 @@ struct CreateGroupView: View {
     @State private var groupMaxValidate: Bool = false
     @State private var groupGoalValidate: Bool = false
     @State private var isMaxNumPickerPresented: Bool = false
-    @State private var DividerSelect: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -41,78 +66,44 @@ struct CreateGroupView: View {
             }
             
             VStack(spacing: 23) {
-                CreateGroupInfo(userInput: $groupName, getType: "그룹 이름", getMaxString: 15)
-                    .onChange(of: groupName) { newValue in
-                        if newValue.count > 0 {
-                            groupNameValidate = true
-                        } else if newValue.count == 0 {
-                            groupNameValidate = false
-                        }
-                    }
+                // MARK: 그룹 이름
+                GetStringGroupInfo(userInput: $groupName, checkStatus: $groupNameValidate, focusedValue: _focusedField, focusType: .groupName, getTitle: "그룹 이름을 입력해주세요", getMaxString: 15)
+                    .focused($focusedField, equals: .groupName)
                 
-                CreateGroupInfo(userInput: $groupContent, getType: "그룹 소개", getMaxString: 50)
-                    .onChange(of: groupContent) { newValue in
-                        if newValue.count > 0 {
-                            groupIntroValidate = true
-                        } else if newValue.count == 0 {
-                            groupIntroValidate = false
-                        }
-                    }
+                // MARK: 그룹 소개 글
+                GetStringGroupInfo(userInput: $groupCaption, checkStatus: $groupIntroValidate, focusedValue: _focusedField, focusType: .groupCaption, getTitle: "그룹 소개를 입력해주세요", getMaxString: 50)
+                    .focused($focusedField, equals: .groupCaption)
                 
-                HStack(spacing: 23) {
-                    Text("목표 금액")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
-                    
-                    
-                    TextField("목표 금액을 입력해주세요", text: $groupGoalString, onEditingChanged: { isEditing in
-                        DividerSelect = isEditing
-                    }
-                    )
-                    .modifier(Body1Bold())
-                    .keyboardType(.numberPad)
-                    .onChange(of: groupGoalString) { newValue in
-                        if newValue.count > 0 {
-                            groupGoalValidate = true
-                        } else if newValue.count == 0 {
-                            groupGoalValidate = false
-                            
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "pencil")
-                        .font(.system(size: 16))
-                        .foregroundColor(Color("Gray2"))
-                }
+                // MARK: 목표 금액
+                GetIntegerGroupInfo( userInput: $input.groupGoalValue, checkStatus: $groupGoalValidate, focusedValue: _focusedField ,getTitle: "목표 금액을 입력해주세요", getMaxString: 9, symbolName: "pencil", focusType: .groupGoal)
+                    .focused($focusedField, equals: .groupGoal)
                 
-                Divider()
-                    .frame(height: 1)
-                    .overlay(DividerSelect ? Color("Main") : Color("Gray4"))
-                
+                // MARK: 최대 인원
                 HStack(spacing: 23) {
                     Text("최대 인원")
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
-                    
-                    HStack {
-                        Text(groupMax == 0 ? "최대 인원을 선택해주세요" : groupMax.description)
-                            .modifier(Body1Bold())
-                            .foregroundColor(groupMax == 0 ? Color("Gray2") : .black)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color("Gray2"))
-                    }
-                    .onTapGesture {
+                    Button {
                         isMaxNumPickerPresented = true
-                    }
-                    .onChange(of: groupMax) { newValue in
-                        if newValue != 0 {
-                            groupMaxValidate = true
+                        focusedField = nil
+                    } label: {
+                        HStack {
+                            Text(groupMax.count == 0 ? "최대 인원을 선택해주세요" : groupMax)
+                                .modifier(Body1Bold())
+                                .foregroundColor(groupMax.isEmpty ? .gray.opacity(0.4) : .black)
+                                .onChange(of: groupMax) { newValue in
+                                    if newValue.isEmpty {
+                                        groupMaxValidate = false
+                                    } else {
+                                        groupMaxValidate = true
+                                    }
+                                }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 16))
+                                .foregroundColor(Color("Gray2"))
                         }
                     }
                 }
@@ -125,6 +116,7 @@ struct CreateGroupView: View {
                     .frame(height: 1)
                     .overlay(Color("Gray4"))
                 
+                // MARK: 비공개 설정
                 HStack {
                     Toggle(isOn: $isSecretRoom) {
                         Text("비공개 그룹 설정")
@@ -136,6 +128,7 @@ struct CreateGroupView: View {
                 }
                 .padding(.bottom, 24)
                 
+                // MARK: 방 비밀번호
                 if isSecretRoom {
                     HStack {
                         Text("비밀번호")
@@ -150,7 +143,14 @@ struct CreateGroupView: View {
                                 letterCondition(value: newValue)
                             }
                             .onAppear {
-                                focusedField = .f1
+                                for i in 0..<4 {
+                                    if inputCodeArray[i].isEmpty {
+                                        focusedField = activeStateForIndex(index: i)
+                                        break
+                                    } else {
+                                        focusedField = .code4
+                                    }
+                                }
                             }
                     }
                 }
@@ -162,13 +162,13 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                store.addData(group_name: groupName, group_introduce: groupContent, group_goal: Int(groupGoalString) ?? 0, group_cur: 1, group_max: groupMax, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
+                store.addData(group_name: groupName, group_introduce: groupCaption, group_goal: groupGoal ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
                 dismiss()
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
-                                            groupMaxValidate && groupGoalValidate && (isSecretRoom == !checkBtnStatus())))
+                                            groupMaxValidate && groupGoalValidate && checkBtnStatus()))
             }
-            .disabled(!(groupNameValidate && groupIntroValidate && groupMaxValidate && groupGoalValidate && (isSecretRoom == !checkBtnStatus())))
+            .disabled(!(groupNameValidate && groupIntroValidate && groupMaxValidate && groupGoalValidate && checkBtnStatus()))
             .padding(.bottom, 60)
             
         }
@@ -177,7 +177,9 @@ struct CreateGroupView: View {
         .onTapGesture { // 키보드밖 화면 터치시 키보드 사라짐
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
-        
+        .onAppear {
+            focusedField = .groupName
+        }
     }
     
     // code input field
@@ -204,12 +206,14 @@ struct CreateGroupView: View {
     
     // 코드 입력 Validation 확인
     func checkBtnStatus() -> Bool {
-        for i in 0..<4 {
-            if inputCodeArray[i].isEmpty {
-                return true
+        if isSecretRoom {
+            for i in 0..<4 {
+                if inputCodeArray[i].isEmpty {
+                    return false
+                }
             }
         }
-        return false
+        return true
     }
     
     func letterCondition(value: [String])  {
@@ -238,59 +242,47 @@ struct CreateGroupView: View {
     
     func activeStateForIndex(index: Int) -> CodeField {
         switch index {
-        case 0: return .f1
-        case 1: return .f2
-        case 2: return .f3
-        default: return .f4
+        case 0: return .code1
+        case 1: return .code2
+        case 2: return .code3
+        default: return .code4
         }
     }
 }
 
-// code 입력창 focus state
-enum CodeField {
-    case f1
-    case f2
-    case f3
-    case f4
-}
 
-// 키보드밖 화면 터치시 키보드 사라짐
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-
-// Get create group info (title, content)
-struct CreateGroupInfo: View {
-    @State private var DividerSelect: Bool = false
-    
+// get String value for group info
+struct GetStringGroupInfo: View {
     @Binding var userInput: String
-    var getType: String
+    @Binding var checkStatus: Bool
+    
+    @FocusState var focusedValue: CodeField?
+    
+    var focusType: CodeField
+    var getTitle: String
     var getMaxString: Int
     
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 23) {
-                Text(getType)
+                Text(getTitle.prefix(5))
                     .modifier(Body2())
                     .foregroundColor(Color("Gray1"))
                 
-                TextField("\(getType)을 입력해주세요", text: $userInput, onEditingChanged: { isEditing in
-                    if isEditing {
-                        DividerSelect = true
-                    } else {
-                        DividerSelect = false
+                TextField(getTitle, text: $userInput, prompt: Text(getTitle).foregroundColor(.gray.opacity(0.4)))
+                    .submitLabel(.done) // 제출 버튼
+                    .autocapitalization(.none)  // 자동 대문자 off
+                    .disableAutocorrection(true)   // 자동 완성 off
+                    .modifier(Body1Bold())
+                    .foregroundColor(.black)
+                    .onChange(of: userInput) { newValue in
+                        if newValue.isEmpty {
+                            checkStatus = false
+                        } else {
+                            checkStatus = true
+                            userInput = String(newValue.prefix(getMaxString))
+                        }
                     }
-                })
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .modifier(Body1Bold())
-                .foregroundColor(userInput.count == 0 ? Color("Gray2") : Color.black)
-                .onChange(of: userInput) { newValue in
-                    userInput = String(newValue.prefix(getMaxString))
-                }
                 
                 Spacer()
                 
@@ -301,27 +293,85 @@ struct CreateGroupInfo: View {
                 }
                 .modifier(Cap1())
                 .foregroundColor(Color("Gray2"))
+                
             }
             .padding(.bottom, 22)
             
             Divider()
                 .frame(height: 1)
-                .overlay(DividerSelect ? Color("Main") : Color("Gray4"))
+                .overlay(focusedValue == focusType ? Color("Main") : Color("Gray4"))
         }
     }
 }
 
+// get Integer value for group info
+struct GetIntegerGroupInfo: View {
+    @State private var dividerSelect: Bool = false
+    @State var keyboardIsPresented: Bool = false
+    
+    @Binding var userInput: String
+    @Binding var checkStatus: Bool
+    @FocusState var focusedValue: CodeField?
+    
+    var getTitle: String
+    var getMaxString: Int
+    var symbolName: String
+    var focusType: CodeField
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 23) {
+                Text(getTitle.prefix(5))
+                    .modifier(Body2())
+                    .foregroundColor(Color("Gray1"))
+                
+                TextField(getTitle, text: $userInput, prompt: Text(getTitle).foregroundColor(.gray.opacity(0.4)))
+                    .modifier(Body1Bold())
+                    .keyboardType(.numberPad)
+                    .foregroundColor(.black)
+                    .onChange(of: userInput) { newValue in
+                        if newValue.isEmpty {
+                            checkStatus = false
+                        } else {
+                            checkStatus = true
+                            userInput = String(newValue.prefix(getMaxString))
+                        }
+                    }
+                
+                Spacer()
+                
+                Image(systemName: symbolName)
+                    .font(.system(size: 16))
+                    .foregroundColor(Color("Gray2"))
+                    .onTapGesture {
+                        focusedValue = focusType
+                    }
+            }
+            .padding(.bottom, 22)
+            
+            Divider()
+                .frame(height: 1)
+                .overlay(focusedValue == focusType ? Color("Main") : Color("Gray4"))
+        }
+    }
+}
+
+// Picker Modal View for 최대인원
 struct PickerModalView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var selectedValue: String
     
-    @Binding var selectedValue: Int
+    let groupMaxArray: [String] = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
     var body: some View {
         NavigationView {
             VStack {
-                Picker(selection: $selectedValue, label: Text("Test")) {
-                    ForEach(2...10, id: \.self) { num in
-                        Text(num.description)
+                Picker(selection: $selectedValue, label: Text("")) {
+                    Text("최대 인원을 선택해주세요").tag("")
+                        .modifier(Body1Bold())
+                    ForEach(groupMaxArray, id: \.self) { num in
+                        Text(num)
+                            .modifier(Num2())
                     }
                 }
                 .labelsHidden()
@@ -337,6 +387,7 @@ struct PickerModalView: View {
 }
 
 
+// 그룹 생성 버튼
 struct GroupCreateBtn: View {
     var validation: Bool
     
@@ -354,6 +405,13 @@ struct GroupCreateBtn: View {
     }
 }
 
+
+// 키보드밖 화면 터치시 키보드 사라짐
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 
 struct CreateGroupView_Previews: PreviewProvider {
     static var previews: some View {
