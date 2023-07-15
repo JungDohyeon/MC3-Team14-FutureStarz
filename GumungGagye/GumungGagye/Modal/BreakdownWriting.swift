@@ -117,7 +117,6 @@ struct BreakdownWriting: View {
                         .foregroundColor(Color("Black"))
                         .modifier(Body1Bold())
                     }
-                    .background(Color("Gray5"))
                     .cornerRadius(8)
                     .toolbar {
                         ToolbarItem(placement: .keyboard) {
@@ -187,7 +186,6 @@ struct BreakdownWriting: View {
                         .foregroundColor(Color("Black"))
                         .modifier(Body1Bold())
                     }
-                    .background(Color("Gray5"))
                     .cornerRadius(8)
                 }
                 
