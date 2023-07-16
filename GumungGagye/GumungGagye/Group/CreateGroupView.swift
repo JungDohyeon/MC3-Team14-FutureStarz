@@ -114,7 +114,7 @@ struct CreateGroupView: View {
                 
                 Divider()
                     .frame(height: 1)
-                    .overlay(Color("Gray4"))
+                    .overlay(isMaxNumPickerPresented ? Color("Main") : Color("Gray4"))
                 
                 // MARK: 비공개 설정
                 HStack {
