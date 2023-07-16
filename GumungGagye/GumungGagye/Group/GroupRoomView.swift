@@ -19,18 +19,18 @@ struct GroupRoomView: View {
             // MARK: 그룹 명
             
             VStack(spacing: 0) {
-                HStack {
+                HStack(spacing: 5){
+                    if groupdata.lock_status {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(Color("Main"))
+                    }
+                    
                     Text(groupdata.group_name)
                         .modifier(Body1Bold())
                         .foregroundColor(Color("Black"))
                     
                     Spacer()
-                    
-                    if groupdata.lock_status {
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color("Gray2"))
-                    }
                 }
                 .padding(.bottom, 8)
                 
