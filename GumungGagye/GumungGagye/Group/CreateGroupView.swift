@@ -33,8 +33,8 @@ class NumbersOnlyInput: ObservableObject {
 }
 
 struct CreateGroupView: View {
-    @ObservedObject var store = GroupListStore()
     @ObservedObject var input = NumbersOnlyInput()
+    @ObservedObject private var firebaseManager = FirebaseController.shared
     @Environment(\.dismiss) var dismiss
     
     @State private var inputCodeArray: [String] = Array(repeating: "", count: 4)
@@ -162,7 +162,7 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                store.addData(group_name: groupName, group_introduce: groupCaption, group_goal: groupGoal ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
+                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: groupGoal ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
                 dismiss()
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
@@ -416,6 +416,5 @@ extension UIApplication {
 struct CreateGroupView_Previews: PreviewProvider {
     static var previews: some View {
         CreateGroupView()
-            .environmentObject(GroupListStore())
     }
 }

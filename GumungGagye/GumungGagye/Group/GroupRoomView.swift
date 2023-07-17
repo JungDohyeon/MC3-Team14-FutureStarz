@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GroupRoomView: View {
-    
     let groupdata: GroupData
     let isNotExist: Bool
     
