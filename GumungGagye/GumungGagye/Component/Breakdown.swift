@@ -19,6 +19,8 @@ struct Breakdown: View {
             }
             Spacer()
             HStack {
+                OverPurchaseTag(isOverPurchase: true)
+                SecretTag(isSecret: true)
                 
             }
         }
