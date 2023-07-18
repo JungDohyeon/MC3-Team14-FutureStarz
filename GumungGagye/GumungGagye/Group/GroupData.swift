@@ -44,7 +44,7 @@ class FirebaseController: ObservableObject {
     
     
     // fetchData from Firestore Cloud
-    func fetchGroupData() {
+    func fetchAllGroupData() {
         let db = Firestore.firestore()
         
         db.collection("groupRoom").order(by: "timeStamp", descending: true).getDocuments { snapshot, error in
