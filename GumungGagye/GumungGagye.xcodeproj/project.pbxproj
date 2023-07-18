@@ -62,7 +62,7 @@
 		CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E72A59AF8800F15A50 /* Pretendard-Thin.otf */; };
 		CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2F42A59B79800F15A50 /* GroupRoomView.swift */; };
 		CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2F62A59B7A200F15A50 /* GroupNotExistView.swift */; };
-		CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2F82A59B80800F15A50 /* GroupData.swift */; };
+		CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2F82A59B80800F15A50 /* FirebaseController.swift */; };
 		CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */; };
 		CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */; };
 		CD27E3002A5AA6FD00F15A50 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CD27E2FF2A5AA6FD00F15A50 /* FirebaseFirestore */; };
@@ -136,7 +136,7 @@
 		CD27E2F22A59AFEC00F15A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CD27E2F42A59B79800F15A50 /* GroupRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomView.swift; sourceTree = "<group>"; };
 		CD27E2F62A59B7A200F15A50 /* GroupNotExistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupNotExistView.swift; sourceTree = "<group>"; };
-		CD27E2F82A59B80800F15A50 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
+		CD27E2F82A59B80800F15A50 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMain.swift; sourceTree = "<group>"; };
 		CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 			children = (
 				CD27E2F42A59B79800F15A50 /* GroupRoomView.swift */,
 				CD27E2F62A59B7A200F15A50 /* GroupNotExistView.swift */,
-				CD27E2F82A59B80800F15A50 /* GroupData.swift */,
+				CD27E2F82A59B80800F15A50 /* FirebaseController.swift */,
 				CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */,
 				CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */,
 				CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */,
@@ -504,7 +504,7 @@
 				99F7D74E2A5F80780090A05A /* MoveMonth.swift in Sources */,
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
 				99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */,
-				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
+				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				D2C828312A5E37EA0003C0D6 /* NextButton.swift in Sources */,
 				5E26235C2A62C6CC00A6E23F /* LoginComplete.swift in Sources */,
@@ -512,7 +512,7 @@
 				0A2828EE2A5D82F300A9D5D9 /* CategoryListView.swift in Sources */,
 				D2F9DFEF2A5F05300037EC59 /* IncomeCategorySheet.swift in Sources */,
 				5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */,
-				CD27E2F92A59B80800F15A50 /* GroupData.swift in Sources */,
+				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
 				99F7D7462A5F7FFE0090A05A /* Breakdown.swift in Sources */,
 				5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */,
 				5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */,
@@ -685,12 +685,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GumungGagye/GumungGagye.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-
 				DEVELOPMENT_TEAM = N8RU5UJH68;
-
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
@@ -706,6 +705,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dohyeon.GumungGagye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -718,12 +718,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GumungGagye/GumungGagye.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-
 				DEVELOPMENT_TEAM = N8RU5UJH68;
-
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
@@ -739,6 +738,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dohyeon.GumungGagye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

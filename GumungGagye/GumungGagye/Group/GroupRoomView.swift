@@ -123,6 +123,6 @@ struct MainColorBtn: View {
 
 struct GroupRoomView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
+        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: true)
     }
 }
