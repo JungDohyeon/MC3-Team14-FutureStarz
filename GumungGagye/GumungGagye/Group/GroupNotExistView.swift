@@ -38,7 +38,7 @@ struct GroupNotExistView: View {
                                         .frame(width: 20)
                                 }
                                 .sheet(isPresented: $isCreateGroup, onDismiss: {
-                                    firebaseManager.fetchGroupData()
+                                    firebaseManager.fetchAllGroupData()
                                 }) {
                                     CreateGroupView()
                                         .presentationDetents([.large])
@@ -88,7 +88,7 @@ struct GroupNotExistView: View {
             }
         }
         .onAppear {
-            firebaseManager.fetchGroupData()
+            firebaseManager.fetchAllGroupData()
         }
     }
     
