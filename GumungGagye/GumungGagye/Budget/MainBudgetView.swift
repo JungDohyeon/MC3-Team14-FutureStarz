@@ -21,7 +21,7 @@ struct MainBudgetView: View {
                     VStack(spacing: 36) {
                         
                         TargetBudgetView()
-                            .padding(.top, 36)
+                            .padding(.top, 16)
                         SectionBar()
                         CurrentAssetView()
                         SectionBar()

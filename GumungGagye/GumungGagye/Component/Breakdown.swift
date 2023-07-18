@@ -11,11 +11,16 @@ struct Breakdown: View {
     var body: some View {
         HStack {
             CategoryIcon(size: .small, color: Color("Food")) // Color 데이터로 바꾸기
-            Text("내용")
-                .modifier(Body1())
+            VStack(alignment: .leading) {
+                Text("-10,000원")
+                    .modifier(Num3Bold())
+                Text("내용")
+                    .modifier(Cap2())
+            }
             Spacer()
-            Text("-10,000원")
-                .modifier(Num3Bold())
+            HStack {
+                
+            }
         }
     }
 }
