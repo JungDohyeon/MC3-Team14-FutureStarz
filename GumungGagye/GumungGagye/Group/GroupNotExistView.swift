@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupNotExistView: View {
     @State private var isCreateGroup: Bool = false
     @State private var searchText: String = ""
-    @ObservedObject var groupList = GroupListStore()
+    @ObservedObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
         GeometryReader { geo in
@@ -38,7 +38,7 @@ struct GroupNotExistView: View {
                                         .frame(width: 20)
                                 }
                                 .sheet(isPresented: $isCreateGroup, onDismiss: {
-                                    groupList.fetchData()
+                                    firebaseManager.fetchAllGroupData()
                                 }) {
                                     CreateGroupView()
                                         .presentationDetents([.large])
@@ -88,16 +88,16 @@ struct GroupNotExistView: View {
             }
         }
         .onAppear {
-            groupList.fetchData()
+            firebaseManager.fetchAllGroupData()
         }
     }
     
     // Search Results (filter)
     var searchResults: [GroupData] {
         if searchText.isEmpty {
-            return groupList.groupList
+            return firebaseManager.groupList
         } else {
-            return groupList.groupList.filter { $0.group_name.contains(searchText) }
+            return firebaseManager.groupList.filter { $0.group_name.contains(searchText) }
         }
     }
 }
@@ -106,6 +106,5 @@ struct GroupNotExistView: View {
 struct GroupNotExistView_Previews: PreviewProvider {
     static var previews: some View {
         GroupNotExistView()
-            .environmentObject(GroupListStore())
     }
 }
