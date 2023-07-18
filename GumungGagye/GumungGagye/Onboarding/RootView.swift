@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct RootView: View {
-    
-    @State private var showSignInView: Bool = false
+    @AppStorage("app_setting") var app_setting: Bool = false
+    @State var showSignInView: Bool = false
     
     var body: some View {
         ZStack{
             if !showSignInView {
-                NavigationStack {
-//                    SettingsView(showSignInView: $showSignInView)
-                    SelectingName()
-                    
+                if !app_setting{
+                    NavigationStack {
+                        //                    SettingsView(showSignInView: $showSignInView)
+                        SelectingName()
+                    }
+                } else {
+                    MainView(showSignInView: $showSignInView)
                 }
             }
         }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PreStart: View {
+    
+    @AppStorage("app_setting") var app_setting: Bool = false
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -17,9 +20,16 @@ struct PreStart: View {
             }
             .padding(.top, 146)
             Spacer()
-            NavigationLink(destination: LoginComplete()) {
-                OnboardingNextButton(isAbled: .constant(true))
-            }
+            
+            OnboardingNextButton(isAbled: .constant(true))
+                .onTapGesture {
+                    app_setting = true
+                }
+            
+//            NavigationLink(destination: LoginComplete()) {
+////                OnboardingNextButton(isAbled: .constant(true))
+//                app_setting = true
+//            }
             .padding(.bottom, 71)
         }
         .padding(.horizontal, 20)
