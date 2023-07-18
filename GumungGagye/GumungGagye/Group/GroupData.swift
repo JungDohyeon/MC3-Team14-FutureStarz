@@ -17,14 +17,18 @@ struct GroupData: Identifiable {
     var group_max: Int  // 최대 인원
     var lock_status: Bool   // 비공개 여부
     var group_pw: String   // 비공개 비번
-    var timeStamp: Date = Date()
+    var timeStamp: Date = Date()    // Time Stamp
 }
 
 
-class GroupListStore: ObservableObject {
+class FirebaseController: ObservableObject {
+    static let shared = FirebaseController()    // SingleTon
     @Published var groupList = [GroupData]()
     
-    func addData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
+    private init() { }
+    
+    // Add Group Room Data
+    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
         let db = Firestore.firestore()
         
         db.collection("groupRoom").addDocument(data: ["group_name" : group_name, "introduce": group_introduce, "group_goal": group_goal, "group_cur": group_cur, "group_max": group_max, "lock_status": lock_status, "group_pw": group_pw, "timeStamp": makeTime]) { error in
@@ -40,7 +44,7 @@ class GroupListStore: ObservableObject {
     
     
     // fetchData from Firestore Cloud
-    func fetchData() {
+    func fetchAllGroupData() {
         let db = Firestore.firestore()
         
         db.collection("groupRoom").order(by: "timeStamp", descending: true).getDocuments { snapshot, error in
@@ -64,7 +68,7 @@ class GroupListStore: ObservableObject {
     }
     
     // delete group
-    func deleteData(deleteGroup: GroupData) {
+    func deleteGroupData(deleteGroup: GroupData) {
         let db = Firestore.firestore()
         
         db.collection("groupRoom").document(deleteGroup.id).delete { error in
