@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @Binding var showSignInView: Bool
+    
     var body: some View {
         TabView{
             MainBudgetView()
@@ -24,7 +27,7 @@ struct MainView: View {
                 Label("그룹", systemImage: "person")
             }
                 
-            SettingView()
+            SettingView(showSignInView: $showSignInView)
             .tabItem {
                 Label("설정", systemImage: "gear")
             }
@@ -41,6 +44,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(showSignInView: .constant(true))
     }
 }
