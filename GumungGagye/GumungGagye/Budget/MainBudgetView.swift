@@ -41,7 +41,6 @@ struct MainBudgetView: View {
             }
         }
         .clipped()
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
