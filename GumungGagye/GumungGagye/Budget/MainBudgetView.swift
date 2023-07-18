@@ -17,13 +17,16 @@ struct MainBudgetView: View {
                 .padding(.horizontal, 20)
             
             ScrollView {
-                VStack(spacing: 36) {
-                    
-                    TargetBudgetView()
-                    SectionBar()
-                    CurrentAssetView()
-                    SectionBar()
-                    
+                VStack(spacing:0) {
+                    VStack(spacing: 36) {
+                        
+                        TargetBudgetView()
+                            .padding(.top, 36)
+                        SectionBar()
+                        CurrentAssetView()
+                        SectionBar()
+                            .padding(.bottom, 26)
+                    }
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header()) {
                             
@@ -36,11 +39,12 @@ struct MainBudgetView: View {
                     }
                 }
             }
-            .clipped()
-            .edgesIgnoringSafeArea(.bottom)
         }
+        .clipped()
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
+
 
 struct Header: View {
     
@@ -61,6 +65,7 @@ struct Header: View {
                     .background(Color("White"))
             }
         }
+        .padding(.top, 10)
         .padding(.bottom, 10) // 전꺼 36
         .background(.white)
         
