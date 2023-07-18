@@ -10,13 +10,14 @@ import SwiftUI
 struct SettingView: View {
     @State private var logoutShowing = false
     @State private var cancelShowing = false
-    
+    @StateObject private var viewModel = SettingsViewModel()
+    @Binding var showSignInView: Bool
     var body: some View {
         VStack(spacing: 36.0) {
             VStack(alignment: .leading, spacing: 36.0) {
                 Text("설정")
                     .modifier(H1Bold())
-
+                
                 // - MARK: - 정보
                 VStack(alignment: .leading, spacing: 20.0) {
                     Text("파도")
@@ -53,12 +54,21 @@ struct SettingView: View {
                 VStack(spacing: 0.0) {
                     Button {
                         logoutShowing = true
+                        
                     } label: {
                         SettingRowView(label: "로그아웃", value: "")
                     }
                     .alert(isPresented: $logoutShowing) {
                         let firstButton = Alert.Button.default(Text("로그아웃")) {
                             // 로그아웃 기능
+                            Task {
+                                do {
+                                    try viewModel.signOut()
+                                    showSignInView = true
+                                } catch {
+                                    print(error)
+                                }
+                            }
                         }
                         let secondButton = Alert.Button.cancel(Text("취소")) {
                             print("secondary button pressed")
@@ -84,7 +94,7 @@ struct SettingView: View {
                         
                     }
                 }
-                    
+                
             }
             .padding(.horizontal, 20)
             
@@ -135,6 +145,6 @@ struct SettingRowView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(showSignInView: .constant(true))
     }
 }
