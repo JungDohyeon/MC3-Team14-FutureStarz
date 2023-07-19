@@ -19,7 +19,7 @@ struct GroupInfoView: View {
             
             ScrollView {
                 VStack {
-                    GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: false)
+                    GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
                 }
                 .padding(.horizontal, 20)
                 
