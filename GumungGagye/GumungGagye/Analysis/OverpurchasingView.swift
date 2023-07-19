@@ -54,11 +54,22 @@ struct OverpurchasingView: View {
                     // - MARK: - 과소비 차트
                     ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
                         .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
+                    
+                    HStack {
+                        Text("식비")
+                            .foregroundColor(Color("Black"))
+                            .modifier(Body1Bold())
+                        Spacer()
+                        Text("200,000원")
+                            .foregroundColor(Color("Black"))
+                            .modifier(Body1Bold())
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 46, maxHeight: 46)
+                    .padding(.horizontal, 16.0)
+                    .background(Color("Gray4"))
+                    .cornerRadius(12)
                 }
                 .padding(.horizontal, 20)
-                
-                // - MARK: - 구분선
-                DividerView()
                 
                 // - MARK: - 내역
                 VStack(alignment: .leading, spacing: 36.0) {

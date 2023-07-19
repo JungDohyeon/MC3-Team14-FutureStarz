@@ -112,7 +112,7 @@ struct AnalysisView: View {
                                 }
                                 .foregroundColor(Color("Gray1"))
                                 .modifier(Body2())
-                                .frame(maxWidth: .infinity, minHeight: 58, maxHeight: 58)
+                                .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
                     }
@@ -168,7 +168,7 @@ struct AnalysisView: View {
                                 }
                                 .foregroundColor(Color("Gray1"))
                                 .modifier(Body2())
-                                .frame(maxWidth: .infinity, minHeight: 58, maxHeight: 58)
+                                .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
                     }
