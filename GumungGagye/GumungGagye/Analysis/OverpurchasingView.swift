@@ -16,7 +16,7 @@ struct OverpurchasingView: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 12.0) {
                             VStack(alignment: .leading, spacing: 8.0){
-                                HStack(spacing: 4.0) {
+                                HStack(spacing: 3.0) {
                                     Text("2023년 7월")
                                     Text("과소비")
                                         .foregroundColor(Color("OverPurchasing"))
@@ -40,9 +40,6 @@ struct OverpurchasingView: View {
                         }
                         
                         Spacer()
-                        // 카테고리 아이콘
-                        Circle()
-                            .frame(width: 80, height: 80)
                     }
                     .padding(.top, 48.0)
                     
