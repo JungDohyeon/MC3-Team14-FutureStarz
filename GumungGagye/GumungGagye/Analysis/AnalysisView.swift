@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AnalysisView: View {
+    
     var body: some View {
-        
             VStack {
                 // - MARK: - 분석 타이틀 / 월 변경
                 
@@ -20,26 +20,7 @@ struct AnalysisView: View {
                         .modifier(H1Bold())
                     
                     // 월 변경
-                    HStack(spacing: 12.0) {
-                        Button {
-                            // 지난 달로
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Gray1"))
-                        }
-
-                        Text("7월")
-                            .modifier(H2SemiBold())
-                        
-                        Button {
-                            // 다음 달로
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Gray1"))
-                        }
-                    }
+                    MoveMonth(month: "7월", size: .Small)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
@@ -94,9 +75,9 @@ struct AnalysisView: View {
                         
                         // Top 3 리스트
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
+                            TopContentView(rank: 1, content: "치킨", money: 32000)
+                            TopContentView(rank: 2, content: "아이스크림", money: 17000)
+                            TopContentView(rank: 3, content: "아이폰 케이스", money: 13300)
                         }
                         .padding(.bottom, 28.0)
                         
@@ -149,9 +130,9 @@ struct AnalysisView: View {
                         
                         // Top 3 List
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
+                            TopContentView(rank: 1, content: "식비", money: 155000)
+                            TopContentView(rank: 2, content: "교통비", money: 100300)
+                            TopContentView(rank: 3, content: "카페", money: 75000)
                         }
                         .padding(.bottom, 28.0)
                         .padding(.top, 24)
