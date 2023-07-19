@@ -8,31 +8,10 @@
 import Foundation
 import Firebase
 
-struct GroupData: Identifiable {
-    var id: String
-    var group_name: String  // 그룹 이름
-    var group_introduce: String // 그룹 설명
-    var group_goal: Int // 그룹 목표 금액
-    var group_cur: Int  // 현재 인원
-    var group_max: Int  // 최대 인원
-    var lock_status: Bool   // 비공개 여부
-    var group_pw: String   // 비공개 비번
-    var timeStamp: Date   // Time Stamp
-}
-
-struct accountData: Identifiable {
-    var id: String
-    var account_date: Date
-    var account_id: String
-    var account_type: Int
-    var account_userID: DocumentReference
-}
-
-
 class FirebaseController: ObservableObject {
     static let shared = FirebaseController()    // SingleTon
     @Published var groupList = [GroupData]()
-    @Published var accountList = [accountData]()
+    @Published var accountList = [AccountData]()
     
     private init() { }
     
@@ -85,7 +64,7 @@ class FirebaseController: ObservableObject {
             }
         }
     }
-
+    
     
     // MARK: fetch User Data Test
     func callUserData() {
@@ -97,9 +76,9 @@ class FirebaseController: ObservableObject {
                     self.accountList = document.documents.map { document in
                         let documentRef: DocumentReference = document["account_userID"] as! DocumentReference   // documentRef -> 해당 reference가 가리키는 위치 데이터.
                         /*
-                            documentRef.documentID -> documentRef가 가리키는 문서의 ID 값. (user의 ID 값)
-                            documentRef.path -> 가리키는 문서의 경로
-                            
+                         documentRef.documentID -> documentRef가 가리키는 문서의 ID 값. (user의 ID 값)
+                         documentRef.path -> 가리키는 문서의 경로
+                         
                          */
                         print("start Document: \(document.data())")
                         
@@ -112,10 +91,31 @@ class FirebaseController: ObservableObject {
                         }
                         
                         
-                        return accountData(id: "", account_date: Date(), account_id: "", account_type: 0, account_userID: document["account_userID"] as! DocumentReference)
+                        return AccountData(id: "", account_date: Date(), account_id: "", account_type: 0, account_userID: document["account_userID"] as! DocumentReference)
                     }
                 }
             }
+        }
+    }
+    
+    // 현재 로그인 중인 유저 반환.
+    static func fetchUserInfo(completion: @escaping (UserData?) -> Void) {
+        if let currentUser = Auth.auth().currentUser {
+            let uid = currentUser.uid
+            let db = Firestore.firestore()
+            let userRef = db.collection("user").document(uid)
+            
+            userRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let user = UserData(data: data!)
+                    completion(user)
+                } else {
+                    completion(nil)
+                }
+            }
+        } else {
+            completion(nil)
         }
     }
     
@@ -135,10 +135,10 @@ class FirebaseController: ObservableObject {
         }
     }
     
-//    Update Group Func
-//    func updateData(updateGroup: GroupData) {
-//        let db = Firestore.firestore()
-//
-//        db.collection("groupRoom").document(updateGroup.id).setData([""])
-//    }
+    //    Update Group Func
+    //    func updateData(updateGroup: GroupData) {
+    //        let db = Firestore.firestore()
+    //
+    //        db.collection("groupRoom").document(updateGroup.id).setData([""])
+    //    }
 }
