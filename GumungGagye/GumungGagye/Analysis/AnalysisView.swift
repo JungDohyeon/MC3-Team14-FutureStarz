@@ -4,7 +4,6 @@
 //
 //  Created by jeongyun on 2023/07/10.
 //
-// - TODO: - 요약 숫자 폰트 변경
 
 import SwiftUI
 
@@ -54,12 +53,17 @@ struct AnalysisView: View {
                     VStack(alignment: .leading) {
                         
                         // 과소비 요약
-                        VStack(alignment: .leading, spacing: 4.0) {
-                            Text("과소비를 8번 하지 않았다면")
-                                .modifier(H2SemiBold())
-                            Text("75,500원을 아꼈을텐데")
-                                .modifier(H2SemiBold())
-                                .foregroundColor(Color("Main"))
+                        // - TODO: - 요약 숫자 폰트 변경
+                        VStack(alignment: .leading, spacing: 12.0) {
+                            Text("과소비 분석")
+                                .modifier(Cap1())
+                            VStack(alignment: .leading, spacing: 4.0) {
+                                Text("과소비를 8번 하지 않았다면")
+                                    .modifier(H2SemiBold())
+                                Text("75,500원을 아꼈을텐데")
+                                    .modifier(H2SemiBold())
+                                    .foregroundColor(Color("Main"))
+                            }
                         }
                         .padding(.bottom, 16.0)
                         .padding(.top, 32.0)
@@ -127,11 +131,16 @@ struct AnalysisView: View {
                     VStack(alignment: .leading) {
                         
                         // 카테고리 요약
-                        VStack(alignment: .leading) {
-                            Text("식비에서 200,000원을 사용하여")
-                                .modifier(H2SemiBold())
-                            Text("돈을 가장 많이 썼어요")
-                                .modifier(H2SemiBold())
+                        VStack(alignment: .leading, spacing: 12.0) {
+                        Text("전체소비 분석")
+                            .modifier(Cap1())
+                            
+                            VStack(alignment: .leading, spacing: 4.0) {
+                                Text("식비에서 200,000원을 사용하여")
+                                    .modifier(H2SemiBold())
+                                Text("돈을 가장 많이 썼어요")
+                                    .modifier(H2SemiBold())
+                            }
                         }
                         .padding(.vertical, 36.0)
                         
