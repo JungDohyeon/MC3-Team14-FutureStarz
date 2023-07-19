@@ -61,7 +61,7 @@ struct GroupViewInside: View {
                         }
                     }
                     .modifier(H1Bold())
-                    .padding(.top, 78)
+                    .padding(.top, 24)
                     .padding(.bottom, 24)
                     .padding(.horizontal, 20)
                     

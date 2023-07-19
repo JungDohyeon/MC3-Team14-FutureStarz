@@ -16,7 +16,7 @@ struct RootView: View {
             if !showSignInView {
                 if !app_setting{
                     NavigationStack {
-                        //                    SettingsView(showSignInView: $showSignInView)
+                        // SettingsView(showSignInView: $showSignInView)
                         SelectingName()
                     }
                 } else {
