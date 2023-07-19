@@ -70,6 +70,9 @@
 		CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */; };
 		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
 		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
+		CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */; };
+		CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874D2A66E78700DE5AE4 /* AccountData.swift */; };
+		CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874F2A66E7A500DE5AE4 /* UserData.swift */; };
 		CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */; };
 		CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C462A53A02F005DF128 /* ContentView.swift */; };
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
@@ -142,6 +145,9 @@
 		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
 		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
 		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
+		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
+		CDB4874D2A66E78700DE5AE4 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
+		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -299,7 +305,6 @@
 			children = (
 				CD27E2F42A59B79800F15A50 /* GroupRoomView.swift */,
 				CD27E2F62A59B7A200F15A50 /* GroupNotExistView.swift */,
-				CD27E2F82A59B80800F15A50 /* FirebaseController.swift */,
 				CD27E2FA2A59C25A00F15A50 /* GroupMain.swift */,
 				CD27E2FC2A59C9D700F15A50 /* CreateGroupView.swift */,
 				CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */,
@@ -316,6 +321,17 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */ = {
+			isa = PBXGroup;
+			children = (
+				CD27E2F82A59B80800F15A50 /* FirebaseController.swift */,
+				CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */,
+				CDB4874D2A66E78700DE5AE4 /* AccountData.swift */,
+				CDB4874F2A66E7A500DE5AE4 /* UserData.swift */,
+			);
+			path = FirebaseQuery;
 			sourceTree = "<group>";
 		};
 		CDCB8C382A53A02F005DF128 = {
@@ -339,6 +355,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5EEFECF42A61593C00AF4A5F /* Onboarding */,
 				99F7D7432A5F7FDD0090A05A /* Component */,
@@ -529,6 +546,7 @@
 				5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */,
 				99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */,
 				99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */,
+				CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */,
 				5EEFED052A61693000AF4A5F /* SignInAppleHelper.swift in Sources */,
 				0A2828DD2A5BB0C900A9D5D9 /* AnalysisView.swift in Sources */,
 				0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */,
@@ -544,6 +562,7 @@
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				5EEFECFD2A6168D800AF4A5F /* SignInEmailView.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
+				CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */,
 				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
 				99F7D73E2A5F78B10090A05A /* ConsListView.swift in Sources */,
 				5EEFED082A61698800AF4A5F /* Utilities.swift in Sources */,
@@ -557,6 +576,7 @@
 				0A2828E72A5D686F00A9D5D9 /* OverpurchasingView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				5E2623542A6188C000A6E23F /* SelectingBank.swift in Sources */,
+				CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */,
 				0A2828F02A5D835100A9D5D9 /* CategoryHistoryView.swift in Sources */,
 				D2C8282F2A5E37D80003C0D6 /* MoneyTypeButton.swift in Sources */,
 			);

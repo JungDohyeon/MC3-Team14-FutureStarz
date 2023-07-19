@@ -10,6 +10,7 @@ import SwiftUI
 struct GroupNotExistView: View {
     @State private var isCreateGroup: Bool = false
     @State private var searchText: String = ""
+    @State private var user: UserData?
     @ObservedObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
@@ -88,6 +89,14 @@ struct GroupNotExistView: View {
         .onAppear {
             firebaseManager.fetchAllGroupData()
             firebaseManager.callUserData()      // test
+            fetchCurUser()
+        }
+    }
+    
+    func fetchCurUser() {
+        FirebaseController.fetchUserInfo { user in
+            self.user = user
+            print("user: \(user?.nickname)")
         }
     }
     
