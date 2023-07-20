@@ -11,6 +11,9 @@ struct RootView: View {
     @AppStorage("app_setting") var app_setting: Bool = false
     @State var showSignInView: Bool = false
     
+    
+    
+    
     var body: some View {
         ZStack{
             if !showSignInView {
@@ -26,9 +29,30 @@ struct RootView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-            self.showSignInView = authUser == nil
+            
+            
+            Task {
+                do {
+                    let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+                    if authUser != nil {
+                        let deleteapp = try await UserManager.shared.getUser(userId: authUser!.uid)
+                        app_setting = deleteapp
+                    }
+                    self.showSignInView = authUser == nil
+                } catch {
+                    
+                }
+                
+                //                UserManager.shared.ge
+            }
         }
+        
+        
+     
+        
+        
+        
+        
         .fullScreenCover(isPresented: $showSignInView) {
             NavigationStack {
                 AuthenticationView(showSignInView: $showSignInView)
