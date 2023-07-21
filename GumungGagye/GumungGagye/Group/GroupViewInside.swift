@@ -14,108 +14,253 @@ enum GroupOption: String, CaseIterable {
 }
 
 struct GroupViewInside: View {
-    @Environment(\.dismiss) var dismiss
-    @State private var isGroupInfo: Bool = false
-    @State private var isShowModal: Bool = false
-    @State private var selectedOption: GroupOption?
-    
-    @State private var isLeaveAlertPresented: Bool = false
     
     var body: some View {
-        ZStack{
-            NavigationView {
+        ZStack {
+            Color("background").ignoresSafeArea()
+            ScrollView {
                 VStack(spacing: 0) {
-                    HStack(spacing: 22) {
-                        Button {
-                            isGroupInfo = false
-                        } label: {
-                            Text("지출 공유")
-                                .foregroundColor(isGroupInfo ? Color("Gray2") : Color("Black"))
-                        }
-                        
-                        Button {
-                            isGroupInfo = true
-                        } label: {
-                            Text("그룹 정보")
-                                .foregroundColor(isGroupInfo ? Color("Black") : Color("Gray2"))
-                        }
-                        
-                        Spacer()
-                        
-                        Menu {
-                            ForEach(GroupOption.allCases, id: \.self) { option in
-                                Button {
-                                    selectedOption = option
-                                    if option == .leave {
-                                        isLeaveAlertPresented = true
-                                    } else {
-                                        isShowModal = true
-                                    }
-                                } label: {
-                                    Text(option.rawValue)
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.black)
-                        }
-                    }
-                    .modifier(H1Bold())
-                    .padding(.top, 78)
-                    .padding(.bottom, 24)
-                    .padding(.horizontal, 20)
-                    
-                    if !isGroupInfo {
-                        ScrollView {
-                            GroupSpendView()
-                                .padding(.horizontal, 20)
-                            
-                            Divider()
-                                .frame(height: 8)
-                                .overlay(Color("Gray4"))
-                            
-                            GroupNotSpendView(userName: "Lavine")
-                                .padding(.horizontal, 20)
-                        }
-                    } else {
-                        VStack {
-                            GroupInfoView()
-                        }
-                    }
-                }
-                .background(Color("background").ignoresSafeArea())
-                .alert(isPresented: $isLeaveAlertPresented) {
-                    leaveAlert
-                }
-                .sheet(isPresented: $isShowModal) {
-                    if let option = selectedOption {
-                        switch(option) {
-                        case .invite:
-                            ShareViewController(shareString: ["ShareCode"])
-                                .presentationDetents([.medium])
-                                .presentationDragIndicator(.visible)
-                        case .leave:
-                            EmptyView()
-                        case .explore:
-                            GroupNotExistView()
-                        }
-                    }
+                    GroupTopInfo()
+                    Divider()
+                        .frame(height: 8)
+                        .overlay(Color("Gray4"))
+                    UserScroller()
+                    GroupUserSumGraph()
+                    UserNoSpend()
                 }
             }
         }
     }
+}
+
+// MARK: 소비 내역이 없을 때
+struct UserNoSpend: View {
+    var body: some View {
+        ZStack {
+            Color("background").ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 20) {
+                Text("4일 화요일")
+                    .modifier(Body2())
+                    .foregroundColor(.black)
+                
+                HStack {
+                    VStack(alignment:. leading, spacing: 8) {
+                        Text("오늘은 소비 내역이 없어요")
+                            .modifier(Body2Bold())
+                        
+                        Text("작성하지 않은 친구를 콕 찔러볼까요?")
+                            .modifier(Cap1())
+                    }
+                    .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button {
+                        
+                    } label: {
+                        MainColorBtn(inputText: "콕 찌르기")
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+// MARK: 소비 내역이 있을 때
+
+
+// MARK: Group Top Info
+struct GroupTopInfo: View {
+    @State private var selectedOption: GroupOption?
+    @State private var isLeaveAlertPresented: Bool = false
+    @State private var isShowModal: Bool = false
+    
+    var body: some View {
+        ZStack {
+            Color("background").ignoresSafeArea()
+            VStack(spacing: 0) {
+                HStack {
+                    Text("나의 그룹")
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    // MARK: Group Menu
+                    Menu {
+                        ForEach(GroupOption.allCases, id: \.self) { option in
+                            Button {
+                                selectedOption = option
+                                if option == .leave {
+                                    isLeaveAlertPresented = true
+                                } else {
+                                    isShowModal = true
+                                }
+                            } label: {
+                                Text(option.rawValue)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.black)
+                    }
+                }
+                .modifier(H1Bold())
+                .padding(.top, 24)
+                .padding(.bottom, 32)
+                
+                GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
+                
+                
+                Spacer()
+            }
+            .background(Color("background").ignoresSafeArea())
+            .alert(isPresented: $isLeaveAlertPresented) {
+                leaveAlert
+            }
+            .sheet(isPresented: $isShowModal) {
+                if let option = selectedOption {
+                    switch(option) {
+                    case .invite:
+                        ShareViewController(shareString: ["ShareCode"])
+                            .presentationDetents([.medium])
+                            .presentationDragIndicator(.visible)
+                    case .leave:
+                        EmptyView()
+                    case .explore:
+                        GroupNotExistView()
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
     
     var leaveAlert: Alert {
-            Alert(
-                title: Text("그룹 탈퇴하기"),
-                message: Text("정말 그룹을 탈퇴하시겠습니까?"),
-                primaryButton: .cancel(Text("취소")),
-                secondaryButton: .destructive(Text("탈퇴하기")) {
-                    // Handle leave group action here
-                }
-            )
-        }
+        Alert(
+            title: Text("그룹 탈퇴하기"),
+            message: Text("정말 그룹을 탈퇴하시겠습니까?"),
+            primaryButton: .cancel(Text("취소")),
+            secondaryButton: .destructive(Text("탈퇴하기")) {
+                // Handle leave group action here
+            }
+        )
+    }
 }
+
+// MARK: User Scroll View
+struct UserScroller: View {
+    let people: [String] = ["Alice", "Bob", "Carol", "Dave", "Eva", "N.D", "Lina", "PADO", "Berry", "Lavine"]
+    @State private var selectedPerson: String = "Alice"
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
+                ForEach(people, id: \.self) { user in
+                    VStack(spacing: 4) {
+                        Circle()
+                            .foregroundColor(Color("Gray3"))
+                            .frame(width: 48, height: 48)
+                            .overlay(
+                                Circle()
+                                    .stroke(selectedPerson == user ? Color("Main") : .clear, lineWidth: 2)
+                                    .frame(width: 46, height: 46)
+                            )
+                        
+                        Text(user)
+                            .modifier(Cap2())
+                            .foregroundColor(selectedPerson == user ? Color("Main") : .black)
+                            .bold(selectedPerson == user)
+                    }
+                    .onTapGesture {
+                        if selectedPerson != user {
+                            selectedPerson = user
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 32)
+        }
+    }
+}
+
+
+// MARK: Show Group user month graph
+struct GroupUserSumGraph: View {
+    var overAll: Double = 1000000
+    var purchaseSum: Double = 256000
+    var overpurchaseSum: Double = 56000
+    @State private var sumGraphWidth: CGFloat = 0.0
+    @State private var overGraphWidth: CGFloat = 0.0
+    
+    var body: some View {
+        ZStack {
+            Color("background").ignoresSafeArea()
+            VStack(spacing: 20) {
+                MonthPicker()
+                // Graph
+                GeometryReader { geometry in
+                    VStack(spacing: 8) {
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(height: 22)
+                                .foregroundColor(Color("Light30"))
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: sumGraphWidth , height: 22)
+                                .foregroundColor(Color("Main"))
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: overGraphWidth, height: 22)
+                                .foregroundColor(Color("OverPurchasing"))
+                        }
+                        
+                        
+                        HStack(spacing: 8) {
+                            HStack(spacing: 3) {
+                                Text("과소비")
+                                    .modifier(Cap1())
+                                    .foregroundColor(Color("Gray2"))
+                                Text("\(Int(overpurchaseSum))원")
+                                    .modifier(Num5())
+                                    .foregroundColor(Color("OverPurchasing"))
+                            }
+                            
+                            Text("/")
+                                .modifier(Cap1())
+                                .foregroundColor(Color("Gray2"))
+                            
+                            HStack(spacing: 3) {
+                                Text("총 지출")
+                                    .modifier(Cap1())
+                                    .foregroundColor(Color("Gray2"))
+                                Text("\(Int(overpurchaseSum))원")
+                                    .modifier(Num5())
+                                    .foregroundColor(Color("Main"))
+                            }
+                            
+                            Spacer()
+                            Text("전체 \(Int(overAll))원")
+                                .modifier(Cap1())
+                                .foregroundColor(Color("Gray2"))
+                        }
+                    }
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 1.0)) {
+                            sumGraphWidth = CGFloat(purchaseSum/overAll) * (geometry.size.width-40)
+                            overGraphWidth = CGFloat(overpurchaseSum/purchaseSum) * (geometry.size.width-40)
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.top, 28)
+        .padding(.bottom, 55)
+    }
+}
+
 
 struct ShareViewController: UIViewControllerRepresentable {
     

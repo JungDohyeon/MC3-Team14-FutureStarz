@@ -16,7 +16,6 @@ struct GroupRoomView: View {
             Color("background").ignoresSafeArea()
             
             // MARK: 그룹 명
-            
             VStack(spacing: 0) {
                 HStack(spacing: 5){
                     if groupdata.lock_status {
@@ -91,7 +90,6 @@ struct GroupRoomView: View {
                         }
                     }
                 }
-                .padding(.bottom, 24)
                 
                 if isNotExist {
                     Divider()
@@ -99,6 +97,9 @@ struct GroupRoomView: View {
                 }
             }
         }
+        .padding()
+        .frame(width: .infinity, height: 117)
+        .border(.red)
     }
 }
 
@@ -110,7 +111,7 @@ struct MainColorBtn: View {
         Text(inputText)
             .modifier(BtnBold())
             .foregroundColor(Color("Main"))
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(
                 Rectangle()
