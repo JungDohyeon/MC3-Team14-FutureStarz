@@ -109,7 +109,7 @@ struct SelectingBank: View {
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    SelectingBudget()
+                    PreStart()
                         
                 })
 //                .disabled(!isAbled)

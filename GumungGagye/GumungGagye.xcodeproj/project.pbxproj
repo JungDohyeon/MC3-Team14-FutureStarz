@@ -20,10 +20,13 @@
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
+		5E25D6422A6A2B2600FBA29F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25D6412A6A2B2600FBA29F /* UserData.swift */; };
+		5E25D6442A6A2B7800FBA29F /* InsertUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */; };
 		5E2623542A6188C000A6E23F /* SelectingBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623532A6188C000A6E23F /* SelectingBank.swift */; };
 		5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623572A6232CD00A6E23F /* BankCardPayView.swift */; };
 		5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623592A62C59E00A6E23F /* PreStart.swift */; };
 		5E26235C2A62C6CC00A6E23F /* LoginComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E26235B2A62C6CC00A6E23F /* LoginComplete.swift */; };
+		5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3380DD2A699950003931B9 /* SelectingUserImage.swift */; };
 		5E6C5B892A67CBE100DE6C6F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */; };
 		5E6C5B8C2A67CD5200DE6C6F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */; };
 		5E6C5B902A67CDBD00DE6C6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */; };
@@ -101,10 +104,13 @@
 		0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHistoryView.swift; sourceTree = "<group>"; };
 		0A2828F12A5E385000A9D5D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		5E25D6412A6A2B2600FBA29F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertUserData.swift; sourceTree = "<group>"; };
 		5E2623532A6188C000A6E23F /* SelectingBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBank.swift; sourceTree = "<group>"; };
 		5E2623572A6232CD00A6E23F /* BankCardPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPayView.swift; sourceTree = "<group>"; };
 		5E2623592A62C59E00A6E23F /* PreStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreStart.swift; sourceTree = "<group>"; };
 		5E26235B2A62C6CC00A6E23F /* LoginComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginComplete.swift; sourceTree = "<group>"; };
+		5E3380DD2A699950003931B9 /* SelectingUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingUserImage.swift; sourceTree = "<group>"; };
 		5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -219,6 +225,15 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		5E25D6402A6A2AE200FBA29F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5E25D6412A6A2B2600FBA29F /* UserData.swift */,
+				5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		5E6C5B872A67CBC200DE6C6F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +261,7 @@
 				5EEFECF82A61689D00AF4A5F /* RootView.swift */,
 				5EEFECFA2A6168C000AF4A5F /* AuthenticationView.swift */,
 				5EEFED0F2A616DCE00AF4A5F /* SelectingName.swift */,
+				5E3380DD2A699950003931B9 /* SelectingUserImage.swift */,
 				5E2623532A6188C000A6E23F /* SelectingBank.swift */,
 				5E2623572A6232CD00A6E23F /* BankCardPayView.swift */,
 				5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */,
@@ -382,6 +398,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				5E25D6402A6A2AE200FBA29F /* Data */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5EEFECF42A61593C00AF4A5F /* Onboarding */,
@@ -552,6 +569,7 @@
 				5E26235C2A62C6CC00A6E23F /* LoginComplete.swift in Sources */,
 				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
 				0A2828EE2A5D82F300A9D5D9 /* CategoryListView.swift in Sources */,
+				5E25D6422A6A2B2600FBA29F /* UserData.swift in Sources */,
 				D2F9DFEF2A5F05300037EC59 /* IncomeCategorySheet.swift in Sources */,
 				5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
@@ -590,11 +608,13 @@
 				5EEFECFD2A6168D800AF4A5F /* SignInEmailView.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
 				CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */,
+				5E25D6442A6A2B7800FBA29F /* InsertUserData.swift in Sources */,
 				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
 				99F7D73E2A5F78B10090A05A /* ConsListView.swift in Sources */,
 				5EEFED082A61698800AF4A5F /* Utilities.swift in Sources */,
 				0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */,
 				99F7D7482A5F80200090A05A /* CategoryIcon.swift in Sources */,
+				5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */,
 				0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				0A2828F52A5E3BC500A9D5D9 /* SettingView.swift in Sources */,

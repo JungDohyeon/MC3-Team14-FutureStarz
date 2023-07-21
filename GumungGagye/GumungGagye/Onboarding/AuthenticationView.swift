@@ -70,13 +70,7 @@ struct AuthenticationView: View {
             
             
             
-            
-            
-            
-            
-            Image("AppleSign")
-                .resizable()
-                .scaledToFit()
+            LoginButton()
                 .padding(.bottom, 24)
                 .onTapGesture {
                     Task {
@@ -88,6 +82,23 @@ struct AuthenticationView: View {
                         }
                     }
                 }
+            
+            
+            
+//            Image("AppleSign")
+//                .resizable()
+//                .scaledToFit()
+//                .padding(.bottom, 24)
+//                .onTapGesture {
+//                    Task {
+//                        do {
+//                            try await viewModel.signInApple()
+//                            showSignInView = false
+//                        } catch {
+//                            print(error)
+//                        }
+//                    }
+//                }
                 
             Text("회원가입 시, 이용약관 및 개인정보처리방침에 동의한 것으로 간주합니다.")
                 .modifier(Cap2())
