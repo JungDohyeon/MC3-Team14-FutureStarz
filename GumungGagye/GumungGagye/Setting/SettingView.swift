@@ -24,10 +24,10 @@ struct SettingView: View {
                 
                 // - MARK: - 정보
                 HStack(spacing: 0) {
-//                    Image(uiImage: inputdata.profile_image!)
-//                        .resizable()
-//                        .frame(width: 74, height: 74)
-//                        .padding(.trailing, 18)
+                    Image(uiImage: inputdata.profile_image!)
+                        .resizable()
+                        .frame(width: 74, height: 74)
+                        .padding(.trailing, 18)
                     VStack(alignment: .leading, spacing: 20.0) {
                         Text(inputdata.nickname!)
                             .modifier(H2SemiBold())

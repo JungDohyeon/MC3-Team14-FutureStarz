@@ -44,6 +44,8 @@ struct RootView: View {
                         
                         
                         try await getUser(userId: authUser!.uid)
+                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
+                        
                         
                         app_setting = deleteapp
                     }
@@ -99,23 +101,23 @@ struct RootView: View {
         
         
         
-        if let profileImageUrlString = data["profile_image_url"] as? String, let profileImageUrl = URL(string: profileImageUrlString) {
-            inputdata.profile_image = try await fetchImage(url: profileImageUrl)
-            print("성공")
-        } else {
-            // Handle the case when profile_image_url is missing or invalid
-            // For example, you can set a default image here.
-            // inputdata.profile_image = UIImage(named: "defaultImage")
-            print("실패")
-        }
-        
-        //        inputdata.profile_image = try await fetchImage(url: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/futurestarz-b892f.appspot.com/o/z1zO0tvHOLQyBDPKWvzG56tKeC92?alt=media&token=c2bf8169-a129-4dee-bae0-92623ce3cafc")!)
-        
-        //        inputdata.profile_image = try await fetchImage(url: URL(string: (data["profile_image_url"] as? String)!)!)
-        
-        
-        
-        
+//        if let profileImageUrlString = data["profile_image_url"] as? String, let profileImageUrl = URL(string: profileImageUrlString) {
+//            inputdata.profile_image = try await fetchImage(url: profileImageUrl)
+//            print("성공")
+//        } else {
+//            // Handle the case when profile_image_url is missing or invalid
+//            // For example, you can set a default image here.
+//            // inputdata.profile_image = UIImage(named: "defaultImage")
+//            print("실패")
+//        }
+//
+//        //        inputdata.profile_image = try await fetchImage(url: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/futurestarz-b892f.appspot.com/o/z1zO0tvHOLQyBDPKWvzG56tKeC92?alt=media&token=c2bf8169-a129-4dee-bae0-92623ce3cafc")!)
+//
+//        //        inputdata.profile_image = try await fetchImage(url: URL(string: (data["profile_image_url"] as? String)!)!)
+//
+//
+//
+//
         
         
     }
