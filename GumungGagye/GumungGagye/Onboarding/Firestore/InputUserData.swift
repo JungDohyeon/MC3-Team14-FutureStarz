@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class InputUserData: ObservableObject {
     static let shared = InputUserData()
@@ -17,7 +18,8 @@ final class InputUserData: ObservableObject {
     var goal: Int?
     var bankcardpay: Int?
     var bankcardpay_index: Int?
-    var profile_image: String?
+    var profile_image: UIImage?
+    var profile_image_url: String?
 
     private init() { }
 }

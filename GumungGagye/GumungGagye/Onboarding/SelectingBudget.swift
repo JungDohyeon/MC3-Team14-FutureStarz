@@ -74,7 +74,7 @@ struct SelectingBudget: View {
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    SelectingBank()
+                    SelectingUserImage()
                         
                 })
                 .disabled(!isAbled)

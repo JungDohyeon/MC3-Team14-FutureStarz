@@ -10,6 +10,27 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
+import FirebaseStorage
+
+
+class FirebaseManager: NSObject {
+    
+    let auth: Auth
+    let storage: Storage
+    
+    static let shared = FirebaseManager()
+    
+    override init() {
+        
+        
+        self.auth = Auth.auth()
+        self.storage = Storage.storage()
+        
+        super.init()
+    }
+    
+}
+
 struct DBUser {
     
     let userId: String
@@ -34,18 +55,30 @@ final class UserManager {
             "goal": inputdata.goal,
             "bankcardpay": inputdata.bankcardpay,
             "bankcardpay_index": inputdata.bankcardpay_index,
-            
+            "profile_image_url": inputdata.profile_image_url
         ]
-        if let profile_image = inputdata.profile_image {
-            userData["profile_image"] = profile_image
-        }
+        
+        
+        
+//        if let profile_image = inputdata.profile_image {
+//            userData["profile_image"] = profile_image
+//        }
+        
+        
         
         if let userss = Auth.auth().currentUser {
+            
             try await Firestore.firestore().collection("users").document(userss.uid).setData(userData, merge: false)
         }
-        
-        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     func getUser(userId: String) async throws -> Bool {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()

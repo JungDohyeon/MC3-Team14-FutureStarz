@@ -20,8 +20,9 @@
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
-		5E25D6422A6A2B2600FBA29F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25D6412A6A2B2600FBA29F /* UserData.swift */; };
 		5E25D6442A6A2B7800FBA29F /* InsertUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */; };
+		5E25D6462A6A92F400FBA29F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25D6452A6A92F400FBA29F /* ImagePicker.swift */; };
+		5E25D6482A6A9B8F00FBA29F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5E25D6472A6A9B8F00FBA29F /* FirebaseStorage */; };
 		5E2623542A6188C000A6E23F /* SelectingBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623532A6188C000A6E23F /* SelectingBank.swift */; };
 		5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623572A6232CD00A6E23F /* BankCardPayView.swift */; };
 		5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623592A62C59E00A6E23F /* PreStart.swift */; };
@@ -104,8 +105,8 @@
 		0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHistoryView.swift; sourceTree = "<group>"; };
 		0A2828F12A5E385000A9D5D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		5E25D6412A6A2B2600FBA29F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertUserData.swift; sourceTree = "<group>"; };
+		5E25D6452A6A92F400FBA29F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5E2623532A6188C000A6E23F /* SelectingBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBank.swift; sourceTree = "<group>"; };
 		5E2623572A6232CD00A6E23F /* BankCardPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPayView.swift; sourceTree = "<group>"; };
 		5E2623592A62C59E00A6E23F /* PreStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreStart.swift; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 				5EEFED0D2A616A9E00AF4A5F /* GoogleSignInSwift in Frameworks */,
 				CD27E3002A5AA6FD00F15A50 /* FirebaseFirestore in Frameworks */,
 				5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */,
+				5E25D6482A6A9B8F00FBA29F /* FirebaseStorage in Frameworks */,
 				5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */,
 				5EEFED0B2A616A9E00AF4A5F /* GoogleSignIn in Frameworks */,
 			);
@@ -228,7 +230,6 @@
 		5E25D6402A6A2AE200FBA29F /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5E25D6412A6A2B2600FBA29F /* UserData.swift */,
 				5E25D6432A6A2B7800FBA29F /* InsertUserData.swift */,
 			);
 			path = Data;
@@ -288,6 +289,7 @@
 			children = (
 				5EEFED072A61698800AF4A5F /* Utilities.swift */,
 				5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */,
+				5E25D6452A6A92F400FBA29F /* ImagePicker.swift */,
 				5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */,
 			);
 			path = Utilities;
@@ -488,6 +490,7 @@
 				CD27E3012A5AA72800F15A50 /* FirebaseFirestoreSwift */,
 				5EEFED0A2A616A9E00AF4A5F /* GoogleSignIn */,
 				5EEFED0C2A616A9E00AF4A5F /* GoogleSignInSwift */,
+				5E25D6472A6A9B8F00FBA29F /* FirebaseStorage */,
 			);
 			productName = GumungGagye;
 			productReference = CDCB8C412A53A02F005DF128 /* GumungGagye.app */;
@@ -569,7 +572,6 @@
 				5E26235C2A62C6CC00A6E23F /* LoginComplete.swift in Sources */,
 				CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */,
 				0A2828EE2A5D82F300A9D5D9 /* CategoryListView.swift in Sources */,
-				5E25D6422A6A2B2600FBA29F /* UserData.swift in Sources */,
 				D2F9DFEF2A5F05300037EC59 /* IncomeCategorySheet.swift in Sources */,
 				5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
@@ -587,6 +589,7 @@
 				D2C8282D2A5E37B00003C0D6 /* ExpenseCategorySheet.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
 				D2C828332A5E37F70003C0D6 /* SmallButton.swift in Sources */,
+				5E25D6462A6A92F400FBA29F /* ImagePicker.swift in Sources */,
 				5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */,
 				99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */,
 				99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */,
@@ -870,6 +873,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5E22C6972A57D6CA008AF9E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		5E25D6472A6A9B8F00FBA29F /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E22C6972A57D6CA008AF9E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		5EEFED0A2A616A9E00AF4A5F /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

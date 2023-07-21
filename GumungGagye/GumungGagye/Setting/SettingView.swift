@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct SettingView: View {
+    
     @AppStorage("app_setting") var app_setting: Bool = false
     @State private var logoutShowing = false
     @State private var cancelShowing = false
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    let inputdata = InputUserData.shared
+    
     var body: some View {
         VStack(spacing: 36.0) {
             VStack(alignment: .leading, spacing: 36.0) {
@@ -20,16 +23,24 @@ struct SettingView: View {
                     .modifier(H1Bold())
                 
                 // - MARK: - 정보
-                VStack(alignment: .leading, spacing: 20.0) {
-                    Text("파도")
-                        .modifier(H2SemiBold())
-                    HStack(alignment: .center, spacing: 4.0) {
-                        Image(systemName: "apple.logo")
-                            .foregroundColor(Color("Gray2"))
-                            .font(.system(size: 16))
-                        Text("이메일")
-                            .modifier(Body2())
+                HStack(spacing: 0) {
+//                    Image(uiImage: inputdata.profile_image!)
+//                        .resizable()
+//                        .frame(width: 74, height: 74)
+//                        .padding(.trailing, 18)
+                    VStack(alignment: .leading, spacing: 20.0) {
+                        Text(inputdata.nickname!)
+                            .modifier(H2SemiBold())
+                        HStack(alignment: .center, spacing: 4.0) {
+                            Image(systemName: "apple.logo")
+                                .foregroundColor(Color("Gray2"))
+                                .font(.system(size: 16))
+                            Text(inputdata.email!)
+                                .modifier(Body2())
+                        }
                     }
+                    
+                    
                 }
             }
             .foregroundColor(Color("Black"))
@@ -42,7 +53,7 @@ struct SettingView: View {
                 // - MARK: - 설정 변경
                 
                 VStack(spacing: 0.0) {
-                    SettingRowView(label: "목표 지출 금액", value: "300,000원")
+                    SettingRowView(label: "목표 지출 금액", value: "\(inputdata.goal!)원")
                     SettingRowView(label: "내역 확인 앱", value: "토스")
                     SettingRowView(label: "푸시 알림", value: "toggle")
                 }
