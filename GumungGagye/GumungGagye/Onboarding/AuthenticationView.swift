@@ -16,6 +16,7 @@ import AuthenticationServices
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
+    let inputdata = InputUserData.shared
     
     let signInAppleHelper = SignInAppleHelper()
     
@@ -28,15 +29,26 @@ final class AuthenticationViewModel: ObservableObject {
     func signInApple() async throws {
         let helper = SignInAppleHelper()
         let tokens = try await helper.startSignInWithAppleFlow()
-        try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
+        let authDataResult = try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
+        inputdata.user_id = authDataResult.uid
+        inputdata.email = authDataResult.email
+        
+        //미뤄야됨
         
         
+        
+//        try await UserManager.shared.createNewUser(auth: authDataResult)
+
     }
+    
+
     
 }
 
 
 struct AuthenticationView: View {
+    
+    
     
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
@@ -54,6 +66,13 @@ struct AuthenticationView: View {
                 Spacer()
             }
             Spacer()
+            
+            
+            
+            
+            
+            
+            
             
             Image("AppleSign")
                 .resizable()

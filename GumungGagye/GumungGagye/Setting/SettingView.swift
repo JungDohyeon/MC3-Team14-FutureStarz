@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @AppStorage("app_setting") var app_setting: Bool = false
     @State private var logoutShowing = false
     @State private var cancelShowing = false
     @StateObject private var viewModel = SettingsViewModel()
@@ -84,6 +85,15 @@ struct SettingView: View {
                     .alert(isPresented: $cancelShowing) {
                         let firstButton = Alert.Button.default(Text("탈퇴")) {
                             // 로그아웃 탈퇴기능
+                            Task {
+                                do {
+                                    try await viewModel.deleteAccount()
+                                    app_setting = false
+                                    showSignInView = true
+                                } catch {
+                                    print(error)
+                                }
+                            }
                         }
                         let secondButton = Alert.Button.cancel(Text("취소")) {
                             print("secondary button pressed")

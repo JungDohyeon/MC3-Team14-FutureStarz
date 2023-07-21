@@ -14,6 +14,7 @@ struct BankCardPayView: View {
     @Binding var selectBankCardPay: Int
     @Binding var selectBankCardPayIndex: Int
     @Binding var isAbled: Bool
+    let inputdata = InputUserData.shared
     var card_info = [[0:""],[1: "신한은행", 2: "국민은행", 3: "하나은행", 4: "우리은행", 5: "농협은행", 6: "기업은행", 7: "제일은행", 8: "카카오뱅크", 9: "토스"], [1:"카카오페이", 2:"네이버페이", 3: "페이코"], [1:"신한카드", 2:"현대카드", 3:"삼성카드", 4:"롯데카드", 5:"국민카드", 6:"하나카드", 7:"우리카드", 8:"농협카드"]]
     
     var body: some View {
@@ -38,6 +39,8 @@ struct BankCardPayView: View {
         .onTapGesture {
             selectBankCardPay = bankCardPay
             selectBankCardPayIndex = index
+            inputdata.bankcardpay = bankCardPay
+            inputdata.bankcardpay_index = index
             isAbled = true
         }
         
