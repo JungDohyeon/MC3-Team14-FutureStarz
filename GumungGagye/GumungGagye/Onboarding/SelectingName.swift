@@ -40,6 +40,9 @@ struct SelectingName: View {
     @State private var name: String = ""
     @State var isAbled: Bool = false
     @State var logic: Bool = false
+    
+    let inputdata = InputUserData.shared
+    
     // MARK: - BODY
     var body: some View {
         VStack(spacing: 0) {
@@ -49,6 +52,7 @@ struct SelectingName: View {
                         .modifier(H1Bold())
                         .padding(.top, 146)
                         .padding(.bottom, 36)
+                    
                     Spacer()
                 }
                 
@@ -77,6 +81,7 @@ struct SelectingName: View {
                 
                 Button(action: {
                     app_name = name
+                    inputdata.nickname = name
                     logic = true
                     
                 }, label: {
