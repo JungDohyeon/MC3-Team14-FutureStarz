@@ -9,18 +9,13 @@ import SwiftUI
 
 // 그룹 정보 뷰
 struct GroupInfoView: View {
-    @State private var monthPicker: Month = .january
-    
-    var month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
             
             ScrollView {
-                VStack {
-                    GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
-                }
+                GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
                 .padding(.horizontal, 20)
                 
                 Divider()
@@ -37,28 +32,7 @@ struct GroupInfoView: View {
                     }
                     .padding(.bottom, 16)
                     
-                    HStack(spacing: 12) {
-                        Button {
-                            monthPicker.decrement()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .modifier(H2SemiBold())
-                                .foregroundColor(Color("Gray1"))
-                        }
-                        
-                        Text(monthPicker.monthName)
-                            .modifier(Body1Bold())
-                            .foregroundColor(.black)
-                        
-                        Button {
-                            monthPicker.increment()
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .modifier(H2SemiBold())
-                                .foregroundColor(Color("Gray1"))
-                        }
-                        Spacer()
-                    }
+                    MonthPicker()
                 }
                 .padding(.top, 36)
                 .padding(.bottom, 20)
@@ -72,6 +46,38 @@ struct GroupInfoView: View {
                 }
             }
             
+        }
+    }
+}
+
+struct MonthPicker: View {
+    
+    @State var monthPicker: Month = .january
+    
+    var month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Button {
+                monthPicker.decrement()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .modifier(H2SemiBold())
+                    .foregroundColor(Color("Gray1"))
+            }
+            
+            Text(monthPicker.monthName)
+                .modifier(Body1Bold())
+                .foregroundColor(.black)
+            
+            Button {
+                monthPicker.increment()
+            } label: {
+                Image(systemName: "chevron.right")
+                    .modifier(H2SemiBold())
+                    .foregroundColor(Color("Gray1"))
+            }
+            Spacer()
         }
     }
 }

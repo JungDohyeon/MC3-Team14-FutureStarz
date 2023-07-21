@@ -82,21 +82,13 @@ struct GroupNotExistView: View {
                             .padding(.horizontal, 20)
                         }
                     }
-                    .padding(.top, 78)
+                    .padding(.top, 24)
                 }
             }
         }
         .onAppear {
             firebaseManager.fetchAllGroupData()
             firebaseManager.callUserData()      // test
-            fetchCurUser()
-        }
-    }
-    
-    func fetchCurUser() {
-        FirebaseController.fetchUserInfo { user in
-            self.user = user
-            print("user: \(user?.nickname)")
         }
     }
     
