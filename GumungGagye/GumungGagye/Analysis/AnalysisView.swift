@@ -125,7 +125,7 @@ struct AnalysisView: View {
                         }
                         .padding(.vertical, 36.0)
                         
-                        ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
+                        ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false)
                             .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
                         
                         // Top 3 List
