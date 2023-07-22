@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import FirebaseStorage
+
 
 struct SettingView: View {
     
@@ -119,6 +125,14 @@ struct SettingView: View {
                             // 로그아웃 탈퇴기능
                             Task {
                                 do {
+                                    
+                                    if let userss = Auth.auth().currentUser {
+                                        try await Firestore.firestore().collection("users").document(userss.uid).delete()
+                                    }
+                                    
+                                    
+                                    
+                                    
                                     try await viewModel.deleteAccount()
                                     app_setting = false
                                     showSignInView = true
