@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-// 내역 추가 입력창 focus state
-enum AccountField {
-    case addPayment
-    case addCategory
-    case addContent
-}
-
 struct AddModalView: View {
     @State var text: String = ""
     @State var currentDate: Date = Date()
@@ -25,8 +18,6 @@ struct AddModalView: View {
     
     @State private var isCheckedExpense = false
     @State private var isCheckedShare = true
-    
-    @FocusState private var focusedField: AccountField?
     
     var bankApp: String = "토스"
     var bankAppScheme: String = "supertoss://"
@@ -81,15 +72,16 @@ struct AddModalView: View {
             // MARK: - 지출일 경우
             if selectButton == .expense {
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+//                    .focused($focusedField, equals: .fixDate)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
-                    .focused($focusedField, equals: .addPayment)
+//                    .focused($focusedField, equals: .addPayment)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
-                    .focused($focusedField, equals: .addCategory)
+//                    .focused($focusedField, equals: .addCategory)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
-                    .focused($focusedField, equals: .addContent)
+//                    .focused($focusedField, equals: .addContent)
                 
                 VStack(spacing: 24) {
                     
