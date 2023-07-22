@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct AuthDataResultModel {
     let uid : String
@@ -67,6 +69,8 @@ final class AuthenticationManager {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badURL)
         }
+        
+        
         
         try await user.delete()
     }

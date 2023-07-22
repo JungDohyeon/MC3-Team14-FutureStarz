@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
 
 @MainActor
 final class SettingsViewModel: ObservableObject {
-    
+    @State private var viewModel = AuthenticationViewModel()
     @Published var authProviders: [AuthProviderOption] = []
     @Published var authUser: AuthDataResultModel? = nil
     
@@ -28,6 +32,29 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func deleteAccount() async throws {
+        try await viewModel.signInApple()
+        if let userss = Auth.auth().currentUser {
+            try await Firestore.firestore().collection("users").document(userss.uid).delete()
+        }
+        
+        
+         
+           //아직 storage 안됨
+        let storageRef = FirebaseManager.shared.storage.reference(forURL: InputUserData.shared.profile_image_url!)
+            
+        
+            
+            storageRef.delete { error in
+                if let error = error {
+                    print("Error deleting image: \(error)")
+                } else {
+                    print("Image deleted successfully.")
+                }
+            }
+        
+        //
+        
+        
         try await AuthenticationManager.shared.delete()
     }
     
@@ -50,6 +77,8 @@ final class SettingsViewModel: ObservableObject {
         let password = "Hello123!"
         try await AuthenticationManager.shared.updatePassword(password: password)
     }
+    
+    
 }
 
 
