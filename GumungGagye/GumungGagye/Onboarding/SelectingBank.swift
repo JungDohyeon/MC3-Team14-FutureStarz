@@ -101,6 +101,7 @@ struct SelectingBank: View {
                 Button(action: {
                     bankCardPay = selectBankCardPay
                     bankCardPayIndex = selectBankCardPayIndex
+                    
                     logic = true
                     
                 }, label: {
@@ -109,7 +110,7 @@ struct SelectingBank: View {
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    SelectingBudget()
+                    PreStart()
                         
                 })
 //                .disabled(!isAbled)

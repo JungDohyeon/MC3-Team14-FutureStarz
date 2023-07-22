@@ -90,7 +90,7 @@ struct SelectingName: View {
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    SelectingBank()
+                    SelectingBudget()
                         
                 })
                 .disabled(!isAbled)
