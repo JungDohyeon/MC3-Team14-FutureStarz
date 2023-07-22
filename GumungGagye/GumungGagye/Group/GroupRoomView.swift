@@ -102,9 +102,9 @@ struct GroupRoomView: View {
                     hasGroupAlert(type: userGroupStatus)
                 }
                 
-                Spacer()
-                
                 if isNotExist {
+                    Spacer()
+                    
                     Divider()
                         .background(Color("Gray3"))
                 }
