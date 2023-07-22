@@ -28,11 +28,9 @@ struct TopContentView: View {
                 .modifier(Body1Bold())
             
             Spacer()
-            HStack(spacing: 0){
-                Text("\(money)")
-                Text("원")
-            }
-                .modifier(Num3())
+            
+            Text("\(money)원")
+            .modifier(Num3())
         }
     }
 }

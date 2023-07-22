@@ -8,43 +8,44 @@
 import SwiftUI
 
 public struct ChartView: View {
-    public let values: [Double]
+    public let values: [Int]
     public let names: [String]
-    public let formatter: (Double) -> String
     public let colors: [Color]
-
+    
+    public let showDescription : Bool
+    
     public var widthFraction: CGFloat
     public var innerRadiusFraction: CGFloat
-
+    
     @State private var activeIndex: Int = 0
-
+    
     var slices: [PieSliceData] {
         let sum = values.reduce(0, +)
         var endDeg: Double = 0
         var tempSlices: [PieSliceData] = []
-
+        
         for (i, value) in values.enumerated() {
-            let degrees: Double = value * 360 / sum
-            tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees),categoryText: names[i] ,percentText: String(format: "%.0f%%", value * 100 / sum), color: self.colors[i]))
+            let degrees: Double = Double(value) * 360 / Double(sum)
+            tempSlices.append(PieSliceData(startAngle: Angle(degrees: endDeg), endAngle: Angle(degrees: endDeg + degrees),categoryText: names[i] ,percentText: String(format: "%.0f%%", Double(value) * 100 / Double(sum)), color: self.colors[i]))
             endDeg += degrees
         }
         return tempSlices
     }
-
-    public init(values:[Double], names: [String], formatter: @escaping (Double) -> String, colors: [Color], widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
+    
+    public init(values:[Int], names: [String], colors: [Color], showDescription: Bool, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
         self.values = values
         self.names = names
-        self.formatter = formatter
-
         self.colors = colors
+        self.showDescription = showDescription
         self.widthFraction = widthFraction
         self.innerRadiusFraction = innerRadiusFraction
     }
-
+    
     public var body: some View {
-        GeometryReader { geometry in
-//            VStack{
+        VStack(spacing: 60.0) {
+            GeometryReader { geometry in
                 ZStack{
+                    // 차트 조각 모음
                     ForEach(0..<self.values.count){ i in
                         PieSliceView(pieSliceData: self.slices[i], isShowingTag: self.activeIndex == i ? true : false)
                             .scaleEffect(self.activeIndex == i ? 1.1 : 1)
@@ -56,54 +57,33 @@ public struct ChartView: View {
                                 else{
                                     self.activeIndex = -1
                                 }
-                                    
                             }
                     }
                     .frame(maxWidth: .infinity, minHeight: 180, maxHeight: 180)
-                    
                     // 차트 내부 공간
                     Circle()
                         .fill(Color("background"))
                         .frame(width: 80, height: 80)
-                    
-                    // 차트 내부 텍스트
-//                    VStack {
-//                        Text(self.activeIndex == -1 ? "총" : names[self.activeIndex])
-//                            .modifier(Body2())
-//                            .foregroundColor(Color.gray)
-//                        Text(self.formatter(self.activeIndex == -1 ? values.reduce(0, +) : values[self.activeIndex]))
-//                            .modifier(Body1Bold())
-//                    }
-
                 }
-//                PieChartRows(colors: self.colors, names: self.names, values: self.values.map { self.formatter($0) }, percents: self.values.map { String(format: "%.0f%%", $0 * 100 / self.values.reduce(0, +)) })
-//            }
-            .foregroundColor(Color.black)
-        }
-    }
-}
+                .foregroundColor(Color.black)
+            }
 
-struct PieChartRows: View {
-    var colors: [Color]
-    var names: [String]
-    var values: [String]
-    var percents: [String]
-
-    var body: some View {
-        VStack{
-            ForEach(0..<self.values.count){ i in
+            
+            // 선택된 항목 얼마인지 보여주는 text (showDescription = true일 경우)
+            if showDescription == true {
                 HStack {
-                    RoundedRectangle(cornerRadius: 5.0)
-                        .fill(self.colors[i])
-                        .frame(width: 20, height: 20)
-                    Text(self.names[i])
+                    Text(self.activeIndex == -1 ? "총" : names[self.activeIndex])
+                        .foregroundColor(Color("Black"))
+                        .modifier(Body1Bold())
                     Spacer()
-                    VStack(alignment: .trailing) {
-                        Text(self.values[i])
-                        Text(self.percents[i])
-                            .foregroundColor(Color.gray)
-                    }
+                    Text(self.activeIndex == -1 ? "\(values.reduce(0, +))원" : "\(values[self.activeIndex])원")
+                        .foregroundColor(Color("Black"))
+                        .modifier(Body1Bold())
                 }
+                .frame(maxWidth: .infinity, minHeight: 46, maxHeight: 46)
+                .padding(.horizontal, 16.0)
+                .background(Color("Gray4"))
+                .cornerRadius(12)
             }
         }
     }
@@ -111,7 +91,7 @@ struct PieChartRows: View {
 
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
+        ChartView(values: [90000, 50000, 30000, 4000], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false)
     }
 }
 
