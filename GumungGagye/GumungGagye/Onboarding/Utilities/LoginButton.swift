@@ -10,12 +10,17 @@ import SwiftUI
 struct LoginButton: View {
     var body: some View {
         HStack {
-            Text("dd")
+            Image(systemName: "apple.logo")
+                .frame(width: 24)
+                .foregroundColor(.white)
+            Text("Apple로 계속하기")
+                .modifier(BtnBold())
                 .foregroundColor(.white)
         }
         .frame(height: 52)
         .frame(maxWidth: .infinity)
         .background(Color.black)
+        .cornerRadius(12)
     }
 }
 

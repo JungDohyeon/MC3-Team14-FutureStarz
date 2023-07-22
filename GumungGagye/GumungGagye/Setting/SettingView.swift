@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct SettingView: View {
+    
     @AppStorage("app_setting") var app_setting: Bool = false
     @State private var logoutShowing = false
     @State private var cancelShowing = false
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    @State var budgetSetting: Bool = false
+    @State var bankCardPaySetting: Bool = false
+    
+    @StateObject var inputdata = InputUserData.shared
+    
     var body: some View {
         VStack(spacing: 36.0) {
             VStack(alignment: .leading, spacing: 36.0) {
@@ -20,16 +26,42 @@ struct SettingView: View {
                     .modifier(H1Bold())
                 
                 // - MARK: - 정보
-                VStack(alignment: .leading, spacing: 20.0) {
-                    Text("파도")
-                        .modifier(H2SemiBold())
-                    HStack(alignment: .center, spacing: 4.0) {
-                        Image(systemName: "apple.logo")
-                            .foregroundColor(Color("Gray2"))
-                            .font(.system(size: 16))
-                        Text("이메일")
-                            .modifier(Body2())
+                HStack(spacing: 0) {
+                    Circle()
+                        .foregroundColor(Color("Gray2"))
+                        .frame(width: 74, height: 74)
+                        .overlay {
+                            if let image = inputdata.profile_image {
+                                //
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipShape(Circle())
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(Color(.white))
+                                
+                            }
+                        }
+                        .padding(.trailing, 18)
+                    
+                    
+                    
+                    
+                    VStack(alignment: .leading, spacing: 20.0) {
+                        Text(inputdata.nickname ?? "")
+                            .modifier(H2SemiBold())
+                        HStack(alignment: .center, spacing: 4.0) {
+                            Image(systemName: "apple.logo")
+                                .foregroundColor(Color("Gray2"))
+                                .font(.system(size: 16))
+                            Text(inputdata.email ?? "")
+                                .modifier(Body2())
+                        }
                     }
+                    
+                    
                 }
             }
             .foregroundColor(Color("Black"))
@@ -42,8 +74,8 @@ struct SettingView: View {
                 // - MARK: - 설정 변경
                 
                 VStack(spacing: 0.0) {
-                    SettingRowView(label: "목표 지출 금액", value: "300,000원")
-                    SettingRowView(label: "내역 확인 앱", value: "토스")
+                    SettingRowView2(label: "목표 지출 금액", value: "\(inputdata.goal ?? 0)원", budgetSetting: $budgetSetting, bankCardPaySetting: $bankCardPaySetting, selectSetting: 1)
+                    SettingRowView2(label: "내역 확인 앱", value: "\(inputdata.bankcardpay_info![0] ?? "선택안함")", budgetSetting: $budgetSetting, bankCardPaySetting: $bankCardPaySetting, selectSetting: 2)
                     SettingRowView(label: "푸시 알림", value: "toggle")
                 }
                 
@@ -113,7 +145,23 @@ struct SettingView: View {
         .padding(.top, 24.0)
         .foregroundColor(Color("Black"))
         .background(Color("background"))
+        .sheet(isPresented: $budgetSetting) {
+            SelectingBudgetView(budget: "\(inputdata.goal ?? 0)", budgetSetting: $budgetSetting)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $bankCardPaySetting) {
+            SelectingBankView(selectBankCardPay: inputdata.bankcardpay ?? 0, selectBankCardPayIndex: inputdata.bankcardpay_index ?? 0, bankCardPaySetting: $bankCardPaySetting)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        }
+        .onAppear {
+            print("\(inputdata.goal)")
+        }
     }
+    
+    
+    
 }
 
 struct SettingRowView: View {
@@ -148,6 +196,46 @@ struct SettingRowView: View {
                         .font(.system(size: 16))
                 }
             }
+        }
+        .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+    }
+}
+
+struct SettingRowView2: View {
+    var label: String
+    var value: String
+    
+    @State private var pushToggle = true
+    @Binding var budgetSetting: Bool
+    @Binding var bankCardPaySetting: Bool
+    @State var selectSetting: Int
+    var body: some View {
+        HStack {
+            Text("\(label)")
+                .modifier(Body1())
+                .foregroundColor(Color("Black"))
+            Spacer()
+            
+            
+            
+            HStack(spacing: 8.0) {
+                Text("\(value)")
+                    .modifier(Num3())
+                    .foregroundColor(Color("Black"))
+                Image(systemName: "chevron.right")
+                    .foregroundColor(Color("Gray2"))
+                    .font(.system(size: 16))
+            }
+            .onTapGesture {
+                if selectSetting == 1{
+                    budgetSetting = true
+                    print("budget")
+                } else if selectSetting == 2 {
+                    bankCardPaySetting = true
+                    print("bank")
+                }
+            }
+            
         }
         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
     }

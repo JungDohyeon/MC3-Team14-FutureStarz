@@ -85,12 +85,12 @@ struct SelectingName: View {
                     logic = true
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: $isAbled)
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")
                         
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    SelectingBank()
+                    SelectingBudget()
                         
                 })
                 .disabled(!isAbled)
