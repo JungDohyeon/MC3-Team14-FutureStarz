@@ -16,7 +16,7 @@ struct SelectingBudget: View {
     @State private var budget: String = ""
     @State var isAbled: Bool = false
     @Environment(\.presentationMode) var presentationMode
-    
+    let inputdata = InputUserData.shared
     var body: some View {
         VStack(spacing: 0) {
             VStack( spacing: 0) {
@@ -66,6 +66,7 @@ struct SelectingBudget: View {
                 Button(action: {
                     user_budget = budget
                     logic = true
+                    inputdata.goal = Int(budget)
                     
                 }, label: {
                     OnboardingNextButton(isAbled: $isAbled)
@@ -73,7 +74,7 @@ struct SelectingBudget: View {
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
-                    PreStart()
+                    SelectingUserImage()
                         
                 })
                 .disabled(!isAbled)

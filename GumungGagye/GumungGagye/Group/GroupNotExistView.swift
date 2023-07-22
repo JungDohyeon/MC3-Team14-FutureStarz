@@ -10,6 +10,7 @@ import SwiftUI
 struct GroupNotExistView: View {
     @State private var isCreateGroup: Bool = false
     @State private var searchText: String = ""
+    @State private var user: UserData?
     @ObservedObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
@@ -37,9 +38,7 @@ struct GroupNotExistView: View {
                                         .padding(2)
                                         .frame(width: 20)
                                 }
-                                .sheet(isPresented: $isCreateGroup, onDismiss: {
-                                    firebaseManager.fetchAllGroupData()
-                                }) {
+                                .sheet(isPresented: $isCreateGroup) {
                                     CreateGroupView()
                                         .presentationDetents([.large])
                                         .presentationDragIndicator(.visible)
@@ -83,12 +82,13 @@ struct GroupNotExistView: View {
                             .padding(.horizontal, 20)
                         }
                     }
-                    .padding(.top, 78)
+                    .padding(.top, 24)
                 }
             }
         }
         .onAppear {
             firebaseManager.fetchAllGroupData()
+            firebaseManager.callUserData()      // test
         }
     }
     

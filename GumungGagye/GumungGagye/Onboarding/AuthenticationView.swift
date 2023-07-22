@@ -16,6 +16,7 @@ import AuthenticationServices
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
     
+    let inputdata = InputUserData.shared
     
     let signInAppleHelper = SignInAppleHelper()
     
@@ -28,15 +29,26 @@ final class AuthenticationViewModel: ObservableObject {
     func signInApple() async throws {
         let helper = SignInAppleHelper()
         let tokens = try await helper.startSignInWithAppleFlow()
-        try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
+        let authDataResult = try await AuthenticationManager.shared.signInWithApple(tokens: tokens)
+        inputdata.user_id = authDataResult.uid
+        inputdata.email = authDataResult.email
+        
+        //미뤄야됨
         
         
+        
+//        try await UserManager.shared.createNewUser(auth: authDataResult)
+
     }
+    
+
     
 }
 
 
 struct AuthenticationView: View {
+    
+    
     
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
@@ -55,9 +67,10 @@ struct AuthenticationView: View {
             }
             Spacer()
             
-            Image("AppleSign")
-                .resizable()
-                .scaledToFit()
+            
+            
+            
+            LoginButton()
                 .padding(.bottom, 24)
                 .onTapGesture {
                     Task {
@@ -69,6 +82,23 @@ struct AuthenticationView: View {
                         }
                     }
                 }
+            
+            
+            
+//            Image("AppleSign")
+//                .resizable()
+//                .scaledToFit()
+//                .padding(.bottom, 24)
+//                .onTapGesture {
+//                    Task {
+//                        do {
+//                            try await viewModel.signInApple()
+//                            showSignInView = false
+//                        } catch {
+//                            print(error)
+//                        }
+//                    }
+//                }
                 
             Text("회원가입 시, 이용약관 및 개인정보처리방침에 동의한 것으로 간주합니다.")
                 .modifier(Cap2())

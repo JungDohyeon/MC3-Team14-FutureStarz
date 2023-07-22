@@ -16,7 +16,6 @@ struct GroupRoomView: View {
             Color("background").ignoresSafeArea()
             
             // MARK: 그룹 명
-            
             VStack(spacing: 0) {
                 HStack(spacing: 5){
                     if groupdata.lock_status {
@@ -91,7 +90,6 @@ struct GroupRoomView: View {
                         }
                     }
                 }
-                .padding(.bottom, 24)
                 
                 if isNotExist {
                     Divider()
@@ -99,6 +97,9 @@ struct GroupRoomView: View {
                 }
             }
         }
+        .padding()
+        .frame(width: .infinity, height: 117)
+        .border(.red)
     }
 }
 
@@ -110,7 +111,7 @@ struct MainColorBtn: View {
         Text(inputText)
             .modifier(BtnBold())
             .foregroundColor(Color("Main"))
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(
                 Rectangle()
@@ -123,6 +124,6 @@ struct MainColorBtn: View {
 
 struct GroupRoomView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234"), isNotExist: true)
+        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: true)
     }
 }

@@ -10,6 +10,11 @@ import SwiftUI
 struct PreStart: View {
     
     @AppStorage("app_setting") var app_setting: Bool = false
+    let inputdata = InputUserData.shared
+    
+    func insertFirestore() async throws {
+        try await UserManager.shared.createNewUser()
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -21,9 +26,23 @@ struct PreStart: View {
             .padding(.top, 146)
             Spacer()
             
+//            Image(uiImage: inputdata.profile_image!)
+//                .resizable()
+//                .scaledToFit()
+            
             OnboardingNextButton(isAbled: .constant(true))
                 .onTapGesture {
-                    app_setting = true
+                    Task {
+                        do {
+                            try await insertFirestore()
+                            app_setting = true
+                        }catch {
+                            print(error)
+                            
+                        }
+                    }
+                    
+                    
                 }
             
 //            NavigationLink(destination: LoginComplete()) {
