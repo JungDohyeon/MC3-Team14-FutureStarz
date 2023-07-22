@@ -102,7 +102,7 @@ struct GroupRoomView: View {
                     hasGroupAlert(type: userGroupStatus)
                 }
                 
-                
+                Spacer()
                 
                 if isNotExist {
                     Divider()
@@ -111,7 +111,6 @@ struct GroupRoomView: View {
             }
         }
         .frame(height: 117)
-        .border(.red)
     }
     
     private func hasGroupAlert(type: AlertType) -> Alert {
@@ -141,9 +140,6 @@ enum AlertType {
     case alreadyJoined
     case otherCase
 }
-
-
-
 
 
 struct MainColorBtn: View {
