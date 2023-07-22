@@ -152,7 +152,7 @@ struct SelectingUserImage: View {
                     return
                 }
                 self.inputdata.profile_image_url = url?.absoluteString
-                
+                print(ref)
                 print(url?.absoluteString)
                 
             }

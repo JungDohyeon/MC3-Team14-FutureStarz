@@ -33,16 +33,10 @@ final class SettingsViewModel: ObservableObject {
     
     func deleteAccount() async throws {
         try await viewModel.signInApple()
-        if let userss = Auth.auth().currentUser {
-            try await Firestore.firestore().collection("users").document(userss.uid).delete()
-        }
         
-        
-         
-           //아직 storage 안됨
         let storageRef = FirebaseManager.shared.storage.reference(forURL: InputUserData.shared.profile_image_url!)
             
-        
+        print("이미지 삭제.ref. : \(storageRef)")
             
             storageRef.delete { error in
                 if let error = error {
@@ -52,7 +46,13 @@ final class SettingsViewModel: ObservableObject {
                 }
             }
         
-        //
+        if let userss = Auth.auth().currentUser {
+            try await Firestore.firestore().collection("users").document(userss.uid).delete()
+        }
+        
+        
+         
+           
         
         
         try await AuthenticationManager.shared.delete()
