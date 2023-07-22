@@ -101,6 +101,7 @@ struct SelectingBank: View {
                 Button(action: {
                     bankCardPay = selectBankCardPay
                     bankCardPayIndex = selectBankCardPayIndex
+                    
                     logic = true
                     
                 }, label: {

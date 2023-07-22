@@ -55,7 +55,8 @@ final class UserManager {
             "goal": inputdata.goal,
             "bankcardpay": inputdata.bankcardpay,
             "bankcardpay_index": inputdata.bankcardpay_index,
-            "profile_image_url": inputdata.profile_image_url
+            "profile_image_url": inputdata.profile_image_url,
+            "bankcardpay_info": inputdata.bankcardpay_info
         ]
         
         

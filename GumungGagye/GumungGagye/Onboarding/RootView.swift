@@ -98,6 +98,7 @@ struct RootView: View {
         inputdata.goal = data["goal"] as? Int
         inputdata.group_id = data["group_id"] as? String
         inputdata.nickname = data["nickname"] as? String
+        inputdata.bankcardpay_info = data["bankcardpay_info"] as? [String]
         
         
         
