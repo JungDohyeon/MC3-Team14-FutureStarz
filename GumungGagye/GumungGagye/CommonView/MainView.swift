@@ -22,7 +22,7 @@ struct MainView: View {
                 Label("분석", systemImage: "chart.pie.fill")
             }
                 
-            GroupNotExistView()
+            GroupMain()
             .tabItem {
                 Label("그룹", systemImage: "person")
             }

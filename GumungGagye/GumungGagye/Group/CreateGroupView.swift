@@ -43,7 +43,6 @@ struct CreateGroupView: View {
     // group data
     @State private var groupName: String = ""
     @State private var groupCaption: String = ""
-    @State private var groupGoal: Int? = nil
     @State private var groupMax: String = ""
     @State private var isSecretRoom: Bool = false
     @State private var groupCode: String = ""
@@ -162,7 +161,7 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: groupGoal ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
+                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: Int(input.groupGoalValue) ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
                 dismiss()
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
