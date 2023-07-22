@@ -40,7 +40,7 @@ struct SelectingBank: View {
                     Button(action: {
                         inputdata.bankcardpay = 0
                         inputdata.bankcardpay_index = 0
-                        inputdata.bankcardpay_info = bankCardPayData.card_info[0][0]
+                        inputdata.bankcardpay_info = bankCardPayData.card_info[0][0]!
                         logic = true
                         
                     }, label: {
@@ -124,7 +124,7 @@ struct SelectingBank: View {
                 Button(action: {
                     inputdata.bankcardpay = selectBankCardPay
                     inputdata.bankcardpay_index = selectBankCardPayIndex
-                    inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]
+                    inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]!
                     logic = true
                     
                 }, label: {

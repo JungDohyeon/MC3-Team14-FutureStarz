@@ -100,7 +100,7 @@ struct SelectingBankView: View {
                     Task{
                         inputdata.bankcardpay = selectBankCardPay
                         inputdata.bankcardpay_index = selectBankCardPayIndex
-                        inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]
+                        inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]!
                         if let userss = Auth.auth().currentUser {
                             try await Firestore.firestore().collection("users").document(userss.uid).updateData(["bankcardpay": inputdata.bankcardpay, "bankcardpay_index": inputdata.bankcardpay_index, "bankcardpay_info": inputdata.bankcardpay_info])
                         }
