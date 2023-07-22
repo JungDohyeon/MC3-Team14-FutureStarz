@@ -11,16 +11,16 @@ import UIKit
 final class InputUserData: ObservableObject {
     static let shared = InputUserData()
 
-    var user_id: String?
-    var email: String?
-    var nickname: String?
-    var group_id: String?
-    var goal: Int?
-    var bankcardpay: Int?
-    var bankcardpay_index: Int?
-    var profile_image: UIImage?
-    var profile_image_url: String?
-    var bankcardpay_info: [String]?
+    @Published var user_id: String?
+    @Published var email: String?
+    @Published var nickname: String?
+    @Published var group_id: String?
+    @Published var goal: Int?
+    @Published var bankcardpay: Int?
+    @Published var bankcardpay_index: Int?
+    @Published var profile_image: UIImage?
+    @Published var profile_image_url: String?
+    @Published var bankcardpay_info: [String]?
 
     private init() { }
 }
