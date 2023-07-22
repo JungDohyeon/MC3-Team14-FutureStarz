@@ -10,10 +10,8 @@ import SwiftUI
 
 struct SelectingBudget: View {
     @State var logic: Bool = false
-    @AppStorage("budget") var user_budget: String = ""
     @ObservedObject private var keyboardResponder = KeyboardResponder()
-    @State private var isActive: Bool = false
-    @State private var budget: String = ""
+    @State var budget: String = ""
     @State var isAbled: Bool = false
     @Environment(\.presentationMode) var presentationMode
     let inputdata = InputUserData.shared
@@ -64,7 +62,6 @@ struct SelectingBudget: View {
                 
                 
                 Button(action: {
-                    user_budget = budget
                     logic = true
                     inputdata.goal = Int(budget)
                     
