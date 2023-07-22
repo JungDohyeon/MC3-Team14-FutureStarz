@@ -30,7 +30,7 @@ struct PreStart: View {
 //                .resizable()
 //                .scaledToFit()
             
-            OnboardingNextButton(isAbled: .constant(true))
+            OnboardingNextButton(isAbled: .constant(true), buttonText: "확인")
                 .onTapGesture {
                     Task {
                         do {

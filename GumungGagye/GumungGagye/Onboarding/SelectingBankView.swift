@@ -1,42 +1,39 @@
 //
-//  SelectingBank.swift
+//  SelectingBankView.swift
 //  GumungGagye
 //
-//  Created by 신상용 on 2023/07/14.
+//  Created by 신상용 on 2023/07/22.
 //
 
 import SwiftUI
+import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseAuth
+import FirebaseStorage
 
-struct SelectingBank: View {
+struct SelectingBankView: View {
+    
+    @StateObject var inputdata = InputUserData.shared
     @State var logic: Bool = false
-    @State var selectBankCardPay: Int = 0
-    @State var selectBankCardPayIndex: Int = 0
+    @State var selectBankCardPay: Int
+    @State var selectBankCardPayIndex: Int
     @State var isAbled: Bool = false
-    @State private var isActive: Bool = false
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var bankCardPaySetting: Bool
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
-    
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment:.leading, spacing: 0) {
-                HStack {
-                    CustomBackButton { presentationMode.wrappedValue.dismiss() }
-                    Spacer()
-                    Text("건너뛰기")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
-                }
-                .padding(.top, 66)
-                .padding(.bottom, 60)
                 
                 Text("주로 소비 내역을 확인하시는\n앱을 선택해주세요")
                     .modifier(H1Bold())
                     .padding(.bottom, 12)
+                    .padding(.top, 50)
                 
                 Text("소비 내역 입력시 바로가기 기능을 제공합니다")
                     .modifier(Body1())
@@ -97,43 +94,34 @@ struct SelectingBank: View {
                 
                 
                 Button(action: {
+                    Task{
+                        if let userss = Auth.auth().currentUser {
+                            try await Firestore.firestore().collection("users").document(userss.uid).updateData(["bankcardpay": inputdata.bankcardpay, "bankcardpay_index": inputdata.bankcardpay_index, "bankcardpay_info": inputdata.bankcardpay_info])
+                        }
+                    }
                     
                     logic = true
-                    
+                    bankCardPaySetting = false
                 }, label: {
-                    OnboardingNextButton(isAbled: .constant(true), buttonText: "가입하기")
+                    OnboardingNextButton(isAbled: .constant(true), buttonText: "저장하기")
                         
                 })
-                .navigationDestination(isPresented: $logic, destination: {
-                    // 목적지
-                    PreStart()
-                        
-                })
-//                .disabled(!isAbled)
                 .padding(.bottom, 59)
                 
                 
                 
-                
-//                NavigationLink(destination: SelectingBudget()) {
-//                    OnboardingNextButton(isAbled: $isAbled)
-//                }
-//                .padding(.bottom, 59)
             }
-            .ignoresSafeArea()
-            .navigationBarBackButtonHidden(true)
         }
         .padding(.horizontal, 20)
-        
     }
 }
 
-struct SelectingBank_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectingBank()
-    }
-}
-
+//struct SelectingBankView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SelectingBankView(bankCardPaySetting: .constant(true))
+//            .previewLayout(.sizeThatFits)
+//    }
+//}
 private struct BankView_header: View {
     
     var var_text: String = ""

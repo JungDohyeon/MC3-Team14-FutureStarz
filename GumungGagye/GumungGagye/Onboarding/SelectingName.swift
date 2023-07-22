@@ -85,7 +85,7 @@ struct SelectingName: View {
                     logic = true
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: $isAbled)
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")
                         
                 })
                 .navigationDestination(isPresented: $logic, destination: {
