@@ -9,12 +9,12 @@ import SwiftUI
 
 struct OnboardingNextButton: View {
     @Binding var isAbled: Bool
-    
+    @State var buttonText: String
     var body: some View {
         
             HStack {
                 Spacer()
-                Text("다음")
+                Text(buttonText)
                     .modifier(BtnBold())
                 
                 Spacer()
@@ -29,6 +29,6 @@ struct OnboardingNextButton: View {
 
 struct OnboardingNextButton_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingNextButton(isAbled: .constant(true))
+        OnboardingNextButton(isAbled: .constant(true), buttonText: "다음")
     }
 }

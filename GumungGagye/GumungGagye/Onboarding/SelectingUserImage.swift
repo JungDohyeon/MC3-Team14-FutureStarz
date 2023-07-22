@@ -107,7 +107,7 @@ struct SelectingUserImage: View {
                     logic = true
                     persistImageToStorage()
                 }, label: {
-                    OnboardingNextButton(isAbled: $isAbled)
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")
                     
                 })
                 .navigationDestination(isPresented: $logic, destination: {

@@ -69,7 +69,7 @@ struct SelectingBudget: View {
                     inputdata.goal = Int(budget)
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: $isAbled)
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")
                         
                 })
                 .navigationDestination(isPresented: $logic, destination: {
