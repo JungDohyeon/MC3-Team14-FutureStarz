@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+// 내역 추가 입력창 focus state
+enum AccountField {
+    case fixDate
+    case addPayment
+    case addCategory
+    case addContent
+}
+
 enum WritingList: String {
     case date = "날짜"
     case money = "금액"
@@ -30,6 +38,8 @@ struct BreakdownWriting: View {
     @State var selectedOption: String = ""
     
     @FocusState var isNumberKeyboardVisible: Bool
+    @FocusState private var isFocused: Bool
+    @FocusState private var focusedField: AccountField?
     
     @Binding var selectedButton: SelectedButtonType
     @Binding var text: String
@@ -94,7 +104,13 @@ struct BreakdownWriting: View {
                                 isDatePickerVisible = false
                                 DividerSelect = false
                             }
+                        Color.clear
+                            .onTapGesture {
+                                isDatePickerVisible = false
+                                DividerSelect = false
+                            }
                     }
+                    
                 }
                 // MARK: - 금액 내역
                 else if item == .money {

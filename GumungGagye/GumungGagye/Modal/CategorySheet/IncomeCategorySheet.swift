@@ -39,8 +39,8 @@ struct IncomeCategoryButton: View {
 enum IncomeCategoryList: String, CaseIterable {
     case pay = "급여"
     case allowance = "용돈"
-    case business = "사업 수입"
-    case financial = "금융 수입"
+    case business = "사업∙수입"
+    case financial = "금융∙수입"
     case extra = "부수입"
     case etc = "기타"
     

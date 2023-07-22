@@ -53,7 +53,8 @@ struct PurchasingContent: View {
                 .modifier(Body2())
             
             if isOverPurchase {
-                SpendTag(isOverPurchase: isOverPurchase, isSecret: false)
+                SpendTag(isOverPurchase: true, isSecret: false)
+                SpendTag(isOverPurchase: false, isSecret: false)
             }
             
             Spacer()

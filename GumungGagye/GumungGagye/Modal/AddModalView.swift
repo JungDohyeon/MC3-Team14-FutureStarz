@@ -72,12 +72,16 @@ struct AddModalView: View {
             // MARK: - 지출일 경우
             if selectButton == .expense {
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+//                    .focused($focusedField, equals: .fixDate)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
+//                    .focused($focusedField, equals: .addPayment)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
+//                    .focused($focusedField, equals: .addCategory)
                 
                 BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
+//                    .focused($focusedField, equals: .addContent)
                 
                 VStack(spacing: 24) {
                     
@@ -92,6 +96,7 @@ struct AddModalView: View {
                             Spacer()
                             
                             Image(systemName: isCheckedExpense ? "checkmark.square.fill" : "checkmark.square")
+                                .font(.system(size: 24))
                                 .foregroundColor(isCheckedExpense ? Color("Main") : Color("Gray2"))
                         }
                     }
@@ -108,6 +113,7 @@ struct AddModalView: View {
                             Spacer()
                             
                             Image(systemName: isCheckedShare ? "checkmark.square.fill" : "checkmark.square")
+                                .font(.system(size: 24))
                                 .foregroundColor(isCheckedShare ? Color("Main") : Color("Gray2"))
                         }
                     }

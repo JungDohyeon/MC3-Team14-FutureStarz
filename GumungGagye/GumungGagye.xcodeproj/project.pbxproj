@@ -58,6 +58,8 @@
 		99F7D74C2A5F805A0090A05A /* DateTotal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D74B2A5F805A0090A05A /* DateTotal.swift */; };
 		99F7D74E2A5F80780090A05A /* MoveMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D74D2A5F80780090A05A /* MoveMonth.swift */; };
 		99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D74F2A5F80880090A05A /* SectionBar.swift */; };
+		99F7D75A2A66AF270090A05A /* OverPurchaseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */; };
+		99F7D75E2A66AF610090A05A /* SecretTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D75D2A66AF610090A05A /* SecretTag.swift */; };
 		CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */; };
 		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
 		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
@@ -143,6 +145,8 @@
 		99F7D74B2A5F805A0090A05A /* DateTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTotal.swift; sourceTree = "<group>"; };
 		99F7D74D2A5F80780090A05A /* MoveMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMonth.swift; sourceTree = "<group>"; };
 		99F7D74F2A5F80880090A05A /* SectionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionBar.swift; sourceTree = "<group>"; };
+		99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverPurchaseTag.swift; sourceTree = "<group>"; };
+		99F7D75D2A66AF610090A05A /* SecretTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretTag.swift; sourceTree = "<group>"; };
 		CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDaySpendView.swift; sourceTree = "<group>"; };
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				99F7D74B2A5F805A0090A05A /* DateTotal.swift */,
 				99F7D74D2A5F80780090A05A /* MoveMonth.swift */,
 				99F7D74F2A5F80880090A05A /* SectionBar.swift */,
+				99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */,
+				99F7D75D2A66AF610090A05A /* SecretTag.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				5E6C5B892A67CBE100DE6C6F /* ProfileView.swift in Sources */,
 				D2C8282D2A5E37B00003C0D6 /* ExpenseCategorySheet.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
+				99F7D75A2A66AF270090A05A /* OverPurchaseTag.swift in Sources */,
 				D2C828332A5E37F70003C0D6 /* SmallButton.swift in Sources */,
 				5E25D6462A6A92F400FBA29F /* ImagePicker.swift in Sources */,
 				5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */,
@@ -617,8 +624,12 @@
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				5EEFECFD2A6168D800AF4A5F /* SignInEmailView.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
+
+				99F7D75E2A66AF610090A05A /* SecretTag.swift in Sources */,
+
 				CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */,
 				5E25D6442A6A2B7800FBA29F /* InsertUserData.swift in Sources */,
+
 				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
 				99F7D73E2A5F78B10090A05A /* ConsListView.swift in Sources */,
 				5EEFED082A61698800AF4A5F /* Utilities.swift in Sources */,
@@ -768,7 +779,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
+
+				DEVELOPMENT_TEAM = N8RU5UJH68;
+
 				DEVELOPMENT_TEAM = C3U3CZ666D;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
@@ -801,7 +816,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
+
+				DEVELOPMENT_TEAM = N8RU5UJH68;
+
 				DEVELOPMENT_TEAM = C3U3CZ666D;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;

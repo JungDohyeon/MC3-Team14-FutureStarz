@@ -75,7 +75,7 @@ struct CreateGroupView: View {
                     .focused($focusedField, equals: .groupCaption)
                 
                 // MARK: 목표 금액
-                GetIntegerGroupInfo( userInput: $input.groupGoalValue, checkStatus: $groupGoalValidate, focusedValue: _focusedField ,getTitle: "목표 금액을 입력해주세요", getMaxString: 9, symbolName: "pencil", focusType: .groupGoal)
+                GetIntegerGroupInfo(userInput: $input.groupGoalValue, checkStatus: $groupGoalValidate, focusedValue: _focusedField ,getTitle: "목표 금액을 입력해주세요", getMaxString: 9, symbolName: "pencil", focusType: .groupGoal)
                     .focused($focusedField, equals: .groupGoal)
                 
                 // MARK: 최대 인원

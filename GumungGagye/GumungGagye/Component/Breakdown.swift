@@ -8,20 +8,30 @@
 import SwiftUI
 
 struct Breakdown: View {
+    
+    public let payment: Int
+    
     var body: some View {
         HStack {
             CategoryIcon(size: .small, color: Color("Food")) // Color 데이터로 바꾸기
-            Text("내용")
-                .modifier(Body1())
+            VStack(alignment: .leading, spacing: 2) {
+                Text("\(payment)")
+                    .modifier(Num3Bold())
+                Text("내용")
+                    .modifier(Cap2())
+            }
             Spacer()
-            Text("-10,000원")
-                .modifier(Num3Bold())
+            HStack {
+                OverPurchaseTag(isOverPurchase: true)
+                SecretTag(isSecret: true)
+                
+            }
         }
     }
 }
 
 struct Breakdown_Previews: PreviewProvider {
     static var previews: some View {
-        Breakdown()
+        Breakdown(payment: 1000000)
     }
 }

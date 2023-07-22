@@ -13,17 +13,20 @@ struct MainBudgetView: View {
         VStack(alignment: .leading) {
             // 월(날짜) 이동
             MoveMonth(month: "7월", size: .Big) // 숫자 데이터로 받아오기
-                .padding(.top, 30)
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
             
             ScrollView {
-                VStack(spacing: 36) {
-                    
-                    TargetBudgetView()
-                    SectionBar()
-                    CurrentAssetView()
-                    SectionBar()
-                    
+                VStack(spacing:0) {
+                    VStack(spacing: 36) {
+                        
+                        TargetBudgetView()
+                            .padding(.top, 16)
+                        SectionBar()
+                        CurrentAssetView()
+                        SectionBar()
+                            .padding(.bottom, 26)
+                    }
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header()) {
                             
@@ -36,11 +39,13 @@ struct MainBudgetView: View {
                     }
                 }
             }
-            .clipped()
-            .edgesIgnoringSafeArea(.bottom)
         }
+        .clipped()
+        .foregroundColor(Color("Black"))
+        .background(Color("background"))
     }
 }
+
 
 struct Header: View {
     
@@ -61,8 +66,9 @@ struct Header: View {
                     .background(Color("White"))
             }
         }
+        .padding(.top, 10)
         .padding(.bottom, 10) // 전꺼 36
-        .background(.white)
+        .background(Color("background"))
         
     }
 }
