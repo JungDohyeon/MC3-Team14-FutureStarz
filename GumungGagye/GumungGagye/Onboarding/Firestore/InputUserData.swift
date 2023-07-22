@@ -20,6 +20,7 @@ final class InputUserData: ObservableObject {
     var bankcardpay_index: Int?
     var profile_image: UIImage?
     var profile_image_url: String?
+    var bankcardpay_info: [String]?
 
     private init() { }
 }

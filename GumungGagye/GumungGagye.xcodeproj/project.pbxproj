@@ -33,6 +33,7 @@
 		5E6C5B902A67CDBD00DE6C6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */; };
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
 		5E6C5B942A680D0D00DE6C6F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */; };
+		5EE6A9DC2A6B86C400480855 /* BankCardPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */; };
 		5EEFECF92A61689D00AF4A5F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFECF82A61689D00AF4A5F /* RootView.swift */; };
 		5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFECFA2A6168C000AF4A5F /* AuthenticationView.swift */; };
 		5EEFECFD2A6168D800AF4A5F /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFECFC2A6168D800AF4A5F /* SignInEmailView.swift */; };
@@ -117,6 +118,7 @@
 		5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
 		5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPay.swift; sourceTree = "<group>"; };
 		5EEFECF82A61689D00AF4A5F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		5EEFECFA2A6168C000AF4A5F /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		5EEFECFC2A6168D800AF4A5F /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */,
 				5E25D6452A6A92F400FBA29F /* ImagePicker.swift */,
 				5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */,
+				5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				5E2623542A6188C000A6E23F /* SelectingBank.swift in Sources */,
 				CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */,
+				5EE6A9DC2A6B86C400480855 /* BankCardPay.swift in Sources */,
 				0A2828F02A5D835100A9D5D9 /* CategoryHistoryView.swift in Sources */,
 				D2C8282F2A5E37D80003C0D6 /* MoneyTypeButton.swift in Sources */,
 			);

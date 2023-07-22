@@ -14,7 +14,7 @@ struct SettingView: View {
     @State private var cancelShowing = false
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
-    let inputdata = InputUserData.shared
+    var inputdata = InputUserData.shared
     
     var body: some View {
         VStack(spacing: 36.0) {
@@ -24,18 +24,36 @@ struct SettingView: View {
                 
                 // - MARK: - 정보
                 HStack(spacing: 0) {
-                    Image(uiImage: inputdata.profile_image!)
-                        .resizable()
+                    Circle()
+                        .foregroundColor(Color("Gray2"))
                         .frame(width: 74, height: 74)
+                        .overlay {
+                            if let image = inputdata.profile_image {
+                                //
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipShape(Circle())
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(Color(.white))
+                                
+                            }
+                        }
                         .padding(.trailing, 18)
+                    
+                    
+                    
+                    
                     VStack(alignment: .leading, spacing: 20.0) {
-                        Text(inputdata.nickname!)
+                        Text(inputdata.nickname ?? "")
                             .modifier(H2SemiBold())
                         HStack(alignment: .center, spacing: 4.0) {
                             Image(systemName: "apple.logo")
                                 .foregroundColor(Color("Gray2"))
                                 .font(.system(size: 16))
-                            Text(inputdata.email!)
+                            Text(inputdata.email ?? "")
                                 .modifier(Body2())
                         }
                     }
@@ -53,7 +71,7 @@ struct SettingView: View {
                 // - MARK: - 설정 변경
                 
                 VStack(spacing: 0.0) {
-                    SettingRowView(label: "목표 지출 금액", value: "\(inputdata.goal!)원")
+                    SettingRowView(label: "목표 지출 금액", value: "\(inputdata.goal ?? 0)원")
                     SettingRowView(label: "내역 확인 앱", value: "토스")
                     SettingRowView(label: "푸시 알림", value: "toggle")
                 }
@@ -125,6 +143,9 @@ struct SettingView: View {
         .foregroundColor(Color("Black"))
         .background(Color("background"))
     }
+    
+    
+    
 }
 
 struct SettingRowView: View {

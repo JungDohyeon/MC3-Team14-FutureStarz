@@ -47,6 +47,7 @@ struct RootView: View {
                         inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
                         
                         
+                        
                         app_setting = deleteapp
                     }
                     self.showSignInView = authUser == nil
@@ -54,7 +55,7 @@ struct RootView: View {
                     
                 }
                 
-                //                UserManager.shared.ge
+                
             }
         }
         
