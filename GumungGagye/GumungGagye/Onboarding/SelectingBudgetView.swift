@@ -41,9 +41,11 @@ struct SelectingBudgetView: View {
                     }
                     //키보드 숫자로!!!
                     .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color("Gray1"))
                     .modifier(H2SemiBold())
                     .padding(.bottom, 14)
+                    .padding(.leading, 8)
                     
                     Text("원")
                         .modifier(H2SemiBold())
@@ -91,3 +93,5 @@ struct SelectingBudgetView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
+
+

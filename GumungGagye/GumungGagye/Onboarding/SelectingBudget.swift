@@ -43,9 +43,12 @@ struct SelectingBudget: View {
                     }
                     //키보드 숫자로!!!
                     .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color("Gray1"))
                     .modifier(H2SemiBold())
                     .padding(.bottom, 14)
+                    .padding(.leading, 8)
+                    
                     if isAbled {
                         Text("원")
                             .modifier(H2SemiBold())
