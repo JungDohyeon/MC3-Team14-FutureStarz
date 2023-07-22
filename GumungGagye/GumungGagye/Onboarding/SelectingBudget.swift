@@ -21,9 +21,7 @@ struct SelectingBudget: View {
                 HStack {
                     CustomBackButton { presentationMode.wrappedValue.dismiss() }
                     Spacer()
-                    Text("건너뛰기")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
+                    
                 }
                 .padding(.top, 66)
                 .padding(.bottom, 60)

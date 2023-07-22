@@ -14,7 +14,7 @@ import FirebaseStorage
 struct SelectingBudgetView: View {
     @State var budget: String
     //    @Binding var isAbled: Bool
-    @State var isAbled: Bool = false
+    @State var isAbled: Bool = true
     @State var logic: Bool = false
     @Binding var budgetSetting: Bool
     let inputdata = InputUserData.shared
@@ -73,7 +73,7 @@ struct SelectingBudgetView: View {
                     
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: $isAbled, buttonText: "저장하기")
+                    OnboardingNextButton(isAbled: .constant(true), buttonText: "저장하기")
                     
                 })
                 .disabled(!isAbled)

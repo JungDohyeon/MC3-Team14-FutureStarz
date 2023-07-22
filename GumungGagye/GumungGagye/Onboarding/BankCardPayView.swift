@@ -40,9 +40,9 @@ struct BankCardPayView: View {
         .onTapGesture {
             selectBankCardPay = bankCardPay
             selectBankCardPayIndex = index
-            inputdata.bankcardpay = bankCardPay
-            inputdata.bankcardpay_index = index
-            inputdata.bankcardpay_info = bankCardPayData.card_info[bankCardPay][index]
+//            inputdata.bankcardpay = bankCardPay
+//            inputdata.bankcardpay_index = index
+//            inputdata.bankcardpay_info = bankCardPayData.card_info[bankCardPay][index]
             isAbled = true
         }
         

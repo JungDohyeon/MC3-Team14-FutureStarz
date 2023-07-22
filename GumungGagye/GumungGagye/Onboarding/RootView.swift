@@ -44,7 +44,12 @@ struct RootView: View {
                         
                         
                         try await getUser(userId: authUser!.uid)
-                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
+                        
+                        if let image_url = inputdata.profile_image_url {
+                            inputdata.profile_image = try await fetchImage(url: URL(string: image_url)!)
+                        }
+                        
+//                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
                         
                         
                         
