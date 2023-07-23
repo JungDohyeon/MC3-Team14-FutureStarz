@@ -9,7 +9,9 @@ import SwiftUI
 
 // Group Main View
 struct GroupMain: View {
-    @StateObject var inputdata = InputUserData.shared
+    @StateObject var user = InputUserData.shared
+    @ObservedObject private var firebaseManager = FirebaseController.shared
+    @State private var userGroupData: GroupData?
     
     var body: some View {
         // TODO: User가 가입된 그룹이 없다면 groupnotexistview 이동 아니면 groupviewinside
@@ -17,22 +19,42 @@ struct GroupMain: View {
             Color("background").ignoresSafeArea()
             
             // TODO: User가 가입된 그룹이 없다면 groupnotexistview 이동 아니면 groupviewinside
-            if inputdata.group_id == "" {
+            if let userGroupData = userGroupData {
+                GroupViewInside(groupData: userGroupData)
+            } else {
                 GroupNotExistView()
             }
-            // user가 그룹을 보유하고 있다면 GroupView 내부를 보여준다.
-            else {
-                GroupViewInside()
-            }
-          
-            // TODO: 해당 그룹 아이디를 찾아 해당 그룹 정보를 띄어준다
-             
+            
+        }
+        .onAppear {
+           fetchData()
         }
     }
+    
+    private func fetchData() {
+            Task {
+                do {
+                    if let userGroupID = user.group_id, !userGroupID.isEmpty {
+                        let groupData = try await firebaseManager.fetchGroupData(groupId: userGroupID)
+                        
+                        if let groupData = groupData {
+                            userGroupData = groupData
+                            print(groupData.id)
+                        } else {
+                            userGroupData = nil
+                        }
+                        
+                    } else {
+                        print("유저가 그룹에 속해있지 않습니다.")
+                        userGroupData = nil
+                    }
+                } catch {
+                    userGroupData = nil
+                    print("Error fetching group data: \(error)")
+                }
+            }
+        }
 }
 
-struct GroupMain_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupMain()
-    }
-}
+
+

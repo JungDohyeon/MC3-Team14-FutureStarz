@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupNotExistView: View {
     @State private var isCreateGroup: Bool = false
     @State private var searchText: String = ""
-    @State private var user: UserData?
+    @StateObject var userData = InputUserData.shared
     @ObservedObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {

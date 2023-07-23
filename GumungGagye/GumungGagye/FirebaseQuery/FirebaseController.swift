@@ -12,6 +12,11 @@ class FirebaseController: ObservableObject {
     static let shared = FirebaseController()    // SingleTon
     @Published var groupList = [GroupData]()
     @Published var accountList = [AccountData]()
+    let inputdata = InputUserData.shared
+    
+    func updateGroupFirestore(groupId: String) async throws {
+        try await UserManager.shared.InsertGroupId(groupId: groupId)
+    }
     
     private init() { }
     
@@ -99,25 +104,25 @@ class FirebaseController: ObservableObject {
     }
     
     // 현재 로그인 중인 유저 반환.
-    static func fetchUserInfo(completion: @escaping (UserData?) -> Void) {
-        if let currentUser = Auth.auth().currentUser {
-            let uid = currentUser.uid
-            let db = Firestore.firestore()
-            let userRef = db.collection("user").document(uid)
-            
-            userRef.getDocument { document, error in
-                if let document = document, document.exists {
-                    let data = document.data()
-                    let user = UserData(data: data!)
-                    completion(user)
-                } else {
-                    completion(nil)
-                }
-            }
-        } else {
-            completion(nil)
-        }
-    }
+    //    static func fetchUserInfo(completion: @escaping (UserData?) -> Void) {
+    //        if let currentUser = Auth.auth().currentUser {
+    //            let uid = currentUser.uid
+    //            let db = Firestore.firestore()
+    //            let userRef = db.collection("user").document(uid)
+    //
+    //            userRef.getDocument { document, error in
+    //                if let document = document, document.exists {
+    //                    let data = document.data()
+    //                    let user = UserData(data: data!)
+    //                    completion(user)
+    //                } else {
+    //                    completion(nil)
+    //                }
+    //            }
+    //        } else {
+    //            completion(nil)
+    //        }
+    //    }
     
     // MARK: delete group
     func deleteGroupData(deleteGroup: GroupData) {
@@ -135,10 +140,125 @@ class FirebaseController: ObservableObject {
         }
     }
     
-    //    Update Group Func
-    //    func updateData(updateGroup: GroupData) {
-    //        let db = Firestore.firestore()
-    //
-    //        db.collection("groupRoom").document(updateGroup.id).setData([""])
-    //    }
+    // Update Group Func (인원 유입)
+    func incrementGroupCur(groupID: String) {
+        let db = Firestore.firestore()
+        // 해당 그룹의 Document 참조
+        
+        let groupRef = db.collection("groupRoom").document(groupID)
+        
+        // 해당 그룹의 현재 groupCur 값을 가져오기
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // 현재 groupCur 값이 있으면 1 증가시키고 업데이트
+                DispatchQueue.main.async {
+                    if var groupData = document.data(),
+                       let currentGroupCur = groupData["group_cur"] as? Int {
+                        let maxGroup = groupData["group_max"] as? Int
+                        if  currentGroupCur >= maxGroup! {
+                            print("정원 초과")
+                            return
+                        } else {
+                            Task {
+                                do {
+                                    try await self.updateGroupFirestore(groupId: groupID)
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                            groupData["group_cur"] = currentGroupCur + 1
+                        }
+                        
+                        groupRef.setData(groupData) { error in
+                            if let error = error {
+                                print("Error updating document: \(error)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    // 그룹 데이터 가져오기
+    func fetchGroupData(groupId: String) async throws -> GroupData? {
+        let db = Firestore.firestore()
+        let groupRoomCollection = db.collection("groupRoom")
+        
+        let documentReference = groupRoomCollection.document(groupId)
+        
+        do {
+            let document = try await documentReference.getDocument()
+            if document.exists, let data = document.data() {
+                // Parse the Firestore data and create the GroupData instance
+                let id = document.documentID
+                let group_name = data["group_name"] as? String ?? ""
+                let group_introduce = data["group_introduce"] as? String ?? ""
+                let group_goal = data["group_goal"] as? Int ?? 0
+                let group_cur = data["group_cur"] as? Int ?? 0
+                let group_max = data["group_max"] as? Int ?? 0
+                let lock_status = data["lock_status"] as? Bool ?? false
+                let group_pw = data["group_pw"] as? String ?? ""
+                let timeStamp = data["timeStamp"] as? Timestamp ?? Timestamp()
+                
+                return GroupData(id: id,
+                                 group_name: group_name,
+                                 group_introduce: group_introduce,
+                                 group_goal: group_goal,
+                                 group_cur: group_cur,
+                                 group_max: group_max,
+                                 lock_status: lock_status,
+                                 group_pw: group_pw,
+                                 timeStamp: timeStamp.dateValue())
+            } else {
+                return nil
+            }
+        } catch {
+            throw error
+        }
+    }
+    
+    
+    // Update Group Func (인원 감소)
+    func decrementGroupCur(groupID: String) {
+        let db = Firestore.firestore()
+        // 해당 그룹의 Document 참조
+        
+        let groupRef = db.collection("groupRoom").document(groupID)
+        
+        // 해당 그룹의 현재 groupCur 값을 가져오기
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                DispatchQueue.main.async {
+                    // 현재 groupCur 값이 있으면 1 감소
+                    if var groupData = document.data(),
+                       let currentGroupCur = groupData["group_cur"] as? Int {
+                        Task {
+                            do {
+                                try await self.updateGroupFirestore(groupId: "")
+                            } catch {
+                                print(error)
+                            }
+                        }
+                        
+                        groupData["group_cur"] = currentGroupCur - 1
+                        
+                        groupRef.setData(groupData) { error in
+                            if let error = error {
+                                print("Error updating document: \(error)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
 }

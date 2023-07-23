@@ -9,11 +9,18 @@ import SwiftUI
 
 struct GroupRoomView: View {
     @StateObject var userData = InputUserData.shared
+    @ObservedObject private var firebaseManager = FirebaseController.shared
+    
     let groupdata: GroupData
     let isNotExist: Bool
+    
     @State private var showHasGroupAlert = false
     @State private var showSubmitGroupAlert = false
     @State private var userGroupStatus: AlertType = .otherCase
+    
+    func updateGroupFirestore(groupId: String) async throws {
+        try await UserManager.shared.InsertGroupId(groupId: groupId)
+    }
     
     var body: some View {
         ZStack {
@@ -88,11 +95,12 @@ struct GroupRoomView: View {
                     // 가입된 그룹이 없을 경우 가입 버튼 생성 (그룹 정보 보여주기 뷰 때문)
                     if isNotExist {
                         Button {
-                            print("user group: \(userData.group_id)")
                             showSubmitGroupAlert = true
+                            
                             if userData.group_id != "" {
                                 userGroupStatus = .alreadyJoined
                             }
+                            
                         } label: {
                             MainColorBtn(inputText: "가입하기")
                         }
@@ -127,8 +135,8 @@ struct GroupRoomView: View {
                 message: Text("가입하면 기록한 지출 내역이 그룹 멤버와 공유돼요."),
                 primaryButton: .cancel(Text("취소")),
                 secondaryButton: .default(Text("가입")) {
-                    userData.group_id = groupdata.id
                     print("User: \(userData.nickname) Joined \(groupdata.group_name)")
+                    firebaseManager.incrementGroupCur(groupID: groupdata.id)
                 }
             )
         }
