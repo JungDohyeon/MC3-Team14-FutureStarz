@@ -44,7 +44,12 @@ struct RootView: View {
                         
                         
                         try await getUser(userId: authUser!.uid)
-                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
+                        
+                        if let image_url = inputdata.profile_image_url {
+                            inputdata.profile_image = try await fetchImage(url: URL(string: image_url)!)
+                        }
+                        
+//                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
                         
                         
                         
@@ -98,7 +103,7 @@ struct RootView: View {
         inputdata.goal = data["goal"] as? Int
         inputdata.group_id = data["group_id"] as? String
         inputdata.nickname = data["nickname"] as? String
-        inputdata.bankcardpay_info = data["bankcardpay_info"] as? [String]
+        inputdata.bankcardpay_info = (data["bankcardpay_info"] as? [String])!
         
         
         
