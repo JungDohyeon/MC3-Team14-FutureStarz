@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 struct SelectingBudgetView: View {
+    @ObservedObject var input = NumbersOnlyInput()
     @State var budget: String
     //    @Binding var isAbled: Bool
     @State var isAbled: Bool = true
@@ -33,10 +34,11 @@ struct SelectingBudgetView: View {
                 
                 
                 HStack {
-                    TextField(text: $budget) {
+                    TextField(text: $input.groupGoalValue) {
                         Text("금액을 입력해주세요")
-                    }.onChange(of: budget) { newValue in
+                    }.onChange(of: input.groupGoalValue) { newValue in
                         isAbled = !newValue.isEmpty
+                        input.groupGoalValue = String(newValue.prefix(9))
                         //                        print(keyboardResponder.currentHeight)
                     }
                     //키보드 숫자로!!!
