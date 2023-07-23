@@ -42,20 +42,21 @@ struct Post: Identifiable, Codable {
 }
 
 final class AccountManager {
-    private var db = Firestore.firestore()
+    var db = Firestore.firestore()
 
-    func addAccount(account: Account, spend: Spend? = nil, income: Income? = nil) {
+
+    func addAccount(account: Account, spend: Spend? = nil, income: Income? = nil) async throws {
         do {
             var newAccount = account
             newAccount.userID = db.collection("users").document(account.userID.documentID)
-            let documentRef = try db.collection("account").addDocument(from: account)
+            let documentRef = try await db.collection("account").addDocument(from: account)
             print("Account added with ID: \(documentRef.documentID)")
             
             // Spend 데이터가 제공되면 spend 컬렉션에 추가
             if let spendData = spend {
                 var newSpend = spendData
                 newSpend.userID = account.userID
-                try db.collection("spend").addDocument(from: newSpend)
+                try await db.collection("spend").addDocument(from: newSpend)
                 print("Spend added for Account with ID: \(documentRef.documentID)")
             }
                     
@@ -63,7 +64,7 @@ final class AccountManager {
             if let incomeData = income {
                 var newIncome = incomeData
                 newIncome.userID = account.userID
-                try db.collection("income").addDocument(from: newIncome)
+                try await db.collection("income").addDocument(from: newIncome)
                 print("Income added for Account with ID: \(documentRef.documentID)")
             }
             
@@ -72,36 +73,57 @@ final class AccountManager {
         }
     }
 
-    func updateAccount(account: Account) {
+    func updateAccount(account: Account) async throws {
         do {
             guard let accountId = account.id else { return }
-            try db.collection("account").document(accountId).setData(from: account)
+            try await db.collection("account").document(accountId).setData(from: account)
             print("Account updated with ID: \(accountId)")
         } catch {
             print("Error updating account: \(error)")
         }
     }
 
-    func deleteAccount(account: Account) {
-        if let accountId = account.id {
-            db.collection("account").document(accountId).delete { error in
-                if let error = error {
-                    print("Error deleting account: \(error)")
-                } else {
-                    print("Account deleted successfully.")
-                }
-            }
-        }
-    }
+//    func deleteAccount(account: Account) async throws {
+//        if let accountId = account.id {
+//            try await db.collection("account").document(accountId).delete
+//            print("Account deleted successfully.")
+//            
+//        }
+//    }
 
-    func createPost(post: Post) {
+    func createPost(post: Post) async throws {
         do {
             var newPost = post
             newPost.userID = db.collection("users").document(post.userID.documentID)
-            let documentRef = try db.collection("post").addDocument(from: post)
+            let documentRef = try await db.collection("post").addDocument(from: post)
             print("Post created with ID: \(documentRef.documentID)")
         } catch {
             print("Error creating post: \(error)")
         }
     }
+    
+    func addExpenseData(expenseData: ExpenseData) async throws {
+        do {
+            var newExpenseData = expenseData
+            newExpenseData.userID = db.collection("users").document(expenseData.userID.documentID)
+            try await db.collection("spend").addDocument(from: newExpenseData)
+            print("Expense data added successfully.")
+        } catch {
+            print("Error adding expense data: \(error)")
+            throw error
+        }
+    }
+    
+    func addIncomeData(incomeData: IncomeData) async throws {
+        do {
+            var newIncomeData = incomeData
+            newIncomeData.userID = db.collection("users").document(incomeData.userID.documentID)
+            try await db.collection("income").addDocument(from: newIncomeData)
+            print("Income data added successfully.")
+        } catch {
+            print("Error adding income data: \(error)")
+            throw error
+        }
+    }
+
 }

@@ -22,21 +22,23 @@ class AddModalViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
 
-    func addExpenseData(expenseData: ExpenseData) {
+    func addExpenseData(expenseData: ExpenseData) async throws {
         do {
-            let documentRef = try db.collection("expense").addDocument(from: expenseData)
+            let documentRef = try await db.collection("expense").addDocument(from: expenseData)
             print("ExpenseData added with ID: \(documentRef.documentID)")
         } catch {
             print("Error adding expense data: \(error)")
+            throw error
         }
     }
 
-    func addIncomeData(incomeData: IncomeData) {
+    func addIncomeData(incomeData: IncomeData) async throws {
         do {
-            let documentRef = try db.collection("income").addDocument(from: incomeData)
+            let documentRef = try await db.collection("income").addDocument(from: incomeData)
             print("IncomeData added with ID: \(documentRef.documentID)")
         } catch {
             print("Error adding income data: \(error)")
+            throw error
         }
     }
     

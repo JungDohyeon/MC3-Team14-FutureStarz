@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct AddModalView: View {
     @State var text: String = ""
@@ -23,6 +25,7 @@ struct AddModalView: View {
     var bankAppScheme: String = "supertoss://"
     
     @StateObject private var viewModel = AddModalViewModel()
+    private var accountManager = AccountManager()
     
     func clearData() {
         text = ""
@@ -144,6 +147,7 @@ struct AddModalView: View {
                     
                     if let date = dateFormatter.date(from: dateString) {
                     let expenseData = ExpenseData(
+                        userID: accountManager.db.collection("users").document("YOUR_USER_ID"),
                         account_date: date,
                         spend_bill: Int(Double(number) ?? 0.0),
                         spend_category: tappedExpenseCategory,
@@ -151,7 +155,7 @@ struct AddModalView: View {
                         spend_overConsume: isCheckedExpense,
                         spend_open: isCheckedShare
                             )
-                    viewModel.addExpenseData(expenseData: expenseData)
+                    accountManager.addExpenseData(expenseData: ExpenseData)
                     clearData() // 데이터 초기화
                     } else {
                         // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
@@ -179,7 +183,6 @@ struct AddModalView: View {
                         .padding(.bottom, 12)
                     
                     Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
-                        print("plus")
                         // Firestore에 데이터 저장
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
@@ -187,12 +190,13 @@ struct AddModalView: View {
                         
                         if let date = dateFormatter.date(from: dateString) {
                             let incomeData = IncomeData(
+                                userID: accountManager.db.collection("users").document("YOUR_USER_ID"),
                                 account_date: date,
                                 income_bill: Int(Double(number) ?? 0.0),
                                 income_category: tappedIncomeCategory,
                                 income_content: text
                             )
-                            viewModel.addIncomeData(incomeData: incomeData)
+                        accountManager.addIncomeData(incomeData: incomeData)
                         } else {
                             // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
                         }
