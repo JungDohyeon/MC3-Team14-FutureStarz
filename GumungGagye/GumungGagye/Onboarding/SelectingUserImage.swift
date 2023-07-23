@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectingUserImage: View {
     @State var shouldShowImagePicker = false
-    @State var image: UIImage?
+    @State var image: UIImage? = nil
     @State var logic: Bool = false
     @State var isAbled: Bool = false
     let inputdata = InputUserData.shared
@@ -21,9 +21,13 @@ struct SelectingUserImage: View {
                 HStack {
                     CustomBackButton { presentationMode.wrappedValue.dismiss() }
                     Spacer()
-                    Text("건너뛰기")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
+                    NavigationLink {
+                        SelectingBank()
+                    } label: {
+                        Text("건너뛰기")
+                            .modifier(Body2())
+                            .foregroundColor(Color("Gray1"))
+                    }
                 }
                 .padding(.top, 66)
                 .padding(.bottom, 60)
@@ -132,13 +136,17 @@ struct SelectingUserImage: View {
         .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
             ImagePicker(image: $image, isAbled: $isAbled)
         }
+//        .onAppear {
+//            image = nil
+//        }
     }
     private func persistImageToStorage()  {
         
         //        let filename = UUID().uuidString
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return  }
         let ref = FirebaseManager.shared.storage.reference(withPath: uid)
-        guard let imageData = inputdata.profile_image?.jpegData(compressionQuality: 0.5) else { return }
+//        guard let imageData = inputdata.profile_image?.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = image?.jpegData(compressionQuality: 0.5) else { return }
         
         ref.putData(imageData, metadata:nil) { metadata, err in
             if let err = err {
@@ -152,7 +160,7 @@ struct SelectingUserImage: View {
                     return
                 }
                 self.inputdata.profile_image_url = url?.absoluteString
-                
+                print(ref)
                 print(url?.absoluteString)
                 
             }

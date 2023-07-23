@@ -16,7 +16,7 @@ struct OverpurchasingView: View {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 12.0) {
                             VStack(alignment: .leading, spacing: 8.0){
-                                HStack(spacing: 4.0) {
+                                HStack(spacing: 3.0) {
                                     Text("2023년 7월")
                                     Text("과소비")
                                         .foregroundColor(Color("OverPurchasing"))
@@ -40,25 +40,15 @@ struct OverpurchasingView: View {
                         }
                         
                         Spacer()
-                        // 카테고리 아이콘
-                        Circle()
-                            .frame(width: 80, height: 80)
                     }
                     .padding(.top, 48.0)
                     
-                    // - MARK: - 과소비 TOP 카테고리
-                    Text("식비에서 200,000원을 사용하여\n돈을 가장 많이 썼어요")
-                        .foregroundColor(Color("Black"))
-                        .modifier(H2SemiBold())
                     
                     // - MARK: - 과소비 차트
-                    ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
-                        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
+                    ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: true)
+                        .frame(maxWidth: .infinity, minHeight: 292, maxHeight: 292, alignment: .center)
                 }
                 .padding(.horizontal, 20)
-                
-                // - MARK: - 구분선
-                DividerView()
                 
                 // - MARK: - 내역
                 VStack(alignment: .leading, spacing: 36.0) {
@@ -66,9 +56,11 @@ struct OverpurchasingView: View {
                         .foregroundColor(Color("Black"))
                     .modifier(H2SemiBold())
                     
-                    Text("가계부 뷰에서 만들어주시지 않았을까?")
-                        .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
-                        .background(Color("Gray3"))
+                    VStack(spacing: 52.0) {
+                        ForEach(1..<10) {_ in
+                            DateBreakdown()
+                        }
+                    }
                 }
                 .padding(.horizontal, 20.0)
             }

@@ -45,9 +45,11 @@ struct CategoryHistoryView: View {
                 .padding(.top, 48.0)
                 
                 // - MARK: - 카테고리 내역 리스트
-                Text("(아마)리나가 만든 내역뷰...")
-                    .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
-                    .background(Color("Gray3"))
+                VStack(spacing: 52.0) {
+                    ForEach(1..<10) {_ in
+                        DateBreakdown()
+                    }
+                }
             }
             .padding(.horizontal, 20.0)
         }

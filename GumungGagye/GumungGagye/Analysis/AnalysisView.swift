@@ -4,13 +4,12 @@
 //
 //  Created by jeongyun on 2023/07/10.
 //
-// - TODO: - 요약 숫자 폰트 변경
 
 import SwiftUI
 
 struct AnalysisView: View {
+    
     var body: some View {
-        
             VStack {
                 // - MARK: - 분석 타이틀 / 월 변경
                 
@@ -21,26 +20,7 @@ struct AnalysisView: View {
                         .modifier(H1Bold())
                     
                     // 월 변경
-                    HStack(spacing: 12.0) {
-                        Button {
-                            // 지난 달로
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Gray1"))
-                        }
-
-                        Text("7월")
-                            .modifier(H2SemiBold())
-                        
-                        Button {
-                            // 다음 달로
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(Color("Gray1"))
-                        }
-                    }
+                    MoveMonth(month: "7월", size: .Small)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
@@ -54,12 +34,17 @@ struct AnalysisView: View {
                     VStack(alignment: .leading) {
                         
                         // 과소비 요약
-                        VStack(alignment: .leading, spacing: 4.0) {
-                            Text("과소비를 8번 하지 않았다면")
-                                .modifier(H2SemiBold())
-                            Text("75,500원을 아꼈을텐데")
-                                .modifier(H2SemiBold())
-                                .foregroundColor(Color("Main"))
+                        // - TODO: - 요약 숫자 폰트 변경
+                        VStack(alignment: .leading, spacing: 12.0) {
+                            Text("과소비 분석")
+                                .modifier(Cap1())
+                            VStack(alignment: .leading, spacing: 4.0) {
+                                Text("과소비를 8번 하지 않았다면")
+                                    .modifier(H2SemiBold())
+                                Text("75,500원을 아꼈을텐데")
+                                    .modifier(H2SemiBold())
+                                    .foregroundColor(Color("Main"))
+                            }
                         }
                         .padding(.bottom, 16.0)
                         .padding(.top, 32.0)
@@ -90,9 +75,9 @@ struct AnalysisView: View {
                         
                         // Top 3 리스트
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
+                            TopContentView(rank: 1, content: "치킨", money: 32000)
+                            TopContentView(rank: 2, content: "아이스크림", money: 17000)
+                            TopContentView(rank: 3, content: "아이폰 케이스", money: 13300)
                         }
                         .padding(.bottom, 28.0)
                         
@@ -108,7 +93,7 @@ struct AnalysisView: View {
                                 }
                                 .foregroundColor(Color("Gray1"))
                                 .modifier(Body2())
-                                .frame(maxWidth: .infinity, minHeight: 58, maxHeight: 58)
+                                .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
                     }
@@ -127,22 +112,27 @@ struct AnalysisView: View {
                     VStack(alignment: .leading) {
                         
                         // 카테고리 요약
-                        VStack(alignment: .leading) {
-                            Text("식비에서 200,000원을 사용하여")
-                                .modifier(H2SemiBold())
-                            Text("돈을 가장 많이 썼어요")
-                                .modifier(H2SemiBold())
+                        VStack(alignment: .leading, spacing: 12.0) {
+                        Text("전체소비 분석")
+                            .modifier(Cap1())
+                            
+                            VStack(alignment: .leading, spacing: 4.0) {
+                                Text("식비에서 200,000원을 사용하여")
+                                    .modifier(H2SemiBold())
+                                Text("돈을 가장 많이 썼어요")
+                                    .modifier(H2SemiBold())
+                            }
                         }
                         .padding(.vertical, 36.0)
                         
-                        ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], formatter: {value in String(format: "%.0f원", value)}, colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")])
+                        ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false)
                             .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
                         
                         // Top 3 List
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
-                            TopContentView(rank: 1, content: "치킨", money: 5000)
+                            TopContentView(rank: 1, content: "식비", money: 155000)
+                            TopContentView(rank: 2, content: "교통비", money: 100300)
+                            TopContentView(rank: 3, content: "카페", money: 75000)
                         }
                         .padding(.bottom, 28.0)
                         .padding(.top, 24)
@@ -159,7 +149,7 @@ struct AnalysisView: View {
                                 }
                                 .foregroundColor(Color("Gray1"))
                                 .modifier(Body2())
-                                .frame(maxWidth: .infinity, minHeight: 58, maxHeight: 58)
+                                .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
                     }

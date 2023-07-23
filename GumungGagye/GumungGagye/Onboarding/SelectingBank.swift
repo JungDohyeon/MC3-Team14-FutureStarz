@@ -13,6 +13,8 @@ struct SelectingBank: View {
     @State var selectBankCardPayIndex: Int = 0
     @State var isAbled: Bool = false
     @State private var isActive: Bool = false
+    let inputdata = InputUserData.shared
+    let bankCardPayData = BankCardPay.shared
     @Environment(\.presentationMode) var presentationMode
     let columns = [
         GridItem(.flexible()),
@@ -27,9 +29,32 @@ struct SelectingBank: View {
                 HStack {
                     CustomBackButton { presentationMode.wrappedValue.dismiss() }
                     Spacer()
-                    Text("건너뛰기")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
+                    //                    NavigationLink {
+                    //                        PreStart()
+                    //                    } label: {
+                    //                        Text("건너뛰기")
+                    //                            .modifier(Body2())
+                    //                            .foregroundColor(Color("Gray1"))
+                    //                    }
+                    
+                    Button(action: {
+                        inputdata.bankcardpay = 0
+                        inputdata.bankcardpay_index = 0
+                        inputdata.bankcardpay_info = bankCardPayData.card_info[0][0]!
+                        logic = true
+                        
+                    }, label: {
+                        Text("건너뛰기")
+                            .modifier(Body2())
+                            .foregroundColor(Color("Gray1"))
+                        
+                    })
+                    .navigationDestination(isPresented: $logic, destination: {
+                        // 목적지
+                        PreStart()
+                        
+                    })
+                    
                 }
                 .padding(.top, 66)
                 .padding(.bottom, 60)
@@ -52,9 +77,9 @@ struct SelectingBank: View {
                                 
                                 ForEach(1...9, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 1, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
-                                        
-                                        
+                                    
+                                    
+                                    
                                 }
                                 
                             }
@@ -69,7 +94,7 @@ struct SelectingBank: View {
                                 
                                 ForEach(1...3, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 2, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
+                                    
                                 }
                                 
                             }
@@ -83,7 +108,7 @@ struct SelectingBank: View {
                                 
                                 ForEach(1...8, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 3, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
+                                    
                                 }
                                 
                             }
@@ -97,28 +122,30 @@ struct SelectingBank: View {
                 
                 
                 Button(action: {
-                    
+                    inputdata.bankcardpay = selectBankCardPay
+                    inputdata.bankcardpay_index = selectBankCardPayIndex
+                    inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]!
                     logic = true
                     
                 }, label: {
                     OnboardingNextButton(isAbled: .constant(true), buttonText: "가입하기")
-                        
+                    
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
                     PreStart()
-                        
+                    
                 })
-//                .disabled(!isAbled)
+                //                .disabled(!isAbled)
                 .padding(.bottom, 59)
                 
                 
                 
                 
-//                NavigationLink(destination: SelectingBudget()) {
-//                    OnboardingNextButton(isAbled: $isAbled)
-//                }
-//                .padding(.bottom, 59)
+                //                NavigationLink(destination: SelectingBudget()) {
+                //                    OnboardingNextButton(isAbled: $isAbled)
+                //                }
+                //                .padding(.bottom, 59)
             }
             .ignoresSafeArea()
             .navigationBarBackButtonHidden(true)

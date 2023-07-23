@@ -45,6 +45,11 @@ final class UserManager {
     static let shared = UserManager()
     private init() { }
     
+    func InsertGroupId(groupId: String) async throws {
+        if let userss = Auth.auth().currentUser {
+            try await Firestore.firestore().collection("users").document(userss.uid).updateData(["group_id": groupId])
+        }
+    }
     
     func createNewUser() async throws {
         var userData: [String:Any] = [

@@ -81,7 +81,7 @@ struct SettingView: View {
                 
                 VStack(spacing: 0.0) {
                     SettingRowView2(label: "목표 지출 금액", value: "\(inputdata.goal ?? 0)원", budgetSetting: $budgetSetting, bankCardPaySetting: $bankCardPaySetting, selectSetting: 1)
-                    SettingRowView2(label: "내역 확인 앱", value: "\(inputdata.bankcardpay_info![0] ?? "선택안함")", budgetSetting: $budgetSetting, bankCardPaySetting: $bankCardPaySetting, selectSetting: 2)
+                    SettingRowView2(label: "내역 확인 앱", value: "\(inputdata.bankcardpay_info[0] ?? "선택안함")", budgetSetting: $budgetSetting, bankCardPaySetting: $bankCardPaySetting, selectSetting: 2)
                     SettingRowView(label: "푸시 알림", value: "toggle")
                 }
                 
