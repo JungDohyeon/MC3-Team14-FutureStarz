@@ -22,6 +22,20 @@ struct AddModalView: View {
     var bankApp: String = "토스"
     var bankAppScheme: String = "supertoss://"
     
+    @StateObject private var viewModel = AddModalViewModel()
+    
+    func clearData() {
+        text = ""
+        currentDate = Date()
+        number = ""
+        tappedExpenseCategory = ""
+        tappedIncomeCategory = ""
+        tappedDate = ""
+        isCheckedExpense = false
+        isCheckedShare = true
+        selectButton = .expense
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -123,6 +137,25 @@ struct AddModalView: View {
                 
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
                     print("plus")
+                    // Firestore에 데이터 저장
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                    let dateString = tappedDate
+                    
+                    if let date = dateFormatter.date(from: dateString) {
+                    let expenseData = ExpenseData(
+                        account_date: date,
+                        spend_bill: Int(Double(number) ?? 0.0),
+                        spend_category: tappedExpenseCategory,
+                        spend_content: text,
+                        spend_overConsume: isCheckedExpense,
+                        spend_open: isCheckedShare
+                            )
+                    viewModel.addExpenseData(expenseData: expenseData)
+                    clearData() // 데이터 초기화
+                    } else {
+                        // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
+                    }
                 }
                 .padding(.bottom, 71)
             }
@@ -147,6 +180,22 @@ struct AddModalView: View {
                     
                     Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
                         print("plus")
+                        // Firestore에 데이터 저장
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                        let dateString = tappedDate
+                        
+                        if let date = dateFormatter.date(from: dateString) {
+                            let incomeData = IncomeData(
+                                account_date: date,
+                                income_bill: Int(Double(number) ?? 0.0),
+                                income_category: tappedIncomeCategory,
+                                income_content: text
+                            )
+                            viewModel.addIncomeData(incomeData: incomeData)
+                        } else {
+                            // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
+                        }
                     }
                 }
                 .padding(.bottom, 71)
@@ -155,6 +204,10 @@ struct AddModalView: View {
         .padding(.top, 50)
         .padding(.horizontal, 20)
         .ignoresSafeArea()
+        .onDisappear {
+            // 뷰가 사라질 때 viewModel의 clearData 메서드를 호출하여 데이터 초기화
+            clearData()
+        }
     }
 }
 

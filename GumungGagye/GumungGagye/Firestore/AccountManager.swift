@@ -19,6 +19,7 @@ struct Account: Identifiable, Codable {
 
 struct Spend: Identifiable, Codable {
     @DocumentID var id: String?
+    var userID: DocumentReference
     var bill: Int
     var category: Int
     var content: String
@@ -28,6 +29,7 @@ struct Spend: Identifiable, Codable {
 
 struct Income: Identifiable, Codable {
     @DocumentID var id: String?
+    var userID: DocumentReference
     var bill: Int
     var category: Int
     var content: String
@@ -42,12 +44,29 @@ struct Post: Identifiable, Codable {
 final class AccountManager {
     private var db = Firestore.firestore()
 
-    func addAccount(account: Account) {
+    func addAccount(account: Account, spend: Spend? = nil, income: Income? = nil) {
         do {
             var newAccount = account
-            newAccount.userID = db.collection("user").document(account.userID.documentID)
+            newAccount.userID = db.collection("users").document(account.userID.documentID)
             let documentRef = try db.collection("account").addDocument(from: account)
             print("Account added with ID: \(documentRef.documentID)")
+            
+            // Spend 데이터가 제공되면 spend 컬렉션에 추가
+            if let spendData = spend {
+                var newSpend = spendData
+                newSpend.userID = account.userID
+                try db.collection("spend").addDocument(from: newSpend)
+                print("Spend added for Account with ID: \(documentRef.documentID)")
+            }
+                    
+            // Income 데이터가 제공되면 income 컬렉션에 추가
+            if let incomeData = income {
+                var newIncome = incomeData
+                newIncome.userID = account.userID
+                try db.collection("income").addDocument(from: newIncome)
+                print("Income added for Account with ID: \(documentRef.documentID)")
+            }
+            
         } catch {
             print("Error adding account: \(error)")
         }
@@ -77,8 +96,8 @@ final class AccountManager {
 
     func createPost(post: Post) {
         do {
-            var newPost = post 
-            newPost.userID = db.collection("user").document(post.userID.documentID)
+            var newPost = post
+            newPost.userID = db.collection("users").document(post.userID.documentID)
             let documentRef = try db.collection("post").addDocument(from: post)
             print("Post created with ID: \(documentRef.documentID)")
         } catch {
