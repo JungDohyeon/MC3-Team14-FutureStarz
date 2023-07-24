@@ -197,7 +197,7 @@ class FirebaseController: ObservableObject {
                 // Parse the Firestore data and create the GroupData instance
                 let id = document.documentID
                 let group_name = data["group_name"] as? String ?? ""
-                let group_introduce = data["group_introduce"] as? String ?? ""
+                let group_introduce = data["introduce"] as? String ?? ""
                 let group_goal = data["group_goal"] as? Int ?? 0
                 let group_cur = data["group_cur"] as? Int ?? 0
                 let group_max = data["group_max"] as? Int ?? 0

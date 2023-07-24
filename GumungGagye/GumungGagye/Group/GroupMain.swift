@@ -19,8 +19,9 @@ struct GroupMain: View {
             Color("background").ignoresSafeArea()
             
             // TODO: User가 가입된 그룹이 없다면 groupnotexistview 이동 아니면 groupviewinside
-            if let userGroupData = userGroupData {
+            if let userGroupData = userGroupData, user.group_id != "" {
                 GroupViewInside(groupData: userGroupData)
+                let _ = print("Main print user group: \(userGroupData.group_introduce)")
             } else {
                 GroupNotExistView()
             }

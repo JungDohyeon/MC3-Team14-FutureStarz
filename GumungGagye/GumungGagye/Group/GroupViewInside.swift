@@ -21,6 +21,7 @@ struct GroupViewInside: View {
             Color("background").ignoresSafeArea()
             ScrollView {
                 VStack(spacing: 0) {
+                    let _ = print("groupData: name: \(groupData.group_name), \(groupData.group_introduce)")
                     GroupTopInfo(groupData: groupData)
                     Divider()
                         .frame(height: 8)

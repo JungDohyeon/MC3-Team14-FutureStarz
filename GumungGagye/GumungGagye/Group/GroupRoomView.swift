@@ -51,7 +51,7 @@ struct GroupRoomView: View {
                         .modifier(Body2())
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color("Gray1"))
-                    
+                    let _ = print("groud intro: \(groupdata.group_introduce)")
                     Spacer()
                 }
                 .padding(.bottom, 16)
