@@ -87,7 +87,6 @@ struct GroupNotExistView: View {
         }
         .onAppear {
             firebaseManager.fetchAllGroupData()
-            firebaseManager.callUserData()      // test
         }
     }
     
