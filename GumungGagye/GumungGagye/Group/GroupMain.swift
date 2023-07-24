@@ -18,12 +18,12 @@ struct GroupMain: View {
         ZStack {
             Color("background").ignoresSafeArea()
             
-            // TODO: User가 가입된 그룹이 없다면 groupnotexistview 이동 아니면 groupviewinside
-            if let userGroupData = userGroupData, user.group_id != "" {
-                GroupViewInside(groupData: userGroupData)
-                let _ = print("Main print user group: \(userGroupData.group_introduce)")
-            } else {
+            if user.group_id == "" || user.group_id == nil {
                 GroupNotExistView()
+            } else {
+                if let userGroupData = userGroupData {
+                    GroupViewInside(groupData: userGroupData)
+                }
             }
             
         }

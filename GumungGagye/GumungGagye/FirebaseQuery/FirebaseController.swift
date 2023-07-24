@@ -21,27 +21,52 @@ class FirebaseController: ObservableObject {
     private init() { }
     
     // MARK: Add Group Room Data
-    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
+    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date, userID: String) {
         let db = Firestore.firestore()
         
-        db.collection("groupRoom").addDocument(
-            data: ["group_name" : group_name,
-                   "introduce": group_introduce,
-                   "group_goal": group_goal,
-                   "group_cur": group_cur,
-                   "group_max": group_max,
-                   "lock_status": lock_status,
-                   "group_pw": group_pw,
-                   "timeStamp": makeTime]
-        ) { error in
-            if error == nil {
-                // if no error
-                //                self.fetchData()
-            }
-            else {
+        var groupData: [String: Any] = [
+            "group_name": group_name,
+            "introduce": group_introduce,
+            "group_goal": group_goal,
+            "group_cur": group_cur,
+            "group_max": group_max,
+            "lock_status": lock_status,
+            "group_pw": group_pw,
+            "timeStamp": makeTime,
+            "userId_array": userID,
+            "group_id": ""
+        ]
+        
+        var newDocumentRef: DocumentReference? = nil
+        newDocumentRef = db.collection("groupRoom").addDocument(data: groupData) { error in
+            if let error = error {
                 // handle Error
+                print("Error adding document: \(error)")
+            } else {
+                // Document added successfully, and the auto-generated ID is stored in newDocumentRef.
+                let group_id = newDocumentRef?.documentID.description
+                
+                if let group_id = group_id {
+                    newDocumentRef?.updateData(["group_id" : String(group_id)])
+                    self.inputdata.group_id = group_id   // 그룹 생성한 유저의 정보 업데이트
+                    Task {
+                        do {
+                            try await self.updateGroupFirestore(groupId: group_id)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                                            
+                } else {
+                    print("error occur ")
+                }
+                
+                // Now you can use the group_id as needed.
+                // For example, if you want to update the document with this ID, you can do something like this:
+                // db.collection("groupRoom").document(group_id).updateData(["fieldToUpdate": newValue])
             }
         }
+        
     }
     
     
@@ -71,37 +96,37 @@ class FirebaseController: ObservableObject {
     }
     
     
-//    // MARK: fetch User Data Test
-//    func callUserData() {
-//        let db = Firestore.firestore()
-//
-//        db.collection("account").getDocuments { document, error in
-//            if error == nil {
-//                if let document = document {
-//                    self.accountList = document.documents.map { document in
-//                        let documentRef: DocumentReference = document["account_userID"] as! DocumentReference   // documentRef -> 해당 reference가 가리키는 위치 데이터.
-//                        /*
-//                         documentRef.documentID -> documentRef가 가리키는 문서의 ID 값. (user의 ID 값)
-//                         documentRef.path -> 가리키는 문서의 경로
-//
-//                         */
-//                        print("start Document: \(document.data())")
-//
-//                        documentRef.getDocument { userSnapshot, userError in
-//                            if let userSnapshot = userSnapshot, userSnapshot.exists {
-//                                if let userData = userSnapshot.data() {
-//                                    print("userData from Account Reference: \n \(userData)")
-//                                }
-//                            }
-//                        }
-//
-//
-//                        return AccountData(id: "", account_date: Date(), account_id: "", account_type: 0, account_userID: document["account_userID"] as! DocumentReference)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    // MARK: fetch User Data Test
+    //    func callUserData() {
+    //        let db = Firestore.firestore()
+    //
+    //        db.collection("account").getDocuments { document, error in
+    //            if error == nil {
+    //                if let document = document {
+    //                    self.accountList = document.documents.map { document in
+    //                        let documentRef: DocumentReference = document["account_userID"] as! DocumentReference   // documentRef -> 해당 reference가 가리키는 위치 데이터.
+    //                        /*
+    //                         documentRef.documentID -> documentRef가 가리키는 문서의 ID 값. (user의 ID 값)
+    //                         documentRef.path -> 가리키는 문서의 경로
+    //
+    //                         */
+    //                        print("start Document: \(document.data())")
+    //
+    //                        documentRef.getDocument { userSnapshot, userError in
+    //                            if let userSnapshot = userSnapshot, userSnapshot.exists {
+    //                                if let userData = userSnapshot.data() {
+    //                                    print("userData from Account Reference: \n \(userData)")
+    //                                }
+    //                            }
+    //                        }
+    //
+    //
+    //                        return AccountData(id: "", account_date: Date(), account_id: "", account_type: 0, account_userID: document["account_userID"] as! DocumentReference)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     // 현재 로그인 중인 유저 반환.
     //    static func fetchUserInfo(completion: @escaping (UserData?) -> Void) {
@@ -159,6 +184,7 @@ class FirebaseController: ObservableObject {
                             print("정원 초과")
                             return
                         } else {
+                            self.inputdata.group_id = groupID   
                             Task {
                                 do {
                                     try await self.updateGroupFirestore(groupId: groupID)

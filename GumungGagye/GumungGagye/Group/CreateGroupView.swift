@@ -163,8 +163,8 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: Int(input.groupGoalValue) ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
-                
+                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: Int(input.groupGoalValue) ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date(), userID: inputdata.user_id ?? "")
+            
                 createAlert = true
                 
                 // TODO: 생성한 그룹 ID를 현재 유저에 넣기.
