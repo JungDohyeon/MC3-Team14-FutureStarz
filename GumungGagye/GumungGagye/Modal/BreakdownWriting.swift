@@ -41,21 +41,23 @@ struct BreakdownWriting: View {
     @FocusState private var isFocused: Bool
     @FocusState private var focusedField: AccountField?
     
-    @Binding var selectedButton: SelectedButtonType
+//    @Binding var selectedButton: SelectedButtonType
     @Binding var text: String
     @Binding var currentDate: Date
     @Binding var tappedExpenseCategory: String
     @Binding var tappedIncomeCategory: String
     @Binding var tappedDate: String
     
+    @Binding var selectedType: Int
+    
     var item: WritingList
     var icon: ListIcon
     var placeholder: String
     
-    init(isDatePickerVisible: Bool, number: State<String>, selectedButton: Binding<SelectedButtonType>, text: Binding<String>, currentDate: Binding<Date>, tappedExpenseCategory: Binding<String>, tappedIncomeCategory: Binding<String>, tappedDate: Binding<String>, item: WritingList, icon: ListIcon, placeholder: String) {
+    init(isDatePickerVisible: Bool, number: State<String>, selectedType: Binding<Int>, text: Binding<String>, currentDate: Binding<Date>, tappedExpenseCategory: Binding<String>, tappedIncomeCategory: Binding<String>, tappedDate: Binding<String>, item: WritingList, icon: ListIcon, placeholder: String) {
         self._isDatePickerVisible = State(initialValue: isDatePickerVisible)
         self._number = number
-        self._selectedButton = selectedButton
+        self._selectedType = selectedType
         self._text = text
         self._currentDate = currentDate
         self._tappedExpenseCategory = tappedExpenseCategory
@@ -161,7 +163,7 @@ struct BreakdownWriting: View {
                         }
                     }
                     .sheet(isPresented: $isCategorySheetVisible) {
-                        if selectedButton == .expense {
+                        if selectedType == 0 {
                             ExpenseCategorySheet(tappedExpenseCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
                                 .presentationDetents([.medium])
                                 .onChange(of: selectedOption, perform: { newValue in
@@ -169,7 +171,7 @@ struct BreakdownWriting: View {
                                     isCategorySheetVisible = false
                                     DividerSelect = false
                                 })
-                        } else if selectedButton == .income {
+                        } else if selectedType == 1 {
                             IncomeCategorySheet(tappedIncomeCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
                                 .presentationDetents([.medium])
                                 .onChange(of: selectedOption, perform: { newValue in

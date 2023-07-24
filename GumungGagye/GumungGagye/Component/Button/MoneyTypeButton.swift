@@ -7,40 +7,48 @@
 
 import SwiftUI
 
-enum SelectedButtonType {
-    case expense
-    case income
+//enum SelectedButtonType {
+//    case expense
+//    case income
+//}
+
+enum SelectedButtonType: Int {
+    case expense = 0
+    case income = 1
 }
 
 struct MoneyTypeButton: View {
     var moneyType: String
-    var isSelected: Bool
+    @Binding var selectedType: Int
+    @State var accountType: Int
     var action: () -> Void
-    init(moneyType: String, isSelected: Bool, action: @escaping () -> Void) {
-        self.moneyType = moneyType
-        self.isSelected = isSelected
-        self.action = action
-    }
+    
+//    init(moneyType: String, action: @escaping () -> Void) {
+//        self.moneyType = moneyType
+//
+//        self.action = action
+//    }
     
     var body: some View {
         Button {
             action()
+            print(selectedType)
         } label: {
             Text(moneyType)
-                .foregroundColor(isSelected ? Color.white : Color("Gray3"))
+                .foregroundColor((selectedType == accountType) ? Color.white : Color("Gray3"))
                 .modifier(Body1Bold())
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
         }
-        .background(isSelected ? Color("Main") : Color("Gray4"))
+        .background((selectedType == accountType) ? Color("Main") : Color("Gray4"))
         .cornerRadius(5)
     }
 }
 
-struct MoneyTypeButton_Previews: PreviewProvider {
-    static var previews: some View {
-        MoneyTypeButton(moneyType: "지출", isSelected: true) {
-            print("지출")
-        }
-    }
-}
+//struct MoneyTypeButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MoneyTypeButton(moneyType: "지출", selectedType: 0) {
+//            print("지출")
+//        }
+//    }
+//}
