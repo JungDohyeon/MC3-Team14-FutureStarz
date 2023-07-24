@@ -28,7 +28,6 @@
 		5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3380DD2A699950003931B9 /* SelectingUserImage.swift */; };
 		5E6C5B892A67CBE100DE6C6F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */; };
 		5E6C5B8C2A67CD5200DE6C6F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */; };
-		5E6C5B902A67CDBD00DE6C6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */; };
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
 		5E6C5B942A680D0D00DE6C6F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */; };
 		5EE6A9DC2A6B86C400480855 /* BankCardPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */; };
@@ -80,6 +79,7 @@
 		CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */; };
 		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
 		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
+		CD5A26D52A6BB9EC0066549A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5A26D42A6BB9EC0066549A /* GoogleService-Info.plist */; };
 		CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */; };
 		CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874D2A66E78700DE5AE4 /* AccountData.swift */; };
 		CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874F2A66E7A500DE5AE4 /* UserData.swift */; };
@@ -115,7 +115,6 @@
 		5E3380DD2A699950003931B9 /* SelectingUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingUserImage.swift; sourceTree = "<group>"; };
 		5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
 		5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPay.swift; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
 		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
 		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
+		CD5A26D42A6BB9EC0066549A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CDB4874D2A66E78700DE5AE4 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -384,7 +384,6 @@
 			children = (
 				CDCB8C432A53A02F005DF128 /* GumungGagye */,
 				CDCB8C422A53A02F005DF128 /* Products */,
-				5E6C5B8F2A67CDBD00DE6C6F /* GoogleService-Info.plist */,
 				CD27E2FE2A5AA6FD00F15A50 /* Frameworks */,
 				CDCBE37E2A5B9F4600DB33C8 /* Recovered References */,
 			);
@@ -401,6 +400,8 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+				CD5A26D42A6BB9EC0066549A /* GoogleService-Info.plist */,
+				5E25D6402A6A2AE200FBA29F /* Data */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5E6C5B8A2A67CD4200DE6C6F /* Firestore */,
@@ -539,12 +540,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E6C5B902A67CDBD00DE6C6F /* GoogleService-Info.plist in Resources */,
 				CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */,
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
 				CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */,
 				CD27E2EC2A59AFAB00F15A50 /* Pretendard-Bold.otf in Resources */,
+				CD5A26D52A6BB9EC0066549A /* GoogleService-Info.plist in Resources */,
 				CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */,
 				CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */,
 				CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */,
@@ -797,7 +798,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-				DEVELOPMENT_TEAM = C3U3CZ666D;
+				DEVELOPMENT_TEAM = N8RU5UJH68;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;

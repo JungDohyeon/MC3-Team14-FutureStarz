@@ -49,6 +49,8 @@ final class UserManager {
         if let userss = Auth.auth().currentUser {
             try await Firestore.firestore().collection("users").document(userss.uid).updateData(["group_id": groupId])
         }
+        
+       inputdata.group_id = groupId
     }
     
     func createNewUser() async throws {
