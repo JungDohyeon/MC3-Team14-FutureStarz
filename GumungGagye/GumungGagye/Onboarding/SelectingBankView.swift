@@ -14,12 +14,15 @@ import FirebaseStorage
 
 struct SelectingBankView: View {
     
-    @StateObject var inputdata = InputUserData.shared
+//    @StateObject var inputdata = InputUserData.shared
     @State var logic: Bool = false
     @State var selectBankCardPay: Int
     @State var selectBankCardPayIndex: Int
+    
     @State var isAbled: Bool = false
     @Binding var bankCardPaySetting: Bool
+    let inputdata = InputUserData.shared
+    let bankCardPayData = BankCardPay.shared
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -95,6 +98,9 @@ struct SelectingBankView: View {
                 
                 Button(action: {
                     Task{
+                        inputdata.bankcardpay = selectBankCardPay
+                        inputdata.bankcardpay_index = selectBankCardPayIndex
+                        inputdata.bankcardpay_info = bankCardPayData.card_info[selectBankCardPay][selectBankCardPayIndex]!
                         if let userss = Auth.auth().currentUser {
                             try await Firestore.firestore().collection("users").document(userss.uid).updateData(["bankcardpay": inputdata.bankcardpay, "bankcardpay_index": inputdata.bankcardpay_index, "bankcardpay_info": inputdata.bankcardpay_info])
                         }
@@ -106,7 +112,7 @@ struct SelectingBankView: View {
                     OnboardingNextButton(isAbled: .constant(true), buttonText: "저장하기")
                         
                 })
-                .padding(.bottom, 59)
+                .padding(.bottom, 25)
                 
                 
                 

@@ -14,13 +14,14 @@ enum GroupOption: String, CaseIterable {
 }
 
 struct GroupViewInside: View {
+    var groupData: GroupData
     
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
             ScrollView {
                 VStack(spacing: 0) {
-                    GroupTopInfo()
+                    GroupTopInfo(groupData: groupData)
                     Divider()
                         .frame(height: 8)
                         .overlay(Color("Gray4"))
@@ -75,6 +76,10 @@ struct GroupTopInfo: View {
     @State private var selectedOption: GroupOption?
     @State private var isLeaveAlertPresented: Bool = false
     @State private var isShowModal: Bool = false
+    var groupData: GroupData
+    
+    @StateObject var userData = InputUserData.shared
+    @ObservedObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
         ZStack {
@@ -109,7 +114,7 @@ struct GroupTopInfo: View {
                 .padding(.top, 24)
                 .padding(.bottom, 32)
                 
-                GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
+                GroupRoomView(groupdata: groupData, isNotExist: false)
                 
                 
                 Spacer()
@@ -142,7 +147,7 @@ struct GroupTopInfo: View {
             message: Text("정말 그룹을 탈퇴하시겠습니까?"),
             primaryButton: .cancel(Text("취소")),
             secondaryButton: .destructive(Text("탈퇴하기")) {
-                // Handle leave group action here
+                firebaseManager.decrementGroupCur(groupID: userData.group_id!)
             }
         )
     }
@@ -276,9 +281,3 @@ struct ShareViewController: UIViewControllerRepresentable {
     }
 }
 
-
-struct GroupViewInside_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupViewInside()
-    }
-}

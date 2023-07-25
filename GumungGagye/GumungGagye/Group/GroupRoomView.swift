@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct GroupRoomView: View {
+    @StateObject var userData = InputUserData.shared
+    @ObservedObject private var firebaseManager = FirebaseController.shared
+    
     let groupdata: GroupData
     let isNotExist: Bool
+    
+    @State private var showHasGroupAlert = false
+    @State private var showSubmitGroupAlert = false
+    @State private var userGroupStatus: AlertType = .otherCase
+    
+    func updateGroupFirestore(groupId: String) async throws {
+        try await UserManager.shared.InsertGroupId(groupId: groupId)
+    }
     
     var body: some View {
         ZStack {
@@ -47,19 +58,20 @@ struct GroupRoomView: View {
                 
                 // MARK: 그룹 목표 금액, 최대 인원
                 
-                HStack(spacing: 23) {
+                HStack {
                     HStack(spacing: 6) {
                         Image(systemName: "wonsign.circle.fill")
                             .font(.system(size: 16))
                             .foregroundColor(Color("Gray2"))
                         
                         HStack(spacing: 0) {
-                            Text(groupdata.group_goal.description)
+                            Text("\(groupdata.group_goal)")
                             Text("원")
                         }
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     }
+                    .padding(.trailing, 20)
                     
                     HStack(spacing: 0) {
                         Image(systemName: "person.fill")
@@ -76,31 +88,65 @@ struct GroupRoomView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     }
-                    .padding(.trailing, 20)
                     
                     Spacer()
                     
                     // MARK: 가입 버튼
-                    // 가입된 그룹이 없을 경우 가입 버튼 생성
+                    // 가입된 그룹이 없을 경우 가입 버튼 생성 (그룹 정보 보여주기 뷰 때문)
                     if isNotExist {
-                        NavigationLink {
-                            GroupViewInside()
+                        Button {
+                            showSubmitGroupAlert = true
+                            
+                            if userData.group_id != "" {
+                                userGroupStatus = .alreadyJoined
+                            }
+                            
                         } label: {
                             MainColorBtn(inputText: "가입하기")
                         }
                     }
                 }
+                .alert(isPresented: $showSubmitGroupAlert) {
+                    hasGroupAlert(type: userGroupStatus)
+                }
                 
                 if isNotExist {
+                    Spacer()
+                    
                     Divider()
                         .background(Color("Gray3"))
                 }
             }
         }
-        .padding()
-        .frame(width: .infinity, height: 117)
-        .border(.red)
+        .frame(height: 117)
     }
+    
+    private func hasGroupAlert(type: AlertType) -> Alert {
+        switch type {
+        case .alreadyJoined:
+            return Alert(
+                title: Text("이미 그룹에 가입되어 있어요"),
+                message: Text("현재 가입된 그룹을 나간 후에 새로운 그룹을 가입할 수 있어요."),
+                dismissButton: .cancel(Text("확인"))
+            )
+        case .otherCase:
+            return Alert(
+                title: Text("그룹에 가입할까요?"),
+                message: Text("가입하면 기록한 지출 내역이 그룹 멤버와 공유돼요."),
+                primaryButton: .cancel(Text("취소")),
+                secondaryButton: .default(Text("가입")) {
+                    print("User: \(userData.nickname) Joined \(groupdata.group_name)")
+                    firebaseManager.incrementGroupCur(groupID: groupdata.id)
+                }
+            )
+        }
+    }
+}
+
+// 가입하기 눌렀을 때 알림 종류 판별
+enum AlertType {
+    case alreadyJoined
+    case otherCase
 }
 
 
@@ -109,14 +155,14 @@ struct MainColorBtn: View {
     
     var body: some View {
         Text(inputText)
-            .modifier(BtnBold())
+            .modifier(Body2Bold())
             .foregroundColor(Color("Main"))
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(
                 Rectangle()
                     .foregroundColor(Color("Light"))
-                    .cornerRadius(5)
+                    .cornerRadius(12)
             )
     }
 }

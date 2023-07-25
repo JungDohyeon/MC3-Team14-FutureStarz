@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SelectingBudget: View {
     @State var logic: Bool = false
+    @ObservedObject var input = NumbersOnlyInput()
     @ObservedObject private var keyboardResponder = KeyboardResponder()
     @State var budget: String = ""
     @State var isAbled: Bool = false
@@ -21,9 +22,7 @@ struct SelectingBudget: View {
                 HStack {
                     CustomBackButton { presentationMode.wrappedValue.dismiss() }
                     Spacer()
-                    Text("건너뛰기")
-                        .modifier(Body2())
-                        .foregroundColor(Color("Gray1"))
+                    
                 }
                 .padding(.top, 66)
                 .padding(.bottom, 60)
@@ -37,17 +36,21 @@ struct SelectingBudget: View {
                 
                 
                 HStack {
-                    TextField(text: $budget) {
+                    TextField(text: $input.groupGoalValue) {
                         Text("금액을 입력해주세요")
-                    }.onChange(of: budget) { newValue in
+                    }.onChange(of: input.groupGoalValue) { newValue in
                         isAbled = !newValue.isEmpty
 //                        print(keyboardResponder.currentHeight)
+                        input.groupGoalValue = String(newValue.prefix(9))
                     }
                     //키보드 숫자로!!!
                     .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color("Gray1"))
                     .modifier(H2SemiBold())
                     .padding(.bottom, 14)
+                    .padding(.leading, 8)
+                    
                     if isAbled {
                         Text("원")
                             .modifier(H2SemiBold())
@@ -63,7 +66,7 @@ struct SelectingBudget: View {
                 
                 Button(action: {
                     logic = true
-                    inputdata.goal = Int(budget)
+                    inputdata.goal = Int(input.groupGoalValue)
                     
                 }, label: {
                     OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")

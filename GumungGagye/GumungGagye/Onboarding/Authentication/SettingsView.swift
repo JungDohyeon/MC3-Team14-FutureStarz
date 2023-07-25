@@ -16,7 +16,7 @@ final class SettingsViewModel: ObservableObject {
     @State private var viewModel = AuthenticationViewModel()
     @Published var authProviders: [AuthProviderOption] = []
     @Published var authUser: AuthDataResultModel? = nil
-    
+    let inputdata = InputUserData.shared
     func loadAuthProviders() {
         if let providers = try? AuthenticationManager.shared.getProviders() {
             authProviders = providers
@@ -34,24 +34,39 @@ final class SettingsViewModel: ObservableObject {
     func deleteAccount() async throws {
         try await viewModel.signInApple()
         
-        let storageRef = FirebaseManager.shared.storage.reference(forURL: InputUserData.shared.profile_image_url!)
+        if let image_url = InputUserData.shared.profile_image_url {
+            let storageRef = FirebaseManager.shared.storage.reference(forURL: image_url)
             
-        print("이미지 삭제.ref. : \(storageRef)")
-            
-            storageRef.delete { error in
-                if let error = error {
-                    print("Error deleting image: \(error)")
-                } else {
-                    print("Image deleted successfully.")
+            print("이미지 삭제.ref. : \(storageRef)")
+                
+                storageRef.delete { error in
+                    if let error = error {
+                        print("Error deleting image: \(error)")
+                    } else {
+                        print("Image deleted successfully.")
+                    }
                 }
-            }
+        }
+        
+//        let storageRef = FirebaseManager.shared.storage.reference(forURL: InputUserData.shared.profile_image_url!)
+//
+//        print("이미지 삭제.ref. : \(storageRef)")
+//
+//            storageRef.delete { error in
+//                if let error = error {
+//                    print("Error deleting image: \(error)")
+//                } else {
+//                    print("Image deleted successfully.")
+//                }
+//            }
         
         if let userss = Auth.auth().currentUser {
             try await Firestore.firestore().collection("users").document(userss.uid).delete()
         }
         
         
-         
+        inputdata.profile_image = nil
+        inputdata.profile_image_url = nil
            
         
         

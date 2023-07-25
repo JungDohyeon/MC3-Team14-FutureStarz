@@ -35,6 +35,7 @@ class NumbersOnlyInput: ObservableObject {
 struct CreateGroupView: View {
     @ObservedObject var input = NumbersOnlyInput()
     @ObservedObject private var firebaseManager = FirebaseController.shared
+    @StateObject var inputdata = InputUserData.shared
     @Environment(\.dismiss) var dismiss
     
     @State private var inputCodeArray: [String] = Array(repeating: "", count: 4)
@@ -43,7 +44,6 @@ struct CreateGroupView: View {
     // group data
     @State private var groupName: String = ""
     @State private var groupCaption: String = ""
-    @State private var groupGoal: Int? = nil
     @State private var groupMax: String = ""
     @State private var isSecretRoom: Bool = false
     @State private var groupCode: String = ""
@@ -54,6 +54,7 @@ struct CreateGroupView: View {
     @State private var groupMaxValidate: Bool = false
     @State private var groupGoalValidate: Bool = false
     @State private var isMaxNumPickerPresented: Bool = false
+    @State private var createAlert: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -162,8 +163,12 @@ struct CreateGroupView: View {
             Button {
                 groupCode = inputCodeArray.joined()
                 let _ = print(isSecretRoom)
-                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: groupGoal ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
-                dismiss()
+                firebaseManager.addGroupData(group_name: groupName, group_introduce: groupCaption, group_goal: Int(input.groupGoalValue) ?? 0, group_cur: 1, group_max: Int(groupMax) ?? 0, lock_status: isSecretRoom, group_pw: groupCode, makeTime: Date())
+                
+                createAlert = true
+                
+                // TODO: 생성한 그룹 ID를 현재 유저에 넣기.
+                
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
                                             groupMaxValidate && groupGoalValidate && checkBtnStatus()))
@@ -179,6 +184,15 @@ struct CreateGroupView: View {
         }
         .onAppear {
             focusedField = .groupName
+        }
+        .alert(isPresented: $createAlert) {
+            Alert(
+                title: Text("그룹이 생성되었어요"),
+                message: Text("그룹 초대하기를 통해 친구를 초대할 수 있어요."),
+                dismissButton: .cancel(Text("확인")) {
+                    dismiss()
+                }
+            )
         }
     }
     
