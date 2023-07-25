@@ -172,7 +172,7 @@ struct BreakdownWriting: View {
                                     DividerSelect = false
                                 })
                         } else if selectedType == 1 {
-                            IncomeCategorySheet(tappedIncomeCategory: $tappedExpenseCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
+                            IncomeCategorySheet(tappedIncomeCategory: $tappedIncomeCategory, isCategorySheetVisible: $isCategorySheetVisible, DividerSelect: $DividerSelect)
                                 .presentationDetents([.medium])
                                 .onChange(of: selectedOption, perform: { newValue in
                                     self.tappedIncomeCategory = newValue

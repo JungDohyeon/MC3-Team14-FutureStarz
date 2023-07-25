@@ -25,8 +25,8 @@ struct AddModalView: View {
     var bankApp: String = "토스"
     var bankAppScheme: String = "supertoss://"
     
-    @StateObject private var viewModel = AddModalViewModel()
-    private var accountManager = AccountManager()
+//    @StateObject private var viewModel = AddModalViewModel()
+//    private var accountManager = AccountManager()
     var accountManager2 = AccountManager2.shared
     
     func clearData() {
@@ -143,7 +143,7 @@ struct AddModalView: View {
                 Spacer()
                 
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
-                    let spendData = SpendData(account_type: selectedType, spend_bill: number, spend_category: tappedExpenseCategory, spend_content: text, spend_open: isCheckedShare, spend_overConsume: isCheckedExpense, account_date: currentDate)
+                    let spendData = SpendData(account_type: selectedType, account_date: currentDate, spend_bill: number, spend_category: tappedExpenseCategory, spend_content: text, spend_open: isCheckedShare, spend_overConsume: isCheckedExpense)
                     Task {
                         do {
                             try await accountManager2.createNewSpendAccount(spendData: spendData)
@@ -212,10 +212,20 @@ struct AddModalView: View {
                         .padding(.bottom, 12)
                     
                     Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
+                        let incomeDate = IncomeData(account_type: selectedType, account_date: currentDate, income_bill: number, income_category: tappedIncomeCategory, income_content: text)
+                        
+                        Task {
+                            do {
+                                try await accountManager2.createNewIncomeAccount(incomeData: incomeDate)
+                            } catch {
+                                print("Error")
+                            }
+                        }
+                        
                         print("plus")
                         print(text)
                         print(number)
-                        print(tappedDate)
+                        print(currentDate)
                         print(tappedIncomeCategory)
                         print(selectedType)
                         // Firestore에 데이터 저장
