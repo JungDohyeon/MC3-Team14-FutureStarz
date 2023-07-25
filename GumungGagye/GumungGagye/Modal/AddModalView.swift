@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct AddModalView: View {
     @State var text: String = ""
     @State var currentDate: Date = Date()
     @State var number: String = ""
-    @State var selectButton: SelectedButtonType = .expense
+    //    @State var selectButton: SelectedButtonType = .expense
+    @State var selectedType: Int = 0 // default: 지출
     @State var tappedExpenseCategory: String = ""
     @State var tappedIncomeCategory: String = ""
     @State var tappedDate: String = ""
@@ -21,6 +24,23 @@ struct AddModalView: View {
     
     var bankApp: String = "토스"
     var bankAppScheme: String = "supertoss://"
+    
+    @StateObject private var viewModel = AddModalViewModel()
+    private var accountManager = AccountManager()
+    
+    
+    func clearData() {
+        text = ""
+        currentDate = Date()
+        number = ""
+        tappedExpenseCategory = ""
+        tappedIncomeCategory = ""
+        tappedDate = ""
+        isCheckedExpense = false
+        isCheckedShare = true
+        //        isSelectButton = false
+        selectedType = 0
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -51,12 +71,13 @@ struct AddModalView: View {
                         .frame(width: 52, alignment: .leading)
                     
                     HStack(spacing: 12) {
-                        MoneyTypeButton(moneyType: "지출", isSelected: selectButton == .expense) {
-                            selectButton = .expense
+                        MoneyTypeButton(moneyType: "지출", selectedType: $selectedType, accountType: 0) {
+                            selectedType = 0
                         }
                         
-                        MoneyTypeButton(moneyType: "수입", isSelected: selectButton == .income) {
-                            selectButton = .income
+                        
+                        MoneyTypeButton(moneyType: "수입", selectedType: $selectedType, accountType: 1) {
+                            selectedType = 1
                         }
                     }
                 }
@@ -70,18 +91,18 @@ struct AddModalView: View {
             }
             
             // MARK: - 지출일 경우
-            if selectButton == .expense {
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
-//                    .focused($focusedField, equals: .fixDate)
+            if selectedType == 0 {
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+                //                    .focused($focusedField, equals: .fixDate)
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
-//                    .focused($focusedField, equals: .addPayment)
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
+                //                    .focused($focusedField, equals: .addPayment)
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
-//                    .focused($focusedField, equals: .addCategory)
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
+                //                    .focused($focusedField, equals: .addCategory)
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
-//                    .focused($focusedField, equals: .addContent)
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate,  item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
+                //                    .focused($focusedField, equals: .addContent)
                 
                 VStack(spacing: 24) {
                     
@@ -123,18 +144,45 @@ struct AddModalView: View {
                 
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
                     print("plus")
+                    print(text)
+                    print(number)
+                    print(tappedDate)
+                    print(tappedExpenseCategory)
+                    print(isCheckedShare)
+                    print(isCheckedExpense)
+                    print(selectedType)
+                    // Firestore에 데이터 저장
+                    //                    let dateFormatter = DateFormatter()
+                    //                    dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                    //                    let dateString = tappedDate
+                    //
+                    //                    if let date = dateFormatter.date(from: dateString) {
+                    //                    let expenseData = ExpenseData(
+                    //                        userID: accountManager.db.collection("users").document("YOUR_USER_ID"),
+                    //                        account_date: date,
+                    //                        spend_bill: Int(Double(number) ?? 0.0),
+                    //                        spend_category: tappedExpenseCategory,
+                    //                        spend_content: text,
+                    //                        spend_overConsume: isCheckedExpense,
+                    //                        spend_open: isCheckedShare
+                    //                            )
+                    //                    accountManager.addExpenseData(expenseData: expenseData)
+                    //                    clearData() // 데이터 초기화
+                    //                    } else {
+                    //                        // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
+                    //                    }
                 }
                 .padding(.bottom, 71)
             }
             // MARK: - 수입일 경우
-            else if selectButton == .income {
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
+            else if selectedType == 1 {
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .date, icon: .chevronRight, placeholder: "날짜를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .money, icon: .pencil, placeholder: "금액을 입력하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .category, icon: .chevronRight, placeholder: "카테고리를 선택하세요")
                 
-                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedButton: $selectButton, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
+                BreakdownWriting(isDatePickerVisible: false, number: _number, selectedType: $selectedType, text: $text, currentDate: $currentDate, tappedExpenseCategory: $tappedExpenseCategory, tappedIncomeCategory: $tappedIncomeCategory, tappedDate: $tappedDate, item: .content, icon: .pencil, placeholder: "내용을 남겨주세요")
                 
                 Spacer()
                 
@@ -147,16 +195,44 @@ struct AddModalView: View {
                     
                     Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
                         print("plus")
+                        print(text)
+                        print(number)
+                        print(tappedDate)
+                        print(tappedIncomeCategory)
+                        print(selectedType)
+                        // Firestore에 데이터 저장
+                        //                        let dateFormatter = DateFormatter()
+                        //                        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+                        //                        let dateString = tappedDate
+                        //
+                        //                        if let date = dateFormatter.date(from: dateString) {
+                        //                            let incomeData = IncomeData(
+                        //                                userID: accountManager.db.collection("users").document("YOUR_USER_ID"),
+                        //                                account_date: date,
+                        //                                income_bill: Int(Double(number) ?? 0.0),
+                        //                                income_category: tappedIncomeCategory,
+                        //                                income_content: text
+                        //                            )
+                        //                        accountManager.addIncomeData(incomeData: incomeData)
+                        //                        } else {
+                        //                            // 날짜 변환에 실패한 경우, 필요에 따라 오류를 처리
+                        //                        }
+                        //                    }
                     }
+                    .padding(.bottom, 71)
                 }
-                .padding(.bottom, 71)
+                .padding(.top, 50)
+                .padding(.horizontal, 20)
+                .ignoresSafeArea()
+                .onDisappear {
+                    // 뷰가 사라질 때 viewModel의 clearData 메서드를 호출하여 데이터 초기화
+                    clearData()
+                }
             }
         }
-        .padding(.top, 50)
-        .padding(.horizontal, 20)
-        .ignoresSafeArea()
     }
 }
+
 
 struct AddModalView_Previews: PreviewProvider {
     static var previews: some View {

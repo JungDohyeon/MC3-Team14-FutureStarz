@@ -46,6 +46,11 @@
 		5EEFED102A616DCE00AF4A5F /* SelectingName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED0F2A616DCE00AF4A5F /* SelectingName.swift */; };
 		5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */; };
 		5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */; };
+		990744952A6CF1EB00A246B5 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744942A6CF1EB00A246B5 /* AccountManager.swift */; };
+		990744972A6CF6AD00A246B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 990744962A6CF6AD00A246B5 /* GoogleService-Info.plist */; };
+		990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744982A6D026B00A246B5 /* AddModalViewModel.swift */; };
+		9907449C2A6D038F00A246B5 /* ExpenseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449B2A6D038F00A246B5 /* ExpenseData.swift */; };
+		9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449D2A6D039B00A246B5 /* IncomeData.swift */; };
 		99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */; };
 		99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7382A5F78B10090A05A /* MainBudgetView.swift */; };
 		99F7D73D2A5F78B10090A05A /* TargetBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */; };
@@ -132,6 +137,11 @@
 		5EEFED0F2A616DCE00AF4A5F /* SelectingName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingName.swift; sourceTree = "<group>"; };
 		5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBudget.swift; sourceTree = "<group>"; };
 		5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
+		990744942A6CF1EB00A246B5 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		990744962A6CF6AD00A246B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		990744982A6D026B00A246B5 /* AddModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModalViewModel.swift; sourceTree = "<group>"; };
+		9907449B2A6D038F00A246B5 /* ExpenseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseData.swift; sourceTree = "<group>"; };
+		9907449D2A6D039B00A246B5 /* IncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeData.swift; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
 		99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetBudgetView.swift; sourceTree = "<group>"; };
@@ -244,8 +254,10 @@
 		5E6C5B8A2A67CD4200DE6C6F /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
+				990744982A6D026B00A246B5 /* AddModalViewModel.swift */,
+				9907449A2A6D035100A246B5 /* Model */,
 				5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */,
-				5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */,
+				990744942A6CF1EB00A246B5 /* AccountManager.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -292,6 +304,16 @@
 				5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9907449A2A6D035100A246B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */,
+				9907449B2A6D038F00A246B5 /* ExpenseData.swift */,
+				9907449D2A6D039B00A246B5 /* IncomeData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		99F7D7122A5BE8770090A05A /* Budget */ = {
@@ -400,8 +422,12 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
+
+				990744962A6CF6AD00A246B5 /* GoogleService-Info.plist */,
+
 				CD5A26D42A6BB9EC0066549A /* GoogleService-Info.plist */,
 				5E25D6402A6A2AE200FBA29F /* Data */,
+
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5E6C5B8A2A67CD4200DE6C6F /* Firestore */,
@@ -540,6 +566,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+				990744972A6CF6AD00A246B5 /* GoogleService-Info.plist in Resources */,
+
+
 				CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */,
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
@@ -568,6 +598,7 @@
 				5E6C5B8C2A67CD5200DE6C6F /* UserManager.swift in Sources */,
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
 				99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */,
+				9907449C2A6D038F00A246B5 /* ExpenseData.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				D2C828312A5E37EA0003C0D6 /* NextButton.swift in Sources */,
@@ -580,6 +611,7 @@
 				5EE6A9DE2A6B965300480855 /* SelectingBudgetView.swift in Sources */,
 				5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */,
 				5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */,
+				9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */,
 				5EEFECFF2A6168F300AF4A5F /* SettingsView.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */,
@@ -623,9 +655,11 @@
 				99F7D7482A5F80200090A05A /* CategoryIcon.swift in Sources */,
 				5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */,
 				0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */,
+				990744952A6CF1EB00A246B5 /* AccountManager.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				0A2828F52A5E3BC500A9D5D9 /* SettingView.swift in Sources */,
 				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
+				990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */,
 				D2C828232A5E366D0003C0D6 /* AddModalView.swift in Sources */,
 				0A2828E72A5D686F00A9D5D9 /* OverpurchasingView.swift in Sources */,
 				5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */,
