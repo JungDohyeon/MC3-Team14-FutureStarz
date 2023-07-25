@@ -31,7 +31,6 @@
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
 		5E6C5B942A680D0D00DE6C6F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */; };
 		5E6C93152A6F6C6D00614BDF /* AccountManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */; };
-		5EB519B02A6F5FA30074393E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */; };
 		5EE6A9DC2A6B86C400480855 /* BankCardPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */; };
 		5EE6A9DE2A6B965300480855 /* SelectingBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */; };
 		5EE6A9E02A6BA72800480855 /* SelectingBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */; };
@@ -52,6 +51,7 @@
 		990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744982A6D026B00A246B5 /* AddModalViewModel.swift */; };
 		9907449C2A6D038F00A246B5 /* ExpenseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449B2A6D038F00A246B5 /* ExpenseData.swift */; };
 		9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449D2A6D039B00A246B5 /* IncomeData.swift */; };
+		990744A22A6F717C00A246B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 990744A12A6F717C00A246B5 /* GoogleService-Info.plist */; };
 		99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */; };
 		99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7382A5F78B10090A05A /* MainBudgetView.swift */; };
 		99F7D73D2A5F78B10090A05A /* TargetBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */; };
@@ -123,7 +123,6 @@
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
 		5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager2.swift; sourceTree = "<group>"; };
-		5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPay.swift; sourceTree = "<group>"; };
 		5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBudgetView.swift; sourceTree = "<group>"; };
 		5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBankView.swift; sourceTree = "<group>"; };
@@ -143,6 +142,7 @@
 		990744982A6D026B00A246B5 /* AddModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModalViewModel.swift; sourceTree = "<group>"; };
 		9907449B2A6D038F00A246B5 /* ExpenseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseData.swift; sourceTree = "<group>"; };
 		9907449D2A6D039B00A246B5 /* IncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeData.swift; sourceTree = "<group>"; };
+		990744A12A6F717C00A246B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
 		99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetBudgetView.swift; sourceTree = "<group>"; };
@@ -423,7 +423,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
-				5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */,
+				990744A12A6F717C00A246B5 /* GoogleService-Info.plist */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5E6C5B8A2A67CD4200DE6C6F /* Firestore */,
@@ -567,7 +567,7 @@
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
 				CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */,
 				CD27E2EC2A59AFAB00F15A50 /* Pretendard-Bold.otf in Resources */,
-				5EB519B02A6F5FA30074393E /* GoogleService-Info.plist in Resources */,
+				990744A22A6F717C00A246B5 /* GoogleService-Info.plist in Resources */,
 				CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */,
 				CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */,
 				CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */,
