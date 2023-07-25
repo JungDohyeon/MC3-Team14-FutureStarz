@@ -10,7 +10,7 @@ import SwiftUI
 // Group Main View
 struct GroupMain: View {
     @StateObject var user = InputUserData.shared
-    @ObservedObject private var firebaseManager = FirebaseController.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
     @State private var userGroupData: GroupData?
     
     var body: some View {
@@ -18,11 +18,12 @@ struct GroupMain: View {
         ZStack {
             Color("background").ignoresSafeArea()
             
-            // TODO: User가 가입된 그룹이 없다면 groupnotexistview 이동 아니면 groupviewinside
-            if let userGroupData = userGroupData {
-                GroupViewInside(groupData: userGroupData)
-            } else {
+            if user.group_id == "" || user.group_id == nil {
                 GroupNotExistView()
+            } else {
+                if let userGroupData = userGroupData {
+                    GroupViewInside(groupData: userGroupData)
+                }
             }
             
         }
