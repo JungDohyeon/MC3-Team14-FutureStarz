@@ -307,4 +307,30 @@ class FirebaseController: ObservableObject {
             }
         }
     }
+    
+    func fetchDataGroupUser(groupID: String, completion: @escaping ([String]?) -> Void) {
+        let db = Firestore.firestore()
+        let documentRef = db.collection("groupRoom").document(groupID)
+        
+        documentRef.addSnapshotListener { (documentSnapshot, error) in
+            guard let document = documentSnapshot else {
+                print("error occur")
+                completion(nil)
+                return
+            }
+            
+            if document.exists {
+                if let data = document.data(),
+                   let arrayData = data["userId_array"] as? [String] {
+                    completion(arrayData)
+                } else {
+                    completion(nil)
+                }
+            } else {
+                print("Document does not exist")
+                completion(nil)
+            }
+        }
+    }
+    
 }

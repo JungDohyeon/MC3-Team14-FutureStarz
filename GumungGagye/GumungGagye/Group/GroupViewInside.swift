@@ -149,7 +149,7 @@ struct GroupTopInfo: View {
             primaryButton: .cancel(Text("취소")),
             secondaryButton: .destructive(Text("탈퇴하기")) {
                 if let groupID = userData.group_id {
-                    firebaseManager.decrementGroupCur(groupID: userData.group_id!)
+                    firebaseManager.decrementGroupCur(groupID: groupID)
                 } else {
                     print("group 탈퇴 에러 발생")
                 }
@@ -160,37 +160,49 @@ struct GroupTopInfo: View {
 
 // MARK: User Scroll View
 struct UserScroller: View {
-    let people: [String] = ["Alice", "Bob", "Carol", "Dave", "Eva", "N.D", "Lina", "PADO", "Berry", "Lavine"]
+    @StateObject private var firebaseManager = FirebaseController.shared
+    @StateObject var inputdata = InputUserData.shared
+    
     @State private var selectedPerson: String = "Alice"
+    @State private var userData: [String] = []
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(people, id: \.self) { user in
+                ForEach(userData, id: \.self) { data in
                     VStack(spacing: 4) {
                         Circle()
                             .foregroundColor(Color("Gray3"))
                             .frame(width: 48, height: 48)
                             .overlay(
                                 Circle()
-                                    .stroke(selectedPerson == user ? Color("Main") : .clear, lineWidth: 2)
+                                    .stroke(selectedPerson == data ? Color("Main") : .clear, lineWidth: 2)
                                     .frame(width: 46, height: 46)
                             )
                         
-                        Text(user)
+                        Text(data)
                             .modifier(Cap2())
-                            .foregroundColor(selectedPerson == user ? Color("Main") : .black)
-                            .bold(selectedPerson == user)
+                            .foregroundColor(selectedPerson == data ? Color("Main") : .black)
+                            .bold(selectedPerson == data)
                     }
                     .onTapGesture {
-                        if selectedPerson != user {
-                            selectedPerson = user
+                        if selectedPerson != data {
+                            selectedPerson = data
                         }
                     }
                 }
             }
             .padding(.horizontal, 20)
             .padding(.top, 32)
+        }
+        .onAppear {
+            if let groupID = inputdata.group_id {
+                firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
+                    if let arrayData = arrayData {
+                        self.userData = arrayData
+                    }
+                }
+            }
         }
     }
 }
