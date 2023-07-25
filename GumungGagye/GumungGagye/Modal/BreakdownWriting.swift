@@ -94,15 +94,15 @@ struct BreakdownWriting: View {
                             .modifier(Body1Bold())
                     }
                     .sheet(isPresented: $isDatePickerVisible) {
-                        DatePicker("", selection: $selectedDate, in: ...Date(), displayedComponents: .date)
+                        DatePicker("", selection: $currentDate, in: ...Date(), displayedComponents: .date)
                             .datePickerStyle(GraphicalDatePickerStyle())
                             .labelsHidden()
                             .presentationDetents([.medium])
-                            .onChange(of: selectedDate) { newValue in
+                            .onChange(of: currentDate) { newValue in
                                 currentDate = newValue
                                 let formatter = DateFormatter()
                                 formatter.dateFormat = "yyyy년 MM월 dd일"
-                                tappedDate = formatter.string(from: selectedDate)
+                                tappedDate = formatter.string(from: currentDate)
                                 isDatePickerVisible = false
                                 DividerSelect = false
                             }
