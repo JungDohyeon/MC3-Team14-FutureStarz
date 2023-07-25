@@ -17,6 +17,7 @@
 		0A2828F02A5D835100A9D5D9 /* CategoryHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */; };
 		0A2828F22A5E385000A9D5D9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828F12A5E385000A9D5D9 /* MainView.swift */; };
 		0A2828F52A5E3BC500A9D5D9 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */; };
+		0AC7376E2A6F781B00D86FA6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AC7376D2A6F781B00D86FA6 /* GoogleService-Info.plist */; };
 		5E22C6992A57D6CA008AF9E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */; };
 		5E22C69B2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */; };
 		5E22C69D2A57D6CA008AF9E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5E22C69C2A57D6CA008AF9E5 /* FirebaseAuth */; };
@@ -31,7 +32,6 @@
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
 		5E6C5B942A680D0D00DE6C6F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */; };
 		5E6C93152A6F6C6D00614BDF /* AccountManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */; };
-		5EB519B02A6F5FA30074393E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */; };
 		5EE6A9DC2A6B86C400480855 /* BankCardPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */; };
 		5EE6A9DE2A6B965300480855 /* SelectingBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */; };
 		5EE6A9E02A6BA72800480855 /* SelectingBankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */; };
@@ -113,6 +113,7 @@
 		0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHistoryView.swift; sourceTree = "<group>"; };
 		0A2828F12A5E385000A9D5D9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0AC7376D2A6F781B00D86FA6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E25D6452A6A92F400FBA29F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5E2623532A6188C000A6E23F /* SelectingBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBank.swift; sourceTree = "<group>"; };
 		5E2623572A6232CD00A6E23F /* BankCardPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPayView.swift; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
 		5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager2.swift; sourceTree = "<group>"; };
-		5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5EE6A9DB2A6B86C400480855 /* BankCardPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPay.swift; sourceTree = "<group>"; };
 		5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBudgetView.swift; sourceTree = "<group>"; };
 		5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBankView.swift; sourceTree = "<group>"; };
@@ -423,7 +423,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
-				5EB519AF2A6F5FA30074393E /* GoogleService-Info.plist */,
+				0AC7376D2A6F781B00D86FA6 /* GoogleService-Info.plist */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5E6C5B8A2A67CD4200DE6C6F /* Firestore */,
@@ -562,12 +562,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AC7376E2A6F781B00D86FA6 /* GoogleService-Info.plist in Resources */,
 				CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */,
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,
 				CD27E2F12A59AFB700F15A50 /* Pretendard-Thin.otf in Resources */,
 				CD27E2EC2A59AFAB00F15A50 /* Pretendard-Bold.otf in Resources */,
-				5EB519B02A6F5FA30074393E /* GoogleService-Info.plist in Resources */,
 				CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */,
 				CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */,
 				CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */,
@@ -792,7 +792,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-				DEVELOPMENT_TEAM = C3U3CZ666D;
+				DEVELOPMENT_TEAM = 3VW5XC5A7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
@@ -825,7 +825,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GumungGagye/Preview Content\"";
-				DEVELOPMENT_TEAM = N8RU5UJH68;
+				DEVELOPMENT_TEAM = 3VW5XC5A7B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GumungGagye/Info.plist;
