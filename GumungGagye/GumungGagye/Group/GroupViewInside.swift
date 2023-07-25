@@ -163,31 +163,31 @@ struct UserScroller: View {
     @StateObject private var firebaseManager = FirebaseController.shared
     @StateObject var inputdata = InputUserData.shared
     
-    @State private var selectedPerson: String = "Alice"
-    @State private var userData: [String] = []
+    @State private var selectedPerson: String = ""
+    @State private var userData: [UserData] = []
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
-                ForEach(userData, id: \.self) { data in
+                ForEach(userData, id: \.id) { data in
                     VStack(spacing: 4) {
                         Circle()
                             .foregroundColor(Color("Gray3"))
                             .frame(width: 48, height: 48)
                             .overlay(
                                 Circle()
-                                    .stroke(selectedPerson == data ? Color("Main") : .clear, lineWidth: 2)
+                                    .stroke(selectedPerson == data.nickname ? Color("Main") : .clear, lineWidth: 2)
                                     .frame(width: 46, height: 46)
                             )
                         
-                        Text(data)
+                        Text(data.nickname)
                             .modifier(Cap2())
-                            .foregroundColor(selectedPerson == data ? Color("Main") : .black)
-                            .bold(selectedPerson == data)
+                            .foregroundColor(selectedPerson == data.nickname ? Color("Main") : .black)
+                            .bold(selectedPerson == data.nickname)
                     }
                     .onTapGesture {
-                        if selectedPerson != data {
-                            selectedPerson = data
+                        if selectedPerson != data.nickname {
+                            selectedPerson = data.nickname
                         }
                     }
                 }
@@ -201,6 +201,7 @@ struct UserScroller: View {
                     if let arrayData = arrayData {
                         self.userData = arrayData
                     }
+                    selectedPerson = userData[0].nickname
                 }
             }
         }
