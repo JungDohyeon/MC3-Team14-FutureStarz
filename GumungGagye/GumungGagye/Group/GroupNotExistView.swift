@@ -11,7 +11,7 @@ struct GroupNotExistView: View {
     @State private var isCreateGroup: Bool = false
     @State private var searchText: String = ""
     @StateObject var userData = InputUserData.shared
-    @ObservedObject private var firebaseManager = FirebaseController.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
         GeometryReader { geo in

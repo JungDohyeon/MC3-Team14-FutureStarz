@@ -10,7 +10,7 @@ import SwiftUI
 // Group Main View
 struct GroupMain: View {
     @StateObject var user = InputUserData.shared
-    @ObservedObject private var firebaseManager = FirebaseController.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
     @State private var userGroupData: GroupData?
     
     var body: some View {

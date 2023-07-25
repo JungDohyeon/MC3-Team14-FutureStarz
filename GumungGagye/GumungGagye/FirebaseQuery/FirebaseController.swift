@@ -21,7 +21,7 @@ class FirebaseController: ObservableObject {
     private init() { }
     
     // MARK: Add Group Room Data
-    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date, userID: String) {
+    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
         let db = Firestore.firestore()
         
         var groupData: [String: Any] = [
@@ -33,7 +33,6 @@ class FirebaseController: ObservableObject {
             "lock_status": lock_status,
             "group_pw": group_pw,
             "timeStamp": makeTime,
-            "userId_array": userID,
             "group_id": ""
         ]
         
@@ -56,7 +55,6 @@ class FirebaseController: ObservableObject {
                             print(error)
                         }
                     }
-                                            
                 } else {
                     print("error occur ")
                 }
@@ -67,6 +65,10 @@ class FirebaseController: ObservableObject {
             }
         }
         
+        if let users = Auth.auth().currentUser {
+            // 그룹 내부에 userID 추가
+            newDocumentRef?.updateData(["userId_array" : FieldValue.arrayUnion([users.uid])])
+        }
     }
     
     
@@ -184,7 +186,7 @@ class FirebaseController: ObservableObject {
                             print("정원 초과")
                             return
                         } else {
-                            self.inputdata.group_id = groupID   
+                            self.inputdata.group_id = groupID
                             Task {
                                 do {
                                     try await self.updateGroupFirestore(groupId: groupID)
@@ -192,6 +194,8 @@ class FirebaseController: ObservableObject {
                                     print(error)
                                 }
                             }
+                            
+                            
                             groupData["group_cur"] = currentGroupCur + 1
                         }
                         
@@ -201,6 +205,11 @@ class FirebaseController: ObservableObject {
                             } else {
                                 print("Document successfully updated")
                             }
+                        }
+                        
+                        if let users = Auth.auth().currentUser {
+                            // 그룹 내부에 userID 추가
+                            groupRef.updateData(["userId_array" : FieldValue.arrayUnion([users.uid])])
                         }
                     }
                 }
@@ -278,6 +287,17 @@ class FirebaseController: ObservableObject {
                                 print("Error updating document: \(error)")
                             } else {
                                 print("Document successfully updated")
+                            }
+                        }
+                        
+                        if let users = Auth.auth().currentUser {
+                            // 그룹 내부에 userID 제거
+                            groupRef.updateData(["userId_array" : FieldValue.arrayRemove([users.uid])]){ error in
+                                if let error = error {
+                                    print("Error decrement dupdating document: \(error)")
+                                } else {
+                                    print("Document decrement updated successfully.")
+                                }
                             }
                         }
                     }

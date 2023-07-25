@@ -80,7 +80,7 @@ struct GroupTopInfo: View {
     var groupData: GroupData
     
     @StateObject var userData = InputUserData.shared
-    @ObservedObject private var firebaseManager = FirebaseController.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
     
     var body: some View {
         ZStack {
@@ -148,7 +148,11 @@ struct GroupTopInfo: View {
             message: Text("정말 그룹을 탈퇴하시겠습니까?"),
             primaryButton: .cancel(Text("취소")),
             secondaryButton: .destructive(Text("탈퇴하기")) {
-                firebaseManager.decrementGroupCur(groupID: userData.group_id!)
+                if let groupID = userData.group_id {
+                    firebaseManager.decrementGroupCur(groupID: userData.group_id!)
+                } else {
+                    print("group 탈퇴 에러 발생")
+                }
             }
         )
     }
