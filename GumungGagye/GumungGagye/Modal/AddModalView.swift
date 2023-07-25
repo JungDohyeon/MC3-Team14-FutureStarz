@@ -27,7 +27,7 @@ struct AddModalView: View {
     
     @StateObject private var viewModel = AddModalViewModel()
     private var accountManager = AccountManager()
-    
+    var accountManager2 = AccountManager2.shared
     
     func clearData() {
         text = ""
@@ -143,6 +143,18 @@ struct AddModalView: View {
                 Spacer()
                 
                 Nextbutton(title: "추가하기", isAbled: !(number.isEmpty) && !(text.isEmpty) && !(tappedExpenseCategory.isEmpty)) {
+                    let spendData = SpendData(account_type: selectedType, spend_bill: number, spend_category: tappedExpenseCategory, spend_content: text, spend_open: isCheckedShare, spend_overConsume: isCheckedExpense, account_date: currentDate)
+                    Task {
+                        do {
+                            try await accountManager2.createNewSpendAccount(spendData: spendData)
+                        } catch {
+                            print("Error")
+                        }
+                    }
+                    
+                    
+                    
+                    print(currentDate)
                     print("plus")
                     print(text)
                     print(number)
@@ -151,6 +163,12 @@ struct AddModalView: View {
                     print(isCheckedShare)
                     print(isCheckedExpense)
                     print(selectedType)
+                    
+                    
+                    
+                    
+                    
+                    
                     // Firestore에 데이터 저장
                     //                    let dateFormatter = DateFormatter()
                     //                    dateFormatter.dateFormat = "yyyy년 MM월 dd일"
