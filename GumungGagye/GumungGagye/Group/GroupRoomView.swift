@@ -111,6 +111,19 @@ struct GroupRoomView: View {
                         } label: {
                             MainColorBtn(inputText: "가입하기")
                         }
+                    } else {
+                        NavigationLink {
+                            Text("랭킹뷰입니다.")
+                        } label: {
+                            HStack(spacing: 3) {
+                                Text("랭킹 보기")
+                                Image(systemName: "chevron.right")
+                            }
+                            .foregroundColor(Color("Main"))
+                            .modifier(Body2Bold())
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                        }
                     }
                 }
                 .sheet(isPresented: $lockStatusModal) {
@@ -145,6 +158,8 @@ struct GroupRoomView: View {
                     Divider()
                         .background(Color("Gray3"))
                 }
+                
+                
             }
         }
         .frame(height: 117)
