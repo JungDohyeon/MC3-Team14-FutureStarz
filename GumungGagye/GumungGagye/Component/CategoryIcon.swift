@@ -7,26 +7,24 @@
 
 import SwiftUI
 
-enum IconSize: CGFloat {
-    case small = 48 // Category/IconSmall
-    case large = 80 // Category/IconBig
+enum IconSize: String {
+    case small = "S" // Category/IconSmall
+    case large = "L" // Category/IconBig
 }
 
 struct CategoryIcon: View {
     
     let size: IconSize
-    let color: Color
+    let category: String
     
     var body: some View {
-        Circle()
-            .foregroundColor(color)
-            .frame(width: size.rawValue, height: size.rawValue)
+        Image("\(category)_\(size.rawValue)")
     }
 }
 
 struct CategoryIcon_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryIcon(size: .small, color: Color("Food"))
+        CategoryIcon(size: .small, category: "Food")
     }
 }
 
