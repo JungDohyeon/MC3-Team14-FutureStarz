@@ -113,7 +113,7 @@ struct GroupRoomView: View {
                         }
                     } else {
                         NavigationLink {
-                            Text("랭킹뷰입니다.")
+                            GroupInfoView(groupData: groupdata)
                         } label: {
                             HStack(spacing: 3) {
                                 Text("랭킹 보기")
