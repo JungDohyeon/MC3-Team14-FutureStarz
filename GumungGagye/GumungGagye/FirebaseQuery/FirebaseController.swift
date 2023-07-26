@@ -307,4 +307,59 @@ class FirebaseController: ObservableObject {
             }
         }
     }
+    
+    // 그룹 안에 있는 유저 정보 가져오기.
+    func fetchDataGroupUser(groupID: String, completion: @escaping ([UserData]?) -> Void) {
+        let db = Firestore.firestore()
+        let documentRef = db.collection("groupRoom").document(groupID)
+        
+        documentRef.addSnapshotListener { (documentSnapshot, error) in
+            guard let document = documentSnapshot else {
+                print("error occur")
+                completion(nil)
+                return
+            }
+            
+            if document.exists {
+                if let data = document.data(),
+                   let arrayData = data["userId_array"] as? [String] {
+                    guard !arrayData.isEmpty else {
+                        print("'userId_array' is empty.")
+                        completion(nil)
+                        return
+                    }
+                    self.fetchUsersData(userIDs: arrayData, completion: completion)
+                } else {
+                    completion(nil)
+                }
+            } else {
+                print("Document does not exist")
+                completion(nil)
+            }
+        }
+    }
+    
+    func fetchUsersData(userIDs: [String], completion: @escaping ([UserData]?) -> Void) {
+        let db = Firestore.firestore()
+        let usersCollectionRef = db.collection("users")
+        
+        usersCollectionRef.whereField("user_id", in: userIDs).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching users: \(error)")
+                completion(nil)
+                return
+            }
+            
+            var users: [UserData] = []
+            
+            for document in querySnapshot!.documents {
+                let data = document.data()
+                let user = UserData(data: data)
+                users.append(user)
+            }
+            
+            completion(users)
+        }
+    }
+    
 }

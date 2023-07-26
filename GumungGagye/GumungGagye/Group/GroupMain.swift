@@ -28,7 +28,8 @@ struct GroupMain: View {
             
         }
         .onAppear {
-           fetchData()
+            fetchData()
+            print("onappear user.group_id: \(user.group_id)")
         }
     }
     
