@@ -11,14 +11,14 @@ struct ExpenseCategoryButton: View {
     var expenseCategoryName: String
     var isSelected: Bool
     var action: () -> Void
-    var expenseCategoryColor: Color
+    var expenseCategoryIcon: String
     
     var body: some View {
         Button {
             action()
         } label: {
             VStack(alignment: .center, spacing: 4) {
-                CategoryIcon(size: .small, color: expenseCategoryColor)
+                CategoryIcon(size: .small, category: expenseCategoryIcon)
                 Text(expenseCategoryName)
                     .modifier(Cap1())
                     .foregroundColor(Color("Black"))
@@ -51,21 +51,21 @@ enum ExpenseCategoryList: String, CaseIterable {
     case congratulation = "경조사∙회비"
     case etc = "기타"
     
-    var expenseCategoryListColor: Color {
+    var expenseCategoryListIcon: String {
         switch self {
-        case .food: return Color("Food")
-        case .cafe: return Color("Cafe")
-        case .alcohol: return Color("Alcohol")
-        case .vehicle: return Color("Vehicle")
-        case .leisure: return Color("Leisure")
-        case .traffic: return Color("Traffic")
-        case .store: return Color("Store")
-        case .fashion: return Color("Fashion")
-        case .living: return Color("Living")
-        case .health: return Color("Health")
-        case .education: return Color("Education")
-        case .congratulation: return Color("Congratulation")
-        case .etc: return Color("Etc")
+        case .food: return "Food"
+        case .cafe: return "Cafe"
+        case .alcohol: return "Alcohol"
+        case .vehicle: return "Vehicle"
+        case .leisure: return "Leisure"
+        case .traffic: return "Traffic"
+        case .store: return "Store"
+        case .fashion: return "Fashion"
+        case .living: return "Living"
+        case .health: return "Health"
+        case .education: return "Education"
+        case .congratulation: return "Congratulation"
+        case .etc: return "Etc"
         }
     }
 }
@@ -115,7 +115,7 @@ struct ExpenseCategorySheet: View {
                                 DividerSelect = false
                                 tappedExpenseCategory = expenseCategory.rawValue
                             },
-                            expenseCategoryColor: expenseCategory.expenseCategoryListColor)
+                            expenseCategoryIcon: expenseCategory.expenseCategoryListIcon)
                         .onTapGesture {
                             tappedExpenseCategory = expenseCategoryName
                         }

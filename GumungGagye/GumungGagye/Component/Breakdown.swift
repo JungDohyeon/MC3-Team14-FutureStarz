@@ -13,7 +13,7 @@ struct Breakdown: View {
     
     var body: some View {
         HStack {
-            CategoryIcon(size: .small, color: Color("Food")) // Color 데이터로 바꾸기
+            CategoryIcon(size: .small, category: "Food")
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(payment)")
                     .modifier(Num3Bold())
