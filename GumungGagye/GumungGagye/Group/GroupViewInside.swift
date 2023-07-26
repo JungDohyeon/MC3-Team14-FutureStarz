@@ -154,9 +154,7 @@ struct GroupTopInfo: View {
             secondaryButton: .destructive(Text("탈퇴하기")) {
                 if let groupID = userData.group_id {
                     userData.group_id = ""
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        firebaseManager.decrementGroupCur(groupID: groupID)
-                    }
+                    firebaseManager.decrementGroupCur(groupID: groupID)
                     presentationMode.wrappedValue.dismiss()
                 } else {
                     print("group 탈퇴 에러 발생")
