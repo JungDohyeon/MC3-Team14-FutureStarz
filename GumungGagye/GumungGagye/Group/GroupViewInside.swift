@@ -74,9 +74,12 @@ struct UserNoSpend: View {
 
 // MARK: Group Top Info
 struct GroupTopInfo: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var selectedOption: GroupOption?
     @State private var isLeaveAlertPresented: Bool = false
     @State private var isShowModal: Bool = false
+    @State private var isUserDismiss: Bool = false
     var groupData: GroupData
     
     @StateObject var userData = InputUserData.shared
@@ -142,6 +145,7 @@ struct GroupTopInfo: View {
         }
     }
     
+    
     var leaveAlert: Alert {
         Alert(
             title: Text("그룹 탈퇴하기"),
@@ -149,10 +153,15 @@ struct GroupTopInfo: View {
             primaryButton: .cancel(Text("취소")),
             secondaryButton: .destructive(Text("탈퇴하기")) {
                 if let groupID = userData.group_id {
-                    firebaseManager.decrementGroupCur(groupID: groupID)
+                    userData.group_id = ""
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        firebaseManager.decrementGroupCur(groupID: groupID)
+                    }
+                    presentationMode.wrappedValue.dismiss()
                 } else {
                     print("group 탈퇴 에러 발생")
                 }
+               
             }
         )
     }
@@ -196,12 +205,14 @@ struct UserScroller: View {
             .padding(.top, 32)
         }
         .onAppear {
-            if let groupID = inputdata.group_id {
-                firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
-                    if let arrayData = arrayData {
-                        self.userData = arrayData
+            if inputdata.group_id != nil || inputdata.group_id != "" {
+                if let groupID = inputdata.group_id {
+                    firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
+                        if let arrayData = arrayData {
+                            self.userData = arrayData
+                        }
+                        selectedPerson = userData[0].nickname
                     }
-                    selectedPerson = userData[0].nickname
                 }
             }
         }

@@ -323,6 +323,11 @@ class FirebaseController: ObservableObject {
             if document.exists {
                 if let data = document.data(),
                    let arrayData = data["userId_array"] as? [String] {
+                    guard !arrayData.isEmpty else {
+                        print("'userId_array' is empty.")
+                        completion(nil)
+                        return
+                    }
                     self.fetchUsersData(userIDs: arrayData, completion: completion)
                 } else {
                     completion(nil)
