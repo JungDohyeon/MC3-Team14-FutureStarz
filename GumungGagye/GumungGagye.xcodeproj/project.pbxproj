@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A12C9E32A70A70500118619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A12C9E22A70A70500118619 /* GoogleService-Info.plist */; };
 		0A2828DD2A5BB0C900A9D5D9 /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */; };
 		0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */; };
 		0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */; };
@@ -103,6 +104,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A12C9E22A70A70500118619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A2828DC2A5BB0C900A9D5D9 /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		0A2828E02A5BB72700A9D5D9 /* TopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContentView.swift; sourceTree = "<group>"; };
 		0A2828E22A5C40F700A9D5D9 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
@@ -423,7 +425,7 @@
 		CDCB8C432A53A02F005DF128 /* GumungGagye */ = {
 			isa = PBXGroup;
 			children = (
-				CD90095E2A700D6000089223 /* GoogleService-Info.plist */,
+				0A12C9E22A70A70500118619 /* GoogleService-Info.plist */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
 				5E6C5B8A2A67CD4200DE6C6F /* Firestore */,
@@ -562,7 +564,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD90095F2A700D6000089223 /* GoogleService-Info.plist in Resources */,
+				0A12C9E32A70A70500118619 /* GoogleService-Info.plist in Resources */,
 				CD27E2F02A59AFB500F15A50 /* Pretendard-SemiBold.otf in Resources */,
 				CDCB8C4C2A53A030005DF128 /* Preview Assets.xcassets in Resources */,
 				CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */,

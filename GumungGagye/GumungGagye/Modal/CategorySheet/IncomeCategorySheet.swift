@@ -11,14 +11,14 @@ struct IncomeCategoryButton: View {
     var incomeCategoryName: String
     var isSelected: Bool
     var action: () -> Void
-    var incomeCategoryColor: Color
+    var incomeCategoryIcon: String
     
     var body: some View {
         Button {
             action()
         } label: {
             VStack(alignment: .center, spacing: 4) {
-                CategoryIcon(size: .small, color: incomeCategoryColor)
+                CategoryIcon(size: .small, category: incomeCategoryIcon)
                 Text(incomeCategoryName)
                     .modifier(Cap1())
                     .foregroundColor(Color("Black"))
@@ -44,14 +44,14 @@ enum IncomeCategoryList: String, CaseIterable {
     case extra = "부수입"
     case etc = "기타"
     
-    var incomeCategoryListColor: Color {
+    var incomeCategoryListIcon: String {
         switch self {
-        case .pay: return Color("Food")
-        case .allowance: return Color("Cafe")
-        case .business: return Color("Alcohol")
-        case .financial: return Color("Vehicle")
-        case .extra: return Color("Leisure")
-        case .etc: return Color("Etc")
+        case .pay: return "Pay"
+        case .allowance: return "PocketMoney"
+        case .business: return "Business"
+        case .financial: return "Finance"
+        case .extra: return "Extra"
+        case .etc: return "Etc"
         }
     }
 }
@@ -102,7 +102,7 @@ struct IncomeCategorySheet: View {
                                 DividerSelect = false
                                 tappedIncomeCategory = incomeCategory.rawValue
                             },
-                            incomeCategoryColor: incomeCategory.incomeCategoryListColor)
+                            incomeCategoryIcon: incomeCategory.incomeCategoryListIcon)
                         .onTapGesture {
                             tappedIncomeCategory = incomeCategoryName
                         }
