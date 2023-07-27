@@ -152,14 +152,27 @@ struct BreakdownWriting: View {
                         isCategorySheetVisible = true
                         DividerSelect = true
                     } label: {
-                        if !(tappedExpenseCategory.isEmpty) {
-                            Text(tappedExpenseCategory)
-                                .modifier(Body1Bold())
-                                .foregroundColor(Color("Black"))
-                        } else {
-                            Text("\(placeholder)")
-                                .modifier(Body1())
-                                .foregroundColor(Color("Gray2"))
+                        if selectedType == 0 {
+                            if !(tappedExpenseCategory.isEmpty) {
+                                Text(tappedExpenseCategory)
+                                    .modifier(Body1Bold())
+                                    .foregroundColor(Color("Black"))
+                            } else {
+                                Text("\(placeholder)")
+                                    .modifier(Body1())
+                                    .foregroundColor(Color("Gray2"))
+                            }
+                        }
+                        else if selectedType == 1 {
+                            if !(tappedIncomeCategory.isEmpty) {
+                                Text(tappedIncomeCategory)
+                                    .modifier(Body1Bold())
+                                    .foregroundColor(Color("Black"))
+                            } else {
+                                Text("\(placeholder)")
+                                    .modifier(Body1())
+                                    .foregroundColor(Color("Gray2"))
+                            }
                         }
                     }
                     .sheet(isPresented: $isCategorySheetVisible) {
