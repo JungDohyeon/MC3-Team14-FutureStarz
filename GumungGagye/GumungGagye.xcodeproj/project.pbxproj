@@ -50,8 +50,7 @@
 		5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */; };
 		990744952A6CF1EB00A246B5 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744942A6CF1EB00A246B5 /* AccountManager.swift */; };
 		990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744982A6D026B00A246B5 /* AddModalViewModel.swift */; };
-		9907449C2A6D038F00A246B5 /* SpendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449B2A6D038F00A246B5 /* SpendData.swift */; };
-		9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907449D2A6D039B00A246B5 /* IncomeData.swift */; };
+		994BA4302A739D20008F7477 /* ReadAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994BA42F2A739D20008F7477 /* ReadAccountManager.swift */; };
 		99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */; };
 		99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7382A5F78B10090A05A /* MainBudgetView.swift */; };
 		99F7D73D2A5F78B10090A05A /* TargetBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */; };
@@ -141,8 +140,7 @@
 		5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
 		990744942A6CF1EB00A246B5 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		990744982A6D026B00A246B5 /* AddModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModalViewModel.swift; sourceTree = "<group>"; };
-		9907449B2A6D038F00A246B5 /* SpendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendData.swift; sourceTree = "<group>"; };
-		9907449D2A6D039B00A246B5 /* IncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeData.swift; sourceTree = "<group>"; };
+		994BA42F2A739D20008F7477 /* ReadAccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAccountManager.swift; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
 		99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetBudgetView.swift; sourceTree = "<group>"; };
@@ -258,6 +256,7 @@
 				9907449A2A6D035100A246B5 /* Model */,
 				5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */,
 				5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */,
+				994BA42F2A739D20008F7477 /* ReadAccountManager.swift */,
 				990744942A6CF1EB00A246B5 /* AccountManager.swift */,
 			);
 			path = Firestore;
@@ -311,8 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */,
-				9907449B2A6D038F00A246B5 /* SpendData.swift */,
-				9907449D2A6D039B00A246B5 /* IncomeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -587,10 +584,10 @@
 				0A2828EA2A5D6ED500A9D5D9 /* DividerView.swift in Sources */,
 				D2C828252A5E36980003C0D6 /* BreakdownWriting.swift in Sources */,
 				99F7D74E2A5F80780090A05A /* MoveMonth.swift in Sources */,
+				994BA4302A739D20008F7477 /* ReadAccountManager.swift in Sources */,
 				5E6C5B8C2A67CD5200DE6C6F /* UserManager.swift in Sources */,
 				CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */,
 				99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */,
-				9907449C2A6D038F00A246B5 /* SpendData.swift in Sources */,
 				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				D2C828312A5E37EA0003C0D6 /* NextButton.swift in Sources */,
@@ -604,7 +601,6 @@
 				5EE6A9DE2A6B965300480855 /* SelectingBudgetView.swift in Sources */,
 				5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */,
 				5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */,
-				9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */,
 				5EEFECFF2A6168F300AF4A5F /* SettingsView.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */,

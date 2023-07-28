@@ -11,26 +11,26 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 import FirebaseStorage
 
-struct SpendData {
-    var spend_id: String = ""
-    var account_type: Int = 0
-    var account_date: Date = Date()
-    var spend_bill: Int = 0
-    var spend_category: Int = 0
-    var spend_content: String = ""
-    var spend_open: Bool = false
-    var spend_overConsume: Bool = false
-}
-
-struct IncomeData {
-    var income_id: String = ""
-    var account_type: Int = 1
-    var account_date: Date = Date()
-    var income_bill: Int = 0
-    var income_category: Int = 0
-    var income_content: String = ""
-}
-
+//struct SpendData {
+//    var spend_id: String = ""
+//    var account_type: Int = 0
+//    var account_date: Date = Date()
+//    var spend_bill: Int = 0
+//    var spend_category: Int = 0
+//    var spend_content: String = ""
+//    var spend_open: Bool = false
+//    var spend_overConsume: Bool = false
+//}
+//
+//struct IncomeData {
+//    var income_id: String = ""
+//    var account_type: Int = 1
+//    var account_date: Date = Date()
+//    var income_bill: Int = 0
+//    var income_category: Int = 0
+//    var income_content: String = ""
+//}
+//
 
 
 
@@ -167,6 +167,8 @@ final class AccountManager2 {
             throw error
         }
     }
+    
+  
     
     
 
