@@ -28,13 +28,26 @@ struct MoveMonth: View {
                 Image(systemName: "chevron.left")
                     .foregroundColor(Color("Gray1"))
             })
+            
             fontView(for: size)
-            Button(action: {
-                self.selectedMonth = self.calendar.date(byAdding: .month, value: 1, to: self.selectedMonth) ?? self.selectedMonth
-            }, label: {
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color("Gray1"))
-            })
+            
+            if formattedDate(selectedMonth) == formattedDate(Date.now) {
+                Button(action: {
+                    print("selected Month: \(selectedMonth)")
+                    print("today : \(Date.now)")
+                }, label: {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color("Gray3"))
+                })
+            } else {
+                Button(action: {
+                    
+                    self.selectedMonth = self.calendar.date(byAdding: .month, value: 1, to: self.selectedMonth) ?? self.selectedMonth
+                }, label: {
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(Color("Gray1"))
+                })
+            }
         }
 
     }
