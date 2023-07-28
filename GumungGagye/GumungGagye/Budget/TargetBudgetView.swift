@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct TargetBudgetView: View {
+    public let goalBill: Int
+    public let spendBill: Int
+    
     var body: some View {
-        
        
         VStack(alignment: .leading, spacing: 0) {
             
             // 목표 예산 알림
-            Text("이번 달 목표 예산이 \n1,000,000원 남았어요!")
+            Text("이번 달 목표 예산이 \(goalBill)원 남았어요!")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 16)
             
@@ -38,7 +40,7 @@ struct TargetBudgetView: View {
                         Text("오늘까지 ")
                             .modifier(Cap1())
                             .foregroundColor(Color("Gray2"))
-                        Text("56,000원")
+                        Text("\(spendBill)")
                             .modifier(Num5())
                             .foregroundColor(Color("Main"))
                     }
@@ -47,7 +49,7 @@ struct TargetBudgetView: View {
                     HStack(spacing: 0) {
                         Text("목표 예산 ")
                             .modifier(Cap1())
-                        Text("1,000,000원")
+                        Text("\(goalBill)원")
                             .modifier(Num5())
                     }
                     .foregroundColor(Color("Gray2"))
@@ -62,6 +64,6 @@ struct TargetBudgetView: View {
 
 struct TargetBudgetView_Previews: PreviewProvider {
     static var previews: some View {
-        TargetBudgetView()
+        TargetBudgetView(goalBill: 10000000, spendBill: 1000)
     }
 }

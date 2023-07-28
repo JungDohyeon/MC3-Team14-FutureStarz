@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct CurrentAssetView: View {
+    public let nickname: String
+    public let spendBill: Int
+    public let incomeBill: Int
+    
     var body: some View {
         
         // 현재 자산 표시
         VStack(alignment: .leading, spacing: 0) {
-            Text("러너 님의 자산")
+            Text("\(nickname) 님의 자산")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 20)
             
@@ -23,7 +27,7 @@ struct CurrentAssetView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     Spacer()
-                    Text("100,000원")
+                    Text("\(spendBill)원")
                         .modifier(Num3())
                 }
              
@@ -33,7 +37,7 @@ struct CurrentAssetView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     Spacer()
-                    Text("100,000원")
+                    Text("\(incomeBill)원")
                         .modifier(Num3())
                 }
              
@@ -43,7 +47,7 @@ struct CurrentAssetView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     Spacer()
-                    Text("100,000원")
+                    Text("\(spendBill-incomeBill)원")
                         .modifier(Num3Bold())
                         .foregroundColor(Color("Main"))
                 }
@@ -56,6 +60,6 @@ struct CurrentAssetView: View {
 
 struct CurrentAssetView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentAssetView()
+        CurrentAssetView(nickname: "리나", spendBill: 50000, incomeBill: 1000000)
     }
 }
