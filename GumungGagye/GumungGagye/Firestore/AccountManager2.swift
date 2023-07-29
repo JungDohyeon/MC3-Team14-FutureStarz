@@ -14,8 +14,8 @@ import FirebaseStorage
 struct SpendData {
     var account_type: Int = 0
     var account_date: Date = Date()
-    var spend_bill: String = ""
-    var spend_category: String = ""
+    var spend_bill: Int = 0
+    var spend_category: Int = 0
     var spend_content: String = ""
     var spend_open: Bool = false
     var spend_overConsume: Bool = false
@@ -24,8 +24,8 @@ struct SpendData {
 struct IncomeData {
     var account_type: Int = 1
     var account_date: Date = Date()
-    var income_bill: String = ""
-    var income_category: String = ""
+    var income_bill: Int = 0
+    var income_category: Int = 0
     var income_content: String = ""
 }
 

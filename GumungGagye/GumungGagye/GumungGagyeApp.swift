@@ -27,6 +27,7 @@ struct GumungGagyeApp: App {
         WindowGroup {
             NavigationView {
                 RootView()
+//                ModalView()
             }
         }
     }

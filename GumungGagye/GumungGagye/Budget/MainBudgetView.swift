@@ -12,7 +12,7 @@ struct MainBudgetView: View {
         
         VStack(alignment: .leading) {
             // 월(날짜) 이동
-            MoveMonth(month: "7월", size: .Big) // 숫자 데이터로 받아오기
+            MoveMonth(size: .Big, selectedMonth: Date.now) // 숫자 데이터로 받아오기
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
             
@@ -60,7 +60,8 @@ struct Header: View {
                 self.showAddModalView = true
             }
             .sheet(isPresented: self.$showAddModalView) {
-                AddModalView()
+//                AddModalView()
+                ModalView(showAddModalView: $showAddModalView)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
                     .background(Color("White"))

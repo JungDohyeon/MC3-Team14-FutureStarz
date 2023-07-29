@@ -20,7 +20,7 @@ struct AnalysisView: View {
                         .modifier(H1Bold())
                     
                     // 월 변경
-                    MoveMonth(month: "7월", size: .Small)
+                    MoveMonth(size: .Small, selectedMonth: Date.now)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
