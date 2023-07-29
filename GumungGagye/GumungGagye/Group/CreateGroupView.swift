@@ -142,10 +142,10 @@ struct CreateGroupView: View {
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
                                             groupMaxValidate && groupGoalValidate &&
-                                            CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus()), text: "그룹 생성하기")
+                                            (CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus() == isSecretRoom)), text: "그룹 생성하기")
             }
             .disabled(!(groupNameValidate && groupIntroValidate && groupMaxValidate && groupGoalValidate &&
-                        CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus()))
+                        (CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus() == isSecretRoom)))
             .padding(.bottom, 60)
             
         }

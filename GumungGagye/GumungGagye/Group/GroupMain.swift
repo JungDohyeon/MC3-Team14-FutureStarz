@@ -29,7 +29,6 @@ struct GroupMain: View {
         }
         .onAppear {
             fetchData()
-            print("onappear user.group_id: \(user.group_id)")
         }
     }
     
@@ -57,6 +56,3 @@ struct GroupMain: View {
             }
         }
 }
-
-
-

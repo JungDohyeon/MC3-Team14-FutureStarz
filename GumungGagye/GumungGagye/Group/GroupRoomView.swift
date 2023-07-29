@@ -95,6 +95,7 @@ struct GroupRoomView: View {
                         Button {
                             if userData.group_id != "" {
                                 userGroupStatus = .alreadyJoined
+                                showSubmitGroupAlert = true
                             } else if groupdata.group_cur >= groupdata.group_max {
                                 userGroupStatus = .groupMax
                                 showSubmitGroupAlert = true
@@ -106,8 +107,6 @@ struct GroupRoomView: View {
                                     showSubmitGroupAlert = true
                                 }
                             }
-                            print("userdata: \(userData.group_id)")
-                            print("userGroupstatus: \(userGroupStatus)")
                         } label: {
                             MainColorBtn(inputText: "가입하기")
                         }
@@ -126,12 +125,13 @@ struct GroupRoomView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $lockStatusModal) {
-                    codeInputView(groupdata: groupdata)
-                }
                 .alert(isPresented: $showSubmitGroupAlert) {
                     hasGroupAlert(type: userGroupStatus)
                 }
+                .sheet(isPresented: $lockStatusModal) {
+                    codeInputView(groupdata: groupdata)
+                }
+              
                 
                 if isNotExist {
                     Spacer()

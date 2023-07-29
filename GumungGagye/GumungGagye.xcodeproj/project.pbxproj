@@ -31,6 +31,9 @@
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
 		5E6C5B942A680D0D00DE6C6F /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */; };
 		5E6C93152A6F6C6D00614BDF /* AccountManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */; };
+		5E7273FC2A75523400527014 /* Logo_Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E7273F92A75523400527014 /* Logo_Launch.png */; };
+		5E7273FD2A75523400527014 /* Logo_Launch@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E7273FA2A75523400527014 /* Logo_Launch@3x.png */; };
+		5E7273FE2A75523400527014 /* Logo_Launch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E7273FB2A75523400527014 /* Logo_Launch@2x.png */; };
 		5E82786A2A71F43200355EBE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E8278692A71F43200355EBE /* GoogleService-Info.plist */; };
 		5E8278722A71F60900355EBE /* DatemodalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82786D2A71F60900355EBE /* DatemodalView.swift */; };
 		5E8278732A71F60900355EBE /* TopModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82786E2A71F60900355EBE /* TopModalView.swift */; };
@@ -138,6 +141,9 @@
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
 		5E6C5B932A680D0D00DE6C6F /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager2.swift; sourceTree = "<group>"; };
+		5E7273F92A75523400527014 /* Logo_Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_Launch.png; sourceTree = "<group>"; };
+		5E7273FA2A75523400527014 /* Logo_Launch@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_Launch@3x.png"; sourceTree = "<group>"; };
+		5E7273FB2A75523400527014 /* Logo_Launch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_Launch@2x.png"; sourceTree = "<group>"; };
 		5E8278692A71F43200355EBE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E82786D2A71F60900355EBE /* DatemodalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatemodalView.swift; sourceTree = "<group>"; };
 		5E82786E2A71F60900355EBE /* TopModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopModalView.swift; sourceTree = "<group>"; };
@@ -291,6 +297,16 @@
 				990744942A6CF1EB00A246B5 /* AccountManager.swift */,
 			);
 			path = Firestore;
+			sourceTree = "<group>";
+		};
+		5E7273F82A75521700527014 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5E7273F92A75523400527014 /* Logo_Launch.png */,
+				5E7273FB2A75523400527014 /* Logo_Launch@2x.png */,
+				5E7273FA2A75523400527014 /* Logo_Launch@3x.png */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		5E82786B2A71F60900355EBE /* AccountModal */ = {
@@ -484,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				5E8278692A71F43200355EBE /* GoogleService-Info.plist */,
+				5E7273F82A75521700527014 /* LaunchScreen */,
 				5E82786B2A71F60900355EBE /* AccountModal */,
 				CDB4874A2A66E4E800DE5AE4 /* FirebaseQuery */,
 				5EEFED0E2A616C6F00AF4A5F /* GumungGagye.entitlements */,
@@ -632,9 +649,12 @@
 				CD27E2EB2A59AFA900F15A50 /* Pretendard-ExtraBold.otf in Resources */,
 				CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */,
 				CD27E2EA2A59AFA700F15A50 /* Pretendard-Light.otf in Resources */,
+				5E7273FD2A75523400527014 /* Logo_Launch@3x.png in Resources */,
 				CD27E2ED2A59AFAD00F15A50 /* Pretendard-Black.otf in Resources */,
 				CD27E2EF2A59AFB300F15A50 /* Pretendard-Regular.otf in Resources */,
 				CD27E2EE2A59AFB100F15A50 /* Pretendard-Medium.otf in Resources */,
+				5E7273FE2A75523400527014 /* Logo_Launch@2x.png in Resources */,
+				5E7273FC2A75523400527014 /* Logo_Launch.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,7 +894,6 @@
 				INFOPLIST_FILE = GumungGagye/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -907,7 +926,6 @@
 				INFOPLIST_FILE = GumungGagye/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

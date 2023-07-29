@@ -14,6 +14,14 @@
 				<string>com.googleusercontent.apps.855398204787-urlo6peu7070auv8ca76eln73krolje0</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ssoap</string>
+			</array>
+		</dict>
 	</array>
 	<key>GIDClientID</key>
 	<string>855398204787-urlo6peu7070auv8ca76eln73krolje0.apps.googleusercontent.com</string>
@@ -35,5 +43,12 @@
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-Black.otf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>Logo_Launch</string>
+		<key>UILaunchScreen</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
