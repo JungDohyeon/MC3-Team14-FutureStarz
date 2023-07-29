@@ -131,7 +131,7 @@ struct GroupTopInfo: View {
                 if let option = selectedOption {
                     switch(option) {
                     case .invite:
-                        ShareViewController(shareString: ["ssoap://receiver?grouID=\(groupData.id)"])
+                        ShareViewController(shareString: ["ssoap://receiver?groupID=\(groupData.id)"])
                             .presentationDetents([.medium])
                             .presentationDragIndicator(.visible)
                     case .leave:
