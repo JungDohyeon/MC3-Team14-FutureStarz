@@ -255,7 +255,7 @@ struct GroupUserSumGraph: View {
                             HStack(spacing: 3) {
                                 Text("과소비")
                                     .modifier(Cap1())
-                                    .foregroundColor(Color("Gray2"))
+                                    .foregroundColor(Color("Gray1"))
                                 Text("\(Int(overpurchaseSum))원")
                                     .modifier(Num5())
                                     .foregroundColor(Color("OverPurchasing"))
@@ -268,7 +268,7 @@ struct GroupUserSumGraph: View {
                             HStack(spacing: 3) {
                                 Text("총 지출")
                                     .modifier(Cap1())
-                                    .foregroundColor(Color("Gray2"))
+                                    .foregroundColor(Color("Gray1"))
                                 Text("\(Int(purchaseSum))원")
                                     .modifier(Num5())
                                     .foregroundColor(Int(purchaseSum) > groupData.group_goal ? Color("OverPurchasing") : Color("Main"))
@@ -277,7 +277,7 @@ struct GroupUserSumGraph: View {
                             Spacer()
                             Text("전체 \(groupData.group_goal)원")
                                 .modifier(Cap1())
-                                .foregroundColor(Color("Gray2"))
+                                .foregroundColor(Color("Gray1"))
                         }.onAppear {
                             print("width: \(CGFloat(purchaseSum/Double(groupData.group_goal)) * (geometry.size.width))")
                             withAnimation(.easeInOut(duration: 1.0)) {
