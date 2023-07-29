@@ -8,18 +8,6 @@
 import SwiftUI
 import FirebaseAuth
 
-// code 입력창 focus state
-enum CodeField {
-    case groupName
-    case groupCaption
-    case groupGoal
-    case groupMax
-    case code1
-    case code2
-    case code3
-    case code4
-}
-
 // Integer만 받도록 하는 클래스. (목표 금액 필드에 사용)
 class NumbersOnlyInput: ObservableObject {
     @Published var groupGoalValue = "" {
@@ -140,20 +128,7 @@ struct CreateGroupView: View {
                         
                         Spacer()
                         
-                        CodeField()
-                            .onChange(of: inputCodeArray) { newValue in
-                                letterCondition(value: newValue)
-                            }
-                            .onAppear {
-                                for i in 0..<4 {
-                                    if inputCodeArray[i].isEmpty {
-                                        focusedField = activeStateForIndex(index: i)
-                                        break
-                                    } else {
-                                        focusedField = .code4
-                                    }
-                                }
-                            }
+                        CodeFieldView(inputCodeArray: $inputCodeArray)
                     }
                 }
             }
@@ -162,18 +137,15 @@ struct CreateGroupView: View {
             
             // add group Btn
             Button {
-                    groupCode = inputCodeArray.joined()
-                    let _ = print(isSecretRoom)
-            
+                groupCode = inputCodeArray.joined()
                 createAlert = true
-                
-                // TODO: 생성한 그룹 ID를 현재 유저에 넣기.
-                
             } label: {
                 GroupCreateBtn(validation: (groupNameValidate && groupIntroValidate &&
-                                            groupMaxValidate && groupGoalValidate && checkBtnStatus()))
+                                            groupMaxValidate && groupGoalValidate &&
+                                            CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus()), text: "그룹 생성하기")
             }
-            .disabled(!(groupNameValidate && groupIntroValidate && groupMaxValidate && groupGoalValidate && checkBtnStatus()))
+            .disabled(!(groupNameValidate && groupIntroValidate && groupMaxValidate && groupGoalValidate &&
+                        CodeFieldView(inputCodeArray: $inputCodeArray).checkBtnStatus()))
             .padding(.bottom, 60)
             
         }
@@ -195,73 +167,6 @@ struct CreateGroupView: View {
             )
         }
     }
-    
-    // code input field
-    @ViewBuilder
-    func CodeField() -> some View {
-        HStack(spacing: 8) {
-            ForEach(0..<4, id: \.self) { idx in
-                VStack(spacing: 8) {
-                    TextField("", text: $inputCodeArray[idx])
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.center)
-                        .modifier(Num3())
-                        .focused($focusedField, equals: activeStateForIndex(index: idx))
-                    
-                    // 번호가 채워진 칸은 파란 밑줄로 수정
-                    Rectangle()
-                        .fill(((focusedField == activeStateForIndex(index: idx)) || inputCodeArray[idx].count != 0) ? Color("Main") : Color("Gray3"))
-                        .frame(height: 2)
-                }
-                .frame(width: 48)
-            }
-        }
-    }
-    
-    // 코드 입력 Validation 확인
-    func checkBtnStatus() -> Bool {
-        if isSecretRoom {
-            for i in 0..<4 {
-                if inputCodeArray[i].isEmpty {
-                    return false
-                }
-            }
-        }
-        return true
-    }
-    
-    func letterCondition(value: [String])  {
-        // 한 글자 입력되면 다음 칸으로 이동하기.
-        for i in 0..<3 {
-            if value[i].count == 1 && activeStateForIndex(index: i) == focusedField {
-                focusedField = activeStateForIndex(index: i + 1)
-            }
-        }
-        
-        // 뒤로가기
-        for i in 1...3 {
-            if value[i].isEmpty && !value[i - 1].isEmpty {
-                focusedField = activeStateForIndex(index: i - 1)
-            }
-        }
-        
-        
-        // 한 글자 이상 입력되는 경우 마지막 한 글자만 받는다.
-        for i in 0..<4 {
-            if value[i].count == 2 {
-                inputCodeArray[i] = String(value[i].last!)
-            }
-        }
-    }
-    
-    func activeStateForIndex(index: Int) -> CodeField {
-        switch index {
-        case 0: return .code1
-        case 1: return .code2
-        case 2: return .code3
-        default: return .code4
-        }
-    }
 }
 
 
@@ -269,7 +174,6 @@ struct CreateGroupView: View {
 struct GetStringGroupInfo: View {
     @Binding var userInput: String
     @Binding var checkStatus: Bool
-    
     @FocusState var focusedValue: CodeField?
     
     var focusType: CodeField
@@ -404,9 +308,10 @@ struct PickerModalView: View {
 // 그룹 생성 버튼
 struct GroupCreateBtn: View {
     var validation: Bool
+    var text: String
     
     var body: some View {
-        Text("그룹 생성하기")
+        Text(text)
             .modifier(BtnBold())
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
