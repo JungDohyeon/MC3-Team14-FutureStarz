@@ -64,6 +64,8 @@
 		5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */; };
 		990744952A6CF1EB00A246B5 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744942A6CF1EB00A246B5 /* AccountManager.swift */; };
 		994BA4302A739D20008F7477 /* ReadAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994BA42F2A739D20008F7477 /* ReadAccountManager.swift */; };
+		994BA4322A75259F008F7477 /* SpendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994BA4312A75259F008F7477 /* SpendData.swift */; };
+		994BA4342A7525AD008F7477 /* IncomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994BA4332A7525AD008F7477 /* IncomeData.swift */; };
 		99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */; };
 		99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7382A5F78B10090A05A /* MainBudgetView.swift */; };
 		99F7D73D2A5F78B10090A05A /* TargetBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */; };
@@ -168,6 +170,8 @@
 		5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
 		990744942A6CF1EB00A246B5 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		994BA42F2A739D20008F7477 /* ReadAccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAccountManager.swift; sourceTree = "<group>"; };
+		994BA4312A75259F008F7477 /* SpendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendData.swift; sourceTree = "<group>"; };
+		994BA4332A7525AD008F7477 /* IncomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeData.swift; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
 		99F7D7392A5F78B10090A05A /* TargetBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetBudgetView.swift; sourceTree = "<group>"; };
@@ -366,6 +370,8 @@
 			isa = PBXGroup;
 			children = (
 				5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */,
+				994BA4312A75259F008F7477 /* SpendData.swift */,
+				994BA4332A7525AD008F7477 /* IncomeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				5E8278862A73C2B100355EBE /* ContentmodelView.swift in Sources */,
 				CD27E2FB2A59C25A00F15A50 /* GroupMain.swift in Sources */,
 				5EEFED032A61691D00AF4A5F /* SignInGoogleHelper.swift in Sources */,
+				994BA4322A75259F008F7477 /* SpendData.swift in Sources */,
 				5E6C5B892A67CBE100DE6C6F /* ProfileView.swift in Sources */,
 				D2C8282D2A5E37B00003C0D6 /* ExpenseCategorySheet.swift in Sources */,
 				CD27E2FD2A59C9D700F15A50 /* CreateGroupView.swift in Sources */,
@@ -708,6 +715,7 @@
 				99F7D75E2A66AF610090A05A /* OpenTag.swift in Sources */,
 				CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */,
 				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
+				994BA4342A7525AD008F7477 /* IncomeData.swift in Sources */,
 				99F7D73E2A5F78B10090A05A /* ConsListView.swift in Sources */,
 				5EEFED082A61698800AF4A5F /* Utilities.swift in Sources */,
 				0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */,
