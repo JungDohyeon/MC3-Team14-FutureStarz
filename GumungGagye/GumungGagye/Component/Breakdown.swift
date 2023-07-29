@@ -11,13 +11,19 @@ struct Breakdown: View {
     
     @Binding var accountBill: Int
     @Binding var accountContent: String
-    @Binding var accountCategory: Int
     @Binding var spendOverconsume: Bool
     @Binding var spendOpen: Bool
     
+    @Binding var size: IconSize
+    @Binding var accountType: Int
+    @Binding var categoryIndex: Int
+
+    @ObservedObject var categoryInfo = CategoryInfo.shared
+
+    
     var body: some View {
         HStack {
-//            CategoryIcon(size: .small, category: "Food")
+            CategoryIcon(size: $size, accountType: $accountType, categoryIndex: $categoryIndex)
             VStack(alignment: .leading, spacing: 2) {
 //                Text("\(payment)")
 //                    .modifier(Num3Bold())
