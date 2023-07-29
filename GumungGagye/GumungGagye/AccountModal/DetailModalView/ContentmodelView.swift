@@ -39,12 +39,18 @@ struct ContentmodelView: View {
                         }
                         HStack(spacing: 0) {
                             Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .frame(width: 24, height: 24)
+                            Image("Union")
+                                .resizable()
+                                .frame(width: 20, height: 20)
                                 .foregroundColor(Color("Gray2"))
                                 .fontWeight(.bold)
                                 .padding(.trailing, 11)
+                            //화살표 이미지
+//                            Image(systemName: "chevron.right")
+//                                .frame(width: 24, height: 24)
+//                                .foregroundColor(Color("Gray2"))
+//                                .fontWeight(.bold)
+//                                .padding(.trailing, 11)
                         }
                         
                     } //: HSTACK

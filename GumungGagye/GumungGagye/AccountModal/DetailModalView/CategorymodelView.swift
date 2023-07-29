@@ -48,8 +48,13 @@ struct CategorymodelView: View {
                                         print(spend_category)
                                     })
                             } else if account_type == 1 {
-                                IncomeCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category)
-                                    .presentationDetents([.medium])
+//                                IncomeCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category)
+//                                    .presentationDetents([.medium])
+                                ExpenseCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category, account_type: $account_type)
+                                    .presentationDetents([.height(350)])
+                                    .onChange(of: spend_category, perform: { newValue in
+                                        print(spend_category)
+                                    })
                                 //                                    .onChange(of: selectedOption, perform: { newValue in
                                 //                                        self.tappedIncomeCategory = newValue
                                 //                                        isCategorySheetVisible = false

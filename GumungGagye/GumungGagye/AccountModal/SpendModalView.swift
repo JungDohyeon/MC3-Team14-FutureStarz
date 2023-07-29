@@ -20,7 +20,8 @@ struct SpendModalView: View {
     @Binding var spend_bill: Int?
     @Binding var spend_category: Int?
     @Binding var spend_content: String
-    
+    @Binding var spend_open: Bool
+    @Binding var spend_overConsume: Bool
     
     
     @Binding var spend_bill_string: String
@@ -32,7 +33,8 @@ struct SpendModalView: View {
             BillmodalView(spend_bill: $spend_bill, spend_bill_string: $spend_bill_string)
             CategorymodelView(account_type: $account_type, spend_category: $spend_category)
             ContentmodelView(spend_content: $spend_content)
-            
+            SpendOpenView(spend_open: $spend_open)
+            SpendOverConsumeView(spend_overConsume: $spend_overConsume)
         }
     }
 }
@@ -41,7 +43,7 @@ struct SpendModalView: View {
 // MARK: - PREVIEW
 struct SpendModalView_Previews: PreviewProvider {
     static var previews: some View {
-        SpendModalView(account_type: .constant(0), account_date: .constant(Date()), spend_bill: .constant(1234), spend_category: .constant(1), spend_content: .constant("안녕하세요"), spend_bill_string: .constant(""))
+        SpendModalView(account_type: .constant(0), account_date: .constant(Date()), spend_bill: .constant(1234), spend_category: .constant(1), spend_content: .constant("안녕하세요"), spend_open: .constant(false), spend_overConsume: .constant(false), spend_bill_string: .constant(""))
             .previewLayout(.sizeThatFits)
     }
 }

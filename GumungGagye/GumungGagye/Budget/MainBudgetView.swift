@@ -60,7 +60,8 @@ struct Header: View {
                 self.showAddModalView = true
             }
             .sheet(isPresented: self.$showAddModalView) {
-                AddModalView()
+//                AddModalView()
+                ModalView(showAddModalView: $showAddModalView)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)
                     .background(Color("White"))

@@ -69,11 +69,11 @@ struct DatemodalView: View {
                                 .onTapGesture {
                                     isDatePickerVisible = false
                                     
-                                    if account_date == nil {
-                                        account_date = Date()
-                                    } else {
+//                                    if account_date == nil {
+//                                        account_date = Date()
+//                                    } else {
                                         account_date = temData
-                                    }
+//                                    }
 //                                    print("account_date : \(dateToString(date: account_date!))")
                                 }
                         }
@@ -100,9 +100,9 @@ extension DatemodalView {
     }
 }
 
-struct DatemodalView_Previews: PreviewProvider {
-    static var previews: some View {
-        DatemodalView(isDatePickerVisible: false, account_date: .constant(Date()))
-            .previewLayout(.sizeThatFits)
-    }
-}
+//struct DatemodalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DatemodalView(isDatePickerVisible: false, account_date: .constant(Date()))
+//            .previewLayout(.sizeThatFits)
+//    }
+//}
