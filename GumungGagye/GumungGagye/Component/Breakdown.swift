@@ -19,7 +19,7 @@ struct Breakdown: View {
         HStack {
             if accountData.account_type == 0 {
                 if let spendData = accountData.spend_data {
-                    CategoryIcon(size: $size, accountType: .constant(0), categoryIndex: $categoryIndex)
+//                    CategoryIcon(size: $size, accountType: .constant(0), categoryIndex: $categoryIndex)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("\(spendData.spend_bill)")
@@ -41,7 +41,7 @@ struct Breakdown: View {
                 }
             } else if accountData.account_type == 1 {
                 if let incomeData = accountData.income_data {
-                    CategoryIcon(size: $size, accountType: .constant(1), categoryIndex: $categoryIndex)
+//                    CategoryIcon(size: $size, accountType: .constant(1), categoryIndex: $categoryIndex)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("\(incomeData.income_bill)")

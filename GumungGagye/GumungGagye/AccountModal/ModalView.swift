@@ -47,10 +47,10 @@ struct ModalView: View {
                 
                 if account_type == 0 {
                     Nextbutton(title: "추가하기", isAbled: ((account_date) != nil) && ((spend_bill) != nil) && ((spend_category) != nil) && !(spend_content.isEmpty)) {
-                        let spendData = SpendData(account_type: account_type, account_date: account_date ?? Date(), spend_bill: spend_bill ?? 0, spend_category: spend_category ?? 0, spend_content: spend_content , spend_open: spend_open, spend_overConsume: spend_overConsume)
+                        let inputSpendData = InputSpendData(account_type: account_type, account_date: account_date ?? Date(), spend_bill: spend_bill ?? 0, spend_category: spend_category ?? 0, spend_content: spend_content , spend_open: spend_open, spend_overConsume: spend_overConsume)
                         Task {
                             do {
-                                try await accountManager2.createNewSpendAccount(spendData: spendData)
+                                try await accountManager2.createNewSpendAccount(inputSpendData: inputSpendData)
                             } catch {
                                 print("Error")
                             }
@@ -69,11 +69,11 @@ struct ModalView: View {
                         .padding(.bottom, 12)
                     
                     Nextbutton(title: "추가하기", isAbled: ((account_date) != nil) && ((income_bill) != nil) && ((income_category) != nil) && !(income_content.isEmpty)) {
-                        let incomeDate = IncomeData(account_type: account_type, account_date: account_date ?? Date(), income_bill: income_bill ?? 0, income_category: income_category ?? 0, income_content: income_content)
+                        let inputIncomeDate = InputIncomeData(account_type: account_type, account_date: account_date ?? Date(), income_bill: income_bill ?? 0, income_category: income_category ?? 0, income_content: income_content)
                         
                         Task {
                             do {
-                                try await accountManager2.createNewIncomeAccount(incomeData: incomeDate)
+                                try await accountManager2.createNewIncomeAccount(inputIncomeData: inputIncomeDate)
                             } catch {
                                 print("Error")
                             }

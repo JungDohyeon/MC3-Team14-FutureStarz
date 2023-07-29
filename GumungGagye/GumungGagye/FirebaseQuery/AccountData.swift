@@ -14,9 +14,9 @@ struct AccountData {
     var account_date: Date = Date()
     var account_type: Int = 0
     var detail_id: String = ""
-    var user_id: String = ""
     var spend_data: SpendData? = nil
     var income_data: IncomeData? = nil
+    var user_id: String = "" 
 
     init?(data: [String: Any]) {
         guard let accountId = data["account_id"] as? String,
@@ -42,5 +42,7 @@ struct AccountData {
            let incomeData = IncomeData(data: incomeDataDict) {
             self.income_data = incomeData
         }
+        
+        self.user_id = data["user_id"] as? String ?? ""
     }
 }
