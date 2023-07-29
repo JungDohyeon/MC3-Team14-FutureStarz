@@ -27,7 +27,7 @@ struct GroupViewInside: View {
                         .frame(height: 8)
                         .overlay(Color("Gray4"))
                     UserScroller()
-                    GroupUserSumGraph()
+                    GroupUserSumGraph(groupData: groupData)
                     UserNoSpend()
                 }
             }
@@ -131,7 +131,7 @@ struct GroupTopInfo: View {
                 if let option = selectedOption {
                     switch(option) {
                     case .invite:
-                        ShareViewController(shareString: ["ShareCode"])
+                        ShareViewController(shareString: ["ssoap://receiver?grouID=\(groupData.id)"])
                             .presentationDetents([.medium])
                             .presentationDragIndicator(.visible)
                     case .leave:
@@ -159,7 +159,7 @@ struct GroupTopInfo: View {
                 } else {
                     print("group 탈퇴 에러 발생")
                 }
-               
+                
             }
         )
     }
@@ -209,7 +209,9 @@ struct UserScroller: View {
                         if let arrayData = arrayData {
                             self.userData = arrayData
                         }
-                        selectedPerson = userData[0].nickname
+                        if userData.count > 0 {
+                            selectedPerson = userData[0].nickname
+                        }
                     }
                 }
             }
@@ -220,9 +222,9 @@ struct UserScroller: View {
 
 // MARK: Show Group user month graph
 struct GroupUserSumGraph: View {
-    var overAll: Double = 1000000
-    var purchaseSum: Double = 256000
-    var overpurchaseSum: Double = 56000
+    var groupData: GroupData
+    var purchaseSum: Double = 12314
+    var overpurchaseSum: Double = 560
     @State private var sumGraphWidth: CGFloat = 0.0
     @State private var overGraphWidth: CGFloat = 0.0
     
@@ -240,7 +242,7 @@ struct GroupUserSumGraph: View {
                                 .foregroundColor(Color("Light30"))
                             
                             RoundedRectangle(cornerRadius: 10)
-                                .frame(width: sumGraphWidth , height: 22)
+                                .frame(width: sumGraphWidth, height: 22)
                                 .foregroundColor(Color("Main"))
                             
                             RoundedRectangle(cornerRadius: 10)
@@ -253,7 +255,7 @@ struct GroupUserSumGraph: View {
                             HStack(spacing: 3) {
                                 Text("과소비")
                                     .modifier(Cap1())
-                                    .foregroundColor(Color("Gray2"))
+                                    .foregroundColor(Color("Gray1"))
                                 Text("\(Int(overpurchaseSum))원")
                                     .modifier(Num5())
                                     .foregroundColor(Color("OverPurchasing"))
@@ -266,22 +268,22 @@ struct GroupUserSumGraph: View {
                             HStack(spacing: 3) {
                                 Text("총 지출")
                                     .modifier(Cap1())
-                                    .foregroundColor(Color("Gray2"))
-                                Text("\(Int(overpurchaseSum))원")
+                                    .foregroundColor(Color("Gray1"))
+                                Text("\(Int(purchaseSum))원")
                                     .modifier(Num5())
-                                    .foregroundColor(Color("Main"))
+                                    .foregroundColor(Int(purchaseSum) > groupData.group_goal ? Color("OverPurchasing") : Color("Main"))
                             }
                             
                             Spacer()
-                            Text("전체 \(Int(overAll))원")
+                            Text("전체 \(groupData.group_goal)원")
                                 .modifier(Cap1())
-                                .foregroundColor(Color("Gray2"))
-                        }
-                    }
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 1.0)) {
-                            sumGraphWidth = CGFloat(purchaseSum/overAll) * (geometry.size.width-40)
-                            overGraphWidth = CGFloat(overpurchaseSum/purchaseSum) * (geometry.size.width-40)
+                                .foregroundColor(Color("Gray1"))
+                        }.onAppear {
+                            print("width: \(CGFloat(purchaseSum/Double(groupData.group_goal)) * (geometry.size.width))")
+                            withAnimation(.easeInOut(duration: 1.0)) {
+                                sumGraphWidth = Int(purchaseSum) > groupData.group_goal ? (geometry.size.width) : CGFloat(purchaseSum/Double(groupData.group_goal)) * (geometry.size.width)
+                                overGraphWidth = Int(purchaseSum) > groupData.group_goal ? (geometry.size.width) : CGFloat(overpurchaseSum/Double(groupData.group_goal)) * (geometry.size.width)
+                            }
                         }
                     }
                 }
