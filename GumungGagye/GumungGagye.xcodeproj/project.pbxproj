@@ -63,7 +63,6 @@
 		5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */; };
 		5EEFED142A61777E00AF4A5F /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */; };
 		990744952A6CF1EB00A246B5 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744942A6CF1EB00A246B5 /* AccountManager.swift */; };
-		990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990744982A6D026B00A246B5 /* AddModalViewModel.swift */; };
 		994BA4302A739D20008F7477 /* ReadAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994BA42F2A739D20008F7477 /* ReadAccountManager.swift */; };
 		99F7D73B2A5F78B10090A05A /* CurrentAssetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */; };
 		99F7D73C2A5F78B10090A05A /* MainBudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7382A5F78B10090A05A /* MainBudgetView.swift */; };
@@ -168,7 +167,6 @@
 		5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingBudget.swift; sourceTree = "<group>"; };
 		5EEFED132A61777E00AF4A5F /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
 		990744942A6CF1EB00A246B5 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
-		990744982A6D026B00A246B5 /* AddModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModalViewModel.swift; sourceTree = "<group>"; };
 		994BA42F2A739D20008F7477 /* ReadAccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAccountManager.swift; sourceTree = "<group>"; };
 		99F7D7372A5F78B10090A05A /* CurrentAssetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAssetView.swift; sourceTree = "<group>"; };
 		99F7D7382A5F78B10090A05A /* MainBudgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBudgetView.swift; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 		5E6C5B8A2A67CD4200DE6C6F /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
-				990744982A6D026B00A246B5 /* AddModalViewModel.swift */,
 				9907449A2A6D035100A246B5 /* Model */,
 				5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */,
 				5E6C93142A6F6C6D00614BDF /* AccountManager2.swift */,
@@ -721,7 +718,6 @@
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
 				0A2828F52A5E3BC500A9D5D9 /* SettingView.swift in Sources */,
 				CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */,
-				990744992A6D026B00A246B5 /* AddModalViewModel.swift in Sources */,
 				D2C828232A5E366D0003C0D6 /* AddModalView.swift in Sources */,
 				0A2828E72A5D686F00A9D5D9 /* OverpurchasingView.swift in Sources */,
 				5E8278802A735DFC00355EBE /* DetailCategoryView.swift in Sources */,

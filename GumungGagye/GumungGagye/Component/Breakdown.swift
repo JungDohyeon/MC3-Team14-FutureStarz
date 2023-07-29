@@ -8,39 +8,51 @@
 import SwiftUI
 
 struct Breakdown: View {
+    @StateObject var userData = InputUserData.shared
+    @StateObject private var accountManager2 = AccountManager2.shared
     
-    @Binding var accountBill: Int
-    @Binding var accountContent: String
-    @Binding var spendOverconsume: Bool
-    @Binding var spendOpen: Bool
-    
+    let accountData: AccountData
+
     @Binding var size: IconSize
-    @Binding var accountType: Int
-    @Binding var categoryIndex: Int
 
-    @ObservedObject var categoryInfo = CategoryInfo.shared
-
-    
     var body: some View {
         HStack {
-            CategoryIcon(size: $size, accountType: $accountType, categoryIndex: $categoryIndex)
-            VStack(alignment: .leading, spacing: 2) {
-//                Text("\(payment)")
-//                    .modifier(Num3Bold())
-//                Text("\(content)")
-//                    .modifier(Cap2())
-            }
-            Spacer()
-            HStack {
-                OverPurchaseTag(isOverPurchase: true)
-                OpenTag(spendOpen: true)
+            if accountData.account_type == 0 {
+                if let spendData = accountData.spend_data {
+                    CategoryIcon(size: $size, accountType: .constant(0), categoryIndex: $categoryIndex)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("\(spendData.spend_bill)")
+                            .modifier(Num3Bold())
+                        Text("\(spendData.spend_content)")
+                            .modifier(Cap2())
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        if spendData.spend_open {
+                            OpenTag(spendOpen: true)
+                        }
+                        if spendData.spend_overConsume {
+                            OverPurchaseTag(isOverPurchase: true)
+                        }
+                    }
+                }
+            } else if accountData.account_type == 1 {
+                if let incomeData = accountData.income_data {
+                    CategoryIcon(size: $size, accountType: .constant(1), categoryIndex: $categoryIndex)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("\(incomeData.income_bill)")
+                            .modifier(Num3Bold())
+                        Text("\(incomeData.income_content)")
+                            .modifier(Cap2())
+                    }
+                    
+                    Spacer()
+                }
             }
         }
     }
 }
-//
-//struct Breakdown_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Breakdown(payment: 1000000, content: "MC3 회식")
-//    }
-//}
