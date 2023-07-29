@@ -9,43 +9,55 @@ import SwiftUI
 
 // 그룹 정보 뷰
 struct GroupInfoView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject private var firebaseManager = FirebaseController.shared
+    @StateObject var inputdata = InputUserData.shared
+    
+    var groupData: GroupData
+
+    @State private var userData: [UserData] = []
     
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
             
             ScrollView {
-                GroupRoomView(groupdata: GroupData(id: "id", group_name: "Test", group_introduce: "Test", group_goal: 1000, group_cur: 3, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: false)
-                .padding(.horizontal, 20)
-                
-                Divider()
-                    .frame(height: 8)
-                    .overlay(Color("Gray4"))
-                
                 VStack(spacing: 0) {
-                    HStack {
-                        Text("지출 랭킹")
-                            .modifier(H2SemiBold())
-                            .foregroundColor(Color("Black"))
-                        
-                        Spacer()
-                    }
-                    .padding(.bottom, 16)
-                    
                     MonthPicker()
                 }
                 .padding(.top, 36)
-                .padding(.bottom, 20)
+                .padding(.bottom, 8)
                 .padding(.horizontal, 20)
                 
                 ScrollView {
-                    ForEach(1..<10) { rank in
-                        GroupRankingView(ranking: rank, userName: "PADO", spendMoney: 7500)
+                    ForEach(userData, id: \.id) { data in
+                        GroupRankingView(ranking: 1, userName: data.nickname, spendMoney: 7500)
                     }
                     .padding(.horizontal, 20)
                 }
             }
-            
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("그룹 지출 랭킹")
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Image(systemName: "chevron.left")
+                .font(.system(size: 16))
+                .fontWeight(.regular)
+                .foregroundColor(.black)
+        }))
+        .onAppear {
+            if inputdata.group_id != nil || inputdata.group_id != "" {
+                if let groupID = inputdata.group_id {
+                    firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
+                        if let arrayData = arrayData {
+                            self.userData = arrayData
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -111,9 +123,15 @@ struct GroupRankingView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 34) {
+            HStack(spacing: 0) {
                 Text(ranking.description)
                     .modifier(Num5())
+                    .padding(.trailing, 18)
+                
+                Circle()
+                    .foregroundColor(Color("Gray3"))
+                    .frame(width: 40, height: 40)
+                    .padding(.trailing, 12)
                 
                 Text(userName)
                     .modifier(Body2())
@@ -123,15 +141,13 @@ struct GroupRankingView: View {
                 Text("-\(spendMoney.description)원")
                     .modifier(Num4SemiBold())
             }
-            .padding(12)
+            .padding(.vertical, 14)
+            .padding(.horizontal, 8)
             
             Divider()
+                .frame(height: 1)
+                .background(Color("Gray4"))
+    
         }
-    }
-}
-
-struct GroupInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupInfoView()
     }
 }
