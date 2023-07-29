@@ -57,6 +57,3 @@ struct GroupMain: View {
             }
         }
 }
-
-
-
