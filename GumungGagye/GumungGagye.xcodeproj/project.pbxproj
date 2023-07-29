@@ -76,7 +76,7 @@
 		99F7D74E2A5F80780090A05A /* MoveMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D74D2A5F80780090A05A /* MoveMonth.swift */; };
 		99F7D7502A5F80880090A05A /* SectionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D74F2A5F80880090A05A /* SectionBar.swift */; };
 		99F7D75A2A66AF270090A05A /* OverPurchaseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */; };
-		99F7D75E2A66AF610090A05A /* SecretTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D75D2A66AF610090A05A /* SecretTag.swift */; };
+		99F7D75E2A66AF610090A05A /* OpenTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F7D75D2A66AF610090A05A /* OpenTag.swift */; };
 		CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */; };
 		CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E2DD2A59AE9300F15A50 /* AppFont.swift */; };
 		CD27E2E92A59AF9D00F15A50 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */; };
@@ -98,10 +98,7 @@
 		CD55899B2A5B0B29003508E2 /* GroupViewInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */; };
 		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
 		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
-
-
 		CD905A6E2A74256C00E5BC02 /* CodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */; };
-
 		CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */; };
 		CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874D2A66E78700DE5AE4 /* AccountData.swift */; };
 		CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874F2A66E7A500DE5AE4 /* UserData.swift */; };
@@ -184,7 +181,7 @@
 		99F7D74D2A5F80780090A05A /* MoveMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMonth.swift; sourceTree = "<group>"; };
 		99F7D74F2A5F80880090A05A /* SectionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionBar.swift; sourceTree = "<group>"; };
 		99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverPurchaseTag.swift; sourceTree = "<group>"; };
-		99F7D75D2A66AF610090A05A /* SecretTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretTag.swift; sourceTree = "<group>"; };
+		99F7D75D2A66AF610090A05A /* OpenTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTag.swift; sourceTree = "<group>"; };
 		CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDaySpendView.swift; sourceTree = "<group>"; };
 		CD27E2DD2A59AE9300F15A50 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		CD27E2E02A59AF8800F15A50 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -205,9 +202,7 @@
 		CD55899A2A5B0B29003508E2 /* GroupViewInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewInside.swift; sourceTree = "<group>"; };
 		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
 		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
-
 		CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeFieldView.swift; sourceTree = "<group>"; };
-
 		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CDB4874D2A66E78700DE5AE4 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -400,7 +395,7 @@
 				99F7D74D2A5F80780090A05A /* MoveMonth.swift */,
 				99F7D74F2A5F80880090A05A /* SectionBar.swift */,
 				99F7D7592A66AF270090A05A /* OverPurchaseTag.swift */,
-				99F7D75D2A66AF610090A05A /* SecretTag.swift */,
+				99F7D75D2A66AF610090A05A /* OpenTag.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -671,11 +666,8 @@
 				5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */,
 				5E82787A2A721DCA00355EBE /* CategorymodelView.swift in Sources */,
 				5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */,
-
-				9907449E2A6D039B00A246B5 /* IncomeData.swift in Sources */,
 				5E8278752A71F60900355EBE /* IncomeModalView.swift in Sources */,
 				5E8278782A7208D900355EBE /* BillmodalView.swift in Sources */,
-
 				5EEFECFF2A6168F300AF4A5F /* SettingsView.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */,
@@ -716,7 +708,7 @@
 				CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */,
 				5EEFECFD2A6168D800AF4A5F /* SignInEmailView.swift in Sources */,
 				CD27E2DE2A59AE9300F15A50 /* AppFont.swift in Sources */,
-				99F7D75E2A66AF610090A05A /* SecretTag.swift in Sources */,
+				99F7D75E2A66AF610090A05A /* OpenTag.swift in Sources */,
 				CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */,
 				CD1006FA2A5D1FD200771585 /* PersonalDaySpendView.swift in Sources */,
 				99F7D73E2A5F78B10090A05A /* ConsListView.swift in Sources */,

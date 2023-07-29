@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SecretTag: View {
-    var isSecret: Bool
+struct OpenTag: View {
+    var spendOpen: Bool
     
     var body: some View {
-        if isSecret {
+        if spendOpen {
             Text("비공개")
                 .modifier(Cap2())
                 .foregroundColor(Color("Gray1"))
@@ -29,8 +29,8 @@ struct SecretTag: View {
     }
 }
 
-struct SecretTag_Previews: PreviewProvider {
+struct OpenTag_Previews: PreviewProvider {
     static var previews: some View {
-        SecretTag(isSecret: true)
+        OpenTag(spendOpen: true)
     }
 }
