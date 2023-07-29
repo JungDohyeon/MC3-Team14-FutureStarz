@@ -22,6 +22,8 @@ struct AddModalView: View {
     @State private var isCheckedExpense = false
     @State private var isCheckedShare = true
     
+    let inputdata = InputUserData.shared
+    
     var bankApp: String = "토스"
     var bankAppScheme: String = "supertoss://"
     
@@ -51,8 +53,8 @@ struct AddModalView: View {
                 
                 Spacer()
                 
-                SmallButton(text: "\(bankApp) 열기"){
-                    let app = bankAppScheme
+                SmallButton(text: "\(inputdata.bankcardpay_info[0]) 열기"){
+                    let app = inputdata.bankcardpay_info[1]
                     let appURL = NSURL(string: app)
                     if (UIApplication.shared.canOpenURL(appURL! as URL)) {
                         UIApplication.shared.open(appURL! as URL)
