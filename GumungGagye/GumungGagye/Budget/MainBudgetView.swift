@@ -31,8 +31,8 @@ struct MainBudgetView: View {
                         Section(header: Header()) {
                             
                             ForEach(1..<10) {_ in
-                                DateBreakdown()
-                                    .padding(.top, 32)
+//                                DateBreakdown()
+//                                    .padding(.top, 32)
                             }
                         }
                         .padding(.horizontal, 20)

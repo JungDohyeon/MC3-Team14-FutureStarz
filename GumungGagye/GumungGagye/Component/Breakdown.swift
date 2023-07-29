@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Breakdown: View {
     @StateObject var userData = InputUserData.shared
-    @StateObject private var accountManager2 = AccountManager2.shared
+    var readAccountManager = ReadAccountManager.shared
     
     let accountData: AccountData
 
@@ -19,7 +19,7 @@ struct Breakdown: View {
         HStack {
             if accountData.account_type == 0 {
                 if let spendData = accountData.spend_data {
-//                    CategoryIcon(size: $size, accountType: .constant(0), categoryIndex: $categoryIndex)
+                    CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.spend_category)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("\(spendData.spend_bill)")
@@ -38,10 +38,15 @@ struct Breakdown: View {
                             OverPurchaseTag(isOverPurchase: true)
                         }
                     }
+                    
+                    let _ = print("\(spendData.spend_category)")
+                    let _ = print("\(spendData.spend_bill)")
+                    let _ = print("\(spendData.spend_content)")
+                    
                 }
             } else if accountData.account_type == 1 {
                 if let incomeData = accountData.income_data {
-//                    CategoryIcon(size: $size, accountType: .constant(1), categoryIndex: $categoryIndex)
+                    CategoryIcon(size: $size, accountType: 1, categoryIndex: incomeData.income_category)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("\(incomeData.income_bill)")
@@ -56,3 +61,4 @@ struct Breakdown: View {
         }
     }
 }
+

@@ -15,8 +15,8 @@ enum IconSize: String {
 struct CategoryIcon: View {
     
     @Binding var size: IconSize
-    @Binding var accountType: Int
-    @Binding var categoryIndex: Int
+    var accountType: Int
+    var categoryIndex: Int
 
     @ObservedObject var categoryInfo = CategoryInfo.shared
     
@@ -30,7 +30,7 @@ struct CategoryIcon: View {
 struct CategoryIcon_Previews: PreviewProvider {
     static var previews: some View {
 //        Group {
-        CategoryIcon(size: .constant(.small), accountType: .constant(0), categoryIndex: .constant(1))
+        CategoryIcon(size: .constant(.small), accountType: 0, categoryIndex: 1)
                 .previewLayout(.sizeThatFits)
                 .padding()
 //            CategoryIcon(size: .large, accountType: 1, categoryIndex: 2)

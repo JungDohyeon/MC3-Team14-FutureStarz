@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 struct ModalView: View {
     @Binding var showAddModalView: Bool
     @State var account_type: Int = 0
