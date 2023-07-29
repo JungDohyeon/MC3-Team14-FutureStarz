@@ -120,7 +120,6 @@ struct GroupTopInfo: View {
                 
                 GroupRoomView(groupdata: groupData, isNotExist: false)
                 
-                
                 Spacer()
             }
             .background(Color("background").ignoresSafeArea())
