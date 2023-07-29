@@ -1,3 +1,5 @@
+import Foundation
+import UIKit
 ////
 ////  UserData.swift
 ////  GumungGagye
@@ -16,6 +18,9 @@ struct UserData: Identifiable, Hashable {
     var goal: Int?
     var bankCardpay: Int?
     var bankCardpay_index: Int?
+    var profile_image: UIImage?
+    var profile_image_url: String? = nil
+    
 
     init(data: [String: Any]) {
         self.id = data["user_id"] as? String ?? ""
@@ -25,5 +30,6 @@ struct UserData: Identifiable, Hashable {
         self.group_id = data["group_id"] as? String ?? nil
         self.bankCardpay = data["bankcardpay"] as? Int ?? nil
         self.bankCardpay_index = data["bankcardpay_index"] as? Int ?? nil
+        self.profile_image_url = data["profile_image_url"] as? String ?? nil
     }
 }

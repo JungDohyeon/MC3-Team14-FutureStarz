@@ -34,15 +34,12 @@ struct RootView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            
-            
             Task {
                 do {
                     let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
                     if authUser != nil {
                         let deleteapp = try await UserManager.shared.getUser(userId: authUser!.uid)
-                        
-                        
+
                         try await getUser(userId: authUser!.uid)
                         
                         if let image_url = inputdata.profile_image_url {
@@ -50,26 +47,14 @@ struct RootView: View {
                         }
                         
 //                        inputdata.profile_image = try await fetchImage(url: URL(string: inputdata.profile_image_url!)!)
-                        
-                        
-                        
                         app_setting = deleteapp
                     }
                     self.showSignInView = authUser == nil
                 } catch {
                     
                 }
-                
-                
             }
         }
-        
-        
-        
-        
-        
-        
-        
         .fullScreenCover(isPresented: $showSignInView) {
             NavigationStack {
                 AuthenticationView(showSignInView: $showSignInView)
@@ -96,6 +81,7 @@ struct RootView: View {
         guard let data = snapshot.data(), let userId = data["user_id"] as? String else {
             throw URLError(.badServerResponse)
         }
+        
         inputdata.profile_image_url = data["profile_image_url"] as? String
         inputdata.bankcardpay = data["bankcardpay"] as? Int
         inputdata.bankcardpay_index = data["bankcardpay_index"] as? Int

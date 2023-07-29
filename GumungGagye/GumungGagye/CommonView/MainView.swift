@@ -47,11 +47,12 @@ struct MainView: View {
                         Task {
                             groupData = try await firebaseManager.fetchGroupData(groupId: groupID)
                             if let groupData = groupData {
-                                print("INVITE USER: \(user.group_id)")
                                 if groupData.group_cur >= groupData.group_max {
                                     inviteGroupStatus = .groupMax
                                 } else if user.group_id != "" {
                                     inviteGroupStatus = .alreadyJoined
+                                } else {
+                                    inviteGroupStatus = .otherCase
                                 }
                             } else {
                                 print("Fetch Group Error")
