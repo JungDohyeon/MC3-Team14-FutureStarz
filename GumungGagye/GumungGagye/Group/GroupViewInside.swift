@@ -209,7 +209,9 @@ struct UserScroller: View {
                         if let arrayData = arrayData {
                             self.userData = arrayData
                         }
-                        selectedPerson = userData[0].nickname
+                        if userData.count > 0 {
+                            selectedPerson = userData[0].nickname
+                        }
                     }
                 }
             }
