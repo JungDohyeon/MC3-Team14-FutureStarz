@@ -9,6 +9,10 @@ import SwiftUI
 
 struct AnalysisView: View {
     
+    var budgetFirebaseManager = BudgetFirebaseManager.shared
+    
+    @State var categorySpendSum = 0
+    
     var body: some View {
             VStack {
                 // - MARK: - 분석 타이틀 / 월 변경
@@ -75,9 +79,9 @@ struct AnalysisView: View {
                         
                         // Top 3 리스트
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 32000)
-                            TopContentView(rank: 2, content: "아이스크림", money: 17000)
-                            TopContentView(rank: 3, content: "아이폰 케이스", money: 13300)
+                            TopContentView(rank: 1, content: "치킨", spendBill: 32000)
+                            TopContentView(rank: 2, content: "아이스크림", spendBill: 17000)
+                            TopContentView(rank: 3, content: "아이폰 케이스", spendBill: 13300)
                         }
                         .padding(.bottom, 28.0)
                         
@@ -130,9 +134,9 @@ struct AnalysisView: View {
                         
                         // Top 3 List
                         VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "식비", money: 155000)
-                            TopContentView(rank: 2, content: "교통비", money: 100300)
-                            TopContentView(rank: 3, content: "카페", money: 75000)
+                            TopContentView(rank: 1, content: "식비", spendBill: 155000)
+                            TopContentView(rank: 2, content: "교통비", spendBill: 100300)
+                            TopContentView(rank: 3, content: "카페", spendBill: 75000)
                         }
                         .padding(.bottom, 28.0)
                         .padding(.top, 24)
