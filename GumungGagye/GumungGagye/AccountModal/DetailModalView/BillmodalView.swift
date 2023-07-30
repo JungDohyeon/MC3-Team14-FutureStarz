@@ -12,6 +12,7 @@ struct BillmodalView: View {
     
     @Binding var spend_bill: Int?
     @Binding var spend_bill_string: String
+
     // MARK: - BODY
     
     var body: some View {
@@ -39,8 +40,8 @@ struct BillmodalView: View {
                             .modifier(Body1Bold())
                             .onChange(of: spend_bill_string, perform: { newValue in
                                 spend_bill = Int(spend_bill_string)
-
                             })
+                            
                         }
                         HStack(spacing: 0) {
                             Spacer()
