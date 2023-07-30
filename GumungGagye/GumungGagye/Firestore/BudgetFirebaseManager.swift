@@ -113,14 +113,17 @@ final class BudgetFirebaseManager: ObservableObject {
                 print("Error adding document: \(error)")
             } else {
                 print("Account data added with ID: \(documentID)")
-                self.checkAndAddSpendToPost(spendData, documentID, userID)
+                self.checkAndAddSpendToPost(spendData, documentID)
             }
         }
     }
     
     // Add post
-    func checkAndAddSpendToPost(_ spendData: InputSpendData, _ accountDocumentID: String, _ userID: String) {
+    func checkAndAddSpendToPost(_ spendData: InputSpendData, _ accountDocumentID: String) {
         let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
         
         // 해당 날짜에 해당하는 POST가 있는지 확인
         let dateFormatter = DateFormatter()
@@ -151,23 +154,42 @@ final class BudgetFirebaseManager: ObservableObject {
                     }
                 }
             } else {
-                // 해당 날짜에 해당하는 POST가 이미 존재할 경우 해당 POST의 account_array에 account_id를 추가
                 let postDoc = snapshot!.documents.first!
                 let postID = postDoc.documentID
+                let postUserID = postDoc["post_userID"] as? String ?? "" // Extract the post_userID from the existing post
                 
-                db.collection("post").document(postID).updateData([
-                    "account_array": FieldValue.arrayUnion([accountDocumentID])
-                ]) { error in
-                    if let error = error {
-                        print("Error updating document: \(error)")
-                    } else {
-                        print("Spend id added to existing post for date: \(dateString)")
+                if postUserID != userID {
+                    // 유저 아이디가 다르다면 새로 생성
+                    let documentRef = db.collection("post").document()
+                    let newPostID = documentRef.documentID
+                    
+                    documentRef.setData([
+                        "post_id": newPostID,
+                        "post_date": dateString,
+                        "post_userID": userID,
+                        "account_array": [accountDocumentID]
+                    ]) { error in
+                        if let error = error {
+                            print("Error adding document: \(error)")
+                        } else {
+                            print("New POST data added with ID: \(newPostID)")
+                        }
+                    }
+                } else {
+                    // Otherwise, update the existing post's account_array
+                    db.collection("post").document(postID).updateData([
+                        "account_array": FieldValue.arrayUnion([accountDocumentID])
+                    ]) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                        } else {
+                            print("Spend id added to existing post for date: \(dateString)")
+                        }
                     }
                 }
             }
         }
     }
-    
     
     // Income
     func saveIncomeToFirebase(_ incomeData: InputIncomeData) {
@@ -214,12 +236,12 @@ final class BudgetFirebaseManager: ObservableObject {
                 print("Error adding document: \(error)")
             } else {
                 print("Account data added with ID: \(documentID)")
-                self.checkAndAddSpendToPost(incomeData, documentID)
+                self.checkAndAddIncomeToPost(incomeData, documentID)
             }
         }
     }
     
-    func checkAndAddSpendToPost(_ spendData: InputIncomeData, _ accountDocumentID: String) {
+    func checkAndAddIncomeToPost(_ incomeData: InputIncomeData, _ accountDocumentID: String) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -228,7 +250,7 @@ final class BudgetFirebaseManager: ObservableObject {
         // 해당 날짜에 해당하는 POST가 있는지 확인
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from: spendData.account_date)
+        let dateString = dateFormatter.string(from: incomeData.account_date)
         
         db.collection("post").whereField("post_date", isEqualTo: dateString).getDocuments { (snapshot, error) in
             if let error = error {
