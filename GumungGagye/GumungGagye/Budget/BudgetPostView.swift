@@ -18,24 +18,35 @@ struct BudgetPostView: View {
     let day: String     // 요일
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
+    @State var incomeSum = 0
+    @State var spendSum = 0
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(year)년 \(month)월 \(date)일 \(day)")
-                .modifier(Body2())
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("\(date)일 \(day)")
+                    .modifier(Body2())
+                Spacer()
+                
+                Text("+\(incomeSum)원")
+                    .modifier(Num4())
+                    .foregroundColor(Color("Main"))
+                
+                Text("-\(spendSum)원")
+                    .modifier(Num4())
+            }
+                
             ForEach(accountIDArray, id: \.self) { accountID in
-                Breakdown(size: .constant(.small), accountDataID: accountID)
+                Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
             }
         }
-        .padding(.bottom, 30)
+        .padding(.bottom, 52)
         .onAppear {
             if let userID = Auth.auth().currentUser?.uid {
                 Task {
                     let todayDate = dayFormat.appending(year).appending("-").appending(month).appending("-").appending(date)
                     accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
-            } else {
-                print("NOT Exist USER")
             }
         }
     }

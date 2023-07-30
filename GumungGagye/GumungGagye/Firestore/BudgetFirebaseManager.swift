@@ -310,6 +310,30 @@ final class BudgetFirebaseManager: ObservableObject {
                 }
             }
             
+            // snapshotListener를 추가하여 해당 쿼리 결과에 변경 사항을 실시간으로 감지합니다.
+            let listener = query.addSnapshotListener { snapshot, error in
+                guard let snapshot = snapshot else {
+                    print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                
+                // 쿼리 결과를 업데이트합니다.
+                var updatedAccountArray: [String] = []
+                for document in snapshot.documents {
+                    if let accountArrayData = document.data()["account_array"] as? [String] {
+                        updatedAccountArray.append(contentsOf: accountArrayData)
+                    }
+                }
+                
+                // 변경된 데이터를 업데이트합니다.
+                accountArray = updatedAccountArray
+                print("Data updated with snapshotListener")
+            }
+            
+            // 필요한 경우 Listener를 사용하여 나중에 Listener를 해제할 수 있습니다.
+            // 예를 들면 뷰가 사라지거나, 더 이상 데이터 감지가 필요하지 않을 때 Listener를 해제합니다.
+            // listener.remove()
+            
             return accountArray
         } catch {
             throw error
@@ -317,42 +341,46 @@ final class BudgetFirebaseManager: ObservableObject {
     }
 
 
+
     
     // Fetch Account
-    func fetchAccountData(forAccountID accountID: String, completion: @escaping ((ReadSpendData?, ReadIncomeData?)) -> Void) {
-        db.collection("account").document(accountID)
-            .getDocument { (documentSnapshot, error) in
-                guard let documentData = documentSnapshot?.data() else {
-                    completion((nil, nil))
-                    return
-                }
-                
-                let accountData = ReadAccountData(
-                    id: documentSnapshot!.documentID,
-                    accountDate: documentData["account_date"] as? Timestamp ?? Timestamp(),
-                    accountType: documentData["account_type"] as? Int ?? 0,
-                    detailId: documentData["detail_id"] as? String,
-                    userId: documentData["user_id"] as? String ?? ""
-                )
-                
-                if let detailID = accountData.detailId {
-                    // income
-                    if accountData.accountType == 1 {
-                        self.fetchIncomeData(forDetailID: detailID) { incomeData in
-                            completion((nil, incomeData))
-                        }
-                    }
-                    // spend
-                    else {
-                        self.fetchSpendData(forDetailID: detailID) { spendData in
-                            completion((spendData, nil))
-                        }
-                    }
-                } else {
-                    completion((nil, nil))
-                }
+    func fetchAccountData(forAccountID accountID: String, completion: @escaping ((ReadSpendData?, ReadIncomeData?)) -> Void) -> ListenerRegistration? {
+        let firestore = Firestore.firestore()
+        let accountRef = firestore.collection("account").document(accountID)
+        
+        return accountRef.addSnapshotListener { (documentSnapshot, error) in
+            guard let documentData = documentSnapshot?.data() else {
+                completion((nil, nil))
+                return
             }
+            
+            let accountData = ReadAccountData(
+                id: documentSnapshot!.documentID,
+                accountDate: documentData["account_date"] as? Timestamp ?? Timestamp(),
+                accountType: documentData["account_type"] as? Int ?? 0,
+                detailId: documentData["detail_id"] as? String,
+                userId: documentData["user_id"] as? String ?? ""
+            )
+            
+            if let detailID = accountData.detailId {
+                // income
+                if accountData.accountType == 1 {
+                    self.fetchIncomeData(forDetailID: detailID) { incomeData in
+                        completion((nil, incomeData))
+                    }
+                }
+                // spend
+                else {
+                    self.fetchSpendData(forDetailID: detailID) { spendData in
+                        completion((spendData, nil))
+                    }
+                }
+            } else {
+                completion((nil, nil))
+            }
+        }
     }
+
     
     // Fetch Spend Data
     private func fetchSpendData(forDetailID detailID: String, completion: @escaping (ReadSpendData?) -> Void) {

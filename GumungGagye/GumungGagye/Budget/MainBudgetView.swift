@@ -31,7 +31,7 @@ struct MainBudgetView: View {
                     }
                     
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
-                        Section(header: Header()) {
+                        Section(header: Header().padding(.bottom, 35)) {
                             ForEach((1...today).reversed(), id:\.self) { day in
                                 BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day))
                             }
