@@ -54,7 +54,7 @@ struct Breakdown: View {
             }
         }
         .onAppear {
-            BudgetFirebaseManager.shared.fetchAccountData(forAccountID: "SI32oGnLpM4B0tiO5jGM") { data in
+            BudgetFirebaseManager.shared.fetchAccountData(forAccountID: accountDataID) { data in
                 self.spendData = data.0
                 self.incomeData = data.1
             }

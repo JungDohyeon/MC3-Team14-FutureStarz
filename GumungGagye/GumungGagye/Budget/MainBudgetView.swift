@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MainBudgetView: View {
+    let today = Calendar.current.component(.day, from: Date())
+    let dateFormatter = DateFormatter()
+    
     var body: some View {
-        
         VStack(alignment: .leading) {
             // 월(날짜) 이동
             MoveMonth(size: .Big, selectedMonth: Date.now) // 숫자 데이터로 받아오기
@@ -20,19 +22,18 @@ struct MainBudgetView: View {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
                         
-//                        TargetBudgetView(goalBill: , spendBill: <#Int#>)
-//                            .padding(.top, 16)
+                        //                        TargetBudgetView(goalBill: , spendBill: <#Int#>)
+                        //                            .padding(.top, 16)
                         SectionBar()
-//                        CurrentAssetView(nickname: <#String#>, spendBill: <#Int#>, incomeBill: <#Int#>)
+                        //                        CurrentAssetView(nickname: <#String#>, spendBill: <#Int#>, incomeBill: <#Int#>)
                         SectionBar()
                             .padding(.bottom, 26)
                     }
                     
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header()) {
-                            
-                            ForEach(1..<10) {_ in
-                                Text("rere")
+                            ForEach((1...today).reversed(), id:\.self) { day in
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day))
                             }
                         }
                         .padding(.horizontal, 20)
@@ -44,13 +45,50 @@ struct MainBudgetView: View {
         .foregroundColor(Color("Black"))
         .background(Color("background"))
     }
+    
+    func getYear(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "YYYY"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    
+    func getMonth(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "MM"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDate(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "dd"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDay(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "EEEE"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
 }
 
 
 struct Header: View {
     
     @State var showAddModalView: Bool = false
-
+    
     var body: some View {
         HStack {
             Text("내역")
@@ -60,7 +98,7 @@ struct Header: View {
                 self.showAddModalView = true
             }
             .sheet(isPresented: self.$showAddModalView) {
-//                AddModalView()
+                //                AddModalView()
                 ModalView(showAddModalView: $showAddModalView)
                     .presentationDetents([.large])
                     .presentationDragIndicator(.visible)

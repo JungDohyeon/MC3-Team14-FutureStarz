@@ -289,8 +289,35 @@ final class BudgetFirebaseManager: ObservableObject {
     }
     
     
-    
     // ================================ READ ================================
+   
+    // fetchPost
+    func fetchPostData(userID userId: String, date: String) async throws -> [String] {
+        let firestore = Firestore.firestore()
+        let postsCollection = firestore.collection("post")
+        
+        // 해당 날짜 범위 내에서 userId와 date가 일치하는 post 문서를 쿼리합니다.
+        let query = postsCollection.whereField("post_userID", isEqualTo: userId)
+                                   .whereField("post_date", isEqualTo: date)
+        
+        do {
+            let snapshot = try await query.getDocuments()
+            
+            var accountArray: [String] = []
+            for document in snapshot.documents {
+                if let accountArrayData = document.data()["account_array"] as? [String] {
+                    accountArray.append(contentsOf: accountArrayData)
+                }
+            }
+            
+            return accountArray
+        } catch {
+            throw error
+        }
+    }
+
+
+    
     // Fetch Account
     func fetchAccountData(forAccountID accountID: String, completion: @escaping ((ReadSpendData?, ReadIncomeData?)) -> Void) {
         db.collection("account").document(accountID)
