@@ -30,11 +30,16 @@ struct GroupInfoView: View {
                 .padding(.horizontal, 20)
                 
                 ScrollView {
+//                    if let image_url = inputdata.profile_image_url {
+//                        inputdata.profile_image = try await fetchImage(url: URL(string: image_url)!)
+//                    }
+                    
                     ForEach(userData, id: \.id) { data in
                         GroupRankingView(ranking: 1, userName: data.nickname, spendMoney: 7500)
                     }
                     .padding(.horizontal, 20)
                 }
+                
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -59,6 +64,17 @@ struct GroupInfoView: View {
                 }
             }
         }
+    }
+    
+    func fetchImage(url: URL) async throws -> UIImage {
+        let request = URLRequest(url: url)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
+              (200...299).contains(statusCode) else { throw NSError(domain: "fetch error", code: 1004) }
+        guard let image = UIImage(data: data) else {return UIImage(systemName: "person.fill")!}
+        
+        return image
     }
 }
 
@@ -112,42 +128,5 @@ enum Month: Int, CaseIterable {
     
     mutating func decrement() {
         self = self == .january ? .december : Month(rawValue: rawValue - 1)!
-    }
-}
-
-
-struct GroupRankingView: View {
-    var ranking: Int
-    var userName: String
-    var spendMoney: Int
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text(ranking.description)
-                    .modifier(Num5())
-                    .padding(.trailing, 18)
-                
-                Circle()
-                    .foregroundColor(Color("Gray3"))
-                    .frame(width: 40, height: 40)
-                    .padding(.trailing, 12)
-                
-                Text(userName)
-                    .modifier(Body2())
-                
-                Spacer()
-                
-                Text("-\(spendMoney.description)원")
-                    .modifier(Num4SemiBold())
-            }
-            .padding(.vertical, 14)
-            .padding(.horizontal, 8)
-            
-            Divider()
-                .frame(height: 1)
-                .background(Color("Gray4"))
-    
-        }
     }
 }

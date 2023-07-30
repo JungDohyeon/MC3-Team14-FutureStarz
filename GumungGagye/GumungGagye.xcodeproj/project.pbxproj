@@ -106,6 +106,7 @@
 		CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */; };
 		CDB4874E2A66E78700DE5AE4 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874D2A66E78700DE5AE4 /* AccountData.swift */; };
 		CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874F2A66E7A500DE5AE4 /* UserData.swift */; };
+		CDB55B472A75379000D7D6F1 /* GroupRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB55B462A75379000D7D6F1 /* GroupRankingView.swift */; };
 		CDCB8C452A53A02F005DF128 /* GumungGagyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */; };
 		CDCB8C472A53A02F005DF128 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB8C462A53A02F005DF128 /* ContentView.swift */; };
 		CDCB8C492A53A030005DF128 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDCB8C482A53A030005DF128 /* Assets.xcassets */; };
@@ -214,6 +215,7 @@
 		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CDB4874D2A66E78700DE5AE4 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		CDB55B462A75379000D7D6F1 /* GroupRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRankingView.swift; sourceTree = "<group>"; };
 		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				CDCBE3822A5BE37D00DB33C8 /* GroupUserSpendView.swift */,
 				CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */,
 				CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */,
+				CDB55B462A75379000D7D6F1 /* GroupRankingView.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				CD27E2F92A59B80800F15A50 /* FirebaseController.swift in Sources */,
 				99F7D7462A5F7FFE0090A05A /* Breakdown.swift in Sources */,
 				5EE6A9DE2A6B965300480855 /* SelectingBudgetView.swift in Sources */,
+				CDB55B472A75379000D7D6F1 /* GroupRankingView.swift in Sources */,
 				5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */,
 				5E82787A2A721DCA00355EBE /* CategorymodelView.swift in Sources */,
 				5EEFECFB2A6168C000AF4A5F /* AuthenticationView.swift in Sources */,
