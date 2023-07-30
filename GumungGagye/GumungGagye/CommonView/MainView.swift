@@ -26,10 +26,13 @@ struct MainView: View {
     @State private var groupData: GroupData? = nil
     
     var body: some View {
-        TabView{
+        TabView(selection: $tabSelection) {
             MainBudgetView()
                 .tabItem {
-                    Label("가계부", systemImage: "list.clipboard.fill")
+                    VStack {
+                        Image(tabSelection == .main ? "BudgetIconAbled" : "BudgetIconDisabled")
+                        Text("가계부")
+                    }
                 }
                 .tag(Tab.main)
                 .onOpenURL { url in
@@ -68,19 +71,28 @@ struct MainView: View {
             
             AnalysisView()
                 .tabItem {
-                    Label("분석", systemImage: "chart.pie.fill")
+                    VStack {
+                        Image(tabSelection == .analysis ? "AnalysisIconAbled" : "AnalysisIconDisabled")
+                        Text("분석")
+                    }
                 }
                 .tag(Tab.analysis)
             
             GroupMain()
                 .tabItem {
-                    Label("그룹", systemImage: "person")
+                    VStack {
+                        Image(tabSelection == .group ? "GroupIconAbled" : "GroupIconDisabled")
+                        Text("그룹")
+                    }
                 }
                 .tag(Tab.group)
             
             SettingView(showSignInView: $showSignInView)
                 .tabItem {
-                    Label("설정", systemImage: "gear")
+                    VStack {
+                        Image(tabSelection == .setting ? "SettingIconAbled" : "SettingIconDisabled")
+                        Text("설정")
+                    }
                 }
                 .tag(Tab.setting)
         }
