@@ -48,34 +48,66 @@ struct DatemodalView: View {
                     .onTapGesture {
                         isDatePickerVisible = true
                     }
+                    
+                    
+                    
                     .sheet(isPresented: $isDatePickerVisible) {
                         VStack(spacing: 0) {
                             DatePicker("", selection: $selectDate, in: ...Date(), displayedComponents: .date)
                                 .datePickerStyle(GraphicalDatePickerStyle())
                                 .labelsHidden()
+                                .accentColor(Color("Main"))
                                 .presentationDetents([.height(450)])
                                 .onChange(of: selectDate) { newValue in
                                     temData = newValue
 //                                    print(account_date)
                                 }
-                            Rectangle()
-                                .frame(height: 50)
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.green)
-                                .overlay {
-                                    Text("Select")
-                                        .modifier(Body1Bold())
-                                }
-                                .onTapGesture {
-                                    isDatePickerVisible = false
+                                .padding(.top, 10)
+                                .padding(.bottom, 15)
+                            
+                            
+                            Button {
+                                isDatePickerVisible = false
+                                account_date = temData
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    Text("선택하기")
+                                        .modifier(BtnBold())
                                     
-//                                    if account_date == nil {
-//                                        account_date = Date()
-//                                    } else {
-                                        account_date = temData
-//                                    }
-//                                    print("account_date : \(dateToString(date: account_date!))")
+                                    Spacer()
                                 }
+                                .frame(height: 48)
+                                .background(Color("Main"))
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                                .padding(.horizontal, 13)
+                            }
+                            
+                            
+                            
+//                            Rectangle()
+//                                .frame(height: 50)
+//                                .frame(maxWidth: .infinity)
+//                                .foregroundColor(.green)
+//                                .overlay {
+//                                    Text("Select")
+//                                        .modifier(Body1Bold())
+//                                }
+//                                .onTapGesture {
+//                                    isDatePickerVisible = false
+//
+////                                    if account_date == nil {
+////                                        account_date = Date()
+////                                    } else {
+//                                        account_date = temData
+////                                    }
+////                                    print("account_date : \(dateToString(date: account_date!))")
+//                                }
+                            
+                            Spacer()
+                            
+                            
                         }
                     }
                     Spacer()

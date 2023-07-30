@@ -52,9 +52,10 @@ struct SettingView: View {
                         .padding(.trailing, 18)
                     
                     
-                    VStack(alignment: .leading, spacing: 20.0) {
+                    VStack(alignment: .leading, spacing: 0) {
                         Text(inputdata.nickname ?? "")
                             .modifier(H2SemiBold())
+                            .padding(.bottom, 8)
                         HStack(alignment: .center, spacing: 4.0) {
                             Image(systemName: "apple.logo")
                                 .foregroundColor(Color("Gray2"))
@@ -63,8 +64,6 @@ struct SettingView: View {
                                 .modifier(Body2())
                         }
                     }
-                    
-                    
                 }
             }
             .foregroundColor(Color("Black"))
@@ -122,12 +121,6 @@ struct SettingView: View {
                             // 로그아웃 탈퇴기능
                             Task {
                                 do {
-//
-                                    
-                                    
-                                    
-                                    
-                                    
                                     try await viewModel.deleteAccount()
                                     app_setting = false
                                     showSignInView = true
@@ -168,9 +161,6 @@ struct SettingView: View {
             print("\(inputdata.goal)")
         }
     }
-    
-    
-    
 }
 
 struct SettingRowView: View {

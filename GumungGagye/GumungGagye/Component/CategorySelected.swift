@@ -11,7 +11,7 @@ struct CategorySelected: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 12) // Use RoundedRectangle instead of Rectangle
             .foregroundColor(Color("Light"))
-            .frame(width: 72, height: 90)
+            .frame(width: 72, height: 88.5)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(Color("Main"), lineWidth: 2) // Add stroke to the RoundedRectangle

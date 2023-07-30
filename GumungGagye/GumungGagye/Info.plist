@@ -27,9 +27,23 @@
 	<string>855398204787-urlo6peu7070auv8ca76eln73krolje0.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>solZzeung</string>
+		<string>kbbank</string>
+		<string>Newsmartpib</string>
+		<string>ionebank</string>
+		<string>kakaobank</string>
 		<string>supertoss</string>
 		<string>kakaotalk</string>
-		<string>kakaomap</string>
+		<string>naverpayapp</string>
+		<string>payco</string>
+		<string>shinhan-sr-ansimclick</string>
+		<string>hdcardappcardansimclick</string>
+		<string>mpocket.online.ansimclick</string>
+		<string>lotteappcard</string>
+		<string>kb-acp</string>
+		<string>cloudpay</string>
+		<string>com.wooricard.wcard</string>
+		<string>nhallonepayansimclick</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

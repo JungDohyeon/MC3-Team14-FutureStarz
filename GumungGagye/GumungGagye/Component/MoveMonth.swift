@@ -25,8 +25,19 @@ struct MoveMonth: View {
             Button(action: {
                 self.selectedMonth = self.calendar.date(byAdding: .month, value: -1, to: self.selectedMonth) ?? self.selectedMonth
             }, label: {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(Color("Gray1"))
+//                Image(systemName: "chevron.left")
+//                    .foregroundColor(Color("Gray1"))
+                switch size {
+                case .Big:
+                    Image("Chevron.left.thick.gray")
+                default:
+                    Image("Chevron.left.midi.gray")
+                }
+//                if size == .Big {
+//
+//                }
+//                    .font(size == .Big ? )
+                    
             })
             
             fontView(for: size)
@@ -36,16 +47,28 @@ struct MoveMonth: View {
                     print("selected Month: \(selectedMonth)")
                     print("today : \(Date.now)")
                 }, label: {
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color("Gray3"))
+//                    Image(systemName: "chevron.right")
+//                        .foregroundColor(Color("Gray3"))
+                    switch size {
+                    case .Big:
+                        Image("Chevron.right.thick.gray3")
+                    default:
+                        Image("Chevron.right.midi.gray3")
+                    }
                 })
             } else {
                 Button(action: {
                     
                     self.selectedMonth = self.calendar.date(byAdding: .month, value: 1, to: self.selectedMonth) ?? self.selectedMonth
                 }, label: {
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color("Gray1"))
+//                    Image(systemName: "chevron.right")
+//                        .foregroundColor(Color("Gray1"))
+                    switch size {
+                    case .Big:
+                        Image("Chevron.right.thick.gray")
+                    default:
+                        Image("Chevron.right.midi.gray")
+                    }
                 })
             }
         }
