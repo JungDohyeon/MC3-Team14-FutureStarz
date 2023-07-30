@@ -36,6 +36,16 @@ struct DetailCategoryView: View {
             spend_category = categoryIndex
             isCategoryPickerVisible = false 
         }
+        .background {
+            if let ss_category = spend_category {
+                if (categoryIndex == spend_category) {
+                    CategorySelected()
+                }
+                else {
+                    Color.clear
+                }
+            }
+        }
     }
 }
 
