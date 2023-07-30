@@ -27,8 +27,11 @@ struct CategoryListView: View {
 }
 
 struct CategorySumView: View {
+    
+//    @State private var spendData: ReadSpendData
+    
     var body: some View {
-        NavigationLink(destination: CategoryHistoryView()){
+//        NavigationLink(destination: CategoryHistoryView(spendData: spendData, size: .constant(.large))){
             HStack {
                 HStack(alignment: .center, spacing: 12.0) {
                     Circle()
@@ -54,7 +57,7 @@ struct CategorySumView: View {
         }
     }
     
-}
+//}
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {

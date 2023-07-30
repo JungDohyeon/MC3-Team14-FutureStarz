@@ -1,5 +1,5 @@
 //
-//  ExpenseCategorySheetView.swift
+//  CategorySheetView.swift
 //  GumungGagye
 //
 //  Created by 신상용 on 2023/07/28.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExpenseCategorySheetView: View {
+struct CategorySheetView: View {
     // MARK: - PROPERTY
     @Binding var isCategoryPickerVisible: Bool
     @Binding var spend_category: Int?
@@ -78,9 +78,9 @@ struct ExpenseCategorySheetView: View {
     }
 }
 
-struct ExpenseCategorySheetView_Previews: PreviewProvider {
+struct CategorySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ExpenseCategorySheetView(isCategoryPickerVisible: .constant(true), spend_category: .constant(1), account_type: .constant(0))
+        CategorySheetView(isCategoryPickerVisible: .constant(true), spend_category: .constant(1), account_type: .constant(0))
             .previewLayout(.sizeThatFits)
     }
 }
