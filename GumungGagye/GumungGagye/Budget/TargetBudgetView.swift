@@ -17,7 +17,7 @@ struct TargetBudgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             
             // 목표 예산 알림
-            Text("이번 달 목표 예산이 \n\(userData.goal!.description)원 남았어요!")
+            Text("이번 달 목표 예산이 \n\(formatNumber(userData.goal))원 남았어요!")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 16)
             
@@ -41,7 +41,7 @@ struct TargetBudgetView: View {
                         Text("오늘까지 ")
                             .modifier(Cap1())
                             .foregroundColor(Color("Gray2"))
-                        Text("\(spendBill)")
+                        Text("\(formatNumber(spendBill))")
                             .modifier(Num5())
                             .foregroundColor(Color("Main"))
                     }
@@ -50,7 +50,7 @@ struct TargetBudgetView: View {
                     HStack(spacing: 0) {
                         Text("목표 예산 ")
                             .modifier(Cap1())
-                        Text("\(userData.goal!.description)원")
+                        Text("\(formatNumber(userData.goal))원")
                             .modifier(Num5())
                     }
                     .foregroundColor(Color("Gray2"))
@@ -60,6 +60,16 @@ struct TargetBudgetView: View {
             
         }
         .padding(.horizontal, 20)
+    }
+    
+    // 세자리마다 쉼표를 추가하는 함수
+    private func formatNumber(_ number: Int?) -> String {
+        guard let number = number else {
+            return ""
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: number)) ?? ""
     }
 }
 
