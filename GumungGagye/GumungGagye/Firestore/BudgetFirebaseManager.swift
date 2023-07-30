@@ -214,13 +214,16 @@ final class BudgetFirebaseManager: ObservableObject {
                 print("Error adding document: \(error)")
             } else {
                 print("Account data added with ID: \(documentID)")
-                self.checkAndAddSpendToPost(incomeData, documentID, userID)
+                self.checkAndAddSpendToPost(incomeData, documentID)
             }
         }
     }
     
-    func checkAndAddSpendToPost(_ spendData: InputIncomeData, _ accountDocumentID: String, _ userID: String) {
+    func checkAndAddSpendToPost(_ spendData: InputIncomeData, _ accountDocumentID: String) {
         let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
         
         // 해당 날짜에 해당하는 POST가 있는지 확인
         let dateFormatter = DateFormatter()

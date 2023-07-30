@@ -23,24 +23,26 @@ struct BudgetPostView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text("\(date)일 \(day)")
-                    .modifier(Body2())
-                Spacer()
-                
-                Text("+\(incomeSum)원")
-                    .modifier(Num4())
-                    .foregroundColor(Color("Main"))
-                
-                Text("-\(spendSum)원")
-                    .modifier(Num4())
-            }
-                
-            ForEach(accountIDArray, id: \.self) { accountID in
-                Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+            if accountIDArray.count > 0 {
+                HStack {
+                    Text("\(date)일 \(day)")
+                        .modifier(Body2())
+                    Spacer()
+                    
+                    Text("+\(incomeSum)원")
+                        .modifier(Num4())
+                        .foregroundColor(Color("Main"))
+                    
+                    Text("-\(spendSum)원")
+                        .modifier(Num4())
+                }
+                    
+                ForEach(accountIDArray, id: \.self) { accountID in
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+                }
             }
         }
-        .padding(.bottom, 52)
+        .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
         .onAppear {
             if let userID = Auth.auth().currentUser?.uid {
                 Task {

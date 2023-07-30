@@ -25,15 +25,9 @@ struct MainBudgetView: View {
                     VStack(spacing: 36) {
                         
                         TargetBudgetView(spendBill: 100000)
-//                            .padding(.top, 16)
+                            .padding(.top, 16)
                         SectionBar()
                         CurrentAssetView(spendBill: 50000, incomeBill: 1000000)
-
-                        //                        TargetBudgetView(goalBill: , spendBill: <#Int#>)
-                        //                            .padding(.top, 16)
-                        SectionBar()
-                        //                        CurrentAssetView(nickname: <#String#>, spendBill: <#Int#>, incomeBill: <#Int#>)
-
                         SectionBar()
                             .padding(.bottom, 26)
                     }
