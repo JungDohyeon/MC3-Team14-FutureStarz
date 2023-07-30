@@ -42,7 +42,7 @@
 		5E8278762A71F60900355EBE /* SpendModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8278712A71F60900355EBE /* SpendModalView.swift */; };
 		5E8278782A7208D900355EBE /* BillmodalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8278772A7208D900355EBE /* BillmodalView.swift */; };
 		5E82787A2A721DCA00355EBE /* CategorymodelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8278792A721DCA00355EBE /* CategorymodelView.swift */; };
-		5E82787C2A7357A300355EBE /* ExpenseCategorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82787B2A7357A300355EBE /* ExpenseCategorySheetView.swift */; };
+		5E82787C2A7357A300355EBE /* CategorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82787B2A7357A300355EBE /* CategorySheetView.swift */; };
 		5E82787E2A73581C00355EBE /* IncomeCategorySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82787D2A73581C00355EBE /* IncomeCategorySheetView.swift */; };
 		5E8278802A735DFC00355EBE /* DetailCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82787F2A735DFC00355EBE /* DetailCategoryView.swift */; };
 		5E8278842A735E6E00355EBE /* CategoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8278832A735E6E00355EBE /* CategoryInfo.swift */; };
@@ -153,7 +153,7 @@
 		5E8278712A71F60900355EBE /* SpendModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendModalView.swift; sourceTree = "<group>"; };
 		5E8278772A7208D900355EBE /* BillmodalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillmodalView.swift; sourceTree = "<group>"; };
 		5E8278792A721DCA00355EBE /* CategorymodelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorymodelView.swift; sourceTree = "<group>"; };
-		5E82787B2A7357A300355EBE /* ExpenseCategorySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategorySheetView.swift; sourceTree = "<group>"; };
+		5E82787B2A7357A300355EBE /* CategorySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySheetView.swift; sourceTree = "<group>"; };
 		5E82787D2A73581C00355EBE /* IncomeCategorySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategorySheetView.swift; sourceTree = "<group>"; };
 		5E82787F2A735DFC00355EBE /* DetailCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategoryView.swift; sourceTree = "<group>"; };
 		5E8278832A735E6E00355EBE /* CategoryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryInfo.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 				5E82786D2A71F60900355EBE /* DatemodalView.swift */,
 				5E8278772A7208D900355EBE /* BillmodalView.swift */,
 				5E8278792A721DCA00355EBE /* CategorymodelView.swift */,
-				5E82787B2A7357A300355EBE /* ExpenseCategorySheetView.swift */,
+				5E82787B2A7357A300355EBE /* CategorySheetView.swift */,
 				5E82787D2A73581C00355EBE /* IncomeCategorySheetView.swift */,
 				5E82787F2A735DFC00355EBE /* DetailCategoryView.swift */,
 				5E8278832A735E6E00355EBE /* CategoryInfo.swift */,
@@ -717,7 +717,7 @@
 				5EEFED052A61693000AF4A5F /* SignInAppleHelper.swift in Sources */,
 				0A2828DD2A5BB0C900A9D5D9 /* AnalysisView.swift in Sources */,
 				0A2828E12A5BB72700A9D5D9 /* TopContentView.swift in Sources */,
-				5E82787C2A7357A300355EBE /* ExpenseCategorySheetView.swift in Sources */,
+				5E82787C2A7357A300355EBE /* CategorySheetView.swift in Sources */,
 				5E82787E2A73581C00355EBE /* IncomeCategorySheetView.swift in Sources */,
 				5EEFED012A61690C00AF4A5F /* AuthenticationManager.swift in Sources */,
 				99F7D74C2A5F805A0090A05A /* DateTotal.swift in Sources */,

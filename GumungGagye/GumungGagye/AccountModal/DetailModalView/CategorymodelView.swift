@@ -42,7 +42,7 @@ struct CategorymodelView: View {
                         
                         .sheet(isPresented: $isCategoryPickerVisible) {
                             if account_type == 0 {
-                                ExpenseCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category, account_type: $account_type)
+                                CategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category, account_type: $account_type)
                                     .presentationDetents([.height(350)])
                                     .onChange(of: spend_category, perform: { newValue in
                                         print(spend_category)
@@ -50,7 +50,7 @@ struct CategorymodelView: View {
                             } else if account_type == 1 {
 //                                IncomeCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category)
 //                                    .presentationDetents([.medium])
-                                ExpenseCategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category, account_type: $account_type)
+                                CategorySheetView(isCategoryPickerVisible: $isCategoryPickerVisible, spend_category: $spend_category, account_type: $account_type)
                                     .presentationDetents([.height(350)])
                                     .onChange(of: spend_category, perform: { newValue in
                                         print(spend_category)

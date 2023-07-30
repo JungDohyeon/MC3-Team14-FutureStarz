@@ -22,6 +22,9 @@ struct DetailCategoryView: View {
                 .frame(width: 48, height: 48)
                 .padding(.bottom, 4)
             Text(category_info.category_info[account_type][categoryIndex]![0])
+                .modifier(Cap1())
+                .foregroundColor(Color("Black"))
+                .multilineTextAlignment(.center)
         }
         .frame(width: 72, height: 90)
         .onTapGesture {
