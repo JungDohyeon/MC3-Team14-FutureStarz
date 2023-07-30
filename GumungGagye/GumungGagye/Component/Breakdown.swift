@@ -38,7 +38,7 @@ struct Breakdown: View {
                 
                 HStack {
                     if spendData.open {
-                        OverPurchaseTag(isOverPurchase: false)
+                        OpenTag(spendOpen: true)
                     }
                     if spendData.overConsume {
                         OverPurchaseTag(isOverPurchase: true)
