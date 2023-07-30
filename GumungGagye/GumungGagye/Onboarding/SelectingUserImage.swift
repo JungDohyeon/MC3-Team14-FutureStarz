@@ -45,7 +45,31 @@ struct SelectingUserImage: View {
                     shouldShowImagePicker.toggle()
                 } label: {
                     VStack {
+                        ZStack {
+                            Circle()
+                                .frame(width: 144, height: 144)
+                                .overlay {
+                                    if let image = self.image {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .clipShape(Circle())
+                                    }else {
+                                        Image("SeletingPictureIcon")
+                                            .resizable()
+                                            .frame(width: 144, height: 144)
+                                            .shadow(color: Color(red: 0.31, green: 0.32, blue: 0.63).opacity(0.2), radius: 5, x: 0, y: 2)
+                                    }
+                                }
+                            
+                            Image("SelectingAlbum")
+                                .resizable()
+                                .frame(width: 44, height: 44)
+                                .offset(x: 50, y: 50)
+                            
+                        }
                         
+                        /*
                         ZStack {
                             
                             Circle()
@@ -59,7 +83,8 @@ struct SelectingUserImage: View {
                                             .scaledToFill()
                                             .clipShape(Circle())
                                     } else {
-                                        Image(systemName: "person.fill")
+//                                        Image(systemName: "person.fill")
+                                        image("SeletingPictureIcon")
                                             .font(.system(size: 68))
                                             .foregroundColor(Color(.white))
                                         
@@ -83,20 +108,10 @@ struct SelectingUserImage: View {
                                 }
                                 .offset(x: 50, y: 50)
                             
-//                            Image(systemName: "photo.circle.fill")
-//                                .symbolRenderingMode(.palette)
-//                                .foregroundStyle(.gray, .white, .white)
-//                                .font(.system(size: 50))
-//
-//                                .overlay {
-//                                    Circle()
-//                                        .stroke(Color("Gray2"), lineWidth: 1)
-//                                }
-//                                .offset(x: 50, y: 50)
                            
                             
                         }
-                        
+                        */
                      
                     }
                 }

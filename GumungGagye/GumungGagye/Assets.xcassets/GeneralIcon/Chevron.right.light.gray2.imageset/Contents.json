@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Icon Name=Chevron.right.light.gray2.svg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Icon Name=Chevron.right.light.gray2 1.svg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Icon Name=Chevron.right.light.gray2 2.svg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
