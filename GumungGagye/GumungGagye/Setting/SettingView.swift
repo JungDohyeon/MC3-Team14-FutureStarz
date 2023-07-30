@@ -239,7 +239,7 @@ struct SettingRowView2: View {
                     .font(.system(size: 16))
             }
             .onTapGesture {
-                if selectSetting == 1{
+                if selectSetting == 1 {
                     budgetSetting = true
                     print("budget")
                 } else if selectSetting == 2 {
