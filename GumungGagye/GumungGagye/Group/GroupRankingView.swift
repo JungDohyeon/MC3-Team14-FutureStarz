@@ -24,10 +24,6 @@ struct GroupRankingView: View {
                     .frame(width: 40, height: 40)
                     .padding(.trailing, 12)
                 
-                Circle()
-                    .foregroundColor(Color("Gray2"))
-                    .frame(width: 40, height: 40)
-                
                 Text(userName)
                     .modifier(Body2())
                 
