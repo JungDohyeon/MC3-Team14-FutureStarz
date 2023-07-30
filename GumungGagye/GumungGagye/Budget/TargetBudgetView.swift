@@ -17,7 +17,7 @@ struct TargetBudgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             
             // 목표 예산 알림
-            Text("이번 달 목표 예산이 \(userData.goal!.description)원 남았어요!")
+            Text("이번 달 목표 예산이 \n\(userData.goal!.description)원 남았어요!")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 16)
             
@@ -63,8 +63,14 @@ struct TargetBudgetView: View {
     }
 }
 
-//struct TargetBudgetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TargetBudgetView()
-//    }
-//}
+struct TargetBudgetView_Previews: PreviewProvider {
+    static var previews: some View {
+        let spendBill = 50000 // 예시로 사용할 쓴 금액
+        let userData = InputUserData.shared
+        userData.goal = 100000 // 예시로 사용할 목표 예산
+        
+        return TargetBudgetView(spendBill: spendBill)
+            .environmentObject(userData) // TargetBudgetView에 userData 환경 객체 전달
+            .previewLayout(.sizeThatFits)
+    }
+}

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainBudgetView: View {
+    
+    @StateObject var userData = InputUserData.shared
+    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -20,7 +23,7 @@ struct MainBudgetView: View {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
                         
-//                        TargetBudgetView(goalBill: , spendBill: <#Int#>)
+//                        TargetBudgetView(spendBill: 100000, userData: <#T##arg#>)
 //                            .padding(.top, 16)
                         SectionBar()
 //                        CurrentAssetView(nickname: <#String#>, spendBill: <#Int#>, incomeBill: <#Int#>)
