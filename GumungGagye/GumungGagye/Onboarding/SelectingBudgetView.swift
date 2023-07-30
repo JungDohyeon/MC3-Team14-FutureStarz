@@ -37,8 +37,11 @@ struct SelectingBudgetView: View {
                     TextField(text: $input.groupGoalValue) {
                         Text("금액을 입력해주세요")
                     }.onChange(of: input.groupGoalValue) { newValue in
+                        
                         isAbled = !newValue.isEmpty
                         input.groupGoalValue = String(newValue.prefix(9))
+                        
+//                        inputdata.goal = Int(input.groupGoalValue)
                         //                        print(keyboardResponder.currentHeight)
                     }
                     //키보드 숫자로!!!
@@ -64,8 +67,8 @@ struct SelectingBudgetView: View {
                 Button(action: {
                     
                     logic = true
-                    inputdata.goal = Int(budget)
-                    
+                    inputdata.goal = Int(input.groupGoalValue)
+                    print("input \(inputdata.goal)")
                     Task{
                         if let userss = Auth.auth().currentUser {
                             try await Firestore.firestore().collection("users").document(userss.uid).updateData(["goal": inputdata.goal])

@@ -7,26 +7,34 @@
 
 import SwiftUI
 
+
 struct DetailCategoryView: View {
     // MARK: - PROPERTY
+    
     @State var categoryIndex: Int
     @Binding var spend_category: Int?
     @Binding var account_type: Int
     @Binding var isCategoryPickerVisible: Bool
     let category_info = CategoryInfo.shared
+    
+    
+
     // MARK: - BODY
     var body: some View {
         VStack (spacing: 0) {
-            Image(category_info.category_info[account_type][categoryIndex]![1])
+            Image("\(category_info.category_info[account_type][categoryIndex]![1])_S")
                 .resizable()
                 .frame(width: 48, height: 48)
                 .padding(.bottom, 4)
             Text(category_info.category_info[account_type][categoryIndex]![0])
+                .modifier(Cap1())
+                .foregroundColor(Color("Black"))
+                .multilineTextAlignment(.center)
         }
         .frame(width: 72, height: 90)
         .onTapGesture {
             spend_category = categoryIndex
-            isCategoryPickerVisible = false
+            isCategoryPickerVisible = false 
         }
     }
 }
