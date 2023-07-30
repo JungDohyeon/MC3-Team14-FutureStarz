@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CategoryHistoryView: View {
+    
+    @State private var spendData: ReadSpendData
+    @Binding var size: IconSize
+    
     var body: some View {
         ScrollView{
             VStack(spacing: 76.0) {
@@ -39,8 +43,8 @@ struct CategoryHistoryView: View {
                     
                     Spacer()
                     // 카테고리 아이콘
-                    Circle()
-                        .frame(width: 80, height: 80)
+                    let spendData = spendData
+                    CategoryIcon(size: .constant(.large), accountType: 0, categoryIndex: spendData.category)
                 }
                 .padding(.top, 48.0)
                 
@@ -59,8 +63,11 @@ struct CategoryHistoryView: View {
     }
 }
 
-struct CategoryHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryHistoryView()
-    }
-}
+//struct CategoryHistoryView_Previews: PreviewProvider {
+//
+//    @State private var spendData: ReadSpendData
+//
+//    static var previews: some View {
+//        CategoryHistoryView(spendData: , size: .constant(.large))
+//    }
+//}

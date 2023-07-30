@@ -27,12 +27,12 @@ struct MainBudgetView: View {
                         SectionBar()
                             .padding(.bottom, 26)
                     }
+                    
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header()) {
                             
                             ForEach(1..<10) {_ in
-//                                DateBreakdown()
-//                                    .padding(.top, 32)
+                                Text("rere")
                             }
                         }
                         .padding(.horizontal, 20)

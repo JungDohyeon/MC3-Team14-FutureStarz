@@ -25,7 +25,6 @@ struct GroupMain: View {
                     GroupViewInside(groupData: userGroupData)
                 }
             }
-            
         }
         .onAppear {
             fetchData()

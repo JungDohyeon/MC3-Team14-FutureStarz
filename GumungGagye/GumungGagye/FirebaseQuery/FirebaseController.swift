@@ -328,6 +328,8 @@ class FirebaseController: ObservableObject {
                         return
                     }
                     self.fetchUsersData(userIDs: arrayData, completion: completion)
+                    
+                    
                 } else {
                     completion(nil)
                 }
@@ -351,9 +353,11 @@ class FirebaseController: ObservableObject {
             
             var users: [UserData] = []
             
+       
             for document in querySnapshot!.documents {
                 let data = document.data()
-                let user = UserData(data: data)
+                var user = UserData(data: data)
+        
                 users.append(user)
             }
             

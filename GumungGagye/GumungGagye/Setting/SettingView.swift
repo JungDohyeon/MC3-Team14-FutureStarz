@@ -14,7 +14,6 @@ import FirebaseStorage
 
 
 struct SettingView: View {
-    
     @AppStorage("app_setting") var app_setting: Bool = false
     @State private var logoutShowing = false
     @State private var cancelShowing = false
@@ -51,8 +50,6 @@ struct SettingView: View {
                             }
                         }
                         .padding(.trailing, 18)
-                    
-                    
                     
                     
                     VStack(alignment: .leading, spacing: 20.0) {

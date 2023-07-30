@@ -46,11 +46,8 @@ struct ModalView: View {
                     Nextbutton(title: "추가하기", isAbled: ((account_date) != nil) && ((spend_bill) != nil) && ((spend_category) != nil) && !(spend_content.isEmpty)) {
                         let inputSpendData = InputSpendData(account_type: account_type, account_date: account_date ?? Date(), spend_bill: spend_bill ?? 0, spend_category: spend_category ?? 0, spend_content: spend_content , spend_open: spend_open, spend_overConsume: spend_overConsume)
                         Task {
-                            do {
-                                try await accountManager2.createNewSpendAccount(inputSpendData: inputSpendData)
-                            } catch {
-                                print("Error")
-                            }
+                            accountManager2.saveSpendToFirebase(inputSpendData)
+                            
                         }
                         showAddModalView = false
                         
@@ -58,7 +55,6 @@ struct ModalView: View {
                     .padding(.bottom, 71)
                     .padding(.horizontal, 20)
                 } else if account_type == 1 {
-                    
                     Text("수입은 그룹원에게 공개되지 않아요.")
                         .modifier(Body2())
                         .foregroundColor(Color("Gray2"))
@@ -66,14 +62,11 @@ struct ModalView: View {
                         .padding(.bottom, 12)
                     
                     Nextbutton(title: "추가하기", isAbled: ((account_date) != nil) && ((income_bill) != nil) && ((income_category) != nil) && !(income_content.isEmpty)) {
-                        let inputIncomeDate = InputIncomeData(account_type: account_type, account_date: account_date ?? Date(), income_bill: income_bill ?? 0, income_category: income_category ?? 0, income_content: income_content)
+                        let inputIncomeData = InputIncomeData(account_type: account_type, account_date: account_date ?? Date(), income_bill: income_bill ?? 0, income_category: income_category ?? 0, income_content: income_content)
                         
                         Task {
-                            do {
-                                try await accountManager2.createNewIncomeAccount(inputIncomeData: inputIncomeDate)
-                            } catch {
-                                print("Error")
-                            }
+                            accountManager2.saveIncomeToFirebase(inputIncomeData)
+                            
                         }
                         showAddModalView = false
                         
@@ -81,9 +74,6 @@ struct ModalView: View {
                     .padding(.bottom, 71)
                     .padding(.horizontal, 20)
                 }
-                
-                
-                
             }
         }
         

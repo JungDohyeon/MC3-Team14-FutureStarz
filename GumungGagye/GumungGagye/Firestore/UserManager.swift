@@ -66,8 +66,6 @@ final class UserManager {
             "bankcardpay_info": inputdata.bankcardpay_info
         ]
         
-        
-        
 //        if let profile_image = inputdata.profile_image {
 //            userData["profile_image"] = profile_image
 //        }

@@ -34,7 +34,7 @@ struct DetailCategoryView: View {
         .frame(width: 72, height: 90)
         .onTapGesture {
             spend_category = categoryIndex
-            isCategoryPickerVisible = false
+            isCategoryPickerVisible = false 
         }
     }
 }
