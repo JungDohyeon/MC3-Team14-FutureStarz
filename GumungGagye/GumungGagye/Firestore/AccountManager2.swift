@@ -29,90 +29,219 @@ struct InputIncomeData {
     var income_content: String = ""
 }
 
+struct InputPost {
+    var account_id: String
+    var post_userID: String
+}
 
 
 final class AccountManager2: ObservableObject{
     
-//    var account_type: Int = 0
-//    var spend_bill = 123340
-//    var spend_category = 2
-//    var spend_content = "리나 점심"
-//    var spend_open = true
-//    var spend_overConsume = true
-//    var income_bill = 62100000
-//    var income_category = 2
-//    var income_content = "리나 용돈"
-//
     let db = Firestore.firestore()
     static let shared = AccountManager2()
     private init() { }
-    
-    
-    func createNewSpendAccount(inputSpendData: InputSpendData) async throws {
-        var accountData: [String: Any] = [
-            "account_date": inputSpendData.account_date,
-//            "user_id": Auth.auth().currentUser?.uid ?? "",
-            "account_type": inputSpendData.account_type,
-        ]
-
-        if let users = Auth.auth().currentUser?.uid {
-            var user_ref = db.collection("users").document(users)
-            accountData["user_id"] = user_ref
+   
+    // Spend
+    func saveSpendToFirebase(_ spendData: InputSpendData) {
+        let db = Firestore.firestore()
+        
+        // Spend 데이터 Firestore에 저장
+        let documentRef = db.collection("spend").document()
+        let documentID = documentRef.documentID // Assign the generated spend_id to the spendData object
+        
+        documentRef.setData([
+            "spend_id": documentID,
+            "spend_bill": spendData.spend_bill,
+            "spend_category": spendData.spend_category,
+            "spend_content": spendData.spend_content,
+            "spend_open": spendData.spend_open,
+            "spend_overConsume": spendData.spend_overConsume
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Spend data added with ID: \(documentID)")
+                self.addSpendToUserAccount(spendData, documentID)
+            }
         }
-
-        var  spendData: [String: Any] = [
-            "spend_bill": inputSpendData.spend_bill,
-            "spend_category": inputSpendData.spend_category,
-            "spend_content": inputSpendData.spend_content,
-            "spend_open": inputSpendData.spend_open,
-            "spend_overConsume": inputSpendData.spend_overConsume,
-        ]
-
-        var account_document_ref = try await db.collection("account").addDocument(data: accountData)
-
-        try await db.collection("account").document(account_document_ref.documentID).updateData(["account_id": account_document_ref.documentID])
-
-        var account_detail_document_ref = try await db.collection("spend").addDocument(data: spendData)
-
-        try await db.collection("spend").document(account_detail_document_ref.documentID).updateData(["spend_id": account_detail_document_ref.documentID])
-
-        try await db.collection("account").document(account_document_ref.documentID).updateData(["detail_id": account_detail_document_ref.documentID])
     }
 
-    func createNewIncomeAccount(inputIncomeData: InputIncomeData) async throws {
-        var accountData: [String: Any] = [
-            "account_data": inputIncomeData.account_date,
-//            "user_id": Auth.auth().currentUser?.uid ?? "",
-            "account_type": inputIncomeData.account_type,
-        ]
 
-        if let users = Auth.auth().currentUser?.uid {
-            var user_ref = db.collection("users").document(users)
-            accountData["user_id"] = user_ref
+    func addSpendToUserAccount(_ spendData: InputSpendData, _ spendDocumentID: String) {
+        let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
         }
-
-
-        var incomeData: [String: Any] = [
-            "income_bill": inputIncomeData.income_bill,
-            "income_category": inputIncomeData.income_category,
-            "income_content": inputIncomeData.income_content,
-        ]
-
-        var account_document_ref = try await db.collection("account").addDocument(data: accountData)
-
-        try await db.collection("account").document(account_document_ref.documentID).updateData(["account_id": account_document_ref.documentID])
-
-        var account_detail_document_ref = try await db.collection("income").addDocument(data: incomeData)
-
-        try await db.collection("income").document(account_detail_document_ref.documentID).updateData(["income_id": account_detail_document_ref.documentID])
-
-        try await db.collection("account").document(account_document_ref.documentID).updateData(["detail_id": account_detail_document_ref.documentID])
-
+        
+        // account 데이터 Firestore에 저장
+        let documentRef = db.collection("account").document()
+        let documentID = documentRef.documentID
+        
+        documentRef.setData([
+            "account_id": documentID,
+            "user_id": userID,
+            "detail_id": spendDocumentID,
+            "account_date": spendData.account_date,
+            "account_type": spendData.account_type
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Account data added with ID: \(documentID)")
+                self.checkAndAddSpendToPost(spendData, documentID, userID)
+            }
+        }
     }
+
+    func checkAndAddSpendToPost(_ spendData: InputSpendData, _ accountDocumentID: String, _ userID: String) {
+        let db = Firestore.firestore()
+
+        // 해당 날짜에 해당하는 POST가 있는지 확인
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: spendData.account_date)
+
+        db.collection("post").whereField("post_date", isEqualTo: dateString).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+
+            // 해당 날짜에 해당하는 POST가 없을 경우 새로운 POST를 생성
+            if snapshot!.isEmpty {
+                let documentRef = db.collection("post").document()
+                let postID = documentRef.documentID
+
+                documentRef.setData([
+                    "post_id": postID,
+                    "post_date": dateString,
+                    "post_userID": userID,
+                    "account_array": [accountDocumentID]
+                ]) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("POST data added with ID: \(postID)")
+                    }
+                }
+            } else {
+                // 해당 날짜에 해당하는 POST가 이미 존재할 경우 해당 POST의 account_array에 account_id를 추가
+                let postDoc = snapshot!.documents.first!
+                let postID = postDoc.documentID
+
+                db.collection("post").document(postID).updateData([
+                    "account_array": FieldValue.arrayUnion([accountDocumentID])
+                ]) { error in
+                    if let error = error {
+                        print("Error updating document: \(error)")
+                    } else {
+                        print("Spend id added to existing post for date: \(dateString)")
+                    }
+                }
+            }
+        }
+    }
+
     
-    
-  
-    
+
+    // Income
+    func saveIncomeToFirebase(_ incomeData: InputIncomeData) {
+        let db = Firestore.firestore()
+        
+        // Spend 데이터 Firestore에 저장
+        let documentRef = db.collection("income").document()
+        let documentID = documentRef.documentID // Assign the generated spend_id to the spendData object
+        
+        documentRef.setData([
+            "income_id": documentID,
+            "income_category": incomeData.income_category,
+            "income_content": incomeData.income_content,
+            "income_bill": incomeData.income_bill
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Spend data added with ID: \(documentID)")
+                self.addIncomeToUserAccount(incomeData, documentID)
+            }
+        }
+    }
+
+
+    func addIncomeToUserAccount(_ incomeData: InputIncomeData, _ incomeDocumentID: String) {
+        let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        // account 데이터 Firestore에 저장
+        let documentRef = db.collection("account").document()
+        let documentID = documentRef.documentID
+        
+        documentRef.setData([
+            "account_id": documentID,
+            "user_id": userID,
+            "detail_id": incomeDocumentID,
+            "account_date": incomeData.account_date,
+            "account_type": incomeData.account_type
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Account data added with ID: \(documentID)")
+                self.checkAndAddSpendToPost(incomeData, documentID, userID)
+            }
+        }
+    }
+
+    func checkAndAddSpendToPost(_ spendData: InputIncomeData, _ accountDocumentID: String, _ userID: String) {
+        let db = Firestore.firestore()
+
+        // 해당 날짜에 해당하는 POST가 있는지 확인
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: spendData.account_date)
+
+        db.collection("post").whereField("post_date", isEqualTo: dateString).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+
+            // 해당 날짜에 해당하는 POST가 없을 경우 새로운 POST를 생성
+            if snapshot!.isEmpty {
+                let documentRef = db.collection("post").document()
+                let postID = documentRef.documentID
+
+                documentRef.setData([
+                    "post_id": postID,
+                    "post_date": dateString,
+                    "post_userID": userID,
+                    "account_array": [accountDocumentID]
+                ]) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("POST data added with ID: \(postID)")
+                    }
+                }
+            } else {
+                // 해당 날짜에 해당하는 POST가 이미 존재할 경우 해당 POST의 account_array에 account_id를 추가
+                let postDoc = snapshot!.documents.first!
+                let postID = postDoc.documentID
+
+                db.collection("post").document(postID).updateData([
+                    "account_array": FieldValue.arrayUnion([accountDocumentID])
+                ]) { error in
+                    if let error = error {
+                        print("Error updating document: \(error)")
+                    } else {
+                        print("Spend id added to existing post for date: \(dateString)")
+                    }
+                }
+            }
+        }
+    }
 
 }
 
