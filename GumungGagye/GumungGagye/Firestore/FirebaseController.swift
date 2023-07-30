@@ -95,60 +95,7 @@ class FirebaseController: ObservableObject {
             }
         }
     }
-    
-    
-    //    // MARK: fetch User Data Test
-    //    func callUserData() {
-    //        let db = Firestore.firestore()
-    //
-    //        db.collection("account").getDocuments { document, error in
-    //            if error == nil {
-    //                if let document = document {
-    //                    self.accountList = document.documents.map { document in
-    //                        let documentRef: DocumentReference = document["account_userID"] as! DocumentReference   // documentRef -> 해당 reference가 가리키는 위치 데이터.
-    //                        /*
-    //                         documentRef.documentID -> documentRef가 가리키는 문서의 ID 값. (user의 ID 값)
-    //                         documentRef.path -> 가리키는 문서의 경로
-    //
-    //                         */
-    //                        print("start Document: \(document.data())")
-    //
-    //                        documentRef.getDocument { userSnapshot, userError in
-    //                            if let userSnapshot = userSnapshot, userSnapshot.exists {
-    //                                if let userData = userSnapshot.data() {
-    //                                    print("userData from Account Reference: \n \(userData)")
-    //                                }
-    //                            }
-    //                        }
-    //
-    //
-    //                        return AccountData(id: "", account_date: Date(), account_id: "", account_type: 0, account_userID: document["account_userID"] as! DocumentReference)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    // 현재 로그인 중인 유저 반환.
-    //    static func fetchUserInfo(completion: @escaping (UserData?) -> Void) {
-    //        if let currentUser = Auth.auth().currentUser {
-    //            let uid = currentUser.uid
-    //            let db = Firestore.firestore()
-    //            let userRef = db.collection("user").document(uid)
-    //
-    //            userRef.getDocument { document, error in
-    //                if let document = document, document.exists {
-    //                    let data = document.data()
-    //                    let user = UserData(data: data!)
-    //                    completion(user)
-    //                } else {
-    //                    completion(nil)
-    //                }
-    //            }
-    //        } else {
-    //            completion(nil)
-    //        }
-    //    }
+
     
     // MARK: delete group
     func deleteGroupData(deleteGroup: GroupData) {
