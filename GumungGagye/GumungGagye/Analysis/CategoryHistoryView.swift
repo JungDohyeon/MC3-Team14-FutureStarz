@@ -47,7 +47,7 @@ struct CategoryHistoryView: View {
                 // - MARK: - 카테고리 내역 리스트
                 VStack(spacing: 52.0) {
                     ForEach(1..<10) {_ in
-                        DateBreakdown()
+//                        DateBreakdown()
                     }
                 }
             }

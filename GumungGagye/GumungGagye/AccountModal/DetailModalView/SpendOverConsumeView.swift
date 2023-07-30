@@ -19,7 +19,7 @@ struct SpendOverConsumeView: View {
                 spend_overConsume.toggle()
             } label: {
                 HStack {
-                    Text("이번 지출 내역을 그룹원에게 공개할게요.")
+                    Text("이번 지출 내역을 그룹원에게 숨길게요.")
                         .modifier(Body1())
                         .foregroundColor(Color("Black"))
                     

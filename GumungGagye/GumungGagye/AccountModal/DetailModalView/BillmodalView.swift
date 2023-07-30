@@ -11,9 +11,6 @@ struct BillmodalView: View {
     // MARK: - PROPERTY
     
     @Binding var spend_bill: Int?
-    
-    
-    
     @Binding var spend_bill_string: String
     // MARK: - BODY
     

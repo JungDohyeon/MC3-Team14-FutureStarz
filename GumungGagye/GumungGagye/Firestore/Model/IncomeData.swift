@@ -1,18 +1,38 @@
+////
+////  IncomeData.swift
+////  GumungGagye
+////
+////  Created by Lee Juwon on 2023/07/29.
+////
 //
-//  IncomeData.swift
-//  GumungGagye
+//import Foundation
 //
-//  Created by Lee Juwon on 2023/07/23.
+//struct IncomeData {
+//    var income_bill: Int = 0
+//    var income_category: Int = 0
+//    var income_content: String = ""
+//    var income_id: String = ""
 //
-
-import Foundation
-import Firebase
-import FirebaseFirestore
-
-//struct IncomeData: Codable {
-//    var userID: DocumentReference
-//    var account_date: Date // Date 타입으로 변경
-//    var income_bill: Int
-//    var income_category: String // 여전히 String 타입으로 유지
-//    var income_content: String
+//    init?(data: [String: Any]) {
+//        guard let incomeBill = data["income_bill"] as? Int,
+//              let incomeCategory = data["income_category"] as? Int,
+//              let incomeContent = data["income_content"] as? String,
+//              let incomeId = data["income_id"] as? String else {
+//            return nil
+//        }
+//
+//        self.income_bill = incomeBill
+//        self.income_category = incomeCategory
+//        self.income_content = incomeContent
+//        self.income_id = incomeId
+//    }
+//    
+//    func asDictionary() -> [String: Any] {
+//        return [
+//            "income_bill": self.income_bill,
+//            "income_category": self.income_category,
+//            "income_content": self.income_content,
+//            "income_id": self.income_id
+//        ]
+//    }
 //}

@@ -23,8 +23,8 @@ struct ConsListView: View {
             
 
             ForEach(1..<10) {_ in
-                DateBreakdown()
-                    .padding(.bottom, 32)
+//                DateBreakdown()
+//                    .padding(.bottom, 32)
             }
         }
         .padding(.horizontal, 20)

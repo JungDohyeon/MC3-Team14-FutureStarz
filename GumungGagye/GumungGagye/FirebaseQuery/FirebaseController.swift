@@ -11,7 +11,6 @@ import Firebase
 class FirebaseController: ObservableObject {
     static let shared = FirebaseController()    // SingleTon
     @Published var groupList = [GroupData]()
-    @Published var accountList = [AccountData]()
     let inputdata = InputUserData.shared
     
     func updateGroupFirestore(groupId: String) async throws {

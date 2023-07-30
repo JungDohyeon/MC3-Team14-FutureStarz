@@ -58,7 +58,7 @@ struct OverpurchasingView: View {
                     
                     VStack(spacing: 52.0) {
                         ForEach(1..<10) {_ in
-                            DateBreakdown()
+//                            DateBreakdown()
                         }
                     }
                 }

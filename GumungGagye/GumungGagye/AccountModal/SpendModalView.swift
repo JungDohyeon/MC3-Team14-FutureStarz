@@ -22,8 +22,6 @@ struct SpendModalView: View {
     @Binding var spend_content: String
     @Binding var spend_open: Bool
     @Binding var spend_overConsume: Bool
-    
-    
     @Binding var spend_bill_string: String
     
     // MARK: - BODY

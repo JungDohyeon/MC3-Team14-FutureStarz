@@ -15,7 +15,7 @@ struct DateBreakdown: View {
                 .padding(.bottom, 16)
             
             ForEach(1..<3) {_ in
-                Breakdown(payment: 100000) // 있는 내역 다 보여주기 - ForEach
+                Breakdown(size: .constant(.small), accountDataID: "") // 있는 내역 다 보여주기 - ForEach
             }
             .padding(.bottom, 20)
         }

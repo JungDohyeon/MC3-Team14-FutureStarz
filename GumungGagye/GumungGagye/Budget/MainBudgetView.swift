@@ -20,10 +20,10 @@ struct MainBudgetView: View {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
                         
-                        TargetBudgetView()
-                            .padding(.top, 16)
+//                        TargetBudgetView(goalBill: , spendBill: <#Int#>)
+//                            .padding(.top, 16)
                         SectionBar()
-                        CurrentAssetView()
+//                        CurrentAssetView(nickname: <#String#>, spendBill: <#Int#>, incomeBill: <#Int#>)
                         SectionBar()
                             .padding(.bottom, 26)
                     }
@@ -31,8 +31,8 @@ struct MainBudgetView: View {
                         Section(header: Header()) {
                             
                             ForEach(1..<10) {_ in
-                                DateBreakdown()
-                                    .padding(.top, 32)
+//                                DateBreakdown()
+//                                    .padding(.top, 32)
                             }
                         }
                         .padding(.horizontal, 20)
