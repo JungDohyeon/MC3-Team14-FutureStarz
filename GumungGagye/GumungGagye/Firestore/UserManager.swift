@@ -32,7 +32,6 @@ class FirebaseManager: NSObject {
 }
 
 struct DBUser {
-    
     let userId: String
     let isAnonymous: Bool?
     let email: String?
@@ -54,7 +53,7 @@ final class UserManager {
     }
     
     func createNewUser() async throws {
-        var userData: [String:Any] = [
+        let userData: [String:Any] = [
             "user_id": inputdata.user_id,
             "email": inputdata.email,
             "nickname": inputdata.nickname,
@@ -66,25 +65,10 @@ final class UserManager {
             "bankcardpay_info": inputdata.bankcardpay_info
         ]
         
-//        if let profile_image = inputdata.profile_image {
-//            userData["profile_image"] = profile_image
-//        }
-        
-        
-        
         if let userss = Auth.auth().currentUser {
-            
             try await Firestore.firestore().collection("users").document(userss.uid).setData(userData, merge: false)
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     func getUser(userId: String) async throws -> Bool {
         let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
@@ -93,13 +77,5 @@ final class UserManager {
             return false
         }
         return true
-        
-//        let isAnonymous = data["is_anonymous"] as? Bool
-//        let email = data["email"] as? String
-//        let photoUrl = data["photo_url"] as? String
-//        let dateCreated = data["date_created"] as? Date
-        
-//        return DBUser(userId: userId, isAnonymous: isAnonymous, email: email, photoUrl: photoUrl, dateCreated: dateCreated )
     }
-    
 }

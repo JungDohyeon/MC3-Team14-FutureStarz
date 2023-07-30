@@ -26,7 +26,7 @@ struct ModalView: View {
     @State var spend_bill_string: String = ""
     @State var income_bill_string: String = ""
     
-    var accountManager2 = AccountManager2.shared
+    var accountManager2 = BudgetFirebaseManager.shared
     
     var body: some View {
         VStack(spacing: 0) {

@@ -1,15 +1,13 @@
 import Foundation
 import UIKit
-////
+
 ////  UserData.swift
 ////  GumungGagye
 ////
 ////  Created by 정도현 on 2023/07/19.
 ////
-//
-//import Foundation
-//
-//// MARK: User Data
+
+
 struct UserData: Identifiable, Hashable {
     var id: String
     var email: String
