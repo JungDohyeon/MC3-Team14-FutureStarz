@@ -29,9 +29,8 @@ struct GroupRoomView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 5){
                     if groupdata.lock_status {
-                        Image(systemName: "lock.fill")
+                        Image("Lock.fill.main")
                             .font(.system(size: 16))
-                            .foregroundColor(Color("Main"))
                     }
                     
                     Text(groupdata.group_name)
@@ -58,9 +57,7 @@ struct GroupRoomView: View {
                 
                 HStack {
                     HStack(spacing: 6) {
-                        Image(systemName: "wonsign.circle.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color("Gray2"))
+                        Image("Won.circle")
                         
                         HStack(spacing: 0) {
                             Text("\(groupdata.group_goal)")
@@ -69,12 +66,10 @@ struct GroupRoomView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     }
-                    .padding(.trailing, 20)
+                    .padding(.trailing, 15)
                     
                     HStack(spacing: 0) {
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color("Gray2"))
+                        Image("Person.fill")
                             .padding(.trailing, 7)
                         
                         Group {
