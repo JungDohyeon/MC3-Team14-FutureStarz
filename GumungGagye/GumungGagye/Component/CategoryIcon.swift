@@ -15,14 +15,15 @@ enum IconSize: String {
 struct CategoryIcon: View {
     
     @Binding var size: IconSize
-    var accountType: Int
-    var categoryIndex: Int
+    var accountType: Int  // 0
+    var categoryIndex: Int // 4
 
     @ObservedObject var categoryInfo = CategoryInfo.shared
     
     var body: some View {
-        if let categoryName = categoryInfo.category_info[accountType][categoryIndex]?[1] {
-            Image("\(categoryName)_\(size.rawValue)")
+        if let categoryName = categoryInfo.category_info[accountType][categoryIndex] {
+            let imageName = categoryName[1]
+            Image("\(imageName)_\(size.rawValue)")
         }
     }
 }

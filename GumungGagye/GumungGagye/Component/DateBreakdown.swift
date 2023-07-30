@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct DateBreakdown: View {
-    var accountDataList: [AccountData]
-    @Binding var size: IconSize
-
     var body: some View {
+        
         VStack(spacing: 0) {
             DateTotal()
                 .padding(.bottom, 16)
-
-//            ForEach(accountDataList) { accountData in
-//                Breakdown(accountData: accountData, size: $size)
-//                    .padding(.bottom, 20)
-//            }
+            
+            ForEach(1..<3) {_ in
+                Breakdown(size: .constant(.small), accountDataID: "") // 있는 내역 다 보여주기 - ForEach
+            }
+            .padding(.bottom, 20)
         }
+        
     }
 }
 
-
-//struct DateBreakdown_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DateBreakdown()
-//    }
-//}
+struct DateBreakdown_Previews: PreviewProvider {
+    static var previews: some View {
+        DateBreakdown()
+    }
+}
 
