@@ -26,7 +26,6 @@ struct MainBudgetView: View {
             ScrollView {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
-                        
                         TargetBudgetView(spendBill: spendAsset)
                             .padding(.top, 16)
                         SectionBar()

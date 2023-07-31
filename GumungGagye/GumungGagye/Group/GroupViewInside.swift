@@ -367,8 +367,8 @@ struct GroupUserSumGraph: View {
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
-            VStack(spacing: 20) {
-                MonthPicker()
+            VStack(alignment: .leading, spacing: 20) {
+                MoveMonth(size: .Small, selectedMonth: Date.now) // 숫자 데이터로 받아오기
                 // Graph
                 GeometryReader { geometry in
                     VStack(spacing: 8) {
@@ -416,13 +416,13 @@ struct GroupUserSumGraph: View {
                                 .foregroundColor(Color("Gray1"))
                         }
                         .onAppear {
-                            withAnimation(.easeInOut(duration: 1.0)) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
                                 sumGraphWidth = purchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(purchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
                                 overGraphWidth = overpurchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(overpurchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
                             }
                         }
                         .onChange(of: [purchaseSum, overpurchaseSum]) { newValue in
-                            withAnimation(.easeInOut(duration: 1.0)) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
                                 sumGraphWidth = newValue[0] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[0])/Double(groupData.group_goal)) * (geometry.size.width)
                                 overGraphWidth = newValue[1] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[1])/Double(groupData.group_goal)) * (geometry.size.width)
                             }
