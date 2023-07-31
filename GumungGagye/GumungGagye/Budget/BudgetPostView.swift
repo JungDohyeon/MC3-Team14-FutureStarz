@@ -19,12 +19,10 @@ struct BudgetPostView: View {
     
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
-    @State var incomeSum = 0
-    @State var spendSum = 0
     @State var overSpendSum = 0
     
-    @Binding var incomeAsset: Int
-    @Binding var spendAsset: Int
+    @Binding var incomeSum: Int
+    @Binding var spendSum: Int
     
     @State var isSpendOnappear = true
     @State var isIncomeOnappear = true

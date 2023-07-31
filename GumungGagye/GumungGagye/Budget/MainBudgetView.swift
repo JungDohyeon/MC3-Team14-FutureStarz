@@ -10,8 +10,8 @@ import SwiftUI
 struct MainBudgetView: View {
     @StateObject var userData = InputUserData.shared
     
-    @State var incomeAsset = 0
-    @State var spendAsset = 0
+    @State var incomeSum = 0
+    @State var spendSum = 0
     @State var selectedMonth = Date.now
 
     let today = Calendar.current.component(.day, from: Date())
@@ -27,10 +27,10 @@ struct MainBudgetView: View {
             ScrollView {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
-                        TargetBudgetView(spendBill: spendAsset)
+                        TargetBudgetView(spendBill: $spendSum)
                             .padding(.top, 16)
                         SectionBar()
-                        CurrentAssetView(spendBill: spendAsset, incomeBill: incomeAsset)
+                        CurrentAssetView(spendBill: spendSum, incomeBill: incomeSum)
                         SectionBar()
                             .padding(.bottom, 26)
                     }
@@ -38,7 +38,7 @@ struct MainBudgetView: View {
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header().padding(.bottom, 35)) {
                             ForEach((1...today).reversed(), id:\.self) { day in
-                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeAsset: $incomeAsset, spendAsset: $spendAsset)
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum)
                             }
                         }
                         .padding(.horizontal, 20)

@@ -407,7 +407,6 @@ struct GroupUserSumGraph: View {
                                 .foregroundColor(Color("OverPurchasing"))
                         }
                         
-                        
                         HStack(spacing: 8) {
                             HStack(spacing: 3) {
                                 Text("과소비")
