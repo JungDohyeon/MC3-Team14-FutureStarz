@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "SettingIconAbled.svg",
+      "filename" : "SettingIconAbled.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SettingIconAbled 1.svg",
+      "filename" : "SettingIconAbled@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SettingIconAbled 2.svg",
+      "filename" : "SettingIconAbled@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

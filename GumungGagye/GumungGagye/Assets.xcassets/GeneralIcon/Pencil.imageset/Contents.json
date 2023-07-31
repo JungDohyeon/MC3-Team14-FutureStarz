@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Pencil.svg",
+      "filename" : "Pencil.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Pencil 1.svg",
+      "filename" : "Pencil@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Pencil 2.svg",
+      "filename" : "Pencil@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

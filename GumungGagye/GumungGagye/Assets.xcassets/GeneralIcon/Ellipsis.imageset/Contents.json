@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Ellipsis.svg",
+      "filename" : "Ellipsis.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Ellipsis 1.svg",
+      "filename" : "Ellipsis@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Ellipsis 2.svg",
+      "filename" : "Ellipsis@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

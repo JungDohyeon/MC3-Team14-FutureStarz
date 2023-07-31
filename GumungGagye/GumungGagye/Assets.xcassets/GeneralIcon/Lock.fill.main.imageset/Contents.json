@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Lock.fill.main.svg",
+      "filename" : "Lock.fill.main.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Lock.fill.main 1.svg",
+      "filename" : "Lock.fill.main@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Lock.fill.main 2.svg",
+      "filename" : "Lock.fill.main@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
