@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Apple.logo.svg",
+      "filename" : "Apple.logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Apple.logo 1.svg",
+      "filename" : "Apple.logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Apple.logo 2.svg",
+      "filename" : "Apple.logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

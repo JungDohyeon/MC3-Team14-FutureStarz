@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Plus.small.svg",
+      "filename" : "Plus.small.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Plus.small 1.svg",
+      "filename" : "Plus.small@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Plus.small 2.svg",
+      "filename" : "Plus.small@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

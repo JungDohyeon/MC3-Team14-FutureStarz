@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "SettingIconDisabled.svg",
+      "filename" : "SettingIconDisabled.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SettingIconDisabled 1.svg",
+      "filename" : "SettingIconDisabled@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SettingIconDisabled 2.svg",
+      "filename" : "SettingIconDisabled@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
