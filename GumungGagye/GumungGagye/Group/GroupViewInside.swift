@@ -172,6 +172,9 @@ struct UserScroller: View {
     @State private var selectedPerson: String = ""
     @State private var userData: [UserData] = []
     
+    @State var overSpendSum = 0
+    @State var spendSum = 0
+    
     let today = Calendar.current.component(.day, from: Date())
     let dateFormatter = DateFormatter()
     
@@ -226,13 +229,13 @@ struct UserScroller: View {
             
             // =======================================================================================
             
-            GroupUserSumGraph(groupData: groupData)
+            GroupUserSumGraph(groupData: groupData, purchaseSum: $spendSum, overpurchaseSum: $overSpendSum)
             
             if let selectedPersonID = selectedPersonID {
                 
                 // 1 ~ 31 한달 보여주기.
                 ForEach((1...today).reversed(), id:\.self) { day in
-                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID)
+                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, spendSum: $spendSum, overSpendSum: $overSpendSum)
                 }
                 .padding(.horizontal, 20)
             }
@@ -292,7 +295,8 @@ struct BudgetGroupView: View {
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
-    @State var spendSum = 0
+    @Binding var spendSum: Int
+    @Binding var overSpendSum: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -315,7 +319,7 @@ struct BudgetGroupView: View {
                 }
                 
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: true, accountDataID: accountID)
                 }
             }
         }
@@ -349,12 +353,11 @@ struct BudgetGroupView: View {
     
 }
 
-
 // MARK: Show Group user month graph
 struct GroupUserSumGraph: View {
     var groupData: GroupData
-    var purchaseSum: Double = 12314
-    var overpurchaseSum: Double = 560
+    @Binding var purchaseSum: Int
+    @Binding var overpurchaseSum: Int
     @State private var sumGraphWidth: CGFloat = 0.0
     @State private var overGraphWidth: CGFloat = 0.0
     
@@ -386,7 +389,7 @@ struct GroupUserSumGraph: View {
                                 Text("과소비")
                                     .modifier(Cap1())
                                     .foregroundColor(Color("Gray1"))
-                                Text("\(Int(overpurchaseSum))원")
+                                Text("\(overpurchaseSum)원")
                                     .modifier(Num5())
                                     .foregroundColor(Color("OverPurchasing"))
                             }
@@ -399,20 +402,26 @@ struct GroupUserSumGraph: View {
                                 Text("총 지출")
                                     .modifier(Cap1())
                                     .foregroundColor(Color("Gray1"))
-                                Text("\(Int(purchaseSum))원")
+                                Text("\(purchaseSum)원")
                                     .modifier(Num5())
-                                    .foregroundColor(Int(purchaseSum) > groupData.group_goal ? Color("OverPurchasing") : Color("Main"))
+                                    .foregroundColor(purchaseSum > groupData.group_goal ? Color("OverPurchasing") : Color("Main"))
                             }
                             
                             Spacer()
                             Text("전체 \(groupData.group_goal)원")
                                 .modifier(Cap1())
                                 .foregroundColor(Color("Gray1"))
-                        }.onAppear {
-                            print("width: \(CGFloat(purchaseSum/Double(groupData.group_goal)) * (geometry.size.width))")
+                        }
+                        .onAppear {
                             withAnimation(.easeInOut(duration: 1.0)) {
-                                sumGraphWidth = Int(purchaseSum) > groupData.group_goal ? (geometry.size.width) : CGFloat(purchaseSum/Double(groupData.group_goal)) * (geometry.size.width)
-                                overGraphWidth = Int(purchaseSum) > groupData.group_goal ? (geometry.size.width) : CGFloat(overpurchaseSum/Double(groupData.group_goal)) * (geometry.size.width)
+                                sumGraphWidth = purchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(purchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
+                                overGraphWidth = overpurchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(overpurchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
+                            }
+                        }
+                        .onChange(of: [purchaseSum, overpurchaseSum]) { newValue in
+                            withAnimation(.easeInOut(duration: 1.0)) {
+                                sumGraphWidth = newValue[0] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[0])/Double(groupData.group_goal)) * (geometry.size.width)
+                                overGraphWidth = newValue[1] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[1])/Double(groupData.group_goal)) * (geometry.size.width)
                             }
                         }
                     }

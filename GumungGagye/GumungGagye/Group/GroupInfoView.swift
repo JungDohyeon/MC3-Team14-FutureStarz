@@ -30,9 +30,6 @@ struct GroupInfoView: View {
                 .padding(.horizontal, 20)
                 
                 ScrollView {
-//                    if let image_url = inputdata.profile_image_url {
-//                        inputdata.profile_image = try await fetchImage(url: URL(string: image_url)!)
-//                    }
                     
                     ForEach(userData, id: \.id) { data in
                         GroupRankingView(ranking: 1, userName: data.nickname, spendMoney: 7500)

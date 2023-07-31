@@ -8,12 +8,6 @@
 import SwiftUI
 
 struct SpendModalView: View {
-    // MARK: - PROPERTY
-    
-    // MARK: - State
-    
-    
-    
     // MARK: - Binding
     @Binding var account_type: Int
     @Binding var account_date: Date?
@@ -31,8 +25,8 @@ struct SpendModalView: View {
             BillmodalView(spend_bill: $spend_bill, spend_bill_string: $spend_bill_string)
             CategorymodelView(account_type: $account_type, spend_category: $spend_category)
             ContentmodelView(spend_content: $spend_content)
-            SpendOpenView(spend_open: $spend_open)
             SpendOverConsumeView(spend_overConsume: $spend_overConsume)
+            SpendOpenView(spend_open: $spend_open)
         }
     }
 }

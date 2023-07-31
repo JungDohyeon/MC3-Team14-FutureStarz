@@ -21,6 +21,7 @@ struct BudgetPostView: View {
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
     @State var spendSum = 0
+    @State var overSpendSum = 0
     
     @Binding var incomeAsset: Int
     @Binding var spendAsset: Int
@@ -36,32 +37,20 @@ struct BudgetPostView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    if incomeSum != 0 {
+                    if incomeSum > 0 {
                         Text("+\(incomeSum)원")
                             .modifier(Num4())
                             .foregroundColor(Color("Main"))
-                            .onAppear {
-                                if isIncomeOnappear {
-                                    incomeAsset += incomeSum
-                                    isIncomeOnappear = false
-                                }
-                            }
                     }
                     
-                    if spendSum != 0 {
+                    if spendSum > 0 {
                         Text("-\(spendSum)원")
                             .modifier(Num4())
-                            .onAppear {
-                                if isSpendOnappear {
-                                    spendAsset += spendSum
-                                    isSpendOnappear = false
-                                }
-                            }
                     }
                 }
                     
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: false, accountDataID: accountID)
                 }
             }
         }
