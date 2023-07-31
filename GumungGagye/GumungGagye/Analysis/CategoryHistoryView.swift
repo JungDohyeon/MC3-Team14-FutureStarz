@@ -19,7 +19,11 @@ struct CategoryHistoryView: View {
     let year: String    // 년도
     let month: String   // 월
     
-    @Binding var categorySpendSum: Int
+    @State var categorySpendSum: Int // 카테고리별 총 금액
+    @State var categorySpendNum: Int // 카테고리별 총 횟수
+    
+    let today = Calendar.current.component(.day, from: Date())
+    let dateFormatter = DateFormatter()
     
     var body: some View {
         ScrollView{
@@ -37,11 +41,11 @@ struct CategoryHistoryView: View {
                             .foregroundColor(Color("Black"))
                             .modifier(Cap1())
                             
-                            Text("200,000원")
+                            Text("\(categorySpendSum)원")
                                 .modifier(Num1())
                         }
                         
-                        Text("총 8회")
+                        Text("총 \(categorySpendNum)회")
                             .foregroundColor(Color("Main"))
                             .modifier(Cap1Bold())
                             .padding(.horizontal, 10)
@@ -58,8 +62,8 @@ struct CategoryHistoryView: View {
                 
                 // - MARK: - 카테고리 내역 리스트
                 VStack(spacing: 52.0) {
-                    ForEach(1..<10) {_ in
-//                        DateBreakdown()
+                    ForEach((1...today).reversed(), id:\.self) { day in
+                        BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day)) //CategoryPostView로 바꿀 것.
                     }
                 }
             }
@@ -68,6 +72,43 @@ struct CategoryHistoryView: View {
         .background(Color("background"))
         .foregroundColor(Color("Black"))
         .navigationBarTitle("식비 내역",  displayMode: .inline)
+    }
+    
+    func getYear(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "YYYY"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    
+    func getMonth(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "MM"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDate(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "dd"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDay(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "EEEE"
+            return dateFormatter.string(from: date)
+        }
+        return ""
     }
 }
 
