@@ -8,27 +8,32 @@
 import SwiftUI
 
 struct CategoryListView: View {
-        
     var body: some View {
-            ScrollView{
-                VStack(spacing: 24.0) {
-                    CategorySumView()
-                    CategorySumView()
-                    CategorySumView()
-                    CategorySumView()
-                    CategorySumView()
+        ScrollView {
+            VStack(spacing: 24.0) {
+                ForEach(Array(CategoryInfo.shared.category_info[0].values), id: \.self) { categoryTitles in
+                    let categoryTitle = categoryTitles[0] ?? ""
+                    let categoryLocalTitle = categoryTitles[1] ?? ""
+                    CategorySumView(categoryTitle: categoryTitle, categoryLocalTitle: categoryLocalTitle)
                 }
-                .padding(.horizontal, 20.0)
-                .padding(.top, 48)
             }
-            .background(Color("background"))
-            .navigationBarTitle("카테고리별 소비", displayMode: .inline)
+            .padding(.horizontal, 20.0)
+            .padding(.top, 48)
+        }
+        .background(Color("background"))
+        .navigationBarTitle("카테고리별 소비", displayMode: .inline)
     }
 }
 
+
 struct CategorySumView: View {
     
-//    @State private var spendData: ReadSpendData
+    let categoryTitle: String
+    let categoryLocalTitle: String
+
+    @StateObject var userData = InputUserData.shared
+    @State private var spendData: ReadSpendData?
+    @State private var incomeData: ReadIncomeData?
     
     var body: some View {
 //        NavigationLink(destination: CategoryHistoryView(spendData: spendData, size: .constant(.large))){
@@ -36,10 +41,10 @@ struct CategorySumView: View {
                 HStack(alignment: .center, spacing: 12.0) {
                     Circle()
                         .frame(width: 48, height: 48)
-                        .foregroundColor(Color("Food"))
-                    
+                        .foregroundColor(Color(categoryTitle))
+                        
                     VStack(alignment: .leading, spacing: 4.0) {
-                        Text("식비")
+                        Text(categoryLocalTitle)
                             .modifier(Cap1())
                             .foregroundColor(Color("Gray1"))
                         
@@ -50,9 +55,7 @@ struct CategorySumView: View {
                 }
                 
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color("Gray2"))
-                    .frame(width: 24, height: 24, alignment: .center)
+                Image("Chevron.right.light.gray2")
             }
         }
     }
