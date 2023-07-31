@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BudgetIconAbled.svg",
+      "filename" : "BudgetIconAbled.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "BudgetIconAbled 1.svg",
+      "filename" : "BudgetIconAbled@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "BudgetIconAbled 2.svg",
+      "filename" : "BudgetIconAbled@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

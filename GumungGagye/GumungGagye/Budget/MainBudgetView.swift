@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainBudgetView: View {
     @StateObject var userData = InputUserData.shared
+    
+    @State var incomeAsset = 0
+    @State var spendAsset = 0
 
     let today = Calendar.current.component(.day, from: Date())
     let dateFormatter = DateFormatter()
@@ -24,10 +27,10 @@ struct MainBudgetView: View {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
                         
-                        TargetBudgetView(spendBill: 100000)
+                        TargetBudgetView(spendBill: spendAsset)
                             .padding(.top, 16)
                         SectionBar()
-                        CurrentAssetView(spendBill: 50000, incomeBill: 1000000)
+                        CurrentAssetView(spendBill: spendAsset, incomeBill: incomeAsset)
                         SectionBar()
                             .padding(.bottom, 26)
                     }
@@ -35,7 +38,7 @@ struct MainBudgetView: View {
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header().padding(.bottom, 35)) {
                             ForEach((1...today).reversed(), id:\.self) { day in
-                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day))
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeAsset: $incomeAsset, spendAsset: $spendAsset)
                             }
                         }
                         .padding(.horizontal, 20)
