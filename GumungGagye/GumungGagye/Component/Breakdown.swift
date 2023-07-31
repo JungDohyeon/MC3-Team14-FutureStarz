@@ -15,6 +15,7 @@ struct Breakdown: View {
     @Binding var size: IconSize
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
+    @Binding var overSpendSum: Int
     
     var isGroup: Bool // 그룹에서 보일건지 내 뷰에서 보일건지 값
     
@@ -58,9 +59,11 @@ struct Breakdown: View {
                         }
                         if spendData.overConsume {
                             OverPurchaseTag(isOverPurchase: true)
+                                .onAppear {
+                                    overSpendSum += spendData.bill
+                                }
                         }
                     }
-                    
                 }
             } else {
                 if let spendData = spendData {
@@ -115,6 +118,7 @@ struct Breakdown: View {
         .onAppear {
             incomeSum = 0
             spendSum = 0
+            overSpendSum = 0
             
             BudgetFirebaseManager.shared.fetchAccountData(forAccountID: accountDataID) { data in
                 self.spendData = data.0

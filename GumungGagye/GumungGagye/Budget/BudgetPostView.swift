@@ -21,6 +21,7 @@ struct BudgetPostView: View {
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
     @State var spendSum = 0
+    @State var overSpendSum = 0
     
     @Binding var incomeAsset: Int
     @Binding var spendAsset: Int
@@ -49,7 +50,7 @@ struct BudgetPostView: View {
                 }
                     
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, isGroup: false, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: false, accountDataID: accountID)
                 }
             }
         }
