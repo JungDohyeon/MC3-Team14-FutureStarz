@@ -16,6 +16,7 @@ struct GroupInfoView: View {
     var groupData: GroupData
 
     @State private var userData: [UserData] = []
+    @State var selectedMonth = Date.now
     
     var body: some View {
         ZStack {
@@ -23,7 +24,7 @@ struct GroupInfoView: View {
             
             ScrollView {
                 HStack {
-                    MoveMonth(size: .Small, selectedMonth: Date.now) // 숫자 데이터로 받아오기
+                    MoveMonth(size: .Small, selectedMonth: $selectedMonth) // 숫자 데이터로 받아오기
                     Spacer()
                 }
                 .padding(.top, 36)
@@ -31,7 +32,6 @@ struct GroupInfoView: View {
                 .padding(.horizontal, 20)
                 
                 ScrollView {
-                    
                     ForEach(userData, id: \.id) { data in
                         GroupRankingView(ranking: 1, userName: data.nickname, spendMoney: 7500)
                     }

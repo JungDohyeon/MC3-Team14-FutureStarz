@@ -12,6 +12,7 @@ struct MainBudgetView: View {
     
     @State var incomeAsset = 0
     @State var spendAsset = 0
+    @State var selectedMonth = Date.now
 
     let today = Calendar.current.component(.day, from: Date())
     let dateFormatter = DateFormatter()
@@ -19,7 +20,7 @@ struct MainBudgetView: View {
     var body: some View {
         VStack(alignment: .leading) {
             // 월(날짜) 이동
-            MoveMonth(size: .Big, selectedMonth: Date.now) // 숫자 데이터로 받아오기
+            MoveMonth(size: .Big, selectedMonth: $selectedMonth) // 숫자 데이터로 받아오기
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
             

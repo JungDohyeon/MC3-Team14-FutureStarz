@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnalysisView: View {
+    @State var selectedMonth = Date.now
     
     var body: some View {
             VStack {
@@ -20,7 +21,7 @@ struct AnalysisView: View {
                         .modifier(H1Bold())
                     
                     // 월 변경
-                    MoveMonth(size: .Small, selectedMonth: Date.now)
+                    MoveMonth(size: .Small, selectedMonth: $selectedMonth)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
