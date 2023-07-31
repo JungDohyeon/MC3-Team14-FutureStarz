@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=X.mark.svg",
+      "filename" : "X.mark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=X.mark 1.svg",
+      "filename" : "X.mark@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=X.mark 2.svg",
+      "filename" : "X.mark@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

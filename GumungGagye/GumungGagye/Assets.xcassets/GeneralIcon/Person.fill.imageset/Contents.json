@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Person.fill.svg",
+      "filename" : "Person.fill.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Person.fill 1.svg",
+      "filename" : "Person.fill@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Person.fill 2.svg",
+      "filename" : "Person.fill@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

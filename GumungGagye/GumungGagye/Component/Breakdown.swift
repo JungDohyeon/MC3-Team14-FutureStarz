@@ -15,6 +15,9 @@ struct Breakdown: View {
     @Binding var size: IconSize
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
+    
+    @State var isSpendOnappear = true
+    @State var isIncomeOnappear = true
 
     // accountData를 전달받을 변수 추가
     var accountDataID: String
@@ -31,14 +34,17 @@ struct Breakdown: View {
                         .modifier(Cap2())
                 }
                 .onAppear {
-                    spendSum += spendData.bill
+                    if isSpendOnappear {
+                        spendSum += spendData.bill
+                        isSpendOnappear = false
+                    }
                 }
                 
                 Spacer()
                 
                 HStack {
                     if spendData.open {
-                        OverPurchaseTag(isOverPurchase: false)
+                        OpenTag(spendOpen: true)
                     }
                     if spendData.overConsume {
                         OverPurchaseTag(isOverPurchase: true)
@@ -55,7 +61,10 @@ struct Breakdown: View {
                         .modifier(Cap2())
                 }
                 .onAppear {
-                    incomeSum += incomeData.bill
+                    if isIncomeOnappear {
+                        incomeSum += incomeData.bill
+                        isIncomeOnappear = false
+                    }
                 }
                 
 
@@ -66,6 +75,9 @@ struct Breakdown: View {
         }
         .padding(.bottom, 20)
         .onAppear {
+            incomeSum = 0
+            spendSum = 0
+            
             BudgetFirebaseManager.shared.fetchAccountData(forAccountID: accountDataID) { data in
                 self.spendData = data.0
                 self.incomeData = data.1

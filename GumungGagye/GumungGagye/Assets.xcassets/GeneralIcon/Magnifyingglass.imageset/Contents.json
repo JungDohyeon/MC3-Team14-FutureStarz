@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Magnifyingglass.svg",
+      "filename" : "Magnifyingglass.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Magnifyingglass 1.svg",
+      "filename" : "Magnifyingglass@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Magnifyingglass 2.svg",
+      "filename" : "Magnifyingglass@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

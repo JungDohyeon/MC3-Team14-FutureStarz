@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon Name=Chevron.left.thick.gray.svg",
+      "filename" : "Chevron.left.thick.gray.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon Name=Chevron.left.thick.gray 1.svg",
+      "filename" : "Chevron.left.thick.gray@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon Name=Chevron.left.thick.gray 2.svg",
+      "filename" : "Chevron.left.thick.gray@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

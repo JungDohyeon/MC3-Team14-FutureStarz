@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "AnalysisIconDisabled.svg",
+      "filename" : "AnalysisIconDisabled.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AnalysisIconDisabled 1.svg",
+      "filename" : "AnalysisIconDisabled@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AnalysisIconDisabled 2.svg",
+      "filename" : "AnalysisIconDisabled@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
