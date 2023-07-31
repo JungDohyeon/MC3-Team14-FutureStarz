@@ -36,27 +36,15 @@ struct BudgetPostView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    if incomeSum != 0 {
+                    if incomeSum > 0 {
                         Text("+\(incomeSum)원")
                             .modifier(Num4())
                             .foregroundColor(Color("Main"))
-                            .onAppear {
-                                if isIncomeOnappear {
-                                    incomeAsset += incomeSum
-                                    isIncomeOnappear = false
-                                }
-                            }
                     }
                     
-                    if spendSum != 0 {
+                    if spendSum > 0 {
                         Text("-\(spendSum)원")
                             .modifier(Num4())
-                            .onAppear {
-                                if isSpendOnappear {
-                                    spendAsset += spendSum
-                                    isSpendOnappear = false
-                                }
-                            }
                     }
                 }
                     
