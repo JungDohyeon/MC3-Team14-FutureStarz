@@ -315,7 +315,7 @@ struct BudgetGroupView: View {
                 }
                 
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, isGroup: true, accountDataID: accountID)
                 }
             }
         }

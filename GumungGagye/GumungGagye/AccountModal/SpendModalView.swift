@@ -8,12 +8,6 @@
 import SwiftUI
 
 struct SpendModalView: View {
-    // MARK: - PROPERTY
-    
-    // MARK: - State
-    
-    
-    
     // MARK: - Binding
     @Binding var account_type: Int
     @Binding var account_date: Date?

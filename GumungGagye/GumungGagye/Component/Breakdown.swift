@@ -16,61 +16,99 @@ struct Breakdown: View {
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
     
+    var isGroup: Bool // 그룹에서 보일건지 내 뷰에서 보일건지 값
+    
     @State var isSpendOnappear = true
     @State var isIncomeOnappear = true
-
+    
     // accountData를 전달받을 변수 추가
     var accountDataID: String
 
     var body: some View {
         HStack {
-            if let spendData = spendData {
-                CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
-                
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("-\(spendData.bill)")
-                        .modifier(Num3Bold())
-                    Text("\(spendData.content)")
-                        .modifier(Cap2())
-                }
-                .onAppear {
-                    if isSpendOnappear {
-                        spendSum += spendData.bill
-                        isSpendOnappear = false
+            if isGroup {
+                if let spendData = spendData {
+                    CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("-\(spendData.bill)")
+                            .modifier(Num3Bold())
+                        
+                        if spendData.open {
+                            Text("\(spendData.content)")
+                                .modifier(Cap2())
+                        } else {
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color("Gray1"))
+                        }
                     }
-                }
-                
-                Spacer()
-                
-                HStack {
-                    if spendData.open {
-                        OpenTag(spendOpen: true)
+                    .onAppear {
+                        if isSpendOnappear {
+                            spendSum += spendData.bill
+                            isSpendOnappear = false
+                        }
                     }
-                    if spendData.overConsume {
-                        OverPurchaseTag(isOverPurchase: true)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        if spendData.open {
+                            OpenTag(spendOpen: true)
+                        }
+                        if spendData.overConsume {
+                            OverPurchaseTag(isOverPurchase: true)
+                        }
                     }
+                    
                 }
-                
-            } else if let incomeData = incomeData {
-                CategoryIcon(size: $size, accountType: 1, categoryIndex: incomeData.category)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("+\(incomeData.bill)")
-                        .modifier(Num3Bold())
-                    Text("\(incomeData.content)")
-                        .modifier(Cap2())
-                }
-                .onAppear {
-                    if isIncomeOnappear {
-                        incomeSum += incomeData.bill
-                        isIncomeOnappear = false
-                    }
-                }
-                
-
-                Spacer()
             } else {
-                Text("Data not found.")
+                if let spendData = spendData {
+                    CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("-\(spendData.bill)")
+                            .modifier(Num3Bold())
+                        Text("\(spendData.content)")
+                            .modifier(Cap2())
+                    }
+                    .onAppear {
+                        if isSpendOnappear {
+                            spendSum += spendData.bill
+                            isSpendOnappear = false
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        if spendData.open {
+                            OpenTag(spendOpen: true)
+                        }
+                        if spendData.overConsume {
+                            OverPurchaseTag(isOverPurchase: true)
+                        }
+                    }
+                    
+                } else if let incomeData = incomeData {
+                    CategoryIcon(size: $size, accountType: 1, categoryIndex: incomeData.category)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("+\(incomeData.bill)")
+                            .modifier(Num3Bold())
+                        Text("\(incomeData.content)")
+                            .modifier(Cap2())
+                    }
+                    .onAppear {
+                        if isIncomeOnappear {
+                            incomeSum += incomeData.bill
+                            isIncomeOnappear = false
+                        }
+                    }
+                    Spacer()
+                } else {
+                    Text("Data not found.")
+                }
             }
         }
         .padding(.bottom, 20)
