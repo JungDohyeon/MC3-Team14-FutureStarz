@@ -37,7 +37,7 @@ struct TargetBudgetView: View {
                     }
                     .onAppear {
                         withAnimation(.easeInOut(duration: 1.0)) {
-                            sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 09)) * (geometry.size.width)
+                            sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 0)) * (geometry.size.width)
                         }
                     }
                 }.frame(height: 24)
