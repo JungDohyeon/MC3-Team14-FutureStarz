@@ -16,6 +16,7 @@ struct BudgetPostView: View {
     let month: String   // 월
     let date: String    // 날짜
     let day: String     // 요일
+    
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
