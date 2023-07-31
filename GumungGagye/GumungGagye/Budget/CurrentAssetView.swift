@@ -48,7 +48,7 @@ struct CurrentAssetView: View {
                         .modifier(Body2())
                         .foregroundColor(Color("Gray1"))
                     Spacer()
-                    Text("\(spendBill-incomeBill)원")
+                    Text("\(incomeBill-spendBill)원")
                         .modifier(Num3Bold())
                         .foregroundColor(Color("Main"))
                 }

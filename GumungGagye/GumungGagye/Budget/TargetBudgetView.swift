@@ -11,28 +11,36 @@ struct TargetBudgetView: View {
     
     public let spendBill: Int
     @StateObject var userData = InputUserData.shared
+    @State private var sumGraphWidth: CGFloat = 0.0
     
     var body: some View {
        
         VStack(alignment: .leading, spacing: 0) {
             
             // 목표 예산 알림
-            Text("이번 달 목표 예산이 \n\(formatNumber(userData.goal-spendBill))원 남았어요!")
+            Text("이번 달 목표 예산이 \n\(formatNumber((userData.goal ?? 0)-spendBill))원 남았어요!")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 16)
             
             VStack(spacing: 8) {
                 // 목표 예산 진행바
-                ZStack(alignment: .leading) {
-                    Rectangle()
-                        .frame(width: 335, height: 24)
-                        .cornerRadius(9)
-                        .foregroundColor(Color("Light30"))
-                    Rectangle()
-                        .frame(width: 75, height: 24)
-                        .cornerRadius(9)
-                        .foregroundColor(Color("Main"))
-                }
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, minHeight: 24, maxHeight: 24)
+                            .cornerRadius(9)
+                            .foregroundColor(Color("Light30"))
+                        Rectangle()
+                            .frame(width: sumGraphWidth, height: 24)
+                            .cornerRadius(9)
+                            .foregroundColor(Color("Main"))
+                    }
+                    .onAppear {
+                        withAnimation(.easeInOut(duration: 1.0)) {
+                            sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 09)) * (geometry.size.width)
+                        }
+                    }
+                }.frame(height: 24)
                 
                 
                 HStack {
