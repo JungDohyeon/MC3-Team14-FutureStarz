@@ -61,6 +61,17 @@ struct BudgetPostView: View {
                 }
             }
         }
+        .onChange(of: month) { newValue in
+            if let userID = Auth.auth().currentUser?.uid {
+                Task {
+                    let todayDate = dayFormat.appending(year).appending("-").appending(newValue).appending("-").appending(date)
+                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                }
+            }
+            spendSum = 0
+            incomeSum = 0
+            overSpendSum = 0
+        }
     }
     
     func fetchAccountArray(userID userId: String, date: String) async throws -> [String] {

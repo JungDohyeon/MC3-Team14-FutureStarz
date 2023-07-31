@@ -53,8 +53,13 @@ struct TargetBudgetView: View {
                             .foregroundColor(isOver ? Color("OverPurchasing") : Color("Main"))
                     }
                     .onAppear {
-                        withAnimation(.easeInOut(duration: 1.0)) {
+                        withAnimation(.easeInOut(duration: 0.7)) {
                             sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 0)) * (geometry.size.width)
+                        }
+                    }
+                    .onChange(of: spendBill) { newValue in
+                        withAnimation(.easeInOut(duration: 0.7)) {
+                            sumGraphWidth = Int(newValue) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(newValue)/Double(userData.goal ?? 0)) * (geometry.size.width)
                         }
                     }
                 }.frame(height: 24)
