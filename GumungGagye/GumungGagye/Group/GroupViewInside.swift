@@ -339,6 +339,9 @@ struct BudgetGroupView: View {
                     accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
+            spendSum = 0
+            incomeSum = 0
+            overSpendSum = 0
         }
     }
     

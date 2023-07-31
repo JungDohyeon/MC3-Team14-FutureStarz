@@ -116,10 +116,6 @@ struct Breakdown: View {
         }
         .padding(.bottom, 20)
         .onAppear {
-            incomeSum = 0
-            spendSum = 0
-            overSpendSum = 0
-            
             BudgetFirebaseManager.shared.fetchAccountData(forAccountID: accountDataID) { data in
                 self.spendData = data.0
                 self.incomeData = data.1
