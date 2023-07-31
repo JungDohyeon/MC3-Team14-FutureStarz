@@ -16,6 +16,7 @@ struct BudgetPostView: View {
     let month: String   // 월
     let date: String    // 날짜
     let day: String     // 요일
+    
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
@@ -29,12 +30,16 @@ struct BudgetPostView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    Text("+\(incomeSum)원")
-                        .modifier(Num4())
-                        .foregroundColor(Color("Main"))
+                    if incomeSum > 0 {
+                        Text("+\(incomeSum)원")
+                            .modifier(Num4())
+                            .foregroundColor(Color("Main"))
+                    }
                     
-                    Text("-\(spendSum)원")
-                        .modifier(Num4())
+                    if spendSum > 0 {
+                        Text("-\(spendSum)원")
+                            .modifier(Num4())
+                    }
                 }
                     
                 ForEach(accountIDArray, id: \.self) { accountID in
