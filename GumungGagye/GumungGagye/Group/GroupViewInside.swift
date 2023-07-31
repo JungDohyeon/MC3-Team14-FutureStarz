@@ -15,6 +15,7 @@ enum GroupOption: String, CaseIterable {
 
 struct GroupViewInside: View {
     var groupData: GroupData
+    @State var selectedUserID: String?
     
     var body: some View {
         ZStack {
@@ -26,9 +27,7 @@ struct GroupViewInside: View {
                     Divider()
                         .frame(height: 8)
                         .overlay(Color("Gray4"))
-                    UserScroller()
-                    GroupUserSumGraph(groupData: groupData)
-                    UserNoSpend()
+                    UserScroller(groupData: groupData)
                 }
             }
         }
@@ -169,53 +168,185 @@ struct UserScroller: View {
     @StateObject private var firebaseManager = FirebaseController.shared
     @StateObject var inputdata = InputUserData.shared
     
+    @State private var selectedPersonID: String?
     @State private var selectedPerson: String = ""
     @State private var userData: [UserData] = []
     
+    let today = Calendar.current.component(.day, from: Date())
+    let dateFormatter = DateFormatter()
+    
+    var groupData: GroupData
+    
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(userData, id: \.id) { data in
-                    VStack(spacing: 4) {
-                        Circle()
-                            .foregroundColor(Color("Gray3"))
-                            .frame(width: 48, height: 48)
-                            .overlay(
-                                Circle()
-                                    .stroke(selectedPerson == data.nickname ? Color("Main") : .clear, lineWidth: 2)
-                                    .frame(width: 46, height: 46)
-                            )
-                        
-                        Text(data.nickname)
-                            .modifier(Cap2())
-                            .foregroundColor(selectedPerson == data.nickname ? Color("Main") : .black)
-                            .bold(selectedPerson == data.nickname)
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(userData, id: \.id) { data in
+                        VStack(spacing: 4) {
+                            Circle()
+                                .foregroundColor(Color("Gray3"))
+                                .frame(width: 48, height: 48)
+                                .overlay(
+                                    Circle()
+                                        .stroke(selectedPerson == data.nickname ? Color("Main") : .clear, lineWidth: 2)
+                                        .frame(width: 46, height: 46)
+                                )
+                            
+                            Text(data.nickname)
+                                .modifier(Cap2())
+                                .foregroundColor(selectedPerson == data.nickname ? Color("Main") : .black)
+                                .bold(selectedPerson == data.nickname)
+                        }
+                        .onTapGesture {
+                            if selectedPersonID != data.id {
+                                selectedPerson = data.nickname
+                                selectedPersonID = data.id
+                            }
+                        }
                     }
-                    .onTapGesture {
-                        if selectedPerson != data.nickname {
-                            selectedPerson = data.nickname
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 32)
+            }
+            .onAppear {
+                if inputdata.group_id != nil || inputdata.group_id != "" {
+                    if let groupID = inputdata.group_id {
+                        firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
+                            if let arrayData = arrayData {
+                                self.userData = arrayData
+                            }
+                            if userData.count > 0 {
+                                selectedPerson = userData[0].nickname
+                                selectedPersonID = userData[0].id
+                            }
                         }
                     }
                 }
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 32)
+            
+            // =======================================================================================
+            
+            GroupUserSumGraph(groupData: groupData)
+            
+            if let selectedPersonID = selectedPersonID {
+                
+                // 1 ~ 31 한달 보여주기.
+                ForEach((1...today).reversed(), id:\.self) { day in
+                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID)
+                }
+                .padding(.horizontal, 20)
+            }
         }
-        .onAppear {
-            if inputdata.group_id != nil || inputdata.group_id != "" {
-                if let groupID = inputdata.group_id {
-                    firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
-                        if let arrayData = arrayData {
-                            self.userData = arrayData
-                        }
-                        if userData.count > 0 {
-                            selectedPerson = userData[0].nickname
-                        }
+    }
+    
+    func getYear(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "YYYY"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    
+    func getMonth(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "MM"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDate(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "dd"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+    
+    func getDay(day: Int) -> String {
+        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        if let date = Calendar.current.date(from: components) {
+            dateFormatter.dateFormat = "EEEE"
+            return dateFormatter.string(from: date)
+        }
+        return ""
+    }
+}
+
+
+
+struct BudgetGroupView: View {
+    @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
+    
+    let year: String    // 년도
+    let month: String   // 월
+    let date: String    // 날짜
+    let day: String     // 요일
+    
+    var selectedUserID: String?
+    
+    @State var dayFormat: String = ""
+    @State var accountIDArray: [String] = []
+    @State var incomeSum = 0
+    @State var spendSum = 0
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            if accountIDArray.count > 0 {
+                HStack {
+                    Text("\(date)일 \(day)")
+                        .modifier(Body2())
+                    Spacer()
+                    
+                    if incomeSum > 0 {
+                        Text("+\(incomeSum)원")
+                            .modifier(Num4())
+                            .foregroundColor(Color("Main"))
                     }
+                    
+                    if spendSum > 0 {
+                        Text("-\(spendSum)원")
+                            .modifier(Num4())
+                    }
+                }
+                
+                ForEach(accountIDArray, id: \.self) { accountID in
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, accountDataID: accountID)
+                }
+            }
+        }
+        .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
+        .onAppear {
+            if let userID = selectedUserID {
+                Task {
+                    let todayDate = dayFormat.appending(year).appending("-").appending(month).appending("-").appending(date)
+                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                }
+            }
+        }
+        .onChange(of: selectedUserID) { newValue in
+            if let userID = newValue {
+                Task {
+                    let todayDate = dayFormat.appending(year).appending("-").appending(month).appending("-").appending(date)
+                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
         }
     }
+    
+    func fetchAccountArray(userID userId: String, date: String) async throws -> [String] {
+        do {
+            let accountArray = try await budgetFirebaseManager.fetchPostData(userID: userId, date: date)
+            return accountArray
+        } catch {
+            throw error
+        }
+    }
+    
 }
 
 
