@@ -17,7 +17,7 @@ struct TargetBudgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             
             // 목표 예산 알림
-            Text("이번 달 목표 예산이 \n\(formatNumber(userData.goal))원 남았어요!")
+            Text("이번 달 목표 예산이 \n\(formatNumber(userData.goal-spendBill))원 남았어요!")
                 .modifier(H2SemiBold())
                 .padding(.bottom, 16)
             

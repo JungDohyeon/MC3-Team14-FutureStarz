@@ -21,6 +21,12 @@ struct BudgetPostView: View {
     @State var incomeSum = 0
     @State var spendSum = 0
     
+    @Binding var incomeAsset: Int
+    @Binding var spendAsset: Int
+    
+    @State var isSpendOnappear = true
+    @State var isIncomeOnappear = true
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if accountIDArray.count > 0 {
@@ -33,11 +39,23 @@ struct BudgetPostView: View {
                         Text("+\(incomeSum)원")
                             .modifier(Num4())
                             .foregroundColor(Color("Main"))
+                            .onAppear {
+                                if isIncomeOnappear {
+                                    incomeAsset += incomeSum
+                                    isIncomeOnappear = false
+                                }
+                            }
                     }
                     
                     if spendSum != 0 {
                         Text("-\(spendSum)원")
                             .modifier(Num4())
+                            .onAppear {
+                                if isSpendOnappear {
+                                    spendAsset += spendSum
+                                    isSpendOnappear = false
+                                }
+                            }
                     }
                 }
                     
