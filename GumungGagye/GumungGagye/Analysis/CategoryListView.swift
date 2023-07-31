@@ -11,10 +11,10 @@ struct CategoryListView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24.0) {
-                ForEach(Array(CategoryInfo.shared.category_info[0].values), id: \.self) { categoryTitles in
-                    let categoryTitle = categoryTitles[0] ?? ""
-                    let categoryLocalTitle = categoryTitles[1] ?? ""
-                    CategorySumView(categoryTitle: categoryTitle, categoryLocalTitle: categoryLocalTitle)
+                ForEach(Array(CategoryInfo.shared.category_info[0]), id: \.key) { category in
+                    if let categoryTitle = category.value[0], let categoryLocalTitle = category.value[1] {
+                        CategorySumView(category: category.key, categoryTitle: categoryTitle, categoryLocalTitle: categoryLocalTitle)
+                    }
                 }
             }
             .padding(.horizontal, 20.0)
@@ -26,8 +26,9 @@ struct CategoryListView: View {
 }
 
 
+
 struct CategorySumView: View {
-    
+    let category: Int
     let categoryTitle: String
     let categoryLocalTitle: String
 
@@ -36,31 +37,41 @@ struct CategorySumView: View {
     @State private var incomeData: ReadIncomeData?
     
     var body: some View {
-//        NavigationLink(destination: CategoryHistoryView(spendData: spendData, size: .constant(.large))){
-            HStack {
-                HStack(alignment: .center, spacing: 12.0) {
-                    Circle()
-                        .frame(width: 48, height: 48)
-                        .foregroundColor(Color(categoryTitle))
-                        
-                    VStack(alignment: .leading, spacing: 4.0) {
-                        Text(categoryLocalTitle)
-                            .modifier(Cap1())
-                            .foregroundColor(Color("Gray1"))
-                        
-                        Text("51.6% | 163,500원")
-                            .modifier(Body1())
-                            .foregroundColor(Color("Black"))
-                    }
-                }
+        HStack {
+            HStack(alignment: .center, spacing: 12.0) {
+               
+                CategoryIcon(size: .constant(.small), accountType: 0, categoryIndex: category)
                 
-                Spacer()
-                Image("Chevron.right.light.gray2")
+                VStack(alignment: .leading, spacing: 4.0) {
+                    Text(categoryLocalTitle)
+                        .modifier(Cap1())
+                        .foregroundColor(Color("Gray1"))
+                    
+                    Text("51.6% | 163,500원") // 여기에 진행률과 금액을 표시하는 로직을 추가해주세요.
+                        .modifier(Body1())
+                        .foregroundColor(Color("Black"))
+                }
             }
+            
+            Spacer()
+            Image("Chevron.right.light.gray2")
+        }
+        .onAppear {
+            fetchSpendData()
         }
     }
     
-//}
+    func fetchSpendData() {
+        // Convert category Int to String
+        let categoryString = String(category)
+        
+        // Use BudgetFirebaseManager to fetch spendData for this category
+        BudgetFirebaseManager.shared.fetchAccountData(forAccountID: categoryString) { (spendData, _) in
+            self.spendData = spendData
+        }
+    }
+}
+
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
