@@ -76,6 +76,7 @@ struct ModalView: View {
                 }
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
         
     }
 }

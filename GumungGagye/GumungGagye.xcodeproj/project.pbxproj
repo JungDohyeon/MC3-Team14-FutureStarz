@@ -210,7 +210,7 @@
 		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		CDB55B462A75379000D7D6F1 /* GroupRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRankingView.swift; sourceTree = "<group>"; };
-		CDCB8C412A53A02F005DF128 /* GumungGagye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GumungGagye.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDCB8C412A53A02F005DF128 /* SSOAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSOAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDCB8C442A53A02F005DF128 /* GumungGagyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GumungGagyeApp.swift; sourceTree = "<group>"; };
 		CDCB8C462A53A02F005DF128 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CDCB8C482A53A030005DF128 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 		CDCB8C422A53A02F005DF128 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDCB8C412A53A02F005DF128 /* GumungGagye.app */,
+				CDCB8C412A53A02F005DF128 /* SSOAP.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,9 +543,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CDCB8C402A53A02F005DF128 /* GumungGagye */ = {
+		CDCB8C402A53A02F005DF128 /* SSOAP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CDCB8C4F2A53A030005DF128 /* Build configuration list for PBXNativeTarget "GumungGagye" */;
+			buildConfigurationList = CDCB8C4F2A53A030005DF128 /* Build configuration list for PBXNativeTarget "SSOAP" */;
 			buildPhases = (
 				CDCB8C3D2A53A02F005DF128 /* Sources */,
 				CDCB8C3E2A53A02F005DF128 /* Frameworks */,
@@ -555,7 +555,7 @@
 			);
 			dependencies = (
 			);
-			name = GumungGagye;
+			name = SSOAP;
 			packageProductDependencies = (
 				5E22C6982A57D6CA008AF9E5 /* FirebaseAnalytics */,
 				5E22C69A2A57D6CA008AF9E5 /* FirebaseAnalyticsSwift */,
@@ -567,7 +567,7 @@
 				5E25D6472A6A9B8F00FBA29F /* FirebaseStorage */,
 			);
 			productName = GumungGagye;
-			productReference = CDCB8C412A53A02F005DF128 /* GumungGagye.app */;
+			productReference = CDCB8C412A53A02F005DF128 /* SSOAP.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -602,7 +602,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDCB8C402A53A02F005DF128 /* GumungGagye */,
+				CDCB8C402A53A02F005DF128 /* SSOAP */,
 			);
 		};
 /* End PBXProject section */
@@ -922,7 +922,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CDCB8C4F2A53A030005DF128 /* Build configuration list for PBXNativeTarget "GumungGagye" */ = {
+		CDCB8C4F2A53A030005DF128 /* Build configuration list for PBXNativeTarget "SSOAP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDCB8C502A53A030005DF128 /* Debug */,

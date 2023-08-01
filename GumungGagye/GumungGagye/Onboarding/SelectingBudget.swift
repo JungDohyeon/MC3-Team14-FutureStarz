@@ -47,7 +47,7 @@ struct SelectingBudget: View {
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("Gray1"))
-                    .modifier(H2SemiBold())
+                    .modifier(Num2())
                     .padding(.bottom, 14)
                     .padding(.leading, 8)
                     

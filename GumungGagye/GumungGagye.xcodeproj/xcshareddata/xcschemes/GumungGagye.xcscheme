@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CDCB8C402A53A02F005DF128"
-               BuildableName = "GumungGagye.app"
-               BlueprintName = "GumungGagye"
+               BuildableName = "SSOAP.app"
+               BlueprintName = "SSOAP"
                ReferencedContainer = "container:GumungGagye.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDCB8C402A53A02F005DF128"
-            BuildableName = "GumungGagye.app"
-            BlueprintName = "GumungGagye"
+            BuildableName = "SSOAP.app"
+            BlueprintName = "SSOAP"
             ReferencedContainer = "container:GumungGagye.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDCB8C402A53A02F005DF128"
-            BuildableName = "GumungGagye.app"
-            BlueprintName = "GumungGagye"
+            BuildableName = "SSOAP.app"
+            BlueprintName = "SSOAP"
             ReferencedContainer = "container:GumungGagye.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
