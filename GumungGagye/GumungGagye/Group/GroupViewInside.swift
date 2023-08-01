@@ -81,6 +81,7 @@ struct GroupTopInfo: View {
     @State private var isLeaveAlertPresented: Bool = false
     @State private var isShowModal: Bool = false
     @State private var isUserDismiss: Bool = false
+    
     var groupData: GroupData
     
     @StateObject var userData = InputUserData.shared
@@ -137,7 +138,7 @@ struct GroupTopInfo: View {
                     case .leave:
                         EmptyView()
                     case .explore:
-                        GroupNotExistView()
+                        GroupNotExistView(userHasGroup: true)
                     }
                 }
             }
