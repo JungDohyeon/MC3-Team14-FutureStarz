@@ -119,6 +119,7 @@ struct SelectingBankView: View {
             }
         }
         .padding(.horizontal, 20)
+        .background(Color("background"))
     }
 }
 
