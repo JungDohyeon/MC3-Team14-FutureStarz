@@ -95,7 +95,7 @@ class FirebaseController: ObservableObject {
             }
         }
     }
-
+    
     
     // MARK: delete group
     func deleteGroupData(deleteGroup: GroupData) {
@@ -109,31 +109,6 @@ class FirebaseController: ObservableObject {
                         return group.id == deleteGroup.id
                     }
                 }
-            }
-        }
-    }
-    
-    // Update Group Func (인원 유입)
-    func incrementGroupCur(groupID: String) {
-        let db = Firestore.firestore()
-        // 해당 그룹의 Document 참조
-        
-        let groupRef = db.collection("groupRoom").document(groupID)
-        
-        // 해당 그룹의 현재 groupCur 값을 가져오기
-        groupRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                // 현재 groupCur 값이 있으면 1 증가시키고 업데이트
-                DispatchQueue.main.async {
-                    if var groupData = document.data() {
-                        if let users = Auth.auth().currentUser {
-                            // 그룹 내부에 userID 추가
-                            groupRef.updateData(["userId_array" : FieldValue.arrayUnion([users.uid])])
-                        }
-                    }
-                }
-            } else {
-                print("Document does not exist")
             }
         }
     }
@@ -174,6 +149,40 @@ class FirebaseController: ObservableObject {
         }
     }
     
+    // Update Group Func (인원 유입)
+    func incrementGroupCur(groupID: String) {
+        let db = Firestore.firestore()
+        // 해당 그룹의 Document 참조
+        
+        let groupRef = db.collection("groupRoom").document(groupID)
+        
+        // 해당 그룹의 현재 groupCur 값을 가져오기
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // 현재 groupCur 값이 있으면 1 증가시키고 업데이트
+                DispatchQueue.main.async {
+                    self.inputdata.group_id = groupID
+                    Task {
+                        do {
+                            try await self.updateGroupFirestore(groupId: groupID)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    
+                    if var groupData = document.data() {
+                        if let users = Auth.auth().currentUser {
+                            // 그룹 내부에 userID 추가
+                            groupRef.updateData(["userId_array" : FieldValue.arrayUnion([users.uid])])
+                        }
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     
     // Update Group Func (인원 감소)
     func decrementGroupCur(groupID: String) {
@@ -188,6 +197,13 @@ class FirebaseController: ObservableObject {
                 DispatchQueue.main.async {
                     // 현재 groupCur 값이 있으면 1 감소
                     if var groupData = document.data() {
+                        Task {
+                            do {
+                                try await self.updateGroupFirestore(groupId: "")
+                            } catch {
+                                print(error)
+                            }
+                        }
                         
                         if let users = Auth.auth().currentUser {
                             // 그룹 내부에 userID 제거
@@ -253,11 +269,11 @@ class FirebaseController: ObservableObject {
             
             var users: [UserData] = []
             
-       
+            
             for document in querySnapshot!.documents {
                 let data = document.data()
                 var user = UserData(data: data)
-        
+                
                 users.append(user)
             }
             
