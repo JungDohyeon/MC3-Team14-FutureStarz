@@ -21,14 +21,13 @@ class FirebaseController: ObservableObject {
     private init() { }
     
     // MARK: Add Group Room Data
-    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_cur: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
+    func addGroupData(group_name: String, group_introduce: String, group_goal: Int, group_max: Int, lock_status: Bool, group_pw: String, makeTime: Date) {
         let db = Firestore.firestore()
         
         var groupData: [String: Any] = [
             "group_name": group_name,
             "introduce": group_introduce,
             "group_goal": group_goal,
-            "group_cur": group_cur,
             "group_max": group_max,
             "lock_status": lock_status,
             "group_pw": group_pw,
@@ -87,7 +86,7 @@ class FirebaseController: ObservableObject {
                     // update list property in main Thread
                     DispatchQueue.main.async {
                         self.groupList = snapshot.documents.map { document in
-                            return GroupData(id: document.documentID, group_name: document["group_name"] as? String ?? "", group_introduce: document["introduce"] as? String ?? "", group_goal: document["group_goal"] as? Int ?? 0, group_cur: document["group_cur"] as? Int ?? 0, group_max: document["group_max"] as? Int ?? 0, lock_status: document["lock_status"] as? Bool ?? false, group_pw: document["group_pw"] as? String ?? "", timeStamp: Date())
+                            return GroupData(id: document.documentID, group_name: document["group_name"] as? String ?? "", group_introduce: document["introduce"] as? String ?? "", group_goal: document["group_goal"] as? Int ?? 0, group_max: document["group_max"] as? Int ?? 0, lock_status: document["lock_status"] as? Bool ?? false, group_pw: document["group_pw"] as? String ?? "", timeStamp: Date())
                         }
                     }
                 }
@@ -126,34 +125,7 @@ class FirebaseController: ObservableObject {
             if let document = document, document.exists {
                 // 현재 groupCur 값이 있으면 1 증가시키고 업데이트
                 DispatchQueue.main.async {
-                    if var groupData = document.data(),
-                       let currentGroupCur = groupData["group_cur"] as? Int {
-                        let maxGroup = groupData["group_max"] as? Int
-                        if  currentGroupCur >= maxGroup! {
-                            print("정원 초과")
-                            return
-                        } else {
-                            self.inputdata.group_id = groupID
-                            Task {
-                                do {
-                                    try await self.updateGroupFirestore(groupId: groupID)
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                            
-                            
-                            groupData["group_cur"] = currentGroupCur + 1
-                        }
-                        
-                        groupRef.setData(groupData) { error in
-                            if let error = error {
-                                print("Error updating document: \(error)")
-                            } else {
-                                print("Document successfully updated")
-                            }
-                        }
-                        
+                    if var groupData = document.data() {
                         if let users = Auth.auth().currentUser {
                             // 그룹 내부에 userID 추가
                             groupRef.updateData(["userId_array" : FieldValue.arrayUnion([users.uid])])
@@ -181,7 +153,6 @@ class FirebaseController: ObservableObject {
                 let group_name = data["group_name"] as? String ?? ""
                 let group_introduce = data["introduce"] as? String ?? ""
                 let group_goal = data["group_goal"] as? Int ?? 0
-                let group_cur = data["group_cur"] as? Int ?? 0
                 let group_max = data["group_max"] as? Int ?? 0
                 let lock_status = data["lock_status"] as? Bool ?? false
                 let group_pw = data["group_pw"] as? String ?? ""
@@ -191,7 +162,6 @@ class FirebaseController: ObservableObject {
                                  group_name: group_name,
                                  group_introduce: group_introduce,
                                  group_goal: group_goal,
-                                 group_cur: group_cur,
                                  group_max: group_max,
                                  lock_status: lock_status,
                                  group_pw: group_pw,
@@ -217,25 +187,7 @@ class FirebaseController: ObservableObject {
             if let document = document, document.exists {
                 DispatchQueue.main.async {
                     // 현재 groupCur 값이 있으면 1 감소
-                    if var groupData = document.data(),
-                       let currentGroupCur = groupData["group_cur"] as? Int {
-                        Task {
-                            do {
-                                try await self.updateGroupFirestore(groupId: "")
-                            } catch {
-                                print(error)
-                            }
-                        }
-                        
-                        groupData["group_cur"] = currentGroupCur - 1
-                        
-                        groupRef.setData(groupData) { error in
-                            if let error = error {
-                                print("Error updating document: \(error)")
-                            } else {
-                                print("Document successfully updated")
-                            }
-                        }
+                    if var groupData = document.data() {
                         
                         if let users = Auth.auth().currentUser {
                             // 그룹 내부에 userID 제거

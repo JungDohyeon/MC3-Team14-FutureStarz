@@ -92,7 +92,7 @@ struct GroupRoomView: View {
                             if userData.group_id != "" {
                                 userGroupStatus = .alreadyJoined
                                 showSubmitGroupAlert = true
-                            } else if groupdata.group_cur >= groupdata.group_max {
+                            } else if userDataArray.count >= groupdata.group_max {
                                 userGroupStatus = .groupMax
                                 showSubmitGroupAlert = true
                             } else {
@@ -282,12 +282,5 @@ struct MainColorBtn: View {
                     .foregroundColor(Color("Light"))
                     .cornerRadius(12)
             )
-    }
-}
-
-
-struct GroupRoomView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: true)
     }
 }
