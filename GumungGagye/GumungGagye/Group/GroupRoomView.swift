@@ -19,6 +19,7 @@ struct GroupRoomView: View {
     @State private var showSubmitGroupAlert = false
     @State private var lockStatusModal: Bool = false
     @State private var userGroupStatus: AlertType = .otherCase
+    @State private var userDataArray: [UserData] = []
     
     
     var body: some View {
@@ -73,7 +74,7 @@ struct GroupRoomView: View {
                             .padding(.trailing, 7)
                         
                         Group {
-                            Text(groupdata.group_cur.description)
+                            Text(userDataArray.count.description)
                             Text("/")
                             Text(groupdata.group_max.description)
                             Text("명")
@@ -133,6 +134,13 @@ struct GroupRoomView: View {
                     
                     Divider()
                         .background(Color("Gray3"))
+                }
+            }
+        }
+        .onAppear {
+            firebaseManager.fetchDataGroupUser(groupID: groupdata.id) { arrayData in
+                if let arrayData = arrayData {
+                    self.userDataArray = arrayData
                 }
             }
         }

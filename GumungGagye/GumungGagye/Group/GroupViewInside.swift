@@ -109,45 +109,6 @@ struct GroupViewInside: View {
     }
 }
 
-// MARK: 소비 내역이 없을 때
-struct UserNoSpend: View {
-    var date: String
-    var day: String
-    
-    var body: some View {
-        ZStack {
-            Color("background").ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 20) {
-                Text("\(date)일 \(day)")
-                    .modifier(Body2())
-                    .foregroundColor(.black)
-                
-                HStack {
-                    VStack(alignment:. leading, spacing: 8) {
-                        Text("오늘은 소비 내역이 없어요")
-                            .modifier(Body2Bold())
-                        
-                        Text("작성하지 않은 친구를 콕 찔러볼까요?")
-                            .modifier(Cap1())
-                    }
-                    .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    Button {
-                        
-                    } label: {
-                        MainColorBtn(inputText: "콕 찌르기")
-                    }
-                }
-            }
-        }
-    }
-}
-
-// MARK: 소비 내역이 있을 때
-
-
 // MARK: Group Top Info
 struct GroupTopInfo: View {
     @Environment(\.presentationMode) var presentationMode
@@ -335,7 +296,7 @@ struct BudgetGroupView: View {
                     
                 }
             } else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
-                UserNoSpend(date: date, day: day)
+                UserNoSpendView(date: date, day: day)
             }
         }
         .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
