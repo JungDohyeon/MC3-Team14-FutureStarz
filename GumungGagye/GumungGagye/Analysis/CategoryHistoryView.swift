@@ -8,27 +8,27 @@
 //import SwiftUI
 //
 //struct CategoryHistoryView: View {
-//    
+//
 //    @State private var spendData: ReadSpendData
-//    
+//
 //    @Binding var size: IconSize
 //    var accountType: Int  // 0
 //    var categoryIndex: Int // 4
 //    @ObservedObject var categoryInfo = CategoryInfo.shared
-//    
+//
 //    let year: String    // 년도
 //    let month: String   // 월
-//    
+//
 //    @State var categorySpendSum: Int // 카테고리별 총 금액
 //    @State var categorySpendNum: Int // 카테고리별 총 횟수
-//    
+//
 //    let today = Calendar.current.component(.day, from: Date())
 //    let dateFormatter = DateFormatter()
-//    
+//
 //    var body: some View {
 //        ScrollView{
 //            VStack(spacing: 76.0) {
-//                
+//
 //                // - MARK: - 카테고리 요약
 //                HStack(alignment: .top, spacing: 0.0) {
 //                    VStack(alignment: .leading, spacing: 12.0) {
@@ -40,11 +40,11 @@
 //                            }
 //                            .foregroundColor(Color("Black"))
 //                            .modifier(Cap1())
-//                            
+//
 //                            Text("\(categorySpendSum)원")
 //                                .modifier(Num1())
 //                        }
-//                        
+//
 //                        Text("총 \(categorySpendNum)회")
 //                            .foregroundColor(Color("Main"))
 //                            .modifier(Cap1Bold())
@@ -53,13 +53,13 @@
 //                            .background(Color("Light"))
 //                            .cornerRadius(5)
 //                    }
-//                    
+//
 //                    Spacer()
 //                    // 카테고리 아이콘
 //                    CategoryIcon(size: .constant(.large), accountType: 0, categoryIndex: spendData.category)
 //                }
 //                .padding(.top, 48.0)
-//                
+//
 //                // - MARK: - 카테고리 내역 리스트
 //                VStack(spacing: 52.0) {
 //                    ForEach((1...today).reversed(), id:\.self) { day in
@@ -73,7 +73,7 @@
 //        .foregroundColor(Color("Black"))
 //        .navigationBarTitle("식비 내역",  displayMode: .inline)
 //    }
-//    
+//
 //    func getYear(day: Int) -> String {
 //        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
 //        if let date = Calendar.current.date(from: components) {
@@ -82,8 +82,8 @@
 //        }
 //        return ""
 //    }
-//    
-//    
+//
+//
 //    func getMonth(day: Int) -> String {
 //        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
 //        if let date = Calendar.current.date(from: components) {
@@ -92,7 +92,7 @@
 //        }
 //        return ""
 //    }
-//    
+//
 //    func getDate(day: Int) -> String {
 //        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
 //        if let date = Calendar.current.date(from: components) {
@@ -101,7 +101,7 @@
 //        }
 //        return ""
 //    }
-//    
+//
 //    func getDay(day: Int) -> String {
 //        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
 //        if let date = Calendar.current.date(from: components) {
