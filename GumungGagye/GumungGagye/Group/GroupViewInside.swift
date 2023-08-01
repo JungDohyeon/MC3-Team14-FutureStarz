@@ -242,7 +242,7 @@ struct UserScroller: View {
     func getDate(day: Int) -> String {
         let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
-            dateFormatter.dateFormat = "dd"
+            dateFormatter.dateFormat = "d"
             return dateFormatter.string(from: date)
         }
         return ""

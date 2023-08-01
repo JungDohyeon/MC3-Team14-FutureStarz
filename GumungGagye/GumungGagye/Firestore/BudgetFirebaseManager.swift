@@ -136,7 +136,7 @@ final class BudgetFirebaseManager: ObservableObject {
         
         // 해당 날짜에 해당하는 POST가 있는지 확인
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-d"
         let dateString = dateFormatter.string(from: spendData.account_date)
         
         db.collection("post").whereField("post_date", isEqualTo: dateString).getDocuments { (snapshot, error) in
@@ -258,7 +258,7 @@ final class BudgetFirebaseManager: ObservableObject {
         
         // 해당 날짜에 해당하는 POST가 있는지 확인
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-d"
         let dateString = dateFormatter.string(from: incomeData.account_date)
         
         db.collection("post").whereField("post_date", isEqualTo: dateString).getDocuments { (snapshot, error) in
