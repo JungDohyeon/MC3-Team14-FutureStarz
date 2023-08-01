@@ -57,10 +57,9 @@ struct DatemodalView: View {
                                 .datePickerStyle(GraphicalDatePickerStyle())
                                 .labelsHidden()
                                 .accentColor(Color("Main"))
-                                .presentationDetents([.height(450)])
+                                .presentationDetents([.fraction(0.6)])
                                 .onChange(of: selectDate) { newValue in
                                     temData = newValue
-//                                    print(account_date)
                                 }
                                 .padding(.top, 10)
                                 .padding(.bottom, 15)
@@ -70,45 +69,11 @@ struct DatemodalView: View {
                                 isDatePickerVisible = false
                                 account_date = temData
                             } label: {
-                                HStack {
-                                    Spacer()
-                                    Text("선택하기")
-                                        .modifier(BtnBold())
-                                    
-                                    Spacer()
-                                }
-                                .frame(height: 48)
-                                .background(Color("Main"))
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                                .padding(.horizontal, 13)
+                                GroupCreateBtn(validation: true, text: "선택하기")
                             }
-                            
-                            
-                            
-//                            Rectangle()
-//                                .frame(height: 50)
-//                                .frame(maxWidth: .infinity)
-//                                .foregroundColor(.green)
-//                                .overlay {
-//                                    Text("Select")
-//                                        .modifier(Body1Bold())
-//                                }
-//                                .onTapGesture {
-//                                    isDatePickerVisible = false
-//
-////                                    if account_date == nil {
-////                                        account_date = Date()
-////                                    } else {
-//                                        account_date = temData
-////                                    }
-////                                    print("account_date : \(dateToString(date: account_date!))")
-//                                }
-                            
                             Spacer()
-                            
-                            
                         }
+                        .padding(.horizontal, 20)
                     }
                     Spacer()
                 }
