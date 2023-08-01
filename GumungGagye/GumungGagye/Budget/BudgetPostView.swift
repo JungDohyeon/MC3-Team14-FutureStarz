@@ -19,11 +19,15 @@ struct BudgetPostView: View {
     
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
-    @State var overSpendSum = 0
     
+    // 일 총합
+    @State var spendTodaySum = 0
+    @State var incomeTodaySum = 0
+    
+    // 달 총합
+    @State var overSpendSum = 0
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
-    @Binding var showAdd: Int
     
     @State var isSpendOnappear = true
     @State var isIncomeOnappear = true
@@ -36,20 +40,20 @@ struct BudgetPostView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    if incomeSum > 0 {
-                        Text("+\(incomeSum)원")
+                    if incomeTodaySum > 0 {
+                        Text("+\(incomeTodaySum)원")
                             .modifier(Num4())
                             .foregroundColor(Color("Main"))
                     }
                     
-                    if spendSum > 0 {
-                        Text("-\(spendSum)원")
+                    if spendTodaySum > 0 {
+                        Text("-\(spendTodaySum)원")
                             .modifier(Num4())
                     }
                 }
                     
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: false, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: $incomeTodaySum, isGroup: false, accountDataID: accountID)
                 }
             }
         }
@@ -72,6 +76,8 @@ struct BudgetPostView: View {
             spendSum = 0
             incomeSum = 0
             overSpendSum = 0
+            spendTodaySum = 0
+            incomeTodaySum = 0
         }
     }
     
@@ -83,5 +89,4 @@ struct BudgetPostView: View {
             throw error
         }
     }
-
 }

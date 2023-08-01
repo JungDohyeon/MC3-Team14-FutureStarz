@@ -38,7 +38,6 @@ struct GroupRankingView: View {
             Divider()
                 .frame(height: 1)
                 .background(Color("Gray4"))
-    
         }
     }
 }

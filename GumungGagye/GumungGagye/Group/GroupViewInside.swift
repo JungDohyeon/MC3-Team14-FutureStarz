@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 enum GroupOption: String, CaseIterable {
     case invite = "그룹 초대하기"
@@ -73,6 +74,8 @@ struct GroupViewInside: View {
                             EmptyView()
                         case .explore:
                             GroupNotExistView(userHasGroup: true)
+                                .presentationDetents([.large])
+                                .presentationDragIndicator(.visible)
                         }
                     }
                 }
@@ -112,7 +115,7 @@ struct GroupViewInside: View {
 // MARK: Group Top Info
 struct GroupTopInfo: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     @State private var isUserDismiss: Bool = false
     
     var groupData: GroupData
@@ -189,7 +192,7 @@ struct UserScroller: View {
                             if let arrayData = arrayData {
                                 self.userData = arrayData
                             }
-                            if userData.count > 0 {
+                            if userData.count > 0 && selectedPersonID == nil {
                                 selectedPerson = userData[0].nickname
                                 selectedPersonID = userData[0].id
                             }
@@ -204,7 +207,7 @@ struct UserScroller: View {
             
             if let selectedPersonID = selectedPersonID {
                 ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
-                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, spendSum: $spendSum, overSpendSum: $overSpendSum)
+                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, selectedUserName: selectedPerson, spendSum: $spendSum, overSpendSum: $overSpendSum)
                 }
                 .padding(.horizontal, 20)
             }
@@ -259,7 +262,6 @@ struct UserScroller: View {
 }
 
 
-
 struct BudgetGroupView: View {
     @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
     
@@ -269,6 +271,7 @@ struct BudgetGroupView: View {
     let day: String     // 요일
     
     var selectedUserID: String?
+    var selectedUserName: String
     
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
@@ -277,26 +280,51 @@ struct BudgetGroupView: View {
     @Binding var spendSum: Int
     @Binding var overSpendSum: Int
     
+    @State private var spendTodaySum = 0
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if accountIDArray.count > 0 {
-                HStack {
-                    Text("\(date)일 \(day)")
-                        .modifier(Body2())
-                    Spacer()
-                    
-                    if spendSum > 0 {
-                        Text("-\(spendSum)원")
-                            .modifier(Num4())
+                NavigationLink {
+                    PersonalDaySpendView(accountIDArray: $accountIDArray, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("\(date)일 \(day)")
+                            .modifier(Body2())
+                        Spacer()
+                        
+                        if spendTodaySum > 0 {
+                            Text("-\(spendTodaySum)원")
+                                .modifier(Num4SemiBold())
+                        }
+                        Image("Chevron.right.thick.black")
+                            .resizable()
+                            .frame(width: 10, height: 14)
+                            .padding(.leading, 3)
+                    }
+                    .foregroundColor(.black)
+                }
+                VStack(spacing: 20) {
+                    ForEach(accountIDArray, id: \.self) { accountID in
+                        Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: .constant(0), isGroup: true, accountDataID: accountID)
                     }
                 }
-                
-                ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: true, accountDataID: accountID)
-                    
+            }
+            else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
+                if selectedUserID != Auth.auth().currentUser?.uid {
+                    UserNoSpendView(date: date, day: day)
+                } else {
+                    HStack(spacing: 0) {
+                        Text("\(date)일 \(day)")
+                            .modifier(Body2())
+                        Spacer()
+                        
+                        if spendTodaySum > 0 {
+                            Text("-\(spendTodaySum)원")
+                                .modifier(Num4SemiBold())
+                        }
+                    }
                 }
-            } else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
-                UserNoSpendView(date: date, day: day)
             }
         }
         .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
@@ -315,6 +343,7 @@ struct BudgetGroupView: View {
                     accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
+            spendTodaySum = 0
             spendSum = 0
             incomeSum = 0
             overSpendSum = 0
@@ -326,6 +355,7 @@ struct BudgetGroupView: View {
                     accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
+            spendTodaySum = 0
             spendSum = 0
             incomeSum = 0
             overSpendSum = 0
@@ -346,13 +376,13 @@ struct BudgetGroupView: View {
         let year = calendar.component(.year, from: date)
         return year
     }
-
+    
     func getMonth(from date: Date) -> Int {
         let calendar = Calendar.current
         let month = calendar.component(.month, from: date)
         return month
     }
-
+    
     func getDate(from date: Date) -> Int {
         let calendar = Calendar.current
         let date = calendar.component(.day, from: date)
