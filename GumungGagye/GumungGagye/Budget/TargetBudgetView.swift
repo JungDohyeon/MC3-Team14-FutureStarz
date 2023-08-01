@@ -61,6 +61,13 @@ struct TargetBudgetView: View {
                             }
                         }
                     }
+                    .onChange(of: userData.goal, perform: { newValue in
+                        if let userGoal = userData.goal {
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                sumGraphWidth = Int(spendBill) > Int(userGoal) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userGoal)) * (geometry.size.width)
+                            }
+                        }
+                    })
                     .onChange(of: selectedMonth, perform: { newValue in
                         if let userGoal = userData.goal {
                             withAnimation(.easeInOut(duration: 0.7)) {
@@ -84,10 +91,11 @@ struct TargetBudgetView: View {
                         Text("오늘까지 ")
                             .modifier(Cap1())
                             .foregroundColor(Color("Gray2"))
-                        Text("\(formatNumber(spendBill))")
+                        Text("\(formatNumber(spendBill))원")
                             .modifier(Num5())
                             .foregroundColor(isOver ? Color("OverPurchasing") : Color("Main"))
                     }
+                    
                     Spacer()
                     // 총 목표 금액
                     HStack(spacing: 0) {
@@ -97,6 +105,15 @@ struct TargetBudgetView: View {
                             .modifier(Num5())
                     }
                     .foregroundColor(Color("Gray2"))
+                }
+            }
+            .onAppear {
+                if let userGoal = userData.goal {
+                    if userGoal - spendBill < 0 {
+                        isOver = true
+                    } else {
+                        isOver = false
+                    }
                 }
             }
         }
