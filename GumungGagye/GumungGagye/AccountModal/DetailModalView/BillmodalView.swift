@@ -35,7 +35,7 @@ struct BillmodalView: View {
                                
                             })
                             .padding(.vertical, 22)
-                            .keyboardType(.decimalPad)
+                            .keyboardType(.numberPad)
                             .foregroundColor(Color("Black"))
                             .modifier(Body1Bold())
                             .onChange(of: spend_bill_string, perform: { newValue in
