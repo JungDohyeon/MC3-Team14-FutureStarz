@@ -36,11 +36,14 @@ struct GroupViewInside: View {
 
 // MARK: 소비 내역이 없을 때
 struct UserNoSpend: View {
+    var date: String
+    var day: String
+    
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
             VStack(alignment: .leading, spacing: 20) {
-                Text("4일 화요일")
+                Text("\(date)일 \(day)")
                     .modifier(Body2())
                     .foregroundColor(.black)
                 
@@ -63,7 +66,6 @@ struct UserNoSpend: View {
                     }
                 }
             }
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -296,7 +298,7 @@ struct BudgetGroupView: View {
     let month: String   // 월
     let date: String    // 날짜
     let day: String     // 요일
-
+    
     var selectedUserID: String?
     
     @State var dayFormat: String = ""
@@ -328,7 +330,10 @@ struct BudgetGroupView: View {
                 
                 ForEach(accountIDArray, id: \.self) { accountID in
                     Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: true, accountDataID: accountID)
+                    
                 }
+            } else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
+                UserNoSpend(date: date, day: day)
             }
         }
         .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
@@ -373,6 +378,23 @@ struct BudgetGroupView: View {
         }
     }
     
+    func getYear(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        return year
+    }
+
+    func getMonth(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        return month
+    }
+
+    func getDate(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let date = calendar.component(.day, from: date)
+        return date
+    }
 }
 
 // MARK: Show Group user month graph
@@ -381,7 +403,7 @@ struct GroupUserSumGraph: View {
     @Binding var purchaseSum: Int
     @Binding var overpurchaseSum: Int
     @Binding var selectedMonth: Date
-
+    
     @State private var sumGraphWidth: CGFloat = 0.0
     @State private var overGraphWidth: CGFloat = 0.0
     
