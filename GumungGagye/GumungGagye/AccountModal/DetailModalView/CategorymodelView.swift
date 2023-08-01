@@ -65,7 +65,7 @@ struct CategorymodelView: View {
                         
                         HStack(spacing: 0) {
                             Spacer()
-                            Image(systemName: "chevron.right")
+                            Image("Chevron.right.light.gray2")
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(Color("Gray2"))
                                 .fontWeight(.bold)

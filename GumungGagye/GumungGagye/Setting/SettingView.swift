@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
@@ -164,6 +163,7 @@ struct SettingView: View {
         .onAppear {
             print("\(inputdata.goal)")
         }
+       
     }
 }
 
@@ -194,12 +194,13 @@ struct SettingRowView: View {
                     Text("\(value)")
                         .modifier(Num3())
                         .foregroundColor(Color("Black"))
-                    Image(systemName: "chevron.right")
+                    Image("Chevron.right.light.gray2")
                         .foregroundColor(Color("Gray2"))
                         .font(.system(size: 16))
                 }
             }
         }
+        .background(Color("background"))
         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
     }
 }
@@ -216,7 +217,6 @@ struct SettingRowView2: View {
         HStack {
             Text("\(label)")
                 .modifier(Body1())
-                .foregroundColor(Color("Black"))
             Spacer()
             
             
@@ -224,10 +224,7 @@ struct SettingRowView2: View {
             HStack(spacing: 8.0) {
                 Text("\(value)")
                     .modifier(Num3())
-                    .foregroundColor(Color("Black"))
                 Image(systemName: "chevron.right")
-                    .foregroundColor(Color("Gray2"))
-                    .font(.system(size: 16))
             }
             .onTapGesture {
                 if selectSetting == 1 {
@@ -240,8 +237,11 @@ struct SettingRowView2: View {
             }
             
         }
+        .background(Color("background"))
         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+       
     }
+        
 }
 
 struct SettingView_Previews: PreviewProvider {

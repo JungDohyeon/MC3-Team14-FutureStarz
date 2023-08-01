@@ -88,7 +88,9 @@ struct SelectingBudgetView: View {
                 
             }
             .padding(.horizontal, 20)
+
         }
+        .background(Color("background"))
     }
 }
 

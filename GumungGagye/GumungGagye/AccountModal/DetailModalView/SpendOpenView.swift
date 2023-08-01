@@ -25,9 +25,9 @@ struct SpendOpenView: View {
                     
                     Spacer()
                     
-                    Image(systemName: spend_open ? "checkmark.square.fill" : "checkmark.square")
-                        .font(.system(size: 24))
-                        .foregroundColor(spend_open ? Color("Main") : Color("Gray2"))
+                    Image(spend_open ? "Checkbox.fill" : "Checkbox.empty")
+//                        .font(.system(size: 24))
+//                        .foregroundColor(spend_open ? Color("Main") : Color("Gray2"))
                 }
             }
             .padding(.top, 18)

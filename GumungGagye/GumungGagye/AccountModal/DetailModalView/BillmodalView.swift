@@ -46,7 +46,7 @@ struct BillmodalView: View {
                         HStack(spacing: 0) {
                             Spacer()
                             
-                            Image("Union")
+                            Image("Pencil")
                                 .resizable()
                                 .frame(width: 20, height: 20)
                                 .foregroundColor(Color("Gray2"))

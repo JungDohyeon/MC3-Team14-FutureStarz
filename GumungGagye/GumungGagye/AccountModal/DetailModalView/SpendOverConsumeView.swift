@@ -25,9 +25,9 @@ struct SpendOverConsumeView: View {
                     
                     Spacer()
                     
-                    Image(systemName: spend_overConsume ? "checkmark.square.fill" : "checkmark.square")
-                        .font(.system(size: 24))
-                        .foregroundColor(spend_overConsume ? Color("Main") : Color("Gray2"))
+                    Image(spend_overConsume ? "Checkbox.fill" : "Checkbox.empty")
+//                        .font(.system(size: 24))
+//                        .foregroundColor(spend_overConsume ? Color("Main") : Color("Gray2"))
                 }
             }
         }
