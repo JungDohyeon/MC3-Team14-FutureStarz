@@ -31,6 +31,13 @@ struct CategorySheetView: View {
                         .padding(.top, 20)
                         .padding(.leading, 20)
                     Spacer()
+                    Image("X.mark")
+                        .padding(.trailing, 20)
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            isCategoryPickerVisible = false 
+                        }
+                    
                 }
                 ScrollView {
                     LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
