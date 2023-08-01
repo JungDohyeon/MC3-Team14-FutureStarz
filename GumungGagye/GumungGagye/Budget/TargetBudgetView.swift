@@ -10,6 +10,8 @@ import SwiftUI
 struct TargetBudgetView: View {
     
     @Binding var spendBill: Int
+    @Binding var selectedMonth: Date
+    
     @StateObject var userData = InputUserData.shared
     @State private var sumGraphWidth: CGFloat = 0.0
     @State private var isOver: Bool = false // 목표 예산을 넘었는지 확인
@@ -48,18 +50,29 @@ struct TargetBudgetView: View {
                             .cornerRadius(9)
                             .foregroundColor(Color("Light30"))
                         Rectangle()
-                            .frame(width: sumGraphWidth, height: 24)
                             .cornerRadius(9)
+                            .frame(width: sumGraphWidth, height: 24)
                             .foregroundColor(isOver ? Color("OverPurchasing") : Color("Main"))
                     }
                     .onAppear {
-                        withAnimation(.easeInOut(duration: 0.7)) {
-                            sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 0)) * (geometry.size.width)
+                        if let userGoal = userData.goal {
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                sumGraphWidth = Int(spendBill) > Int(userGoal) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userGoal)) * (geometry.size.width)
+                            }
                         }
                     }
+                    .onChange(of: selectedMonth, perform: { newValue in
+                        if let userGoal = userData.goal {
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                sumGraphWidth = Int(spendBill) > Int(userGoal) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userGoal)) * (geometry.size.width)
+                            }
+                        }
+                    })
                     .onChange(of: spendBill) { newValue in
-                        withAnimation(.easeInOut(duration: 0.7)) {
-                            sumGraphWidth = Int(newValue) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(newValue)/Double(userData.goal ?? 0)) * (geometry.size.width)
+                        if let userGoal = userData.goal {
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                sumGraphWidth = Int(newValue) > Int(userGoal) ? (geometry.size.width) : CGFloat(Double(newValue)/Double(userGoal)) * (geometry.size.width)
+                            }
                         }
                     }
                 }.frame(height: 24)
@@ -86,8 +99,6 @@ struct TargetBudgetView: View {
                     .foregroundColor(Color("Gray2"))
                 }
             }
-            
-            
         }
         .padding(.horizontal, 20)
     }

@@ -26,7 +26,7 @@ struct MainBudgetView: View {
             ScrollView {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
-                        TargetBudgetView(spendBill: $spendSum)
+                        TargetBudgetView(spendBill: $spendSum, selectedMonth: $selectedMonth)
                             .padding(.top, 16)
                         SectionBar()
                         CurrentAssetView(spendBill: spendSum, incomeBill: incomeSum)
