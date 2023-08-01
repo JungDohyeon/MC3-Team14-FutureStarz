@@ -204,7 +204,6 @@ struct AnalysisView: View {
                             
                             print("oversort::\(sortOverConsumeSpendArray)")
                         }
-                        
                     } catch {
                         print(error)
                     }

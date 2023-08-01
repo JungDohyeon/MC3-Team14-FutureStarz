@@ -337,8 +337,8 @@ final class BudgetFirebaseManager: ObservableObject {
                 analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)"))
             }
         }
-        
         return analysisAccountArray
+        
     }
     
     
