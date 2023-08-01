@@ -128,7 +128,7 @@ struct SelectingBank: View {
                     logic = true
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: .constant(true), buttonText: "가입하기")
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "가입하기")
                     
                 })
                 .navigationDestination(isPresented: $logic, destination: {

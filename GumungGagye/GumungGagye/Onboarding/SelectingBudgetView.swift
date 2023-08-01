@@ -15,7 +15,7 @@ struct SelectingBudgetView: View {
     @ObservedObject var input = NumbersOnlyInput()
     @State var budget: String
     //    @Binding var isAbled: Bool
-    @State var isAbled: Bool = true
+    @State var isAbled: Bool = false
     @State var logic: Bool = false
     @Binding var budgetSetting: Bool
     let inputdata = InputUserData.shared
@@ -48,7 +48,7 @@ struct SelectingBudgetView: View {
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("Gray1"))
-                    .modifier(H2SemiBold())
+                    .modifier(Num2())
                     .padding(.bottom, 14)
                     .padding(.leading, 8)
                     
@@ -80,11 +80,11 @@ struct SelectingBudgetView: View {
                     
                     
                 }, label: {
-                    OnboardingNextButton(isAbled: .constant(true), buttonText: "저장하기")
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "저장하기")
                     
                 })
                 .disabled(!isAbled)
-                .padding(.bottom, 25)
+                .padding(.bottom, 30)
                 
             }
             .padding(.horizontal, 20)

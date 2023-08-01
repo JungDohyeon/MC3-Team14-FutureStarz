@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
 import FirebaseStorage
+import SwiftUI
 
 struct InputSpendData {
     var account_type: Int = 0
@@ -56,6 +57,14 @@ struct ReadAccountData {
     var accountType: Int
     var detailId: String?
     var userId: String
+}
+
+// N.D
+struct Analysis_Post {
+    let post_date: String
+    let post_id: String
+    let post_userID: String
+    let account_array: [String]
 }
 
 
@@ -315,15 +324,116 @@ final class BudgetFirebaseManager: ObservableObject {
     
     
     // ================================ READ ================================
-   
+    
+    func analysisFetchAccount(userID userId: String) async throws -> [String] {
+        
+        //나의 달에 있는 모든 account 저장하는 배열
+        var analysisAccountArray: [String] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
+        
+        for i in 1...31 {
+            if i < 10 {
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)"))
+            } else {
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)"))
+            }
+        }
+        
+        return analysisAccountArray
+    }
+    
+    
+    
+    func analysisFetchAccountSpend(userID userId: String, analysisAccountArray: [String]) async throws -> [String] {
+        var analysisAccountSpendArray: [String] = []
+        let accountCollection = db.collection("account")
+        
+        for accountId in analysisAccountArray {
+            let documentReference = accountCollection.document(accountId)
+            let document = try await documentReference.getDocument()
+            
+            if document.exists, let data = document.data() {
+                let account_type = data["account_type"] as? Int ?? 0
+                let detail_id = data["detail_id"] as? String ?? ""
+                
+                if account_type == 0 {
+                    analysisAccountSpendArray.append(detail_id)
+                }
+            }
+        }
+        return analysisAccountSpendArray
+    }
+    
+    func analysisFetchSpendData(analysisAccountSpendArray: [String]) async throws -> (Int, Int, [ReadSpendData]) {
+        var totalOverConsume: Int = 0
+        var totalConsume: Int = 0
+        var overConsumeSpendArray: [ReadSpendData] = []
+        let spendCollection = db.collection("spend")
+        
+        for spendId in analysisAccountSpendArray {
+            let documentReference = spendCollection.document(spendId)
+            let document = try await documentReference.getDocument()
+            
+            if document.exists, let data = document.data() {
+                let id = data["spend_id"] as? String ?? ""
+                let bill = data["spend_bill"] as? Int ?? 0
+                let category = data["spend_category"] as? Int ?? 0
+                let content = data["spend_content"] as? String ?? ""
+                let open = data["spend_open"] as? Bool ?? false
+                let overConsume = data["spend_overConsume"] as? Bool ?? false
+                
+                if overConsume == true {
+                    totalOverConsume += bill
+                    overConsumeSpendArray.append(ReadSpendData(id: id, bill: bill, category: category, content: content, open: open, overConsume: overConsume))
+                }
+                totalConsume += bill
+                print(id)
+                print(bill)
+                print(category)
+                print(content)
+                print(open)
+                print(overConsume)
+            }
+        }
+        
+        return (totalConsume, totalOverConsume, overConsumeSpendArray)
+    }
+    
+    //Analysis fetchPost
+    func analysisFetchPost(userID userId: String) async throws -> (Int, Int, [ReadSpendData]) {
+        var totalConsume: Int = 0
+        var totalOverConsume: Int = 0
+        // MARK: - 해당 달의 Account 수입 + 지출 내역 전체
+        // 나의 달에 있는 모든 account 저장하는 배열
+        var analysisAccountArray: [String] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
+        analysisAccountArray = try await analysisFetchAccount(userID: userId)
+        print("main::analysisAccountArray: \(analysisAccountArray)")
+        
+        // MARK: - Account배열에서 지출(Spend) 필터링
+        var analysisAccountSpendArray: [String] = []
+        analysisAccountSpendArray = try await analysisFetchAccountSpend(userID: userId, analysisAccountArray: analysisAccountArray)
+        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
+        
+        // MARK: - 과소비 골라서 데이터 베열에 넣는 필터링
+        var overConsumeSpendArray: [ReadSpendData] = []
+        (totalConsume, totalOverConsume, overConsumeSpendArray) = try await analysisFetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
+        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
+        
+        return (totalConsume, totalOverConsume, overConsumeSpendArray)
+    }
+    
+    
+    
+    
+    
+    
+    
     // fetchPost
     func fetchPostData(userID userId: String, date: String) async throws -> [String] {
         let firestore = Firestore.firestore()
         let postsCollection = firestore.collection("post")
         
-        // 해당 날짜 범위 내에서 userId와 date가 일치하는 post 문서를 쿼리합니다.
         let query = postsCollection.whereField("post_userID", isEqualTo: userId)
-                                   .whereField("post_date", isEqualTo: date)
+            .whereField("post_date", isEqualTo: date)
         
         do {
             let snapshot = try await query.getDocuments()
@@ -335,14 +445,12 @@ final class BudgetFirebaseManager: ObservableObject {
                 }
             }
             
-            // snapshotListener를 추가하여 해당 쿼리 결과에 변경 사항을 실시간으로 감지합니다.
             let listener = query.addSnapshotListener { snapshot, error in
                 guard let snapshot = snapshot else {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
                 
-                // 쿼리 결과를 업데이트합니다.
                 var updatedAccountArray: [String] = []
                 for document in snapshot.documents {
                     if let accountArrayData = document.data()["account_array"] as? [String] {
@@ -350,23 +458,15 @@ final class BudgetFirebaseManager: ObservableObject {
                     }
                 }
                 
-                // 변경된 데이터를 업데이트합니다.
                 accountArray = updatedAccountArray
                 print("Data updated with snapshotListener")
             }
-            
-            // 필요한 경우 Listener를 사용하여 나중에 Listener를 해제할 수 있습니다.
-            // 예를 들면 뷰가 사라지거나, 더 이상 데이터 감지가 필요하지 않을 때 Listener를 해제합니다.
-            // listener.remove()
             
             return accountArray
         } catch {
             throw error
         }
     }
-
-
-
     
     // Fetch Account
     func fetchAccountData(forAccountID accountID: String, completion: @escaping ((ReadSpendData?, ReadIncomeData?)) -> Void) -> ListenerRegistration? {
@@ -405,12 +505,12 @@ final class BudgetFirebaseManager: ObservableObject {
             }
         }
     }
-
+    
     
     // Fetch Spend Data
     private func fetchSpendData(forDetailID detailID: String, completion: @escaping (ReadSpendData?) -> Void) {
         db.collection("spend").whereField("spend_id", isEqualTo: detailID).limit(to: 1)
-            .getDocuments { (querySnapshot, error) in
+            .addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents, let data = documents.first?.data() else {
                     completion(nil)
                     return
@@ -427,6 +527,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 completion(spendData)
             }
     }
+
     
     // Fetch Income Data
     private func fetchIncomeData(forDetailID detailID: String, completion: @escaping (ReadIncomeData?) -> Void) {

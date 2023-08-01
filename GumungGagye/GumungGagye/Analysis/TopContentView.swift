@@ -11,7 +11,7 @@ struct TopContentView: View {
     
     public let rank: Int
     public let content: String
-    public let spendBill: Int
+    public let money: Int
     
     var body: some View {
         
@@ -29,7 +29,7 @@ struct TopContentView: View {
             
             Spacer()
             
-            Text("\(spendBill)원")
+            Text("\(money)원")
             .modifier(Num3())
         }
     }
@@ -37,6 +37,6 @@ struct TopContentView: View {
 
 struct TopContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TopContentView(rank: 1, content: "치킨", spendBill: 5000)
+        TopContentView(rank: 1, content: "치킨", money: 5000)
     }
 }

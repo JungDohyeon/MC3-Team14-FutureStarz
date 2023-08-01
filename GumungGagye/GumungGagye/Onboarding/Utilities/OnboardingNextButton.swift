@@ -19,7 +19,7 @@ struct OnboardingNextButton: View {
                 
                 Spacer()
             }
-            .frame(height: 48)
+            .frame(height: 52)
             .background(isAbled ? Color("Main") : Color("Gray3"))
             .foregroundColor(.white)
             .cornerRadius(12)

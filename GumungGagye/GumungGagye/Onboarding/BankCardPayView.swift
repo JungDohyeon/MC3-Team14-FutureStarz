@@ -25,17 +25,24 @@ struct BankCardPayView: View {
                 .frame(width: 32, height: 32)
                 .padding(.bottom, 4)
             Text(bankCardPayData.card_info[bankCardPay][index]![0])
+                .foregroundColor(selectBankCardPay == bankCardPay && selectBankCardPayIndex == index ? Color("Main") : Color("Black"))
+                .font(.custom(selectBankCardPay == bankCardPay && selectBankCardPayIndex == index ? "Pretendard-SemiBold" : "Pretendard-Regular", size: 14))
+
+                
+            
         }
         .frame(width: 108, height: 80)
         .background {
             Color("Gray4")
-                
+                .cornerRadius(9)
         }
         .cornerRadius(9)
         .overlay(
             RoundedRectangle(cornerRadius: 9)
                 .inset(by: 2)
                 .stroke(selectBankCardPay == bankCardPay && selectBankCardPayIndex == index ? Color("Main") : Color.clear, lineWidth: 2)
+                .background(selectBankCardPay == bankCardPay && selectBankCardPayIndex == index ? Color("Light30") : Color.clear)
+                .cornerRadius(9)
         )
         
         .onTapGesture {

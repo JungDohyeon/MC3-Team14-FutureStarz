@@ -10,35 +10,34 @@ import SwiftUI
 struct MainBudgetView: View {
     @StateObject var userData = InputUserData.shared
     
-    @State var incomeAsset = 0
-    @State var spendAsset = 0
+    @State var incomeSum = 0
+    @State var spendSum = 0
+    @State var selectedMonth = Date.now
 
-    let today = Calendar.current.component(.day, from: Date())
     let dateFormatter = DateFormatter()
 
     var body: some View {
         VStack(alignment: .leading) {
             // 월(날짜) 이동
-            MoveMonth(size: .Big, selectedMonth: Date.now) // 숫자 데이터로 받아오기
+            MoveMonth(size: .Big, selectedMonth: $selectedMonth) // 숫자 데이터로 받아오기
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
             
             ScrollView {
                 VStack(spacing:0) {
                     VStack(spacing: 36) {
-                        
-                        TargetBudgetView(spendBill: spendAsset)
+                        TargetBudgetView(spendBill: $spendSum, selectedMonth: $selectedMonth)
                             .padding(.top, 16)
                         SectionBar()
-                        CurrentAssetView(spendBill: spendAsset, incomeBill: incomeAsset)
+                        CurrentAssetView(spendBill: spendSum, incomeBill: incomeSum)
                         SectionBar()
                             .padding(.bottom, 26)
                     }
                     
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section(header: Header().padding(.bottom, 35)) {
-                            ForEach((1...today).reversed(), id:\.self) { day in
-                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeAsset: $incomeAsset, spendAsset: $spendAsset)
+                            ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum)
                             }
                         }
                         .padding(.horizontal, 20)
@@ -51,8 +50,18 @@ struct MainBudgetView: View {
         .background(Color("background"))
     }
     
+    // 선택 한 달의 범위 리턴
+    private func daysInSelectedMonth() -> Range<Int> {
+        let calendar = Calendar.current
+        guard let monthRange = calendar.range(of: .day, in: .month, for: selectedMonth) else {
+            return 1..<2
+        }
+        
+        return monthRange
+    }
+    
     func getYear(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "YYYY"
             return dateFormatter.string(from: date)
@@ -60,9 +69,8 @@ struct MainBudgetView: View {
         return ""
     }
     
-    
     func getMonth(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "MM"
             return dateFormatter.string(from: date)
@@ -71,7 +79,7 @@ struct MainBudgetView: View {
     }
     
     func getDate(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "dd"
             return dateFormatter.string(from: date)
@@ -80,7 +88,7 @@ struct MainBudgetView: View {
     }
     
     func getDay(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: date)

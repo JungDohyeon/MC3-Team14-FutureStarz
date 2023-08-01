@@ -109,7 +109,7 @@ struct SelectingBankView: View {
                     logic = true
                     bankCardPaySetting = false
                 }, label: {
-                    OnboardingNextButton(isAbled: .constant(true), buttonText: "저장하기")
+                    OnboardingNextButton(isAbled: $isAbled, buttonText: "저장하기")
                         
                 })
                 .padding(.bottom, 25)

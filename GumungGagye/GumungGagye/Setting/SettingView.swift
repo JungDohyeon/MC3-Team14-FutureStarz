@@ -43,9 +43,13 @@ struct SettingView: View {
                                     .scaledToFill()
                                     .clipShape(Circle())
                             } else {
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: 50))
-                                    .foregroundColor(Color(.white))
+                                Image("SeletingPictureIcon")
+                                    .resizable()
+                                    .frame(width: 74, height: 74)
+                                    .shadow(color: Color(red: 0.31, green: 0.32, blue: 0.63).opacity(0.2), radius: 5, x: 0, y: 2)
+//                                Image(systemName: "person.fill")
+//                                    .font(.system(size: 50))
+//                                    .foregroundColor(Color(.white))
                                 
                             }
                         }
