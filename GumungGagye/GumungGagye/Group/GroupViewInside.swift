@@ -287,7 +287,6 @@ struct BudgetGroupView: View {
             if accountIDArray.count > 0 {
                 NavigationLink {
                     PersonalDaySpendView(accountIDArray: $accountIDArray, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
-                    
                 } label: {
                     HStack(spacing: 0) {
                         Text("\(date)일 \(day)")

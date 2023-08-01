@@ -46,10 +46,7 @@ struct GroupInfoView: View {
         .navigationBarItems(leading: Button(action: {
             presentationMode.wrappedValue.dismiss()
         }, label: {
-            Image(systemName: "chevron.left")
-                .font(.system(size: 16))
-                .fontWeight(.regular)
-                .foregroundColor(.black)
+            Image("Chevron.back.light.black")
         }))
         .onAppear {
             if inputdata.group_id != nil || inputdata.group_id != "" {
