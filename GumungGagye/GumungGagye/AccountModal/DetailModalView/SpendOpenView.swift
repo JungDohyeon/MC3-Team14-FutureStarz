@@ -25,7 +25,7 @@ struct SpendOpenView: View {
                     
                     Spacer()
                     
-                    Image(spend_open ? "Checkbox.fill" : "Checkbox.empty")
+                    Image(spend_open ? "Checkbox.empty" : "Checkbox.fill")
 //                        .font(.system(size: 24))
 //                        .foregroundColor(spend_open ? Color("Main") : Color("Gray2"))
                 }
