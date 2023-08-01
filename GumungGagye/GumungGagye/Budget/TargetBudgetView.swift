@@ -9,18 +9,35 @@ import SwiftUI
 
 struct TargetBudgetView: View {
     
-    public let spendBill: Int
+    @Binding var spendBill: Int
     @StateObject var userData = InputUserData.shared
     @State private var sumGraphWidth: CGFloat = 0.0
+    @State private var isOver: Bool = false // 목표 예산을 넘었는지 확인
     
     var body: some View {
-       
         VStack(alignment: .leading, spacing: 0) {
             
-            // 목표 예산 알림
-            Text("이번 달 목표 예산이 \n\(formatNumber((userData.goal ?? 0)-spendBill))원 남았어요!")
-                .modifier(H2SemiBold())
-                .padding(.bottom, 16)
+            if let userGoal = userData.goal {
+                if userGoal - spendBill < 0 {
+                    Text("이번 달 목표 예산보다 \n\(abs(userGoal-spendBill))원 넘었어요!")
+                        .modifier(H2SemiBold())
+                        .padding(.bottom, 16)
+                        .onAppear {
+                            isOver = true
+                        }
+                } else {
+                    Text("이번 달 목표 예산이 \n\(userGoal-spendBill)원 남았어요!")
+                        .modifier(H2SemiBold())
+                        .padding(.bottom, 16)
+                        .onAppear {
+                            isOver = false
+                        }
+                }
+            } else {
+                Text("목표 예산을 설정해주세요!")
+                    .modifier(H2SemiBold())
+            }
+            
             
             VStack(spacing: 8) {
                 // 목표 예산 진행바
@@ -33,11 +50,16 @@ struct TargetBudgetView: View {
                         Rectangle()
                             .frame(width: sumGraphWidth, height: 24)
                             .cornerRadius(9)
-                            .foregroundColor(Color("Main"))
+                            .foregroundColor(isOver ? Color("OverPurchasing") : Color("Main"))
                     }
                     .onAppear {
-                        withAnimation(.easeInOut(duration: 1.0)) {
+                        withAnimation(.easeInOut(duration: 0.7)) {
                             sumGraphWidth = Int(spendBill) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(spendBill)/Double(userData.goal ?? 0)) * (geometry.size.width)
+                        }
+                    }
+                    .onChange(of: spendBill) { newValue in
+                        withAnimation(.easeInOut(duration: 0.7)) {
+                            sumGraphWidth = Int(newValue) > Int(userData.goal ?? 0) ? (geometry.size.width) : CGFloat(Double(newValue)/Double(userData.goal ?? 0)) * (geometry.size.width)
                         }
                     }
                 }.frame(height: 24)
@@ -51,7 +73,7 @@ struct TargetBudgetView: View {
                             .foregroundColor(Color("Gray2"))
                         Text("\(formatNumber(spendBill))")
                             .modifier(Num5())
-                            .foregroundColor(Color("Main"))
+                            .foregroundColor(isOver ? Color("OverPurchasing") : Color("Main"))
                     }
                     Spacer()
                     // 총 목표 금액
@@ -78,17 +100,5 @@ struct TargetBudgetView: View {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: NSNumber(value: number)) ?? ""
-    }
-}
-
-struct TargetBudgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        let spendBill = 50000 // 예시로 사용할 쓴 금액
-        let userData = InputUserData.shared
-        userData.goal = 100000 // 예시로 사용할 목표 예산
-        
-        return TargetBudgetView(spendBill: spendBill)
-            .environmentObject(userData) // TargetBudgetView에 userData 환경 객체 전달
-            .previewLayout(.sizeThatFits)
     }
 }

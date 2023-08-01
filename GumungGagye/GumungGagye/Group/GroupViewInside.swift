@@ -36,11 +36,14 @@ struct GroupViewInside: View {
 
 // MARK: 소비 내역이 없을 때
 struct UserNoSpend: View {
+    var date: String
+    var day: String
+    
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
             VStack(alignment: .leading, spacing: 20) {
-                Text("4일 화요일")
+                Text("\(date)일 \(day)")
                     .modifier(Body2())
                     .foregroundColor(.black)
                 
@@ -63,7 +66,6 @@ struct UserNoSpend: View {
                     }
                 }
             }
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -174,8 +176,8 @@ struct UserScroller: View {
     
     @State var overSpendSum = 0
     @State var spendSum = 0
+    @State var selectedMonth = Date.now
     
-    let today = Calendar.current.component(.day, from: Date())
     let dateFormatter = DateFormatter()
     
     var groupData: GroupData
@@ -229,12 +231,10 @@ struct UserScroller: View {
             
             // =======================================================================================
             
-            GroupUserSumGraph(groupData: groupData, purchaseSum: $spendSum, overpurchaseSum: $overSpendSum)
+            GroupUserSumGraph(groupData: groupData, purchaseSum: $spendSum, overpurchaseSum: $overSpendSum, selectedMonth: $selectedMonth)
             
             if let selectedPersonID = selectedPersonID {
-                
-                // 1 ~ 31 한달 보여주기.
-                ForEach((1...today).reversed(), id:\.self) { day in
+                ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
                     BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, spendSum: $spendSum, overSpendSum: $overSpendSum)
                 }
                 .padding(.horizontal, 20)
@@ -242,8 +242,18 @@ struct UserScroller: View {
         }
     }
     
+    // 선택 한 달의 범위 리턴
+    private func daysInSelectedMonth() -> Range<Int> {
+        let calendar = Calendar.current
+        guard let monthRange = calendar.range(of: .day, in: .month, for: selectedMonth) else {
+            return 1..<2
+        }
+        
+        return monthRange
+    }
+    
     func getYear(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "YYYY"
             return dateFormatter.string(from: date)
@@ -251,9 +261,8 @@ struct UserScroller: View {
         return ""
     }
     
-    
     func getMonth(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "MM"
             return dateFormatter.string(from: date)
@@ -262,7 +271,7 @@ struct UserScroller: View {
     }
     
     func getDate(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "dd"
             return dateFormatter.string(from: date)
@@ -271,7 +280,7 @@ struct UserScroller: View {
     }
     
     func getDay(day: Int) -> String {
-        let components = DateComponents(year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: day)
+        let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "EEEE"
             return dateFormatter.string(from: date)
@@ -295,6 +304,7 @@ struct BudgetGroupView: View {
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
     @State var incomeSum = 0
+    
     @Binding var spendSum: Int
     @Binding var overSpendSum: Int
     
@@ -320,7 +330,10 @@ struct BudgetGroupView: View {
                 
                 ForEach(accountIDArray, id: \.self) { accountID in
                     Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, isGroup: true, accountDataID: accountID)
+                    
                 }
+            } else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
+                UserNoSpend(date: date, day: day)
             }
         }
         .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
@@ -343,6 +356,17 @@ struct BudgetGroupView: View {
             incomeSum = 0
             overSpendSum = 0
         }
+        .onChange(of: month) { newValue in
+            if let userID = selectedUserID {
+                Task {
+                    let todayDate = dayFormat.appending(year).appending("-").appending(newValue).appending("-").appending(date)
+                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                }
+            }
+            spendSum = 0
+            incomeSum = 0
+            overSpendSum = 0
+        }
     }
     
     func fetchAccountArray(userID userId: String, date: String) async throws -> [String] {
@@ -354,6 +378,23 @@ struct BudgetGroupView: View {
         }
     }
     
+    func getYear(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        return year
+    }
+
+    func getMonth(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: date)
+        return month
+    }
+
+    func getDate(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let date = calendar.component(.day, from: date)
+        return date
+    }
 }
 
 // MARK: Show Group user month graph
@@ -361,15 +402,17 @@ struct GroupUserSumGraph: View {
     var groupData: GroupData
     @Binding var purchaseSum: Int
     @Binding var overpurchaseSum: Int
+    @Binding var selectedMonth: Date
+    
     @State private var sumGraphWidth: CGFloat = 0.0
     @State private var overGraphWidth: CGFloat = 0.0
     
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
-            VStack(spacing: 20) {
-                MonthPicker()
-                // Graph
+            VStack(alignment: .leading, spacing: 20) {
+                MoveMonth(size: .Small, selectedMonth: $selectedMonth)
+                
                 GeometryReader { geometry in
                     VStack(spacing: 8) {
                         ZStack(alignment: .leading) {
@@ -385,7 +428,6 @@ struct GroupUserSumGraph: View {
                                 .frame(width: overGraphWidth, height: 22)
                                 .foregroundColor(Color("OverPurchasing"))
                         }
-                        
                         
                         HStack(spacing: 8) {
                             HStack(spacing: 3) {
@@ -416,15 +458,20 @@ struct GroupUserSumGraph: View {
                                 .foregroundColor(Color("Gray1"))
                         }
                         .onAppear {
-                            withAnimation(.easeInOut(duration: 1.0)) {
+                            withAnimation(.easeInOut(duration: 0.7)) {
                                 sumGraphWidth = purchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(purchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
                                 overGraphWidth = overpurchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(overpurchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
                             }
                         }
                         .onChange(of: [purchaseSum, overpurchaseSum]) { newValue in
-                            withAnimation(.easeInOut(duration: 1.0)) {
-                                sumGraphWidth = newValue[0] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[0])/Double(groupData.group_goal)) * (geometry.size.width)
-                                overGraphWidth = newValue[1] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[1])/Double(groupData.group_goal)) * (geometry.size.width)
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                if newValue[0] > groupData.group_goal {
+                                    sumGraphWidth = (geometry.size.width)
+                                    overGraphWidth = (geometry.size.width)
+                                } else {
+                                    sumGraphWidth = newValue[0] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[0])/Double(groupData.group_goal)) * (geometry.size.width)
+                                    overGraphWidth = newValue[1] > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(newValue[1])/Double(groupData.group_goal)) * (geometry.size.width)
+                                }
                             }
                         }
                     }

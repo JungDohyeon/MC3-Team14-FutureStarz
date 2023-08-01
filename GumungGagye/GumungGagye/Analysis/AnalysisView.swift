@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct AnalysisView: View {
+    @State var selectedMonth = Date.now
     
     // MARK: - PROPERTY
     @State private var sumGraphWidth: CGFloat = 0.0
@@ -29,7 +30,7 @@ struct AnalysisView: View {
                         .modifier(H1Bold())
                     
                     // 월 변경
-                    MoveMonth(size: .Small, selectedMonth: Date.now)
+                    MoveMonth(size: .Small, selectedMonth: $selectedMonth)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)

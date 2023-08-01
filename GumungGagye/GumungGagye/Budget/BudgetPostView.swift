@@ -10,7 +10,7 @@ import FirebaseAuth
 import Firebase
 
 struct BudgetPostView: View {
-    var budgetFirebaseManager = BudgetFirebaseManager.shared
+    @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
     
     let year: String    // 년도
     let month: String   // 월
@@ -19,12 +19,10 @@ struct BudgetPostView: View {
     
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
-    @State var incomeSum = 0
-    @State var spendSum = 0
     @State var overSpendSum = 0
     
-    @Binding var incomeAsset: Int
-    @Binding var spendAsset: Int
+    @Binding var incomeSum: Int
+    @Binding var spendSum: Int
     
     @State var isSpendOnappear = true
     @State var isIncomeOnappear = true
@@ -62,6 +60,17 @@ struct BudgetPostView: View {
                     accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
+        }
+        .onChange(of: month) { newValue in
+            if let userID = Auth.auth().currentUser?.uid {
+                Task {
+                    let todayDate = dayFormat.appending(year).appending("-").appending(newValue).appending("-").appending(date)
+                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                }
+            }
+            spendSum = 0
+            incomeSum = 0
+            overSpendSum = 0
         }
     }
     
