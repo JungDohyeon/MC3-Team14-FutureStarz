@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentmodelView: View {
     // MARK: - PROPERTY
     @Binding var spend_content: String
-    
+    var getMaxString: Int
     
     
     // MARK: - BODY
@@ -36,21 +36,17 @@ struct ContentmodelView: View {
                             .padding(.vertical, 22)
                             .foregroundColor(Color("Black"))
                             .modifier(Body1Bold())
+                            .submitLabel(.done)
                         }
                         HStack(spacing: 0) {
                             Spacer()
-                            Image("Pencil")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color("Gray2"))
-                                .fontWeight(.bold)
-                                .padding(.trailing, 11)
-                            //화살표 이미지
-//                            Image(systemName: "chevron.right")
-//                                .frame(width: 24, height: 24)
-//                                .foregroundColor(Color("Gray2"))
-//                                .fontWeight(.bold)
-//                                .padding(.trailing, 11)
+                            HStack(spacing: 0) {
+                                Text(spend_content.count.description)
+                                Text("/")
+                                Text(getMaxString.description)
+                            }
+                            .modifier(Cap1())
+                            .foregroundColor(Color("Gray2"))
                         }
                         
                     } //: HSTACK
@@ -69,6 +65,6 @@ struct ContentmodelView: View {
 // MARK: - PREVIEW
 struct ContentmodelView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentmodelView(spend_content: .constant(""))
+        ContentmodelView(spend_content: .constant(""), getMaxString: 15)
     }
 }

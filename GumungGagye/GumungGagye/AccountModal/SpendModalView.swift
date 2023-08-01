@@ -24,7 +24,8 @@ struct SpendModalView: View {
             DatemodalView(account_date: $account_date)
             BillmodalView(spend_bill: $spend_bill, spend_bill_string: $spend_bill_string)
             CategorymodelView(account_type: $account_type, spend_category: $spend_category)
-            ContentmodelView(spend_content: $spend_content)
+//            ContentmodelView(spend_content: $spend_content)
+            ContentmodelView(spend_content: $spend_content, getMaxString: 15)
             SpendOverConsumeView(spend_overConsume: $spend_overConsume)
             SpendOpenView(spend_open: $spend_open)
         }
