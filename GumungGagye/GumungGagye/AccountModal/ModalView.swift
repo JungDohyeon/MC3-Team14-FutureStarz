@@ -14,7 +14,7 @@ struct ModalView: View {
     @State var spend_bill: Int?
     @State var spend_category: Int?
     @State var spend_content: String = ""
-    @State var spend_open: Bool = false
+    @State var spend_open: Bool = true
     @State var spend_overConsume: Bool = false
     
     
@@ -64,7 +64,6 @@ struct ModalView: View {
                         
                         Task {
                             accountManager2.saveIncomeToFirebase(inputIncomeData)
-                            
                         }
                         showAddModalView = false
                         
