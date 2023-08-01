@@ -86,7 +86,9 @@ struct GroupNotExistView: View {
                 }
                 .padding(.top, 24)
             }
-            
+        }
+        .onTapGesture { // 키보드밖 화면 터치시 키보드 사라짐
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .onAppear {
             firebaseManager.fetchAllGroupData()

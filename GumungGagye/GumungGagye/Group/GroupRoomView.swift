@@ -126,7 +126,7 @@ struct GroupRoomView: View {
                 .sheet(isPresented: $lockStatusModal) {
                     codeInputView(groupdata: groupdata)
                 }
-              
+                
                 
                 if isNotExist {
                     Spacer()
@@ -200,6 +200,8 @@ struct codeInputView: View {
             
             Spacer()
             
+            
+            
             Button {
                 if inputCodeArray.joined() == groupdata.group_pw {
                     showSubmitGroupAlert = true
@@ -223,6 +225,9 @@ struct codeInputView: View {
         }
         .alert(isPresented: $showSubmitGroupAlert) {
             hasGroupAlert(type: userGroupStatus)
+        }
+        .onTapGesture { // 키보드밖 화면 터치시 키보드 사라짐
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
     

@@ -14,23 +14,98 @@ enum GroupOption: String, CaseIterable {
 }
 
 struct GroupViewInside: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var groupData: GroupData
+    
+    @StateObject var userData = InputUserData.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
+    
     @State var selectedUserID: String?
+    @State private var selectedOption: GroupOption?
+    @State private var isLeaveAlertPresented: Bool = false
+    @State private var isShowModal: Bool = false
     
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 0) {
-                    let _ = print("groupData: name: \(groupData.group_name), \(groupData.group_introduce)")
-                    GroupTopInfo(groupData: groupData)
-                    Divider()
-                        .frame(height: 8)
-                        .overlay(Color("Gray4"))
-                    UserScroller(groupData: groupData)
+            VStack(spacing: 0) {
+                HStack {
+                    Text("나의 그룹")
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    // MARK: Group Menu
+                    Menu {
+                        ForEach(GroupOption.allCases, id: \.self) { option in
+                            Button {
+                                selectedOption = option
+                                if option == .leave {
+                                    isLeaveAlertPresented = true
+                                } else {
+                                    isShowModal = true
+                                }
+                            } label: {
+                                Text(option.rawValue)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.black)
+                    }
+                }
+                .modifier(H1Bold())
+                .padding(.top, 24)
+                .padding(.bottom, 32)
+                .padding(.horizontal, 20)
+                .alert(isPresented: $isLeaveAlertPresented) {
+                    leaveAlert
+                }
+                .sheet(isPresented: $isShowModal) {
+                    if let option = selectedOption {
+                        switch(option) {
+                        case .invite:
+                            ShareViewController(shareString: ["ssoap://receiver?groupID=\(groupData.id)"])
+                                .presentationDetents([.medium])
+                                .presentationDragIndicator(.visible)
+                        case .leave:
+                            EmptyView()
+                        case .explore:
+                            GroupNotExistView(userHasGroup: true)
+                        }
+                    }
+                }
+                
+                ScrollView {
+                    VStack(spacing: 0) {
+                        GroupTopInfo(groupData: groupData)
+                        Divider()
+                            .frame(height: 8)
+                            .overlay(Color("Gray4"))
+                        UserScroller(groupData: groupData)
+                    }
                 }
             }
         }
+    }
+    
+    var leaveAlert: Alert {
+        Alert(
+            title: Text("그룹 탈퇴하기"),
+            message: Text("정말 그룹을 탈퇴하시겠습니까?"),
+            primaryButton: .cancel(Text("취소")),
+            secondaryButton: .destructive(Text("탈퇴하기")) {
+                if let groupID = userData.group_id {
+                    userData.group_id = ""
+                    firebaseManager.decrementGroupCur(groupID: groupID)
+                    presentationMode.wrappedValue.dismiss()
+                } else {
+                    print("group 탈퇴 에러 발생")
+                }
+                
+            }
+        )
     }
 }
 
@@ -76,10 +151,7 @@ struct UserNoSpend: View {
 // MARK: Group Top Info
 struct GroupTopInfo: View {
     @Environment(\.presentationMode) var presentationMode
-    
-    @State private var selectedOption: GroupOption?
-    @State private var isLeaveAlertPresented: Bool = false
-    @State private var isShowModal: Bool = false
+
     @State private var isUserDismiss: Bool = false
     
     var groupData: GroupData
@@ -91,78 +163,13 @@ struct GroupTopInfo: View {
         ZStack {
             Color("background").ignoresSafeArea()
             VStack(spacing: 0) {
-                HStack {
-                    Text("나의 그룹")
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    // MARK: Group Menu
-                    Menu {
-                        ForEach(GroupOption.allCases, id: \.self) { option in
-                            Button {
-                                selectedOption = option
-                                if option == .leave {
-                                    isLeaveAlertPresented = true
-                                } else {
-                                    isShowModal = true
-                                }
-                            } label: {
-                                Text(option.rawValue)
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.black)
-                    }
-                }
-                .modifier(H1Bold())
-                .padding(.top, 24)
-                .padding(.bottom, 32)
-                
                 GroupRoomView(groupdata: groupData, isNotExist: false)
                 
                 Spacer()
             }
             .background(Color("background").ignoresSafeArea())
-            .alert(isPresented: $isLeaveAlertPresented) {
-                leaveAlert
-            }
-            .sheet(isPresented: $isShowModal) {
-                if let option = selectedOption {
-                    switch(option) {
-                    case .invite:
-                        ShareViewController(shareString: ["ssoap://receiver?groupID=\(groupData.id)"])
-                            .presentationDetents([.medium])
-                            .presentationDragIndicator(.visible)
-                    case .leave:
-                        EmptyView()
-                    case .explore:
-                        GroupNotExistView(userHasGroup: true)
-                    }
-                }
-            }
             .padding(.horizontal, 20)
         }
-    }
-    
-    
-    var leaveAlert: Alert {
-        Alert(
-            title: Text("그룹 탈퇴하기"),
-            message: Text("정말 그룹을 탈퇴하시겠습니까?"),
-            primaryButton: .cancel(Text("취소")),
-            secondaryButton: .destructive(Text("탈퇴하기")) {
-                if let groupID = userData.group_id {
-                    userData.group_id = ""
-                    firebaseManager.decrementGroupCur(groupID: groupID)
-                    presentationMode.wrappedValue.dismiss()
-                } else {
-                    print("group 탈퇴 에러 발생")
-                }
-                
-            }
-        )
     }
 }
 

@@ -304,7 +304,6 @@ struct PickerModalView: View {
     }
 }
 
-
 // 그룹 생성 버튼
 struct GroupCreateBtn: View {
     var validation: Bool
