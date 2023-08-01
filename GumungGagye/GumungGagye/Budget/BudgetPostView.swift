@@ -10,7 +10,7 @@ import FirebaseAuth
 import Firebase
 
 struct BudgetPostView: View {
-    var budgetFirebaseManager = BudgetFirebaseManager.shared
+    @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
     
     let year: String    // 년도
     let month: String   // 월

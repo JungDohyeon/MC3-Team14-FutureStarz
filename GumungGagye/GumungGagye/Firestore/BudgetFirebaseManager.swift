@@ -321,7 +321,6 @@ final class BudgetFirebaseManager: ObservableObject {
         let firestore = Firestore.firestore()
         let postsCollection = firestore.collection("post")
         
-        // 해당 날짜 범위 내에서 userId와 date가 일치하는 post 문서를 쿼리합니다.
         let query = postsCollection.whereField("post_userID", isEqualTo: userId)
                                    .whereField("post_date", isEqualTo: date)
         
@@ -335,14 +334,12 @@ final class BudgetFirebaseManager: ObservableObject {
                 }
             }
             
-            // snapshotListener를 추가하여 해당 쿼리 결과에 변경 사항을 실시간으로 감지합니다.
             let listener = query.addSnapshotListener { snapshot, error in
                 guard let snapshot = snapshot else {
                     print("Error fetching documents: \(error?.localizedDescription ?? "Unknown error")")
                     return
                 }
                 
-                // 쿼리 결과를 업데이트합니다.
                 var updatedAccountArray: [String] = []
                 for document in snapshot.documents {
                     if let accountArrayData = document.data()["account_array"] as? [String] {
@@ -350,20 +347,16 @@ final class BudgetFirebaseManager: ObservableObject {
                     }
                 }
                 
-                // 변경된 데이터를 업데이트합니다.
                 accountArray = updatedAccountArray
                 print("Data updated with snapshotListener")
             }
-            
-            // 필요한 경우 Listener를 사용하여 나중에 Listener를 해제할 수 있습니다.
-            // 예를 들면 뷰가 사라지거나, 더 이상 데이터 감지가 필요하지 않을 때 Listener를 해제합니다.
-            // listener.remove()
             
             return accountArray
         } catch {
             throw error
         }
     }
+
 
 
 
@@ -410,7 +403,7 @@ final class BudgetFirebaseManager: ObservableObject {
     // Fetch Spend Data
     private func fetchSpendData(forDetailID detailID: String, completion: @escaping (ReadSpendData?) -> Void) {
         db.collection("spend").whereField("spend_id", isEqualTo: detailID).limit(to: 1)
-            .getDocuments { (querySnapshot, error) in
+            .addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents, let data = documents.first?.data() else {
                     completion(nil)
                     return
@@ -427,6 +420,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 completion(spendData)
             }
     }
+
     
     // Fetch Income Data
     private func fetchIncomeData(forDetailID detailID: String, completion: @escaping (ReadIncomeData?) -> Void) {

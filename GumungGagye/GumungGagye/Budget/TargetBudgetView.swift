@@ -19,7 +19,7 @@ struct TargetBudgetView: View {
             
             if let userGoal = userData.goal {
                 if userGoal - spendBill < 0 {
-                    Text("이번 달 목표 예산을 \n\(abs(userGoal-spendBill))원 넘었어요!")
+                    Text("이번 달 목표 예산보다 \n\(abs(userGoal-spendBill))원 넘었어요!")
                         .modifier(H2SemiBold())
                         .padding(.bottom, 16)
                         .onAppear {
@@ -102,15 +102,3 @@ struct TargetBudgetView: View {
         return numberFormatter.string(from: NSNumber(value: number)) ?? ""
     }
 }
-
-//struct TargetBudgetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let spendBill = 50000 // 예시로 사용할 쓴 금액
-//        let userData = InputUserData.shared
-//        userData.goal = 100000 // 예시로 사용할 목표 예산
-//
-//        return TargetBudgetView(spendBill: spendBill)
-//            .environmentObject(userData) // TargetBudgetView에 userData 환경 객체 전달
-//            .previewLayout(.sizeThatFits)
-//    }
-//}
