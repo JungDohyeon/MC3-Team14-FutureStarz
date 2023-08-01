@@ -73,6 +73,8 @@ struct GroupViewInside: View {
                             EmptyView()
                         case .explore:
                             GroupNotExistView(userHasGroup: true)
+                                .presentationDetents([.large])
+                                .presentationDragIndicator(.visible)
                         }
                     }
                 }

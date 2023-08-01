@@ -126,6 +126,8 @@ struct GroupRoomView: View {
                 }
                 .sheet(isPresented: $lockStatusModal) {
                     codeInputView(groupdata: groupdata)
+                        .presentationDetents([.large])
+                        .presentationDragIndicator(.visible)
                 }
                 
                 
