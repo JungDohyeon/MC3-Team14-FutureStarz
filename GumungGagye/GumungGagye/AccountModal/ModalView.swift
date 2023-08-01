@@ -47,10 +47,8 @@ struct ModalView: View {
                         let inputSpendData = InputSpendData(account_type: account_type, account_date: account_date ?? Date(), spend_bill: spend_bill ?? 0, spend_category: spend_category ?? 0, spend_content: spend_content , spend_open: spend_open, spend_overConsume: spend_overConsume)
                         Task {
                             accountManager2.saveSpendToFirebase(inputSpendData)
-                            
                         }
                         showAddModalView = false
-                        
                     }
                     .padding(.bottom, 71)
                     .padding(.horizontal, 20)

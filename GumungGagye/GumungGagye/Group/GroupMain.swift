@@ -42,9 +42,7 @@ struct GroupMain: View {
             if let userID = user.user_id {
                 Task {
                     try await getUser(userId: userID)
-                }
-                fetchData()
-            }
+                }            }
             fetchData()
         }
     }

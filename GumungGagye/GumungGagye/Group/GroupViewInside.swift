@@ -316,12 +316,6 @@ struct BudgetGroupView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    if incomeSum > 0 {
-                        Text("+\(incomeSum)원")
-                            .modifier(Num4())
-                            .foregroundColor(Color("Main"))
-                    }
-                    
                     if spendSum > 0 {
                         Text("-\(spendSum)원")
                             .modifier(Num4())

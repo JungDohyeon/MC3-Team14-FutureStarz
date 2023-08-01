@@ -23,6 +23,7 @@ struct BudgetPostView: View {
     
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
+    @Binding var showAdd: Int
     
     @State var isSpendOnappear = true
     @State var isIncomeOnappear = true
