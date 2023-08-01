@@ -160,7 +160,6 @@ struct GroupRoomView: View {
                 primaryButton: .cancel(Text("취소")),
                 secondaryButton: .default(Text("가입")) {
                     firebaseManager.incrementGroupCur(groupID: groupdata.id)
-                    
                 }
             )
         }
