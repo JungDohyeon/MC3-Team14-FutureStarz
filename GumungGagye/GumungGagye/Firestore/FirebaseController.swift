@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 class FirebaseController: ObservableObject {
     static let shared = FirebaseController()    // SingleTon

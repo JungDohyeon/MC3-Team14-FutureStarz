@@ -17,7 +17,7 @@ struct OverpurchasingView: View {
                         VStack(alignment: .leading, spacing: 12.0) {
                             VStack(alignment: .leading, spacing: 8.0){
                                 HStack(spacing: 3.0) {
-                                    Text("2023년 7월")
+                                    Text("2023년 8월")
                                     Text("과소비")
                                         .foregroundColor(Color("OverPurchasing"))
                                         .modifier(Cap1Bold())
