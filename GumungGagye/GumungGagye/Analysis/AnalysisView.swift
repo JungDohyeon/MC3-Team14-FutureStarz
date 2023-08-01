@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct AnalysisView: View {
     
+    // MARK: - PROPERTY
+    @State private var sumGraphWidth: CGFloat = 0.0
+    @State var overConsumeSpendArray: [ReadSpendData] = []
+    @State var sortOverConsumeSpendArray: [ReadSpendData] = []
+    @State var totalOverConsume: Int = 0
+    @State var totalConsume: Int = 0
+    // MARK: - BODY
     var body: some View {
+        GeometryReader { geometry in
             VStack {
                 // - MARK: - 분석 타이틀 / 월 변경
                 
@@ -25,6 +34,8 @@ struct AnalysisView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
                 .padding(.horizontal, 20)
+                //
+                
                 
                 ScrollView(){
                     
@@ -39,9 +50,9 @@ struct AnalysisView: View {
                             Text("과소비 분석")
                                 .modifier(Cap1())
                             VStack(alignment: .leading, spacing: 4.0) {
-                                Text("과소비를 8번 하지 않았다면")
+                                Text("과소비를 \(overConsumeSpendArray.count)번 하지 않았다면")
                                     .modifier(H2SemiBold())
-                                Text("75,500원을 아꼈을텐데")
+                                Text("\(totalOverConsume)원을 아꼈을텐데")
                                     .modifier(H2SemiBold())
                                     .foregroundColor(Color("Main"))
                             }
@@ -51,35 +62,53 @@ struct AnalysisView: View {
                         
                         // 과소비 비율 차트
                         VStack(spacing: 8) {
-                            ZStack(alignment: .leading) {
-                                Rectangle()
-                                    .frame(maxWidth: .infinity, minHeight: 24, maxHeight: 24)
-                                    .cornerRadius(9)
-                                    .foregroundColor(Color("Light30"))
-                                Rectangle()
-                                    .frame(width: 100, height: 24)
-                                    .cornerRadius(9)
-                                    .foregroundColor(Color("Main"))
-                            }
+                            // 목표 예산 진행바
+                            GeometryReader { geometry in
+                                ZStack(alignment: .leading) {
+                                    Rectangle()
+                                        .frame(maxWidth: .infinity, minHeight: 24, maxHeight: 24)
+                                        .cornerRadius(9)
+                                        .foregroundColor(Color("Light30"))
+                                    Rectangle()
+                                        .frame(width: max(0, sumGraphWidth), height: 24)
+                                        .cornerRadius(9)
+                                        .foregroundColor(Color("Main"))
+                                }
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 1.0)) {
+                                        sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
+                                    }
+                                }
+                            }.frame(height: 24)
+                            
                             HStack {
-                                Text("75,500원")
+                                Text("\(totalOverConsume)원")
                                     .modifier(Cap1())
                                     .foregroundColor(Color("Main"))
                                 Spacer()
-                                Text("월 총 소비금액 00원")
+                                Text("월 총 소비금액 \(totalConsume)원")
                                     .modifier(Cap1())
                                     .foregroundColor(Color("Gray2"))
                             }
-                        }
-                        .padding(.bottom, 28.0)
+                        }.padding(.bottom, 28.0)
                         
-                        // Top 3 리스트
-                        VStack(spacing: 10.0) {
-                            TopContentView(rank: 1, content: "치킨", money: 32000)
-                            TopContentView(rank: 2, content: "아이스크림", money: 17000)
-                            TopContentView(rank: 3, content: "아이폰 케이스", money: 13300)
+                        if sortOverConsumeSpendArray.count > 0 && sortOverConsumeSpendArray.count < 3 {
+                            VStack(spacing: 10.0) {
+                                ForEach(0..<sortOverConsumeSpendArray.count) { index in
+                                    TopContentView(rank: index + 1, content: sortOverConsumeSpendArray[index].content, money: sortOverConsumeSpendArray[index].bill)
+                                }
+                            }
+                            .padding(.bottom, 28.0)
+                            
+                        } else if sortOverConsumeSpendArray.count != 0 {
+                            VStack(spacing: 10.0) {
+                                TopContentView(rank: 1, content: sortOverConsumeSpendArray[0].content, money: sortOverConsumeSpendArray[0].bill)
+                                TopContentView(rank: 2, content: sortOverConsumeSpendArray[1].content, money: sortOverConsumeSpendArray[1].bill)
+                                TopContentView(rank: 3, content: sortOverConsumeSpendArray[2].content, money: sortOverConsumeSpendArray[2].bill)
+                            }
+                            .padding(.bottom, 28.0)
                         }
-                        .padding(.bottom, 28.0)
+                        
                         
                         // 더보기 Button
                         NavigationLink(destination: OverpurchasingView()){
@@ -113,8 +142,8 @@ struct AnalysisView: View {
                         
                         // 카테고리 요약
                         VStack(alignment: .leading, spacing: 12.0) {
-                        Text("전체소비 분석")
-                            .modifier(Cap1())
+                            Text("전체소비 분석")
+                                .modifier(Cap1())
                             
                             VStack(alignment: .leading, spacing: 4.0) {
                                 Text("식비에서 200,000원을 사용하여")
@@ -130,6 +159,9 @@ struct AnalysisView: View {
                         
                         // Top 3 List
                         VStack(spacing: 10.0) {
+                            
+                            
+                            
                             TopContentView(rank: 1, content: "식비", money: 155000)
                             TopContentView(rank: 2, content: "교통비", money: 100300)
                             TopContentView(rank: 3, content: "카페", money: 75000)
@@ -160,9 +192,32 @@ struct AnalysisView: View {
             .padding(.top, 24.0)
             .foregroundColor(Color("Black"))
             .background(Color("background"))
+            .onAppear {
+                Task {
+                    do {
+                        if let userId = Auth.auth().currentUser?.uid {
+                            (totalConsume, totalOverConsume, overConsumeSpendArray) = try await BudgetFirebaseManager.shared.analysisFetchPost(userID: userId)
+                            sortOverConsumeSpendArray = overConsumeSpendArray
+                            
+                            sortOverConsumeSpendArray.sort(by: { $0.bill > $1.bill })
+                            
+                            print("oversort::\(sortOverConsumeSpendArray)")
+                        }
+                        
+                    } catch {
+                        print(error)
+                    }
+                }
+                
+            }
+            .onChange(of: totalOverConsume) { newValue in
+                withAnimation(.easeInOut(duration: 1.0)) {
+                    sumGraphWidth = max(0, Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume) / Double(totalConsume ?? 0)) * (geometry.size.width))
+                }
+            }
+        }
     }
 }
-
 struct AnalysisView_Previews: PreviewProvider {
     static var previews: some View {
         AnalysisView()
