@@ -13,6 +13,7 @@ struct MainBudgetView: View {
     @State var incomeSum = 0
     @State var spendSum = 0
     @State var selectedMonth = Date.now
+    @State var userAdd: Int = 0
 
     let dateFormatter = DateFormatter()
 
@@ -35,17 +36,16 @@ struct MainBudgetView: View {
                     }
                     
                     LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
-                        Section(header: Header().padding(.bottom, 35)) {
+                        Section(header: Header().padding(.bottom, 35).onDisappear{ userAdd += 1 }) {
                             ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
-                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum)
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum, showAdd: $userAdd)
                             }
                         }
                         .padding(.horizontal, 20)
                     }
                 }
             }
-        }
-        .clipped()
+        }        .clipped()
         .foregroundColor(Color("Black"))
         .background(Color("background"))
     }
@@ -81,7 +81,7 @@ struct MainBudgetView: View {
     func getDate(day: Int) -> String {
         let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
-            dateFormatter.dateFormat = "dd"
+            dateFormatter.dateFormat = "d"
             return dateFormatter.string(from: date)
         }
         return ""

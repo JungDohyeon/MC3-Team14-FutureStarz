@@ -24,6 +24,8 @@ struct MainView: View {
     @State private var inviteGroupID: String? = nil
     @State private var inviteGroupStatus: AlertType = .otherCase
     @State private var groupData: GroupData? = nil
+    @State private var userDataArray: [UserData] = []
+    
     
     var body: some View {
         TabView(selection: $tabSelection) {
@@ -36,21 +38,25 @@ struct MainView: View {
                 }
                 .tag(Tab.main)
                 .onOpenURL { url in
-                    tabSelection = .main
                     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
                         return
                     }
                     
-                    print(components)
-                    
                     if components.scheme == "ssoap", components.host == "receiver", let groupID = components.queryItems?.first(where: { $0.name == "groupID" })?.value {
                         print("GROUP ID : \(groupID)")
                         inviteGroupID = groupID
+                        tabSelection = .main
                         
                         Task {
                             groupData = try await firebaseManager.fetchGroupData(groupId: groupID)
+                            firebaseManager.fetchDataGroupUser(groupID: groupID) { arrayData in
+                                if let arrayData = arrayData {
+                                    self.userDataArray = arrayData
+                                }
+                            }
+
                             if let groupData = groupData {
-                                if groupData.group_cur >= groupData.group_max {
+                                if userDataArray.count >= groupData.group_max {
                                     inviteGroupStatus = .groupMax
                                 } else if user.group_id != "" {
                                     inviteGroupStatus = .alreadyJoined

@@ -14,77 +14,17 @@ enum GroupOption: String, CaseIterable {
 }
 
 struct GroupViewInside: View {
-    var groupData: GroupData
-    @State var selectedUserID: String?
-    
-    var body: some View {
-        ZStack {
-            Color("background").ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 0) {
-                    let _ = print("groupData: name: \(groupData.group_name), \(groupData.group_introduce)")
-                    GroupTopInfo(groupData: groupData)
-                    Divider()
-                        .frame(height: 8)
-                        .overlay(Color("Gray4"))
-                    UserScroller(groupData: groupData)
-                }
-            }
-        }
-    }
-}
-
-// MARK: 소비 내역이 없을 때
-struct UserNoSpend: View {
-    var date: String
-    var day: String
-    
-    var body: some View {
-        ZStack {
-            Color("background").ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 20) {
-                Text("\(date)일 \(day)")
-                    .modifier(Body2())
-                    .foregroundColor(.black)
-                
-                HStack {
-                    VStack(alignment:. leading, spacing: 8) {
-                        Text("오늘은 소비 내역이 없어요")
-                            .modifier(Body2Bold())
-                        
-                        Text("작성하지 않은 친구를 콕 찔러볼까요?")
-                            .modifier(Cap1())
-                    }
-                    .foregroundColor(.black)
-                    
-                    Spacer()
-                    
-                    Button {
-                        
-                    } label: {
-                        MainColorBtn(inputText: "콕 찌르기")
-                    }
-                }
-            }
-        }
-    }
-}
-
-// MARK: 소비 내역이 있을 때
-
-
-// MARK: Group Top Info
-struct GroupTopInfo: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var selectedOption: GroupOption?
-    @State private var isLeaveAlertPresented: Bool = false
-    @State private var isShowModal: Bool = false
-    @State private var isUserDismiss: Bool = false
     var groupData: GroupData
     
     @StateObject var userData = InputUserData.shared
     @StateObject private var firebaseManager = FirebaseController.shared
+    
+    @State var selectedUserID: String?
+    @State private var selectedOption: GroupOption?
+    @State private var isLeaveAlertPresented: Bool = false
+    @State private var isShowModal: Bool = false
     
     var body: some View {
         ZStack {
@@ -118,33 +58,37 @@ struct GroupTopInfo: View {
                 .modifier(H1Bold())
                 .padding(.top, 24)
                 .padding(.bottom, 32)
+                .padding(.horizontal, 20)
+                .alert(isPresented: $isLeaveAlertPresented) {
+                    leaveAlert
+                }
+                .sheet(isPresented: $isShowModal) {
+                    if let option = selectedOption {
+                        switch(option) {
+                        case .invite:
+                            ShareViewController(shareString: ["ssoap://receiver?groupID=\(groupData.id)"])
+                                .presentationDetents([.medium])
+                                .presentationDragIndicator(.visible)
+                        case .leave:
+                            EmptyView()
+                        case .explore:
+                            GroupNotExistView(userHasGroup: true)
+                        }
+                    }
+                }
                 
-                GroupRoomView(groupdata: groupData, isNotExist: false)
-                
-                Spacer()
-            }
-            .background(Color("background").ignoresSafeArea())
-            .alert(isPresented: $isLeaveAlertPresented) {
-                leaveAlert
-            }
-            .sheet(isPresented: $isShowModal) {
-                if let option = selectedOption {
-                    switch(option) {
-                    case .invite:
-                        ShareViewController(shareString: ["ssoap://receiver?groupID=\(groupData.id)"])
-                            .presentationDetents([.medium])
-                            .presentationDragIndicator(.visible)
-                    case .leave:
-                        EmptyView()
-                    case .explore:
-                        GroupNotExistView()
+                ScrollView {
+                    VStack(spacing: 0) {
+                        GroupTopInfo(groupData: groupData)
+                        Divider()
+                            .frame(height: 8)
+                            .overlay(Color("Gray4"))
+                        UserScroller(groupData: groupData)
                     }
                 }
             }
-            .padding(.horizontal, 20)
         }
     }
-    
     
     var leaveAlert: Alert {
         Alert(
@@ -162,6 +106,31 @@ struct GroupTopInfo: View {
                 
             }
         )
+    }
+}
+
+// MARK: Group Top Info
+struct GroupTopInfo: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    @State private var isUserDismiss: Bool = false
+    
+    var groupData: GroupData
+    
+    @StateObject var userData = InputUserData.shared
+    @StateObject private var firebaseManager = FirebaseController.shared
+    
+    var body: some View {
+        ZStack {
+            Color("background").ignoresSafeArea()
+            VStack(spacing: 0) {
+                GroupRoomView(groupdata: groupData, isNotExist: false)
+                
+                Spacer()
+            }
+            .background(Color("background").ignoresSafeArea())
+            .padding(.horizontal, 20)
+        }
     }
 }
 
@@ -273,7 +242,7 @@ struct UserScroller: View {
     func getDate(day: Int) -> String {
         let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
-            dateFormatter.dateFormat = "dd"
+            dateFormatter.dateFormat = "d"
             return dateFormatter.string(from: date)
         }
         return ""
@@ -316,12 +285,6 @@ struct BudgetGroupView: View {
                         .modifier(Body2())
                     Spacer()
                     
-                    if incomeSum > 0 {
-                        Text("+\(incomeSum)원")
-                            .modifier(Num4())
-                            .foregroundColor(Color("Main"))
-                    }
-                    
                     if spendSum > 0 {
                         Text("-\(spendSum)원")
                             .modifier(Num4())
@@ -333,7 +296,7 @@ struct BudgetGroupView: View {
                     
                 }
             } else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
-                UserNoSpend(date: date, day: day)
+                UserNoSpendView(date: date, day: day)
             }
         }
         .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)

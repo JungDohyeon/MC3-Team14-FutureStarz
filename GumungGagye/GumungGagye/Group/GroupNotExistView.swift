@@ -12,6 +12,7 @@ struct GroupNotExistView: View {
     @State private var searchText: String = ""
     @StateObject var userData = InputUserData.shared
     @StateObject private var firebaseManager = FirebaseController.shared
+    var userHasGroup: Bool
     
     var body: some View {
         GeometryReader { geo in
@@ -26,21 +27,23 @@ struct GroupNotExistView: View {
                             
                             Spacer()
                             
-                            Button {
-                                isCreateGroup.toggle()
-                            } label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .fontWeight(.medium)
-                                    .foregroundColor(.black)
-                                    .scaledToFit()
-                                    .padding(2)
-                                    .frame(width: 20)
-                            }
-                            .sheet(isPresented: $isCreateGroup) {
-                                CreateGroupView()
-                                    .presentationDetents([.large])
-                                    .presentationDragIndicator(.visible)
+                            if !userHasGroup {
+                                Button {
+                                    isCreateGroup.toggle()
+                                } label: {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.black)
+                                        .scaledToFit()
+                                        .padding(2)
+                                        .frame(width: 20)
+                                }
+                                .sheet(isPresented: $isCreateGroup) {
+                                    CreateGroupView()
+                                        .presentationDetents([.large])
+                                        .presentationDragIndicator(.visible)
+                                }
                             }
                         }
                         .padding(.bottom, 48)
@@ -83,7 +86,9 @@ struct GroupNotExistView: View {
                 }
                 .padding(.top, 24)
             }
-            
+        }
+        .onTapGesture { // 키보드밖 화면 터치시 키보드 사라짐
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .onAppear {
             firebaseManager.fetchAllGroupData()
@@ -97,12 +102,5 @@ struct GroupNotExistView: View {
         } else {
             return firebaseManager.groupList.filter { $0.group_name.contains(searchText) }
         }
-    }
-}
-
-
-struct GroupNotExistView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupNotExistView()
     }
 }

@@ -22,7 +22,7 @@ struct GroupMain: View {
             Color("background").ignoresSafeArea()
             
             if user.group_id == "" || user.group_id == nil {
-                GroupNotExistView()
+                GroupNotExistView(userHasGroup: false)
             } else {
                 if let userGroupData = userGroupData {
                     GroupViewInside(groupData: userGroupData)
@@ -42,9 +42,7 @@ struct GroupMain: View {
             if let userID = user.user_id {
                 Task {
                     try await getUser(userId: userID)
-                }
-                fetchData()
-            }
+                }            }
             fetchData()
         }
     }

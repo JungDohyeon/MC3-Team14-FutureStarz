@@ -14,7 +14,7 @@ struct ModalView: View {
     @State var spend_bill: Int?
     @State var spend_category: Int?
     @State var spend_content: String = ""
-    @State var spend_open: Bool = false
+    @State var spend_open: Bool = true
     @State var spend_overConsume: Bool = false
     
     
@@ -47,10 +47,8 @@ struct ModalView: View {
                         let inputSpendData = InputSpendData(account_type: account_type, account_date: account_date ?? Date(), spend_bill: spend_bill ?? 0, spend_category: spend_category ?? 0, spend_content: spend_content , spend_open: spend_open, spend_overConsume: spend_overConsume)
                         Task {
                             accountManager2.saveSpendToFirebase(inputSpendData)
-                            
                         }
                         showAddModalView = false
-                        
                     }
                     .padding(.bottom, 71)
                     .padding(.horizontal, 20)
@@ -66,7 +64,6 @@ struct ModalView: View {
                         
                         Task {
                             accountManager2.saveIncomeToFirebase(inputIncomeData)
-                            
                         }
                         showAddModalView = false
                         

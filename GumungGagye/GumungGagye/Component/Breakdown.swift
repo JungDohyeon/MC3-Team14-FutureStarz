@@ -20,6 +20,7 @@ struct Breakdown: View {
     var isGroup: Bool // 그룹에서 보일건지 내 뷰에서 보일건지 값
     
     @State var isSpendOnappear = true
+    @State var isOverSpendOnappear = true
     @State var isIncomeOnappear = true
     
     // accountData를 전달받을 변수 추가
@@ -60,7 +61,10 @@ struct Breakdown: View {
                         if spendData.overConsume {
                             OverPurchaseTag(isOverPurchase: true)
                                 .onAppear {
-                                    overSpendSum += spendData.bill
+                                    if isOverSpendOnappear  {
+                                        overSpendSum += spendData.bill
+                                        isOverSpendOnappear = false
+                                    }
                                 }
                         }
                     }

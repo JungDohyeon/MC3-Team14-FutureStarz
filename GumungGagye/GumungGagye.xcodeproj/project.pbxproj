@@ -102,6 +102,7 @@
 		CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899C2A5B104B003508E2 /* GroupInfoView.swift */; };
 		CD55899F2A5B105A003508E2 /* GroupSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD55899E2A5B105A003508E2 /* GroupSpendView.swift */; };
 		CD7F49E12A76C08900065FF5 /* BudgetPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F49E02A76C08900065FF5 /* BudgetPostView.swift */; };
+		CD8EE4BE2A794471005B5F29 /* UserNoSpendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE4BD2A794471005B5F29 /* UserNoSpendView.swift */; };
 		CD905A6E2A74256C00E5BC02 /* CodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */; };
 		CDB4874C2A66E76E00DE5AE4 /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */; };
 		CDB487502A66E7A500DE5AE4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB4874F2A66E7A500DE5AE4 /* UserData.swift */; };
@@ -206,6 +207,7 @@
 		CD55899C2A5B104B003508E2 /* GroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoView.swift; sourceTree = "<group>"; };
 		CD55899E2A5B105A003508E2 /* GroupSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSpendView.swift; sourceTree = "<group>"; };
 		CD7F49E02A76C08900065FF5 /* BudgetPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPostView.swift; sourceTree = "<group>"; };
+		CD8EE4BD2A794471005B5F29 /* UserNoSpendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNoSpendView.swift; sourceTree = "<group>"; };
 		CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeFieldView.swift; sourceTree = "<group>"; };
 		CDB4874B2A66E76E00DE5AE4 /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		CDB4874F2A66E7A500DE5AE4 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				CD1006F92A5D1FD200771585 /* PersonalDaySpendView.swift */,
 				CD905A6D2A74256C00E5BC02 /* CodeFieldView.swift */,
 				CDB55B462A75379000D7D6F1 /* GroupRankingView.swift */,
+				CD8EE4BD2A794471005B5F29 /* UserNoSpendView.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				5EEFECFF2A6168F300AF4A5F /* SettingsView.swift in Sources */,
 				CD27E2F72A59B7A200F15A50 /* GroupNotExistView.swift in Sources */,
 				5EEFED122A61771A00AF4A5F /* SelectingBudget.swift in Sources */,
+				CD8EE4BE2A794471005B5F29 /* UserNoSpendView.swift in Sources */,
 				CD55899D2A5B104B003508E2 /* GroupInfoView.swift in Sources */,
 				5EEFECF92A61689D00AF4A5F /* RootView.swift in Sources */,
 				5E7475F72A77D7A000E19D49 /* AnalysisData.swift in Sources */,

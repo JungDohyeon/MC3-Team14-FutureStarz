@@ -19,6 +19,7 @@ struct GroupRoomView: View {
     @State private var showSubmitGroupAlert = false
     @State private var lockStatusModal: Bool = false
     @State private var userGroupStatus: AlertType = .otherCase
+    @State private var userDataArray: [UserData] = []
     
     
     var body: some View {
@@ -73,7 +74,7 @@ struct GroupRoomView: View {
                             .padding(.trailing, 7)
                         
                         Group {
-                            Text(groupdata.group_cur.description)
+                            Text(userDataArray.count.description)
                             Text("/")
                             Text(groupdata.group_max.description)
                             Text("명")
@@ -91,7 +92,7 @@ struct GroupRoomView: View {
                             if userData.group_id != "" {
                                 userGroupStatus = .alreadyJoined
                                 showSubmitGroupAlert = true
-                            } else if groupdata.group_cur >= groupdata.group_max {
+                            } else if userDataArray.count >= groupdata.group_max {
                                 userGroupStatus = .groupMax
                                 showSubmitGroupAlert = true
                             } else {
@@ -126,13 +127,20 @@ struct GroupRoomView: View {
                 .sheet(isPresented: $lockStatusModal) {
                     codeInputView(groupdata: groupdata)
                 }
-              
+                
                 
                 if isNotExist {
                     Spacer()
                     
                     Divider()
                         .background(Color("Gray3"))
+                }
+            }
+        }
+        .onAppear {
+            firebaseManager.fetchDataGroupUser(groupID: groupdata.id) { arrayData in
+                if let arrayData = arrayData {
+                    self.userDataArray = arrayData
                 }
             }
         }
@@ -200,6 +208,8 @@ struct codeInputView: View {
             
             Spacer()
             
+            
+            
             Button {
                 if inputCodeArray.joined() == groupdata.group_pw {
                     showSubmitGroupAlert = true
@@ -223,6 +233,9 @@ struct codeInputView: View {
         }
         .alert(isPresented: $showSubmitGroupAlert) {
             hasGroupAlert(type: userGroupStatus)
+        }
+        .onTapGesture { // 키보드밖 화면 터치시 키보드 사라짐
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
     
@@ -269,12 +282,5 @@ struct MainColorBtn: View {
                     .foregroundColor(Color("Light"))
                     .cornerRadius(12)
             )
-    }
-}
-
-
-struct GroupRoomView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupRoomView(groupdata: GroupData(id: "1", group_name: "test", group_introduce: "test", group_goal: 100000, group_cur: 7, group_max: 10, lock_status: true, group_pw: "1234", timeStamp: Date()), isNotExist: true)
     }
 }
