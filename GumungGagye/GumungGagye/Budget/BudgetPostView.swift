@@ -53,7 +53,7 @@ struct BudgetPostView: View {
                 }
                     
                 ForEach(accountIDArray, id: \.self) { accountID in
-                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: .constant(0), isGroup: false, accountDataID: accountID)
+                    Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: $incomeTodaySum, isGroup: false, accountDataID: accountID)
                 }
             }
         }

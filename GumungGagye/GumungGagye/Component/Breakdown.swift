@@ -35,16 +35,16 @@ struct Breakdown: View {
                     CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("-\(spendData.bill)")
+                        Text("-\(spendData.bill)원")
                             .modifier(Num3Bold())
                         
                         if spendData.open {
                             Text("\(spendData.content)")
                                 .modifier(Cap2())
                         } else {
-                            Image(systemName: "lock.fill")
-                                .font(.system(size: 10))
-                                .foregroundColor(Color("Gray1"))
+                            Image("Lock.fill.gray")
+                                .resizable()
+                                .frame(width: 11, height: 12)
                         }
                     }
                     .onAppear {
@@ -77,7 +77,7 @@ struct Breakdown: View {
                     CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("-\(spendData.bill)")
+                        Text("-\(spendData.bill)원")
                             .modifier(Num3Bold())
                         Text("\(spendData.content)")
                             .modifier(Cap2())

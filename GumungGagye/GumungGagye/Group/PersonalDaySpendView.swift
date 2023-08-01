@@ -9,11 +9,18 @@ import SwiftUI
 
 struct PersonalDaySpendView: View {
     @State private var commentInput: String = ""
+    @Binding var accountIDArray: [String]
+    
+    var month: String
+    var date: String
+    var day: String
+    var selectedUserName: String
+    var spendTodaySum: Int
     
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                AboutUserSpendView(userName: "Pado")
+                AboutUserSpendView(userName: selectedUserName, month: month, date: date, day: day, spendTodaySum: spendTodaySum, accountIDArray: $accountIDArray)
                     .padding(.horizontal, 20)
                 
                 Divider()
@@ -76,24 +83,28 @@ struct PersonalDaySpendView: View {
 
 
 struct AboutUserSpendView: View {
-    
     var userName: String
+    var month: String
+    var date: String
+    var day: String
+    var spendTodaySum: Int
+    
+    @Binding var accountIDArray: [String]
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         Group {
             VStack(spacing: 8) {
                 HStack(spacing: 2) {
-                    Text("7월 23일")
+                    Text("\(month)월 \(date)일 \(day)")
                         .modifier(Cap1())
-                    Text(userName)
-                        .modifier(Cap1Bold())
                     
                     Spacer()
                 }
                 
                 HStack {
-                    Text("25,000원")
+                    Text("\(spendTodaySum)원")
                         .modifier(Num1())
                     Spacer()
                 }
@@ -101,10 +112,10 @@ struct AboutUserSpendView: View {
             .padding(.top, 48)
             .padding(.bottom, 24)
             
-            VStack(spacing: 12) {
-                PurchasingContent(isOverPurchase: true)
-                PurchasingContent(isOverPurchase: false)
-                PurchasingContent(isOverPurchase: true)
+            VStack(spacing: 20) {
+                ForEach(accountIDArray, id: \.self) { accountID in
+                    Breakdown(size: .constant(.small), incomeSum: .constant(0), spendSum: .constant(0), overSpendSum: .constant(0), spendTodaySum: .constant(0), incomeTodaySum: .constant(0), isGroup: true, accountDataID: accountID)
+                }
             }
             .padding(.bottom, 36)
         }
@@ -112,12 +123,9 @@ struct AboutUserSpendView: View {
         .navigationBarItems(leading: Button(action: {
             presentationMode.wrappedValue.dismiss()
         }, label: {
-            Image(systemName: "chevron.left")
-                .font(.system(size: 16))
-                .fontWeight(.regular)
-                .foregroundColor(.black)
+            Image("Chevron.back.light.black")
         }))
-        .navigationBarTitle("하루 지출 내역", displayMode: .inline)
+        .navigationBarTitle("\(userName)의 하루 지출", displayMode: .inline)
     }
 }
 
@@ -154,9 +162,3 @@ struct CommentView: View {
     }
 }
 
-
-struct PersonalDaySpendView_Previews: PreviewProvider {
-    static var previews: some View {
-        PersonalDaySpendView()
-    }
-}

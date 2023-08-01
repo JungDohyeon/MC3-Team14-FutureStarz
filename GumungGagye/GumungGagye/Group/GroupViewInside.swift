@@ -192,7 +192,7 @@ struct UserScroller: View {
                             if let arrayData = arrayData {
                                 self.userData = arrayData
                             }
-                            if userData.count > 0 {
+                            if userData.count > 0 && selectedPersonID == nil {
                                 selectedPerson = userData[0].nickname
                                 selectedPersonID = userData[0].id
                             }
@@ -207,7 +207,7 @@ struct UserScroller: View {
             
             if let selectedPersonID = selectedPersonID {
                 ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
-                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, spendSum: $spendSum, overSpendSum: $overSpendSum)
+                    BudgetGroupView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), selectedUserID: selectedPersonID, selectedUserName: selectedPerson, spendSum: $spendSum, overSpendSum: $overSpendSum)
                 }
                 .padding(.horizontal, 20)
             }
@@ -262,7 +262,6 @@ struct UserScroller: View {
 }
 
 
-
 struct BudgetGroupView: View {
     @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
     
@@ -272,6 +271,7 @@ struct BudgetGroupView: View {
     let day: String     // 요일
     
     var selectedUserID: String?
+    var selectedUserName: String
     
     @State var dayFormat: String = ""
     @State var accountIDArray: [String] = []
@@ -285,19 +285,25 @@ struct BudgetGroupView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if accountIDArray.count > 0 {
-                HStack(spacing: 0) {
-                    Text("\(date)일 \(day)")
-                        .modifier(Body2())
-                    Spacer()
+                NavigationLink {
+                    PersonalDaySpendView(accountIDArray: $accountIDArray, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
                     
-                    if spendTodaySum > 0 {
-                        Text("-\(spendTodaySum)원")
-                            .modifier(Num4SemiBold())
+                } label: {
+                    HStack(spacing: 0) {
+                        Text("\(date)일 \(day)")
+                            .modifier(Body2())
+                        Spacer()
+                        
+                        if spendTodaySum > 0 {
+                            Text("-\(spendTodaySum)원")
+                                .modifier(Num4SemiBold())
+                        }
+                        Image("Chevron.right.thick.black")
+                            .resizable()
+                            .frame(width: 10, height: 14)
+                            .padding(.leading, 3)
                     }
-                    Image("Chevron.right.thick.black")
-                        .resizable()
-                        .frame(width: 10, height: 14)
-                        .padding(.leading, 3)
+                    .foregroundColor(.black)
                 }
                 VStack(spacing: 20) {
                     ForEach(accountIDArray, id: \.self) { accountID in
