@@ -32,8 +32,8 @@ struct GroupInfoView: View {
                 .padding(.horizontal, 20)
                 
                 ScrollView {
-                    ForEach(userData, id: \.id) { data in
-                        GroupRankingView(ranking: 1, userName: data.nickname, spendMoney: 7500)
+                    ForEach(Array(userData.enumerated()), id: \.element.id) { index, data in
+                        GroupRankingView(ranking: index + 1, userName: data.nickname, spendMoney: 1093120 - (index*243230))
                     }
                     .padding(.horizontal, 20)
                 }
