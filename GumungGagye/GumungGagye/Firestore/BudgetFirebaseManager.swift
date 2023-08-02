@@ -410,7 +410,8 @@ final class BudgetFirebaseManager: ObservableObject {
     
     func analysis2FetchSpendData(analysisAccountSpendArray: [(Int, [String])]) async throws -> [(Int, [ReadSpendData])] {
         var overConsumeSpendArray: [(Int, [ReadSpendData])] = []
-        
+        var categoryDic:  [Int: Int] = [:]
+        var sortedCategoryDic:  [Int: Int] = [:]
         var tempSpendArray: [ReadSpendData] = []
         let spendCollection = db.collection("spend")
         
@@ -431,7 +432,11 @@ final class BudgetFirebaseManager: ObservableObject {
                     
                     if overConsume == true {
                         tempSpendArray.append(ReadSpendData(id: id, bill: bill, category: category, content: content, open: open, overConsume: overConsume))
-                        
+                        if let existingValue = categoryDic[category] {
+                            categoryDic[category] = existingValue + bill
+                        } else {
+                            categoryDic[category] = bill
+                        }
                         
                     }
                     //                print(id)
@@ -446,6 +451,11 @@ final class BudgetFirebaseManager: ObservableObject {
             overConsumeSpendArray.append((analysisAccountIndex.0, tempSpendArray))
             tempSpendArray = []
         }
+        
+//        print("categoryDic : : \(categoryDic)")
+        sortedCategoryDic = Dictionary(uniqueKeysWithValues: categoryDic.sorted { $0.value > $1.value })
+        
+        print(sortedCategoryDic)
         return overConsumeSpendArray
     }
     
