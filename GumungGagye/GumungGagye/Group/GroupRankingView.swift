@@ -30,7 +30,7 @@ struct GroupRankingView: View {
                 
                 Spacer()
                 
-                Text("-\(spendMoney.description)원")
+                Text("-\(spendMoney)원")
                     .modifier(Num4SemiBold())
             }
             .padding(.vertical, 14)
