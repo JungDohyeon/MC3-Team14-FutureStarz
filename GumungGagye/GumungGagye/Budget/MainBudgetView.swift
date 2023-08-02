@@ -13,7 +13,6 @@ struct MainBudgetView: View {
     @State var incomeSum = 0
     @State var spendSum = 0
     @State var selectedMonth = Date.now
-    @State var userAdd: Int = 0
 
     let dateFormatter = DateFormatter()
 
@@ -34,18 +33,19 @@ struct MainBudgetView: View {
                         SectionBar()
                             .padding(.bottom, 26)
                     }
-                    
-                    LazyVStack( alignment: .leading, spacing: 0, pinnedViews: [.sectionHeaders]) {
-                        Section(header: Header().padding(.bottom, 35).onDisappear{ userAdd += 1 }) {
+                
+                    VStack(alignment: .leading, spacing: 0) {
+                        Section(header: Header().padding(.bottom, 35)) {
                             ForEach(daysInSelectedMonth().reversed(), id: \.self) { day in
-                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum, showAdd: $userAdd)
+                                BudgetPostView(year: getYear(day: day), month: getMonth(day: day), date: getDate(day: day), day: getDay(day: day), incomeSum: $incomeSum, spendSum: $spendSum)
                             }
                         }
                         .padding(.horizontal, 20)
                     }
                 }
             }
-        }        .clipped()
+        }
+        .clipped()
         .foregroundColor(Color("Black"))
         .background(Color("background"))
     }
@@ -99,7 +99,6 @@ struct MainBudgetView: View {
 
 
 struct Header: View {
-    
     @State var showAddModalView: Bool = false
     
     var body: some View {

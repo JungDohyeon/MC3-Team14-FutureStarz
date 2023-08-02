@@ -16,6 +16,8 @@ struct Breakdown: View {
     @Binding var incomeSum: Int
     @Binding var spendSum: Int
     @Binding var overSpendSum: Int
+    @Binding var spendTodaySum: Int
+    @Binding var incomeTodaySum: Int
     
     var isGroup: Bool // 그룹에서 보일건지 내 뷰에서 보일건지 값
     
@@ -33,21 +35,22 @@ struct Breakdown: View {
                     CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("-\(spendData.bill)")
+                        Text("-\(spendData.bill)원")
                             .modifier(Num3Bold())
                         
                         if spendData.open {
                             Text("\(spendData.content)")
                                 .modifier(Cap2())
                         } else {
-                            Image(systemName: "lock.fill")
-                                .font(.system(size: 10))
-                                .foregroundColor(Color("Gray1"))
+                            Image("Lock.fill.gray")
+                                .resizable()
+                                .frame(width: 11, height: 12)
                         }
                     }
                     .onAppear {
                         if isSpendOnappear {
                             spendSum += spendData.bill
+                            spendTodaySum += spendData.bill
                             isSpendOnappear = false
                         }
                     }
@@ -55,8 +58,8 @@ struct Breakdown: View {
                     Spacer()
                     
                     HStack {
-                        if spendData.open {
-                            OpenTag(spendOpen: true)
+                        if !spendData.open {
+                            HideTag(spendOpen: false)
                         }
                         if spendData.overConsume {
                             OverPurchaseTag(isOverPurchase: true)
@@ -74,7 +77,7 @@ struct Breakdown: View {
                     CategoryIcon(size: $size, accountType: 0, categoryIndex: spendData.category)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("-\(spendData.bill)")
+                        Text("-\(spendData.bill)원")
                             .modifier(Num3Bold())
                         Text("\(spendData.content)")
                             .modifier(Cap2())
@@ -82,6 +85,7 @@ struct Breakdown: View {
                     .onAppear {
                         if isSpendOnappear {
                             spendSum += spendData.bill
+                            spendTodaySum += spendData.bill
                             isSpendOnappear = false
                         }
                     }
@@ -89,8 +93,8 @@ struct Breakdown: View {
                     Spacer()
                     
                     HStack {
-                        if spendData.open {
-                            OpenTag(spendOpen: true)
+                        if !spendData.open {
+                            HideTag(spendOpen: false)
                         }
                         if spendData.overConsume {
                             OverPurchaseTag(isOverPurchase: true)
@@ -109,16 +113,17 @@ struct Breakdown: View {
                     .onAppear {
                         if isIncomeOnappear {
                             incomeSum += incomeData.bill
+                            incomeTodaySum += incomeData.bill
                             isIncomeOnappear = false
                         }
                     }
+                    
                     Spacer()
                 } else {
                     Text("Data not found.")
                 }
             }
         }
-        .padding(.bottom, 20)
         .onAppear {
             BudgetFirebaseManager.shared.fetchAccountData(forAccountID: accountDataID) { data in
                 self.spendData = data.0

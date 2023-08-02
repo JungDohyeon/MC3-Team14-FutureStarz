@@ -219,8 +219,6 @@ struct SettingRowView2: View {
                 .modifier(Body1())
             Spacer()
             
-            
-            
             HStack(spacing: 8.0) {
                 Text("\(value)")
                     .modifier(Num3())
@@ -235,13 +233,10 @@ struct SettingRowView2: View {
                     print("bank")
                 }
             }
-            
         }
         .background(Color("background"))
         .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
-       
     }
-        
 }
 
 struct SettingView_Previews: PreviewProvider {

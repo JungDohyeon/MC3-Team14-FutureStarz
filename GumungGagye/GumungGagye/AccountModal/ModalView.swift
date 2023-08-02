@@ -84,18 +84,3 @@ struct ModalView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
-
-
-
-
-//Button(action: {
-//    print(account_type)
-//    print(account_date)
-//    print(spend_bill)
-//    print(spend_category)
-//    print(spend_content)
-//    print(spend_bill_string)
-//
-//}, label: {
-//    Text("제출")
-//})

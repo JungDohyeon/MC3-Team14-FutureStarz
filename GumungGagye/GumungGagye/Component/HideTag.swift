@@ -28,9 +28,3 @@ struct HideTag: View {
         
     }
 }
-
-struct OpenTag_Previews: PreviewProvider {
-    static var previews: some View {
-        HideTag(spendOpen: true)
-    }
-}
