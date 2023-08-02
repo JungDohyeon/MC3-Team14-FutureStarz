@@ -19,8 +19,12 @@ struct OverpurchasingView: View {
     @State var overConsumeSpendDetailArray: [(Int, [ReadSpendData])] = []
     @State var sortedCategoryArray: [Dictionary<Int, Int>.Element] = []
     
-//    @State var categoryKey: [Int] = []
-//    @State var categoryValue: [Int] = []
+    
+    @State var tempKey: [Int] = []
+    @State var tempValue: [Int] = []
+    
+    @State var categoryKey: [Int] = []
+    @State var categoryValue: [Int] = []
     // MARK: - BODY
     var body: some View {
         ScrollView{
@@ -91,6 +95,19 @@ struct OverpurchasingView: View {
                         
                         print("result:: \(overConsumeSpendDetailArray)")
                         print("result:: \(sortedCategoryArray)")
+                        
+                        for indexArray in sortedCategoryArray {
+                            self.tempKey.append(indexArray.key)
+                            self.tempValue.append(indexArray.value)
+                            
+                            
+                        }
+                        categoryKey = tempKey
+                        categoryValue = tempValue
+                        
+                        print(categoryKey)
+                        print(categoryValue)
+                        
                     }
                 } catch {
                     print(error)

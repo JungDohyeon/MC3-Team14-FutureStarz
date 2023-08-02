@@ -128,6 +128,7 @@ struct AnalysisView: View {
                                 .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
+                        
                     }
                     .padding(.horizontal, 20)
                     
@@ -201,8 +202,9 @@ struct AnalysisView: View {
                         if let userId = Auth.auth().currentUser?.uid {
                             (totalConsume, totalOverConsume, overConsumeSpendArray) = try await BudgetFirebaseManager.shared.analysisFetchPost(userID: userId)
                             sortOverConsumeSpendArray = overConsumeSpendArray
-                            
                             sortOverConsumeSpendArray.sort(by: { $0.bill > $1.bill })
+                            
+                            
                             
 //                            print("oversort::\(sortOverConsumeSpendArray)")
                         }
