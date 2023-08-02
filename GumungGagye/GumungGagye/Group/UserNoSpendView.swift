@@ -15,10 +15,11 @@ struct UserNoSpendView: View {
     var body: some View {
         ZStack {
             Color("background").ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("\(date)일 \(day)")
                     .modifier(Body2())
                     .foregroundColor(.black)
+                    .padding(.bottom, 20)
                 
                 HStack {
                     VStack(alignment:. leading, spacing: 8) {
