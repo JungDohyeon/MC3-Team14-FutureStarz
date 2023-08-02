@@ -312,6 +312,7 @@ struct BudgetGroupView: View {
                 VStack(spacing: 20) {
                     ForEach(postData.accountArray, id: \.self) { accountID in
                         Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: .constant(0), isGroup: true, accountDataID: accountID)
+                            .padding(.bottom, 12)
                     }
                 }
             }
