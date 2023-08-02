@@ -71,13 +71,15 @@ struct AnalysisView: View {
                                         .cornerRadius(9)
                                         .foregroundColor(Color("Light30"))
                                     Rectangle()
-                                        .frame(width: max(0, sumGraphWidth), height: 24)
+                                        .frame(width: sumGraphWidth, height: 24)
                                         .cornerRadius(9)
                                         .foregroundColor(Color("Main"))
                                 }
                                 .onAppear {
                                     withAnimation(.easeInOut(duration: 1.0)) {
-                                        sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
+//                                        if totalOverConsume != 0 {
+                                            sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
+//                                        }
                                     }
                                 }
                             }.frame(height: 24)
@@ -112,7 +114,7 @@ struct AnalysisView: View {
                         
                         
                         // 더보기 Button
-                        NavigationLink(destination: OverpurchasingView()){
+                        NavigationLink(destination: OverpurchasingView(overConsumeSpendArray: $overConsumeSpendArray, sortOverConsumeSpendArray: $sortOverConsumeSpendArray, totalOverConsume: $totalOverConsume, totalConsume: $totalConsume)){
                             VStack {
                                 Rectangle()
                                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
@@ -202,7 +204,7 @@ struct AnalysisView: View {
                             
                             sortOverConsumeSpendArray.sort(by: { $0.bill > $1.bill })
                             
-                            print("oversort::\(sortOverConsumeSpendArray)")
+//                            print("oversort::\(sortOverConsumeSpendArray)")
                         }
                     } catch {
                         print(error)

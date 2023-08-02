@@ -325,6 +325,200 @@ final class BudgetFirebaseManager: ObservableObject {
     
     // ================================ READ ================================
     
+    // MARK: - AnalysisView 2 Function
+    
+    
+    //    func analysis2FetchAccount(userID userId: String) async throws -> [(Int, String)] {
+    //
+    //        //나의 달에 있는 모든 account 저장하는 배열
+    //        var analysisAccountArray: [(Int, String)] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
+    //
+    //        for i in 1...31 {
+    //            if i < 10 {
+    //                analysisAccountArray.append((i, try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)")))
+    //            } else {
+    //                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)"))
+    //            }
+    //        }
+    //        return analysisAccountArray
+    //
+    //    }
+    //
+    
+    
+    func analysis2FetchAccount(userID userId: String) async throws -> [(Int, [String])] {
+        
+        //나의 달에 있는 모든 account 저장하는 배열
+        var analysisAccountArray: [(Int, [String])] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
+        var accountArray: [String] = []
+        for i in 1...31 {
+            if i < 10 {
+                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)")
+                if !accountArray.isEmpty {
+                    //                    print("testaccountarray: \(accountArray)") //test 출력
+                    analysisAccountArray.append((i, accountArray))
+                } else {
+                    
+                }
+                
+            } else {
+                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)")
+                if !accountArray.isEmpty {
+                    //                    print("testaccountarray: \(accountArray)") //test 출력
+                    analysisAccountArray.append((i, accountArray))
+                } else {
+                    
+                }
+            }
+        }
+        
+        return analysisAccountArray
+    }
+    
+    
+    func analysis2FetchAccountSpend(userID userId: String, analysisAccountArray: [(Int, [String])]) async throws -> [(Int, [String])] {
+        var tempArray: [String] = []
+        var analysisAccountSpendArray: [(Int, [String])] = []
+        let accountCollection = db.collection("account")
+        
+        for analysisAccountIndex in analysisAccountArray {
+            //            print(analysisAccountIndex)
+            for accountId in analysisAccountIndex.1 {
+                let documentReference = accountCollection.document(accountId)
+                let document = try await documentReference.getDocument()
+                
+                if document.exists, let data = document.data() {
+                    let account_type = data["account_type"] as? Int ?? 0
+                    let detail_id = data["detail_id"] as? String ?? ""
+                    
+                    if account_type == 0 {
+                        tempArray.append(detail_id)
+                    }
+                }
+            }
+            analysisAccountSpendArray.append((analysisAccountIndex.0, tempArray))
+            tempArray = []
+        }
+        return analysisAccountSpendArray
+    }
+    
+    
+    
+    
+    
+    
+    
+    func analysis2FetchSpendData(analysisAccountSpendArray: [(Int, [String])]) async throws -> [(Int, [ReadSpendData])] {
+        var overConsumeSpendArray: [(Int, [ReadSpendData])] = []
+        
+        var tempSpendArray: [ReadSpendData] = []
+        let spendCollection = db.collection("spend")
+        
+        
+        for analysisAccountIndex in analysisAccountSpendArray {
+            for spendId in analysisAccountIndex.1 {
+                
+                let documentReference = spendCollection.document(spendId)
+                let document = try await documentReference.getDocument()
+                
+                if document.exists, let data = document.data() {
+                    let id = data["spend_id"] as? String ?? ""
+                    let bill = data["spend_bill"] as? Int ?? 0
+                    let category = data["spend_category"] as? Int ?? 0
+                    let content = data["spend_content"] as? String ?? ""
+                    let open = data["spend_open"] as? Bool ?? false
+                    let overConsume = data["spend_overConsume"] as? Bool ?? false
+                    
+                    if overConsume == true {
+                        tempSpendArray.append(ReadSpendData(id: id, bill: bill, category: category, content: content, open: open, overConsume: overConsume))
+                        
+                        
+                    }
+                    //                print(id)
+                    //                print(bill)
+                    //                print(category)
+                    //                print(content)
+                    //                print(open)
+                    //                print(overConsume)
+                }
+                
+            }
+            overConsumeSpendArray.append((analysisAccountIndex.0, tempSpendArray))
+            tempSpendArray = []
+        }
+        return overConsumeSpendArray
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - analysis2FetchPost Fucntion 관리 함수
+    func analysis2FetchPost(userID userId: String) async throws {
+        // MARK: - 해당 달의 Account 수입 + 지출 내역 전체
+        // 나의 달에 있는 모든 account 저장하는 배열
+        var analysisAccountArray: [(Int, [String])] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
+        analysisAccountArray = try await analysis2FetchAccount(userID: userId)
+        print("main::analysisAccountArray: \(analysisAccountArray)")
+        
+        
+        // MARK: - Account배열에서 지출(Spend) 필터링
+        var analysisAccountSpendArray: [(Int, [String])] = []
+        analysisAccountSpendArray = try await analysis2FetchAccountSpend(userID: userId, analysisAccountArray: analysisAccountArray)
+        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
+        
+        
+        var overConsumeSpendArray: [(Int, [ReadSpendData])] = []
+        overConsumeSpendArray = try await analysis2FetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
+        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - end:// AnalysisView 2 Function
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - AnalysisView 1 Function
+    
+    
     func analysisFetchAccount(userID userId: String) async throws -> [String] {
         
         //나의 달에 있는 모든 account 저장하는 배열
@@ -386,12 +580,12 @@ final class BudgetFirebaseManager: ObservableObject {
                     overConsumeSpendArray.append(ReadSpendData(id: id, bill: bill, category: category, content: content, open: open, overConsume: overConsume))
                 }
                 totalConsume += bill
-                print(id)
-                print(bill)
-                print(category)
-                print(content)
-                print(open)
-                print(overConsume)
+                //                print(id)
+                //                print(bill)
+                //                print(category)
+                //                print(content)
+                //                print(open)
+                //                print(overConsume)
             }
         }
         
@@ -406,23 +600,23 @@ final class BudgetFirebaseManager: ObservableObject {
         // 나의 달에 있는 모든 account 저장하는 배열
         var analysisAccountArray: [String] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
         analysisAccountArray = try await analysisFetchAccount(userID: userId)
-        print("main::analysisAccountArray: \(analysisAccountArray)")
+        //        print("main::analysisAccountArray: \(analysisAccountArray)")
         
         // MARK: - Account배열에서 지출(Spend) 필터링
         var analysisAccountSpendArray: [String] = []
         analysisAccountSpendArray = try await analysisFetchAccountSpend(userID: userId, analysisAccountArray: analysisAccountArray)
-        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
+        //        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
         
         // MARK: - 과소비 골라서 데이터 베열에 넣는 필터링
         var overConsumeSpendArray: [ReadSpendData] = []
         (totalConsume, totalOverConsume, overConsumeSpendArray) = try await analysisFetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
-        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
+        //        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
         
         return (totalConsume, totalOverConsume, overConsumeSpendArray)
     }
     
     
-    
+    // MARK: - end:// AnalysisView 1 Function
     
     
     
@@ -527,7 +721,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 completion(spendData)
             }
     }
-
+    
     
     // Fetch Income Data
     private func fetchIncomeData(forDetailID detailID: String, completion: @escaping (ReadIncomeData?) -> Void) {

@@ -6,8 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct OverpurchasingView: View {
+    // MARK: - PROPERTY
+    @Binding var overConsumeSpendArray: [ReadSpendData]
+    @Binding var sortOverConsumeSpendArray: [ReadSpendData]
+    @Binding var totalOverConsume: Int
+    @Binding var totalConsume: Int
+    // MARK: - BODY
     var body: some View {
         ScrollView{
             VStack(spacing: 36.0) {
@@ -26,11 +33,11 @@ struct OverpurchasingView: View {
                                 .foregroundColor(Color("Black"))
                                 .modifier(Cap1())
                                 
-                                Text("200,000원")
+                                Text("\(totalOverConsume)원")
                                     .modifier(Num1())
                             }
                             
-                            Text("총 8회")
+                            Text("총 \(overConsumeSpendArray.count)회")
                                 .foregroundColor(Color("OverPurchasing"))
                                 .modifier(Cap1Bold())
                                 .padding(.horizontal, 10)
@@ -45,7 +52,7 @@ struct OverpurchasingView: View {
                     
                     
                     // - MARK: - 과소비 차트
-                    ChartView(values: [900, 500, 300, 400], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: true)
+                    ChartView(values: [900, 500, 300, 400, 100], names: ["식비", "카페", "교통", "건강", "아아"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc"), Color("Food")], showDescription: true)
                         .frame(maxWidth: .infinity, minHeight: 292, maxHeight: 292, alignment: .center)
                 }
                 .padding(.horizontal, 20)
@@ -69,11 +76,23 @@ struct OverpurchasingView: View {
         .foregroundColor(Color("Black"))
         .background(Color("background"))
         .navigationBarTitle("과소비 내역", displayMode: .inline)
+        .onAppear {
+            Task {
+                do {
+                    if let userId = Auth.auth().currentUser?.uid {
+                        try await BudgetFirebaseManager.shared.analysis2FetchPost(userID: userId)
+                        
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }
     }
 }
 
 struct OverpurchasingView_Previews: PreviewProvider {
     static var previews: some View {
-        OverpurchasingView()
+        OverpurchasingView(overConsumeSpendArray: .constant([]), sortOverConsumeSpendArray: .constant([]), totalOverConsume: .constant(10000), totalConsume: .constant(1000000))
     }
 }
