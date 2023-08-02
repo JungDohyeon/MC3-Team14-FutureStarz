@@ -395,8 +395,6 @@ final class BudgetFirebaseManager: ObservableObject {
     
     // ================================ READ ================================
     
-<<<<<<< Updated upstream
-=======
     // MARK: - AnalysisView 2 Function
     
     
@@ -610,7 +608,6 @@ final class BudgetFirebaseManager: ObservableObject {
     // MARK: - AnalysisView 1 Function
     
     
->>>>>>> Stashed changes
     func analysisFetchAccount(userID userId: String) async throws -> [String] {
         
         //나의 달에 있는 모든 account 저장하는 배열
@@ -623,8 +620,8 @@ final class BudgetFirebaseManager: ObservableObject {
                 analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)").accountArray)
             }
         }
-        
         return analysisAccountArray
+        
     }
     
     
@@ -671,12 +668,12 @@ final class BudgetFirebaseManager: ObservableObject {
                     overConsumeSpendArray.append(ReadSpendData(id: id, bill: bill, category: category, content: content, open: open, overConsume: overConsume))
                 }
                 totalConsume += bill
-                print(id)
-                print(bill)
-                print(category)
-                print(content)
-                print(open)
-                print(overConsume)
+                //                print(id)
+                //                print(bill)
+                //                print(category)
+                //                print(content)
+                //                print(open)
+                //                print(overConsume)
             }
         }
         
@@ -691,23 +688,23 @@ final class BudgetFirebaseManager: ObservableObject {
         // 나의 달에 있는 모든 account 저장하는 배열
         var analysisAccountArray: [String] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
         analysisAccountArray = try await analysisFetchAccount(userID: userId)
-        print("main::analysisAccountArray: \(analysisAccountArray)")
+        //        print("main::analysisAccountArray: \(analysisAccountArray)")
         
         // MARK: - Account배열에서 지출(Spend) 필터링
         var analysisAccountSpendArray: [String] = []
         analysisAccountSpendArray = try await analysisFetchAccountSpend(userID: userId, analysisAccountArray: analysisAccountArray)
-        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
+        //        print("main::analysisAccountSpendArray: \(analysisAccountSpendArray)")
         
         // MARK: - 과소비 골라서 데이터 베열에 넣는 필터링
         var overConsumeSpendArray: [ReadSpendData] = []
         (totalConsume, totalOverConsume, overConsumeSpendArray) = try await analysisFetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
-        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
+        //        print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
         
         return (totalConsume, totalOverConsume, overConsumeSpendArray)
     }
     
     
-    
+    // MARK: - end:// AnalysisView 1 Function
     
     // commentID Fetch
     func fetchAllcommentID(postID: String) {
