@@ -11,13 +11,16 @@ public struct ChartView: View {
     public let values: [Int]
     public let names: [String]
     public let colors: [Color]
-    
     public let showDescription : Bool
     
     public var widthFraction: CGFloat
     public var innerRadiusFraction: CGFloat
-    
     @State private var activeIndex: Int = 0
+    
+    
+//    @State var categoryKey: [Int] = []
+//    @State var categoryValue: [Int] = []
+    
     
     var slices: [PieSliceData] {
         let sum = values.reduce(0, +)

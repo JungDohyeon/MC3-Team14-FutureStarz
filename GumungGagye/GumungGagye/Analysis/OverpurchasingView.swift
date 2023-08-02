@@ -14,6 +14,13 @@ struct OverpurchasingView: View {
     @Binding var sortOverConsumeSpendArray: [ReadSpendData]
     @Binding var totalOverConsume: Int
     @Binding var totalConsume: Int
+    
+    
+    @State var overConsumeSpendDetailArray: [(Int, [ReadSpendData])] = []
+    @State var sortedCategoryArray: [Dictionary<Int, Int>.Element] = []
+    
+//    @State var categoryKey: [Int] = []
+//    @State var categoryValue: [Int] = []
     // MARK: - BODY
     var body: some View {
         ScrollView{
@@ -80,8 +87,10 @@ struct OverpurchasingView: View {
             Task {
                 do {
                     if let userId = Auth.auth().currentUser?.uid {
-                        try await BudgetFirebaseManager.shared.analysis2FetchPost(userID: userId)
+                        (overConsumeSpendDetailArray, sortedCategoryArray) = try await BudgetFirebaseManager.shared.analysis2FetchPost(userID: userId)
                         
+                        print("result:: \(overConsumeSpendDetailArray)")
+                        print("result:: \(sortedCategoryArray)")
                     }
                 } catch {
                     print(error)

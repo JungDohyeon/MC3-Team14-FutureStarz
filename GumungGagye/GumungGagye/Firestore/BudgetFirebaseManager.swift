@@ -408,11 +408,12 @@ final class BudgetFirebaseManager: ObservableObject {
     
     
     
-    func analysis2FetchSpendData(analysisAccountSpendArray: [(Int, [String])]) async throws -> [(Int, [ReadSpendData])] {
+    func analysis2FetchSpendData(analysisAccountSpendArray: [(Int, [String])]) async throws -> ([(Int, [ReadSpendData])], [Dictionary<Int, Int>.Element]) {
         var overConsumeSpendArray: [(Int, [ReadSpendData])] = []
         var categoryDic:  [Int: Int] = [:]
-        var sortedCategoryDic:  [Int: Int] = [:]
+//        var sortedCategoryDic:  [Int: Int] = [:]
         var tempSpendArray: [ReadSpendData] = []
+        var sortedCategoryArray: [Dictionary<Int, Int>.Element] = []
         let spendCollection = db.collection("spend")
         
         
@@ -453,10 +454,11 @@ final class BudgetFirebaseManager: ObservableObject {
         }
         
 //        print("categoryDic : : \(categoryDic)")
-        sortedCategoryDic = Dictionary(uniqueKeysWithValues: categoryDic.sorted { $0.value > $1.value })
+//        sortedCategoryDic = Dictionary(uniqueKeysWithValues: categoryDic.sorted { $0.value > $1.value })
+        sortedCategoryArray = categoryDic.sorted { $0.value > $1.value }
         
-        print(sortedCategoryDic)
-        return overConsumeSpendArray
+        
+        return (overConsumeSpendArray, sortedCategoryArray)
     }
     
     
@@ -476,7 +478,10 @@ final class BudgetFirebaseManager: ObservableObject {
     
     
     // MARK: - analysis2FetchPost Fucntion 관리 함수
-    func analysis2FetchPost(userID userId: String) async throws {
+    func analysis2FetchPost(userID userId: String) async throws -> ([(Int, [ReadSpendData])], [Dictionary<Int, Int>.Element]){
+        
+       
+        
         // MARK: - 해당 달의 Account 수입 + 지출 내역 전체
         // 나의 달에 있는 모든 account 저장하는 배열
         var analysisAccountArray: [(Int, [String])] = [] //해당 달의 수입 지출 Account문서 ID 받아오는 배열
@@ -491,11 +496,12 @@ final class BudgetFirebaseManager: ObservableObject {
         
         
         var overConsumeSpendArray: [(Int, [ReadSpendData])] = []
-        overConsumeSpendArray = try await analysis2FetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
+        var sortedCategoryArray: [Dictionary<Int, Int>.Element] = []
+        (overConsumeSpendArray, sortedCategoryArray) = try await analysis2FetchSpendData(analysisAccountSpendArray: analysisAccountSpendArray)
         print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
         
         
-        
+        return (overConsumeSpendArray, sortedCategoryArray)
     }
     
     
