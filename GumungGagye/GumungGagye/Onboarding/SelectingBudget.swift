@@ -20,7 +20,7 @@ struct SelectingBudget: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack(spacing: 0) {
+            VStack(alignment:.leading, spacing: 0) {
                 HStack {
                     CustomBackButton { presentationMode.wrappedValue.dismiss() }
                     Spacer()
@@ -28,12 +28,14 @@ struct SelectingBudget: View {
                 .padding(.top, 66)
                 .padding(.bottom, 60)
 
-                HStack {
-                    Text("한 달 지출 목표 금액이\n얼마인가요?")
-                        .modifier(H1Bold())
-                    Spacer()
-                }
-                .padding(.bottom, 36)
+                Text("한 달 지출 목표 금액이\n얼마인가요?")
+                    .modifier(H1Bold())
+                    .padding(.bottom, 12)
+                
+                Text("생활 고정비를 포함해서 적어주세요.")
+                    .modifier(Body1())
+                    .foregroundColor(Color("Gray1"))
+                    .padding(.bottom, 36)
 
                 HStack {
                     TextField("", text: $formattedAmount) {
