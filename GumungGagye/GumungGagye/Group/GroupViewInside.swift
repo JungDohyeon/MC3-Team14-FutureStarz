@@ -236,7 +236,7 @@ struct UserScroller: View {
     func getMonth(day: Int) -> String {
         let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
-            dateFormatter.dateFormat = "MM"
+            dateFormatter.dateFormat = "M"
             return dateFormatter.string(from: date)
         }
         return ""
@@ -453,7 +453,7 @@ struct GroupUserSumGraph: View {
                         .onAppear {
                             withAnimation(.easeInOut(duration: 0.7)) {
                                 sumGraphWidth = purchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(purchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
-                                overGraphWidth = overpurchaseSum > groupData.group_goal ? (geometry.size.width) : CGFloat(Double(overpurchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
+                                overGraphWidth = (overpurchaseSum > groupData.group_goal || purchaseSum > groupData.group_goal) ? (geometry.size.width) : CGFloat(Double(overpurchaseSum)/Double(groupData.group_goal)) * (geometry.size.width)
                             }
                         }
                         .onChange(of: [purchaseSum, overpurchaseSum]) { newValue in
