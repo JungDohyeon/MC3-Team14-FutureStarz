@@ -12,6 +12,24 @@ import FirebaseAuth
 import FirebaseStorage
 import SwiftUI
 
+
+struct PostDataModel {
+    var accountArray: [String]
+    var postID: String
+}
+
+struct InputComment: Hashable {
+    let date: Date
+    let content: String
+    let userName: String
+}
+
+struct OutputComment: Hashable {
+    let date: String
+    let content: String
+    let userName: String
+}
+
 struct InputSpendData {
     var account_type: Int = 0
     var account_date: Date = Date()
@@ -72,6 +90,9 @@ final class BudgetFirebaseManager: ObservableObject {
     
     let db = Firestore.firestore()
     static let shared = BudgetFirebaseManager()
+    @Published var commentIDArray: [String] = []
+    @Published var comments = [OutputComment]()
+    
     private init() { }
     
     // ================================ CREATE ================================
@@ -154,7 +175,8 @@ final class BudgetFirebaseManager: ObservableObject {
                     "post_id": postID,
                     "post_date": dateString,
                     "post_userID": userID,
-                    "account_array": [accountDocumentID]
+                    "account_array": [accountDocumentID],
+                    "account_array": []
                 ]) { error in
                     if let error = error {
                         print("Error adding document: \(error)")
@@ -176,7 +198,8 @@ final class BudgetFirebaseManager: ObservableObject {
                         "post_id": newPostID,
                         "post_date": dateString,
                         "post_userID": userID,
-                        "account_array": [accountDocumentID]
+                        "account_array": [accountDocumentID],
+                        "comment_array": []
                     ]) { error in
                         if let error = error {
                             print("Error adding document: \(error)")
@@ -322,6 +345,48 @@ final class BudgetFirebaseManager: ObservableObject {
         }
     }
     
+    func saveCommentToFirestore(comment: InputComment, postID: String) {
+        let db = Firestore.firestore()
+        let documentRef = db.collection("comment").document()
+        let documentID = documentRef.documentID
+        
+        documentRef.setData([
+            "comment_id": documentID,
+            "comment_userName": comment.userName,
+            "comment_content": comment.content,
+            "comment_Date": comment.date
+        ]) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Comment data added with ID: \(documentID)")
+                
+                let postDocumentRef = db.collection("post").document(postID)
+                postDocumentRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        // Get the current comment_array from the post document
+                        var commentArray = document.data()?["comment_array"] as? [String] ?? []
+                        
+                        // Append the new comment_id to the comment_array
+                        commentArray.append(documentID)
+                        
+                        // Update the comment_array in the post document
+                        postDocumentRef.updateData(["comment_array": commentArray]) { error in
+                            if let error = error {
+                                print("Error updating post document: \(error)")
+                            } else {
+                                print("Comment_id added to comment_array in post document.")
+                            }
+                        }
+                    } else {
+                        print("Post document not found.")
+                    }
+                }
+            }
+        }
+    }
+    
+    
     
     // ================================ READ ================================
     
@@ -332,9 +397,9 @@ final class BudgetFirebaseManager: ObservableObject {
         
         for i in 1...31 {
             if i < 10 {
-                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)"))
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)").accountArray)
             } else {
-                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)"))
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)").accountArray)
             }
         }
         
@@ -424,11 +489,52 @@ final class BudgetFirebaseManager: ObservableObject {
     
     
     
+    // commentID Fetch
+    func fetchAllcommentID(postID: String) {
+        let db = Firestore.firestore()
+        
+        db.collection("post").document(postID).addSnapshotListener { snapshot, error in
+            if error == nil {
+                if let snapshot = snapshot, let post = snapshot.data(), let commentArray = post["comment_array"] as? [String] {
+                    DispatchQueue.main.async {
+                        self.commentIDArray = commentArray
+                        print("Updated comment_array:", commentArray)
+                    }
+                }
+            } else {
+                // Handle the error
+                print("Error fetching comments:", error?.localizedDescription ?? "Unknown error")
+            }
+        }
+    }
     
     
+    func fetchCommentData(commentID: String) async throws -> InputComment? {
+        let db = Firestore.firestore()
+        let groupRoomCollection = db.collection("comment")
+        
+        let documentReference = groupRoomCollection.document(commentID)
+        
+        do {
+            let document = try await documentReference.getDocument()
+            if document.exists, let data = document.data() {
+                // Parse the Firestore data and create the GroupData instance
+                let userName = data["comment_userName"] as? String ?? ""
+                let content = data["comment_content"] as? String ?? ""
+                let date = data["comment_Date"] as? Date ?? Date.now
+                
+                return InputComment(date: date, content: content, userName: userName)
+            } else {
+                return nil
+            }
+        } catch {
+            throw error
+        }
+    }
     
-    // fetchPost
-    func fetchPostData(userID userId: String, date: String) async throws -> [String] {
+    
+    // fetchPost (return array, id)
+    func fetchPostData(userID userId: String, date: String) async throws -> PostDataModel {
         let firestore = Firestore.firestore()
         let postsCollection = firestore.collection("post")
         
@@ -439,9 +545,14 @@ final class BudgetFirebaseManager: ObservableObject {
             let snapshot = try await query.getDocuments()
             
             var accountArray: [String] = []
+            var postID: String = ""
             for document in snapshot.documents {
                 if let accountArrayData = document.data()["account_array"] as? [String] {
                     accountArray.append(contentsOf: accountArrayData)
+                }
+                
+                if let postIDFetch = document.data()["post_id"] as? String {
+                    postID = postIDFetch
                 }
             }
             
@@ -462,7 +573,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 print("Data updated with snapshotListener")
             }
             
-            return accountArray
+            return PostDataModel(accountArray: accountArray, postID: postID)
         } catch {
             throw error
         }
@@ -527,7 +638,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 completion(spendData)
             }
     }
-
+    
     
     // Fetch Income Data
     private func fetchIncomeData(forDetailID detailID: String, completion: @escaping (ReadIncomeData?) -> Void) {

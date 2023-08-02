@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+
 class FirebaseController: ObservableObject {
     static let shared = FirebaseController()    // SingleTon
     @Published var groupList = [GroupData]()
@@ -112,6 +113,9 @@ class FirebaseController: ObservableObject {
             }
         }
     }
+    
+    
+    
     
     // 그룹 데이터 가져오기
     func fetchGroupData(groupId: String) async throws -> GroupData? {

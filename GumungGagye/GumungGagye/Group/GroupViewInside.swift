@@ -274,7 +274,7 @@ struct BudgetGroupView: View {
     var selectedUserName: String
     
     @State var dayFormat: String = ""
-    @State var accountIDArray: [String] = []
+    @State var postData: PostDataModel = PostDataModel(accountArray: [], postID: "")
     @State var incomeSum = 0
     
     @Binding var spendSum: Int
@@ -284,9 +284,9 @@ struct BudgetGroupView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if accountIDArray.count > 0 {
+            if postData.accountArray.count > 0 {
                 NavigationLink {
-                    PersonalDaySpendView(accountIDArray: $accountIDArray, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
+                    PersonalDaySpendView(accountIDArray: $postData.accountArray, postID: $postData.postID, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
                 } label: {
                     HStack(spacing: 0) {
                         Text("\(date)일 \(day)")
@@ -305,12 +305,12 @@ struct BudgetGroupView: View {
                     .foregroundColor(.black)
                 }
                 VStack(spacing: 20) {
-                    ForEach(accountIDArray, id: \.self) { accountID in
+                    ForEach(postData.accountArray, id: \.self) { accountID in
                         Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: .constant(0), isGroup: true, accountDataID: accountID)
                     }
                 }
             }
-            else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && accountIDArray.count == 0) {
+            else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && postData.accountArray.count == 0) {
                 if selectedUserID != Auth.auth().currentUser?.uid {
                     UserNoSpendView(date: date, day: day)
                 } else {
@@ -327,12 +327,12 @@ struct BudgetGroupView: View {
                 }
             }
         }
-        .padding(.bottom, accountIDArray.count > 0 ? 52 : 0)
+        .padding(.bottom, postData.accountArray.count > 0 ? 52 : 0)
         .onAppear {
             if let userID = selectedUserID {
                 Task {
                     let todayDate = dayFormat.appending(year).appending("-").appending(month).appending("-").appending(date)
-                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                    postData = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
         }
@@ -340,7 +340,7 @@ struct BudgetGroupView: View {
             if let userID = newValue {
                 Task {
                     let todayDate = dayFormat.appending(year).appending("-").appending(month).appending("-").appending(date)
-                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                    postData = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
             spendTodaySum = 0
@@ -352,7 +352,7 @@ struct BudgetGroupView: View {
             if let userID = selectedUserID {
                 Task {
                     let todayDate = dayFormat.appending(year).appending("-").appending(newValue).appending("-").appending(date)
-                    accountIDArray = try await fetchAccountArray(userID: userID, date: todayDate)
+                    postData = try await fetchAccountArray(userID: userID, date: todayDate)
                 }
             }
             spendTodaySum = 0
@@ -362,14 +362,15 @@ struct BudgetGroupView: View {
         }
     }
     
-    func fetchAccountArray(userID userId: String, date: String) async throws -> [String] {
+    func fetchAccountArray(userID userId: String, date: String) async throws -> PostDataModel {
         do {
-            let accountArray = try await budgetFirebaseManager.fetchPostData(userID: userId, date: date)
-            return accountArray
+            let postDataModel = try await budgetFirebaseManager.fetchPostData(userID: userId, date: date)
+            return postDataModel
         } catch {
             throw error
         }
     }
+    
     
     func getYear(from date: Date) -> Int {
         let calendar = Calendar.current

@@ -96,10 +96,3 @@ extension DatemodalView {
         return dateFormatter.string(from: date)
     }
 }
-
-//struct DatemodalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DatemodalView(isDatePickerVisible: false, account_date: .constant(Date()))
-//            .previewLayout(.sizeThatFits)
-//    }
-//}

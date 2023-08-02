@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct PersonalDaySpendView: View {
+    @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
+    @StateObject var userData = InputUserData.shared
+    
     @State private var commentInput: String = ""
+    @State var commentArray: [OutputComment] = []
+    
     @Binding var accountIDArray: [String]
+    @Binding var postID: String
     
     var month: String
     var date: String
@@ -22,6 +28,9 @@ struct PersonalDaySpendView: View {
             ScrollView {
                 AboutUserSpendView(userName: selectedUserName, month: month, date: date, day: day, spendTodaySum: spendTodaySum, accountIDArray: $accountIDArray)
                     .padding(.horizontal, 20)
+                    .onAppear {
+                        budgetFirebaseManager.fetchAllcommentID(postID: postID)
+                    }
                 
                 Divider()
                     .frame(height: 8)
@@ -35,7 +44,7 @@ struct PersonalDaySpendView: View {
                     
                     HStack(spacing: 4) {
                         Text("댓글")
-                        Text(3.description)
+                        Text(budgetFirebaseManager.commentIDArray.count.description)
                             .foregroundColor(Color("Gray1"))
                     }
                     .modifier(Body1Bold())
@@ -46,37 +55,45 @@ struct PersonalDaySpendView: View {
                 .padding(.horizontal, 20)
                 
                 VStack(spacing: 0) {
-                    CommentView()
-                    CommentView()
-                    CommentView()
-                    CommentView()
-                    CommentView()
-                    CommentView()
+                    ForEach(budgetFirebaseManager.commentIDArray, id: \.self) { comment in
+                        CommentView(id: comment)
+                    }
                 }
                 .padding(.horizontal, 20)
             }
             
-            TextField("댓글을 입력해주세요", text: $commentInput)
-                .padding(.vertical, 12.5)
-                .padding(.horizontal, 12)
-                .modifier(Body1Bold())
-                .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color.black)
-                .background(Color("Gray4"))
-                .cornerRadius(12)
-                .overlay(
-                    HStack {
-                        Image(systemName: "paperplane.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color("Main"))
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                            .padding(.trailing, 12)
-                    }
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .padding(.top, 16)
-                .padding(.bottom, 12)
-                .padding(.horizontal, 20)
+            ZStack {
+                TextField("댓글을 입력해주세요", text: $commentInput)
+                    .padding(.vertical, 12.5)
+                    .padding(.horizontal, 12)
+                    .modifier(Body1Bold())
+                    .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color.black)
+                    .background(Color("Gray4"))
+                    .cornerRadius(12)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .padding(.top, 16)
+                    .padding(.bottom, 12)
+                    .padding(.horizontal, 20)
+                
+                HStack {
+                    Spacer()
+                    
+                    Image(systemName: "paperplane.fill")
+                        .font(.system(size: 16))
+                        .foregroundColor(commentInput.count == 0 ? Color("Gray2") : Color("Main"))
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 32)
+                        .onTapGesture {
+                            if commentInput.count == 0 {
+                                
+                            } else {
+                                budgetFirebaseManager.saveCommentToFirestore(comment: InputComment(date: Date.now, content: commentInput, userName: userData.nickname!), postID: postID)
+                                commentInput = ""
+                            }
+                        }
+                }
+            }
         }
     }
 }
@@ -131,32 +148,44 @@ struct AboutUserSpendView: View {
 
 
 struct CommentView: View {
+    @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
+    @State private var comment: InputComment? = nil
+    var id: String
+    
     var body: some View {
         VStack(spacing: 8) {
-            HStack(spacing: 8) {
-                Text("파도")
-                    .modifier(Body2Bold())
-                Text("3시간전")
-                    .modifier(Cap1())
-                    .foregroundColor(Color("Gray2"))
-                
-                Spacer()
-                
-                Button {
-                    // TODO: 삭제 구현
-                } label: {
-                    Text("삭제")
+            if let comment = comment {
+                HStack(spacing: 8) {
+                    Text(comment.userName)
+                        .modifier(Body2Bold())
+                    Text(comment.date.description)
                         .modifier(Cap1())
                         .foregroundColor(Color("Gray2"))
+                    
+                    Spacer()
+                    
+                    Button {
+                        // TODO: 삭제 구현
+                    } label: {
+                        Text("삭제")
+                            .modifier(Cap1())
+                            .foregroundColor(Color("Gray2"))
+                    }
+                }
+                
+                HStack {
+                    Text(comment.content)
+                        .modifier(Body2())
+                    
+                    Spacer()
                 }
             }
-            
-            HStack {
-                Text("열심히 절약하는 모습 멋있어요!")
-                    .modifier(Body2())
-                
-                Spacer()
+        }
+        .onAppear {
+            Task {
+                comment = try await budgetFirebaseManager.fetchCommentData(commentID: id)
             }
+            
         }
         .padding(.vertical, 20)
     }
