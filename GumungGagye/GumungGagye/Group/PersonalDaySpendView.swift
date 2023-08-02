@@ -46,6 +46,7 @@ struct PersonalDaySpendView: View {
                         Text("댓글")
                         Text(budgetFirebaseManager.commentIDArray.count.description)
                             .foregroundColor(Color("Gray1"))
+                        
                     }
                     .modifier(Body1Bold())
                     

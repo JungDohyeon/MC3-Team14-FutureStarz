@@ -281,6 +281,7 @@ struct BudgetGroupView: View {
     @State var dayFormat: String = ""
     @State var postData: PostDataModel = PostDataModel(accountArray: [], postID: "")
     @State var incomeSum = 0
+    @State var commentSum = 0
     
     @Binding var spendSum: Int
     @Binding var overSpendSum: Int
@@ -288,7 +289,7 @@ struct BudgetGroupView: View {
     @State private var spendTodaySum = 0
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 0) {
             if postData.accountArray.count > 0 {
                 NavigationLink {
                     PersonalDaySpendView(accountIDArray: $postData.accountArray, postID: $postData.postID, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
@@ -309,16 +310,57 @@ struct BudgetGroupView: View {
                     }
                     .foregroundColor(.black)
                 }
+                .padding(.bottom, 20)
+                
                 VStack(spacing: 20) {
                     ForEach(postData.accountArray, id: \.self) { accountID in
                         Breakdown(size: .constant(.small), incomeSum: $incomeSum, spendSum: $spendSum, overSpendSum: $overSpendSum, spendTodaySum: $spendTodaySum, incomeTodaySum: .constant(0), isGroup: true, accountDataID: accountID)
-                            .padding(.bottom, 12)
                     }
                 }
+                .padding(.bottom, 20)
+            
+                Divider()
+                .frame(height: 1)
+                .overlay(Color("Gray4"))
+                .padding(.bottom, 20)
+                
+                NavigationLink {
+                    PersonalDaySpendView(accountIDArray: $postData.accountArray, postID: $postData.postID, month: month, date: date, day: day, selectedUserName: selectedUserName, spendTodaySum: spendTodaySum)
+                } label: {
+                    HStack {
+                        Text("댓글 \(budgetFirebaseManager.commentIDArray.count)")
+                        Spacer()
+                        HStack {
+                            Image("Comment")
+                            Text("댓글달기")
+                        }
+                    }
+                    .modifier(Body2())
+                    .foregroundColor(Color("Gray1"))
+                }
+                
             }
             else if ((getYear(from: Date.now) == Int(year)) && (getMonth(from: Date.now) == Int(month)) && (getDate(from: Date.now) == Int(date)) && postData.accountArray.count == 0) {
                 if selectedUserID != Auth.auth().currentUser?.uid {
                     UserNoSpendView(date: date, day: day)
+                        .padding(.bottom, 20)
+                    
+                    Divider()
+                        .frame(height: 1)
+                        .overlay(Color("Gray4"))
+                        .padding(.bottom, 20)
+                    
+                    HStack {
+                        Text("댓글 \(budgetFirebaseManager.commentIDArray.count)")
+                        Spacer()
+                        HStack {
+                            Image("Comment")
+                            Text("댓글달기")
+                        }
+                    }
+                    .modifier(Body2())
+                    .foregroundColor(Color("Gray1"))
+                    .padding(.bottom, 52)
                 } else {
                     HStack(spacing: 0) {
                         Text("\(date)일 \(day)")
