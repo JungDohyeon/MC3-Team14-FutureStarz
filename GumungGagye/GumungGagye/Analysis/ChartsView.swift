@@ -13,10 +13,11 @@ public struct ChartView: View {
     public let colors: [Color]
     public let showDescription : Bool
     
-    public var widthFraction: CGFloat
-    public var innerRadiusFraction: CGFloat
+    public var widthFraction: CGFloat = 0.75
+    public var innerRadiusFraction: CGFloat = 0.5
     @State private var activeIndex: Int = 0
     
+    @Binding var indexs: Int
     
 //    @State var categoryKey: [Int] = []
 //    @State var categoryValue: [Int] = []
@@ -35,14 +36,14 @@ public struct ChartView: View {
         return tempSlices
     }
     
-    public init(values:[Int], names: [String], colors: [Color], showDescription: Bool, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
-        self.values = values
-        self.names = names
-        self.colors = colors
-        self.showDescription = showDescription
-        self.widthFraction = widthFraction
-        self.innerRadiusFraction = innerRadiusFraction
-    }
+//    public init(values:[Int], names: [String], colors: [Color], showDescription: Bool, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.50){
+//        self.values = values
+//        self.names = names
+//        self.colors = colors
+//        self.showDescription = showDescription
+//        self.widthFraction = widthFraction
+//        self.innerRadiusFraction = innerRadiusFraction
+//    }
     
     public var body: some View {
         VStack(spacing: 60.0) {
@@ -54,8 +55,10 @@ public struct ChartView: View {
                             .scaleEffect(self.activeIndex == i ? 1.1 : 1)
                             .animation(.spring())
                             .onTapGesture {
-                                if(self.activeIndex != i){
+                                if(self.activeIndex != i) {
                                     self.activeIndex = i
+                                    indexs = i
+                                    print("iii:: : \(i)")
                                 }
                                 else{
                                     self.activeIndex = -1
@@ -94,7 +97,7 @@ public struct ChartView: View {
 
 struct PieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView(values: [90000, 50000, 30000, 4000], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false)
+        ChartView(values: [90000, 50000, 30000, 4000], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false, indexs: .constant(0))
     }
 }
 

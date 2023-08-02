@@ -26,6 +26,7 @@
 		5E2623582A6232CD00A6E23F /* BankCardPayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623572A6232CD00A6E23F /* BankCardPayView.swift */; };
 		5E26235A2A62C59E00A6E23F /* PreStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2623592A62C59E00A6E23F /* PreStart.swift */; };
 		5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3380DD2A699950003931B9 /* SelectingUserImage.swift */; };
+		5E39DDA52A7A9C8200EC9C29 /* CategoryListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E39DDA42A7A9C8200EC9C29 /* CategoryListDetailView.swift */; };
 		5E6C5B892A67CBE100DE6C6F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */; };
 		5E6C5B8C2A67CD5200DE6C6F /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */; };
 		5E6C5B922A67D9EC00DE6C6F /* InputUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */; };
@@ -130,6 +131,7 @@
 		5E2623572A6232CD00A6E23F /* BankCardPayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPayView.swift; sourceTree = "<group>"; };
 		5E2623592A62C59E00A6E23F /* PreStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreStart.swift; sourceTree = "<group>"; };
 		5E3380DD2A699950003931B9 /* SelectingUserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingUserImage.swift; sourceTree = "<group>"; };
+		5E39DDA42A7A9C8200EC9C29 /* CategoryListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListDetailView.swift; sourceTree = "<group>"; };
 		5E6C5B882A67CBE100DE6C6F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5E6C5B8B2A67CD5200DE6C6F /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		5E6C5B912A67D9EC00DE6C6F /* InputUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputUserData.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				0A2828E42A5C589900A9D5D9 /* PieSliceView.swift */,
 				0A2828E62A5D686F00A9D5D9 /* OverpurchasingView.swift */,
 				0A2828ED2A5D82F300A9D5D9 /* CategoryListView.swift */,
+				5E39DDA42A7A9C8200EC9C29 /* CategoryListDetailView.swift */,
 				0A2828EF2A5D835100A9D5D9 /* CategoryHistoryView.swift */,
 			);
 			path = Analysis;
@@ -702,6 +705,7 @@
 				5EEFED082A61698800AF4A5F /* Utilities.swift in Sources */,
 				0A2828E32A5C40F700A9D5D9 /* ChartsView.swift in Sources */,
 				99F7D7482A5F80200090A05A /* CategoryIcon.swift in Sources */,
+				5E39DDA52A7A9C8200EC9C29 /* CategoryListDetailView.swift in Sources */,
 				5E3380DE2A699950003931B9 /* SelectingUserImage.swift in Sources */,
 				0A2828E52A5C589900A9D5D9 /* PieSliceView.swift in Sources */,
 				CD27E2F52A59B79800F15A50 /* GroupRoomView.swift in Sources */,
