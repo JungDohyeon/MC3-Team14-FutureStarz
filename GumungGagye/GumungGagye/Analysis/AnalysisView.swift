@@ -95,13 +95,14 @@ struct AnalysisView: View {
                                         .cornerRadius(9)
                                         .foregroundColor(Color("Main"))
                                 }
-//                                .onAppear {
-//                                    withAnimation(.easeInOut(duration: 1.0)) {
-////                                        if totalOverConsume != 0 {
-//                                            sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
-////                                        }
-//                                    }
-//                                }
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 1.0)) {
+                                        if totalOverConsume != 0 {
+                                            sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
+                                            //                                        }
+                                        }
+                                    }
+                                }
                             }.frame(height: 24)
                             
                             HStack {

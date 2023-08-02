@@ -36,19 +36,19 @@ struct OverpurchasingView: View {
             VStack(spacing: 36.0) {
                 VStack(alignment: .leading, spacing: 36.0) {
                     // - MARK: - 과소비 합계
-                    VStack {
-                        ZStack {
-                            HStack {
-                                CustomBackButton { presentationMode.wrappedValue.dismiss() }
-                                Spacer()
-                            }
-                            HStack {
-                                Text("과소비 내역")
-                                    .modifier(Body1Bold())
-                            }
-                        }
-                    }
-                    .padding(.top, 20)
+//                    VStack {
+//                        ZStack {
+//                            HStack {
+//                                CustomBackButton { presentationMode.wrappedValue.dismiss() }
+//                                Spacer()
+//                            }
+//                            HStack {
+//                                Text("과소비 내역")
+//                                    .modifier(Body1Bold())
+//                            }
+//                        }
+//                    }
+//                    .padding(.top, 20)
                     
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 12.0) {
@@ -78,7 +78,7 @@ struct OverpurchasingView: View {
                         
                         Spacer()
                     }
-//                    .padding(.top, 48.0)
+                    .padding(.top, 70.0)
                     
                     // [203540, 53331, 42664, 24887, 31998]
                     // - MARK: - 과소비 차트
@@ -107,10 +107,17 @@ struct OverpurchasingView: View {
         .foregroundColor(Color("Black"))
         .background(Color("background"))
         .ignoresSafeArea()
-//        .navigationBarTitle("과소비 내역", displayMode: .inline)
+        .navigationBarTitle("과소비 내역", displayMode: .inline)
         .onAppear {
             print("dd: \(categoryKey)")
         }
+//        .navigationBarTitle("카테고리별 소비", displayMode: .inline)
+        .navigationBarItems(
+            leading: CustomBackButton { // 커스텀 Back Button 추가
+                presentationMode.wrappedValue.dismiss()
+            }
+        )
+        
         .navigationBarBackButtonHidden(true)
 //        .onAppear {
 //            Task {

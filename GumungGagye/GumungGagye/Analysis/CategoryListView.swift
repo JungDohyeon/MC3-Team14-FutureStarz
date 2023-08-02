@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ScrollView{
             VStack(spacing: 24.0) {
                 Image("FoodCategoryList")
                 Image("FashionCategoryList")
                 Image("HealthCategoryList")
-                Image("TrafficCategoryList")
+                NavigationLink {
+                    CategoryListDetailView()
+                } label: {
+                    Image("TrafficCategoryList")
+                }
+                
+                    
                 Image("LivingCategoryList")
                 Image("EducationCategoryList")
             }
@@ -24,7 +30,13 @@ struct CategoryListView: View {
         }
         .background(Color("background"))
         .navigationBarTitle("카테고리별 소비", displayMode: .inline)
+        .navigationBarItems(
+            leading: CustomBackButton { // 커스텀 Back Button 추가
+                presentationMode.wrappedValue.dismiss()
+            }
+        )
         
+        .navigationBarBackButtonHidden(true)
         
     }
 }
