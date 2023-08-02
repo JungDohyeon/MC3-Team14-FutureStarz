@@ -38,40 +38,29 @@ struct SelectingBankView: View {
                     .padding(.bottom, 12)
                     .padding(.top, 50)
                 
-                Text("소비 내역 입력시 바로가기 기능을 제공합니다")
+                Text("가계부 내역 입력시 바로가기 기능을 제공해요.")
                     .modifier(Body1())
                     .foregroundColor(Color("Gray1"))
                     .padding(.bottom, 36)
-                
-                
                 
                 ScrollView(showsIndicators: false) {
                     LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
                         Section(header: BankView_header(var_text: "은행")) {
                             LazyVGrid(columns: columns) {
-                                
                                 ForEach(1...9, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 1, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
-                                        
-                                        
                                 }
-                                
                             }
                         }
                     }
                     .padding(.bottom, 36)
                     
-                    
                     LazyVStack(alignment: .leading, pinnedViews: [.sectionHeaders]) {
                         Section(header: BankView_header(var_text: "페이")) {
                             LazyVGrid(columns: columns) {
-                                
                                 ForEach(1...3, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 2, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
                                 }
-                                
                             }
                         }
                     }
@@ -83,18 +72,14 @@ struct SelectingBankView: View {
                                 
                                 ForEach(1...8, id: \.self) { index in
                                     BankCardPayView(bankCardPay: 3, index: index, selectBankCardPay: $selectBankCardPay, selectBankCardPayIndex: $selectBankCardPayIndex, isAbled: $isAbled)
-                                        
                                 }
-                                
                             }
                         }
                     }
                     .padding(.bottom, 36)
-                    
                 }
                 
                 Spacer()
-                
                 
                 Button(action: {
                     Task{
@@ -110,12 +95,8 @@ struct SelectingBankView: View {
                     bankCardPaySetting = false
                 }, label: {
                     OnboardingNextButton(isAbled: $isAbled, buttonText: "저장하기")
-                        
                 })
                 .padding(.bottom, 25)
-                
-                
-                
             }
         }
         .padding(.horizontal, 20)
@@ -141,10 +122,6 @@ private struct BankView_header: View {
             Spacer()
         }
         .padding(.bottom, 24)
-        
-        .background {
-            Color.white
-        }
-        
+        .background(Color("background"))
     }
 }

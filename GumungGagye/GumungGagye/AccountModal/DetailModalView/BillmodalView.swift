@@ -32,15 +32,15 @@ struct BillmodalView: View {
                             }
                             
                             TextField("", text: $spend_bill_string, onEditingChanged: { isEditing in
-                               
                             })
                             .padding(.vertical, 22)
-                            .keyboardType(.decimalPad)
+                            .keyboardType(.numberPad)
                             .foregroundColor(Color("Black"))
                             .modifier(Body1Bold())
-                            .onChange(of: spend_bill_string, perform: { newValue in
-                                spend_bill = Int(spend_bill_string)
-                            })
+//                            .onChange(of: spend_bill_string, perform: { newValue in
+//                                spend_bill = Int(spend_bill_string)
+//                                spend_bill_string = formatNumber(spend_bill)
+//                            })
                             
                         }
                         HStack(spacing: 0) {
@@ -52,12 +52,6 @@ struct BillmodalView: View {
                                 .foregroundColor(Color("Gray2"))
                                 .fontWeight(.bold)
                                 .padding(.trailing, 11)
-                            //화살표 이미지
-//                            Image(systemName: "chevron.right")
-//                                .frame(width: 24, height: 24)
-//                                .foregroundColor(Color("Gray2"))
-//                                .fontWeight(.bold)
-//                                .padding(.trailing, 11)
                         }
                         
                     } //: HSTACK
@@ -70,7 +64,26 @@ struct BillmodalView: View {
                 .overlay(Color("Gray4"))
         }
         .padding(.horizontal, 20)
+        .onAppear {
+            spend_bill_string = formatNumber(spend_bill)
+        }
+        .onChange(of: spend_bill_string) { newValue in
+            let cleanedValue = newValue.filter { "0123456789".contains($0) }
+            spend_bill = Int(cleanedValue)
+            
+            spend_bill_string = formatNumber(spend_bill)
+        }
         
+    }
+    
+    // 세자리마다 쉼표를 추가하는 함수
+    private func formatNumber(_ number: Int?) -> String {
+        guard let number = number else {
+            return ""
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: number)) ?? ""
     }
     
 }

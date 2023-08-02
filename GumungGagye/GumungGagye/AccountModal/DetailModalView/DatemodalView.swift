@@ -91,7 +91,7 @@ struct DatemodalView: View {
 extension DatemodalView {
     private func dateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일 EEEEEE요일"
+        dateFormatter.dateFormat = "yyyy년 M월 d일 EEEEEE요일"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.string(from: date)
     }
