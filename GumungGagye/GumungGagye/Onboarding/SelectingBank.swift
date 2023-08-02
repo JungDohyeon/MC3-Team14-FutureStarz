@@ -63,7 +63,7 @@ struct SelectingBank: View {
                     .modifier(H1Bold())
                     .padding(.bottom, 12)
                 
-                Text("소비 내역 입력시 바로가기 기능을 제공합니다")
+                Text("가계부 내역 입력시 바로가기 기능을 제공해요.")
                     .modifier(Body1())
                     .foregroundColor(Color("Gray1"))
                     .padding(.bottom, 36)
