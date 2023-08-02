@@ -263,6 +263,8 @@
 		0A2828F32A5E3AD500A9D5D9 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */,
+				5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */,
 				0A2828F42A5E3BC500A9D5D9 /* SettingView.swift */,
 			);
 			path = Setting;
@@ -348,8 +350,6 @@
 				5E2623532A6188C000A6E23F /* SelectingBank.swift */,
 				5E2623572A6232CD00A6E23F /* BankCardPayView.swift */,
 				5EEFED112A61771A00AF4A5F /* SelectingBudget.swift */,
-				5EE6A9DD2A6B965300480855 /* SelectingBudgetView.swift */,
-				5EE6A9DF2A6BA72800480855 /* SelectingBankView.swift */,
 				5E2623592A62C59E00A6E23F /* PreStart.swift */,
 			);
 			path = Onboarding;
