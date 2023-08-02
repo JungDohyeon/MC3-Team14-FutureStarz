@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct SelectingBudget: View {
     @State var logic: Bool = false
     @ObservedObject var input = NumbersOnlyInput()
@@ -36,14 +35,12 @@ struct SelectingBudget: View {
                 
                 
                 HStack {
-                    TextField(text: $input.groupGoalValue) {
+                    TextField("", text: $input.groupGoalValue) {
                         Text("금액을 입력해주세요")
                     }.onChange(of: input.groupGoalValue) { newValue in
                         isAbled = !newValue.isEmpty
-//                        print(keyboardResponder.currentHeight)
-                        input.groupGoalValue = String(newValue.prefix(9))
+                        input.groupGoalValue = formatNumber(newValue)
                     }
-                    //키보드 숫자로!!!
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("Gray1"))
@@ -66,37 +63,33 @@ struct SelectingBudget: View {
                 
                 Button(action: {
                     logic = true
-                    inputdata.goal = Int(input.groupGoalValue)
-                    
+                    inputdata.goal = Int(input.groupGoalValue.filter("0123456789".contains))
                 }, label: {
                     OnboardingNextButton(isAbled: $isAbled, buttonText: "다음")
-                        
                 })
                 .navigationDestination(isPresented: $logic, destination: {
                     // 목적지
                     SelectingUserImage()
-                        
                 })
                 .disabled(!isAbled)
                 .padding(.bottom, 25)
-                
-                
-                
-                
-//                NavigationLink(destination: PreStart()) {
-//                    OnboardingNextButton(isAbled: $isAbled)
-//                }
-//                .disabled(!isAbled)
-////                .padding(.bottom, keyboardResponder.currentHeight > 0 ? 250 : 59)
-//                .padding(.bottom, 25)
             }
         }
         .edgesIgnoringSafeArea([.top])
         .padding(.horizontal, 20)
-//        .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
     }
     
+    // 세자리마다 쉼표를 추가하는 함수
+    private func formatNumber(_ numberString: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        guard let number = Double(numberString.filter("0123456789".contains)) else {
+            return ""
+        }
+        return numberFormatter.string(from: NSNumber(value: number)) ?? ""
+    }
 }
 
 struct SelectingBudget_Previews: PreviewProvider {
