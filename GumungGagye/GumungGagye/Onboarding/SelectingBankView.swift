@@ -122,10 +122,6 @@ private struct BankView_header: View {
             Spacer()
         }
         .padding(.bottom, 24)
-        
-        .background {
-            Color.white
-        }
-        
+        .background(Color("background"))
     }
 }
