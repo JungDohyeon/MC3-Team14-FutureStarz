@@ -160,9 +160,10 @@ struct UserScroller: View {
                 HStack(spacing: 16) {
                     ForEach(userData, id: \.id) { data in
                         VStack(spacing: 4) {
-                            Circle()
-                                .foregroundColor(Color("Gray3"))
+                            Image("SeletingPictureIcon")
+                                .resizable()
                                 .frame(width: 48, height: 48)
+                                .shadow(color: Color(red: 0.31, green: 0.32, blue: 0.63).opacity(0.2), radius: 5, x: 0, y: 2)
                                 .overlay(
                                     Circle()
                                         .stroke(selectedPerson == data.nickname ? Color("Main") : .clear, lineWidth: 2)
