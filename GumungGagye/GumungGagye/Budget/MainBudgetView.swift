@@ -91,6 +91,7 @@ struct MainBudgetView: View {
         let components = DateComponents(year: Calendar.current.component(.year, from: selectedMonth), month: Calendar.current.component(.month, from: selectedMonth), day: day)
         if let date = Calendar.current.date(from: components) {
             dateFormatter.dateFormat = "EEEE"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
             return dateFormatter.string(from: date)
         }
         return ""
