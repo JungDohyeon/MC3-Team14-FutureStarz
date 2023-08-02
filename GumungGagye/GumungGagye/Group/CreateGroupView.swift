@@ -222,42 +222,42 @@ struct GetStringGroupInfo: View {
     }
 }
 
-// get Integer value for group info
 struct GetIntegerGroupInfo: View {
     @State private var dividerSelect: Bool = false
     @State var keyboardIsPresented: Bool = false
-    
+
     @Binding var userInput: String
     @Binding var checkStatus: Bool
     @FocusState var focusedValue: CodeField?
-    
+
     var getTitle: String
     var getMaxString: Int
     var symbolName: String
     var focusType: CodeField
-    
+
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 23) {
                 Text(getTitle.prefix(5))
                     .modifier(Body2())
                     .foregroundColor(Color("Gray1"))
-                
+
                 TextField(getTitle, text: $userInput, prompt: Text(getTitle).foregroundColor(.gray.opacity(0.4)))
                     .modifier(Body1Bold())
                     .keyboardType(.numberPad)
                     .foregroundColor(.black)
                     .onChange(of: userInput) { newValue in
-                        if newValue.isEmpty {
-                            checkStatus = false
-                        } else {
+                        if let intValue = Int(newValue.filter { $0.isNumber }) {
+                            userInput = formatNumber(intValue)
                             checkStatus = true
-                            userInput = String(newValue.prefix(getMaxString))
+                        } else {
+                            checkStatus = false
                         }
                     }
-                
+
+
                 Spacer()
-                
+
                 Image(symbolName)
                     .font(.system(size: 16))
                     .foregroundColor(Color("Gray2"))
@@ -266,13 +266,27 @@ struct GetIntegerGroupInfo: View {
                     }
             }
             .padding(.bottom, 22)
-            
+
             Divider()
                 .frame(height: 1)
                 .overlay(focusedValue == focusType ? Color("Main") : Color("Gray4"))
         }
     }
+
+    // 세 자리마다 쉼표를 추가하는 함수
+    private func formatNumber(_ number: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        if let formattedString = numberFormatter.string(from: NSNumber(value: number)) {
+            return formattedString
+        } else {
+            return ""
+        }
+    }
+
 }
+
+
 
 // Picker Modal View for 최대인원
 struct PickerModalView: View {
