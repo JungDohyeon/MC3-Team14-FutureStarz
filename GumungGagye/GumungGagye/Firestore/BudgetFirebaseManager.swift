@@ -424,6 +424,7 @@ final class BudgetFirebaseManager: ObservableObject {
         for i in 1...31 {
             if i < 10 {
                 accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)")
+                    .accountArray
                 if !accountArray.isEmpty {
                     //                    print("testaccountarray: \(accountArray)") //test 출력
                     analysisAccountArray.append((i, accountArray))
@@ -433,6 +434,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 
             } else {
                 accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)")
+                    .accountArray
                 if !accountArray.isEmpty {
                     //                    print("testaccountarray: \(accountArray)") //test 출력
                     analysisAccountArray.append((i, accountArray))
