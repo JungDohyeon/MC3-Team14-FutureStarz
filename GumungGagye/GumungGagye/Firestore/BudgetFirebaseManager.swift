@@ -353,7 +353,7 @@ final class BudgetFirebaseManager: ObservableObject {
         var accountArray: [String] = []
         for i in 1...31 {
             if i < 10 {
-                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)")
+                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-07-0\(i)")
                 if !accountArray.isEmpty {
                     //                    print("testaccountarray: \(accountArray)") //test 출력
                     analysisAccountArray.append((i, accountArray))
@@ -362,7 +362,7 @@ final class BudgetFirebaseManager: ObservableObject {
                 }
                 
             } else {
-                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)")
+                accountArray = try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-07-\(i)")
                 if !accountArray.isEmpty {
                     //                    print("testaccountarray: \(accountArray)") //test 출력
                     analysisAccountArray.append((i, accountArray))
@@ -543,9 +543,9 @@ final class BudgetFirebaseManager: ObservableObject {
         
         for i in 1...31 {
             if i < 10 {
-                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-0\(i)"))
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-07-0\(i)"))
             } else {
-                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-08-\(i)"))
+                analysisAccountArray.append(contentsOf: try await BudgetFirebaseManager.shared.fetchPostData(userID: userId, date: "2023-07-\(i)"))
             }
         }
         return analysisAccountArray

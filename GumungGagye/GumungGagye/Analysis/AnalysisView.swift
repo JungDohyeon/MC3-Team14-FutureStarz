@@ -10,13 +10,29 @@ import FirebaseAuth
 
 struct AnalysisView: View {
     @State var selectedMonth = Date.now
-    
+    private let calendar = Calendar.current
     // MARK: - PROPERTY
     @State private var sumGraphWidth: CGFloat = 0.0
     @State var overConsumeSpendArray: [ReadSpendData] = []
     @State var sortOverConsumeSpendArray: [ReadSpendData] = []
     @State var totalOverConsume: Int = 0
     @State var totalConsume: Int = 0
+    @State var isAlbed: Bool = true
+    
+    
+    @State var overConsumeSpendDetailArray: [(Int, [ReadSpendData])] = []
+    @State var sortedCategoryArray: [Dictionary<Int, Int>.Element] = []
+    
+    
+    @State var tempKey: [Int] = []
+    @State var tempValue: [Int] = []
+    
+    @State var categoryKey: [Int] = []
+    @State var categoryValue: [Int] = []
+    
+    @State var indexs: Int = 0
+    
+
     // MARK: - BODY
     var body: some View {
         GeometryReader { geometry in
@@ -31,6 +47,10 @@ struct AnalysisView: View {
                     
                     // 월 변경
                     MoveMonth(size: .Small, selectedMonth: $selectedMonth)
+                }
+                .onAppear {
+                    selectedMonth = Date.now
+                    self.selectedMonth = self.calendar.date(byAdding: .month, value: -1, to: self.selectedMonth) ?? self.selectedMonth
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 4)
@@ -71,17 +91,17 @@ struct AnalysisView: View {
                                         .cornerRadius(9)
                                         .foregroundColor(Color("Light30"))
                                     Rectangle()
-                                        .frame(width: sumGraphWidth, height: 24)
+                                        .frame(width: max(sumGraphWidth, 0), height: 24)
                                         .cornerRadius(9)
                                         .foregroundColor(Color("Main"))
                                 }
-                                .onAppear {
-                                    withAnimation(.easeInOut(duration: 1.0)) {
-//                                        if totalOverConsume != 0 {
-                                            sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
-//                                        }
-                                    }
-                                }
+//                                .onAppear {
+//                                    withAnimation(.easeInOut(duration: 1.0)) {
+////                                        if totalOverConsume != 0 {
+//                                            sumGraphWidth = Int(totalOverConsume) > Int(totalConsume ?? 0) ? (geometry.size.width) : CGFloat(Double(totalOverConsume)/Double(totalConsume ?? 0)) * (geometry.size.width)
+////                                        }
+//                                    }
+//                                }
                             }.frame(height: 24)
                             
                             HStack {
@@ -114,7 +134,7 @@ struct AnalysisView: View {
                         
                         
                         // 더보기 Button
-                        NavigationLink(destination: OverpurchasingView(overConsumeSpendArray: $overConsumeSpendArray, sortOverConsumeSpendArray: $sortOverConsumeSpendArray, totalOverConsume: $totalOverConsume, totalConsume: $totalConsume)){
+                        NavigationLink(destination: OverpurchasingView(overConsumeSpendArray: $overConsumeSpendArray, sortOverConsumeSpendArray: $sortOverConsumeSpendArray, totalOverConsume: $totalOverConsume, totalConsume: $totalConsume, overConsumeSpendDetailArray: $overConsumeSpendDetailArray, sortedCategoryArray: $sortedCategoryArray, tempKey: $tempKey, tempValue: $tempValue, categoryKey: $categoryKey, categoryValue: $categoryValue)){
                             VStack {
                                 Rectangle()
                                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
@@ -128,7 +148,7 @@ struct AnalysisView: View {
                                 .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
                             }
                         }
-                        
+                        .disabled(isAlbed)
                     }
                     .padding(.horizontal, 20)
                     
@@ -150,7 +170,7 @@ struct AnalysisView: View {
                                 .modifier(Cap1())
                             
                             VStack(alignment: .leading, spacing: 4.0) {
-                                Text("식비에서 200,000원을 사용하여")
+                                Text("식비에서 75,400원을 사용하여")
                                     .modifier(H2SemiBold())
                                 Text("돈을 가장 많이 썼어요")
                                     .modifier(H2SemiBold())
@@ -158,7 +178,7 @@ struct AnalysisView: View {
                         }
                         .padding(.vertical, 36.0)
                         
-                        ChartView(values: [900, 500, 300, 200], names: ["식비", "카페", "교통", "건강"], colors: [Color("Food"), Color("Cafe"), Color("Alcohol"), Color("Etc")], showDescription: false)
+                        ChartView(values: [463500, 316500, 118740, 71300, 32760], names: ["식비", "패션, 미용", "의료, 건강", "주거, 통신", "기타"], colors: [Color("Food"), Color("Fashion"), Color("Health"),Color("Traffic"), Color("Etc")], showDescription: false, indexs: $indexs)
                             .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200, alignment: .center)
                         
                         // Top 3 List
@@ -166,9 +186,9 @@ struct AnalysisView: View {
                             
                             
                             
-                            TopContentView(rank: 1, content: "식비", money: 155000)
-                            TopContentView(rank: 2, content: "교통비", money: 100300)
-                            TopContentView(rank: 3, content: "카페", money: 75000)
+                            TopContentView(rank: 1, content: "식비", money: 463500)
+                            TopContentView(rank: 2, content: "패션, 미용", money: 316500)
+                            TopContentView(rank: 3, content: "의료, 건강", money: 118740)
                         }
                         .padding(.bottom, 28.0)
                         .padding(.top, 24)
@@ -199,13 +219,37 @@ struct AnalysisView: View {
             .onAppear {
                 Task {
                     do {
+                        tempKey = []
+                        tempValue = []
+                        
                         if let userId = Auth.auth().currentUser?.uid {
                             (totalConsume, totalOverConsume, overConsumeSpendArray) = try await BudgetFirebaseManager.shared.analysisFetchPost(userID: userId)
                             sortOverConsumeSpendArray = overConsumeSpendArray
                             sortOverConsumeSpendArray.sort(by: { $0.bill > $1.bill })
                             
                             
+                            (overConsumeSpendDetailArray, sortedCategoryArray) = try await BudgetFirebaseManager.shared.analysis2FetchPost(userID: userId)
                             
+                            print("result:: \(overConsumeSpendDetailArray)")
+                            print("result:: \(sortedCategoryArray)")
+                            
+                            for indexArray in sortedCategoryArray {
+                                self.tempKey.append(indexArray.key)
+                                self.tempValue.append(indexArray.value)
+                                
+                                
+                            }
+                            
+                            
+                            categoryKey = tempKey
+                            categoryValue = tempValue
+                            
+                            print("aa\(categoryKey)")
+                            print(categoryValue)
+                            
+                            
+                            
+                            isAlbed = false
 //                            print("oversort::\(sortOverConsumeSpendArray)")
                         }
                     } catch {
