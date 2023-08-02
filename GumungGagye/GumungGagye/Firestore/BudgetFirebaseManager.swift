@@ -176,7 +176,7 @@ final class BudgetFirebaseManager: ObservableObject {
                     "post_date": dateString,
                     "post_userID": userID,
                     "account_array": [accountDocumentID],
-                    "account_array": []
+                    "comment_array": []
                 ]) { error in
                     if let error = error {
                         print("Error adding document: \(error)")
