@@ -324,6 +324,7 @@ struct BudgetGroupView: View {
                                 .modifier(Num4SemiBold())
                         }
                     }
+                    .padding(.bottom, 52)
                 }
             }
         }

@@ -149,7 +149,7 @@ struct AboutUserSpendView: View {
 
 struct CommentView: View {
     @StateObject var budgetFirebaseManager = BudgetFirebaseManager.shared
-    @State private var comment: InputComment? = nil
+    @State private var comment: OutputComment? = nil
     var id: String
     
     var body: some View {
@@ -158,7 +158,7 @@ struct CommentView: View {
                 HStack(spacing: 8) {
                     Text(comment.userName)
                         .modifier(Body2Bold())
-                    Text(comment.date.description)
+                    Text(comment.date)
                         .modifier(Cap1())
                         .foregroundColor(Color("Gray2"))
                     

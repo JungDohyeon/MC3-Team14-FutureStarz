@@ -350,11 +350,16 @@ final class BudgetFirebaseManager: ObservableObject {
         let documentRef = db.collection("comment").document()
         let documentID = documentRef.documentID
         
+        
+        let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = TimeZone(secondsFromGMT: 9 * 3600)
+        
         documentRef.setData([
             "comment_id": documentID,
             "comment_userName": comment.userName,
             "comment_content": comment.content,
-            "comment_Date": comment.date
+            "comment_Date": formatter.string(from: comment.date)
         ]) { error in
             if let error = error {
                 print("Error adding document: \(error)")
@@ -405,7 +410,6 @@ final class BudgetFirebaseManager: ObservableObject {
         
         return analysisAccountArray
     }
-    
     
     
     func analysisFetchAccountSpend(userID userId: String, analysisAccountArray: [String]) async throws -> [String] {
@@ -509,7 +513,7 @@ final class BudgetFirebaseManager: ObservableObject {
     }
     
     
-    func fetchCommentData(commentID: String) async throws -> InputComment? {
+    func fetchCommentData(commentID: String) async throws -> OutputComment? {
         let db = Firestore.firestore()
         let groupRoomCollection = db.collection("comment")
         
@@ -521,9 +525,9 @@ final class BudgetFirebaseManager: ObservableObject {
                 // Parse the Firestore data and create the GroupData instance
                 let userName = data["comment_userName"] as? String ?? ""
                 let content = data["comment_content"] as? String ?? ""
-                let date = data["comment_Date"] as? Date ?? Date.now
+                let date = data["comment_Date"] as? String ?? ""
                 
-                return InputComment(date: date, content: content, userName: userName)
+                return OutputComment(date: date, content: content, userName: userName)
             } else {
                 return nil
             }
