@@ -108,6 +108,7 @@ struct OverpurchasingView: View {
                         print(categoryKey)
                         print(categoryValue)
                         
+                        
                     }
                 } catch {
                     print(error)

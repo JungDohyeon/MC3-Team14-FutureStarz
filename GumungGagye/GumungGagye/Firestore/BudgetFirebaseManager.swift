@@ -501,6 +501,7 @@ final class BudgetFirebaseManager: ObservableObject {
         print("main::overConsumeSpendArray: \(overConsumeSpendArray)")
         
         
+        
         return (overConsumeSpendArray, sortedCategoryArray)
     }
     
