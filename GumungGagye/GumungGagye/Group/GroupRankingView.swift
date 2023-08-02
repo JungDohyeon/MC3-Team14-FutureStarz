@@ -19,9 +19,10 @@ struct GroupRankingView: View {
                     .modifier(Num5())
                     .padding(.trailing, 18)
                 
-                Circle()
-                    .foregroundColor(Color("Gray3"))
+                Image("SeletingPictureIcon")
+                    .resizable()
                     .frame(width: 40, height: 40)
+                    .shadow(color: Color(red: 0.31, green: 0.32, blue: 0.63).opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.trailing, 12)
                 
                 Text(userName)
